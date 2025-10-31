@@ -78,6 +78,9 @@ booleans {
    # option(s)
    opt_hone_aye : boolean "false" ;
 
+   # silly random
+   r0_jail : boolean "false" ;
+
    # blocker dynamic booleans
    r0_hone_block : dynamic_boolean {( opt_hone_aye )} ;
 
@@ -184,6 +187,11 @@ on_startup {
    : if (won_yet) {
       : print "Thanks for replaying, but this is a reminder to look at the other {ecomp} entries, too!" ;
       : press_any_key ;
+   }
+   : if (random(1) == 1) {
+      : set_true "r0_jail" ;
+   } : else {
+      : set_false "r0_jail" ;
    }
    : print "Intro." ;
    : press_any_key ;
@@ -305,10 +313,20 @@ on_render {
    : if (!show_overlay) {
       : done ;
    }
+   : if (is_at "r0") {
+      : if (r0_jail) {
+         : overlay "r0_rand_1" x="0" y="0" ;
+      } : else {
+         : overlay "r0_rand_2" x="0" y="0" ;
+      }
+   }
 }
 
 assets {
    graphics {
+      r_blank : base64_png "iVBORw0KGgoAAAANSUhEUgAAAQAAAAAYAQMAAAAvTrFnAAAAA1BMVEX//wCKxvRFAAAAD0lEQVR4XmPAAKNgFIwCAAMYAAFrMpCEAAAAAElFTkSuQmCC" ;
       r0_1 : base64_png "iVBORw0KGgoAAAANSUhEUgAAAQAAAAAoAQMAAAArNLbKAAAAA1BMVEUAAACnej3aAAAAE0lEQVR4XmPAC0bBKBgFo2AUAAAFKAABhzzafQAAAABJRU5ErkJggg==" ;
+      r0_rand_1 : base64_png "iVBORw0KGgoAAAANSUhEUgAAABUAAAAPAQMAAAAxlBYoAAAABlBMVEUAAAD///+l2Z/dAAAALUlEQVR4XmMAgfr/Hxhc3AUYQvMDgBhChwAxWDw8gCEXiHPA9AcG30CIOBAAAP4GEalNIq2XAAAAAElFTkSuQmCC" ;
+      r0_rand_2 : base64_png "iVBORw0KGgoAAAANSUhEUgAAABUAAAAPAQMAAAAxlBYoAAAABlBMVEUAAAD///+l2Z/dAAAALElEQVR4XmMAgfr/Hxhc3AUYQvMDgBhChwAxSNyzPIAhGogjwTSQLwgRBwIAAdsRs8NGrrsAAAAASUVORK5CYII=" ;
    }
 }
