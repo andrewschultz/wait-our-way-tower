@@ -1,0 +1,314 @@
+start_at = "r0"
+start_theme = my_theme
+
+#cch.py makes sure of things
+
+game_information {
+   game_name                    = Wait-Our-Way Tower
+   game_version                 = 1.0.0
+   game_shortname               = WOWT
+   written_by                   = Andrew Schultz
+   uuid                         = b3c1f8e2-5d4a-4f9b-8c3d-2a7e5f6a9b1c
+   year_of_release              = 2026
+   copyright_message            = Free to distribute, voluntary payments welcome
+   short_synopsis               = EctoComp 2026 Petite Mort entry, in the vein of {l_wp} and {l_ut}
+}
+
+
+## Defines locations in the world
+
+strings {
+   # top level
+   wowt : string "<Wait-Our-Way Tower<#f80>>" ;
+   l_ut : string "<Us Too<#0f0>>[http://andrewschultz.itch.io/us-too]" ;
+   l_wp : string "<Why Pout<#0f0>>[http://andrewschultz.itch.io/why-pout]" ;
+   ecomp : string "<EctoComp<#f80>>[https://itch.io/jam/ectocomp-2026]" ;
+
+   # basics
+   my_score : string "{score}/{max_score}" ;
+   custom_unknown_verb_error : dynamic_string {( "Nothing special happens. You can use {vm_verbs} for a general overview of standard verbs." )} ;
+   exits_err : dynamic_string {( "Can't go that way." )} ;
+
+   # parser stuff
+   nospecial_custom : string "You see no specific item like that--time limits mean I couldn't implement noncritical things. To examine a room, <LOOK<#0f0>>. Note that the parser may not recognize adjectives as synonyms, so using a noun works best." ;
+   yn_or_12_or_14 : dynamic_string {( (verb_is "save" || verb_is "load") ? "Please choose from 1 to 4." : in_number_choice ? "Please choose 1 or 2." : "Please choose YES/Y or NO/N." )}
+
+   # noting stuff
+   one_time : string "<ONE-TIME NOTE: <#f0f>>" ;
+   key_enter : string "the <ENTER<#f88>>/<RETURN<#f88>> key" ;
+
+   # meta-verbs
+   hone_aye : string "<HONE AYE<#ff0>>/<HONE EYE<#ff0>>" ;
+   ho_nigh : string "<HO NIGH<#ff0>>" ;
+   vm_about : string "<ABOUT<#f80>>" ;
+   vm_credits : string "<CREDITS<#f80>>" ;
+   vm_think : string "<THINK<#f80>>" ;
+   vm_verbs : string "<VERBS<#f80>>" ;
+   vm_versions : string "<VERSIONS<#f80>>" ;
+
+   xtats : string "<X TATS<#f80>>" ;
+   xme : string "<X ME<#0f0>>" ;
+
+   # room(s)
+   r0_loc : string "" ;
+   r0_header : string "Wait-Our-Way Tower" ;
+
+   # item(s)
+   i_fspt : string "<Fey Stats Phase Tats<#ccc>>" ;
+}
+
+integers {
+   score : integer "0" ;
+   max_score : integer "12" ;
+   tats_number : dynamic_integer {(
+      is_at "r0" ? r0_hintnum : 0
+      )} ;
+   r0_hintnum : dynamic_integer {( 0 )} ;
+}
+
+booleans {
+   # game state (noncritical)
+   showed_first_note : boolean "false" ;
+   warn_score_header : boolean "false" ;
+   wait_yet : boolean "false" ;
+   me_x_yet : boolean "false" ;
+   won_yet : boolean "false" scope="survivor" ;
+   in_number_choice : boolean "false" ;
+
+   # option(s)
+   opt_hone_aye : boolean "false" ;
+
+   # blocker dynamic booleans
+   r0_hone_block : dynamic_boolean {( opt_hone_aye )} ;
+
+   think_any : dynamic_boolean {( 1 == 0 )} ;
+   show_overlay : boolean "true" ;
+}
+
+vocabulary {
+}
+
+locations {
+   r0 : location "{r0_loc}" header="{r0_header}" graphic="r0_1" {
+      on_command {
+      }
+   }
+}
+
+# Defines things in the world (scenery cannot be carried)
+objects {
+   phase_tats : object "{i_fspt}" ;
+}
+
+#connections {
+
+#}
+
+barriers {
+   block_hone_r0 : block {
+      location = r0
+      block_when = r0_hone_block
+      message = No need to go back. You found the light source to leave.
+   }
+}
+
+subroutines {
+   add_point : subroutine {
+      : print "<Your score has just gone up by a point!<#ff0>>" ;
+	  : increment "score" ;
+	  : update_graphic ;
+   }
+   say_half : subroutine {
+      : print "You got half right." ;
+   }
+
+   check_options : subroutine {
+      : match "hone aye;hone eye" {
+         : print {( "Available exits are " + (opt_hone_aye ? "already" : "now") + " honed to ones you still need to use to win." )} ;
+         : if (tats_number == 0 && !opt_hone_aye) {
+            : print "Since you're choosing this option, and you're done here, I'll make a note of that. You can exit, but you can't come back." ;
+         }
+         : set_true "opt_hone_aye" ;
+      }
+      : match "ho nigh" {
+         : print {( "Exits are " + (opt_hone_aye ? "already" : "now") + " all available, even ones you don't need to revisited." )} ;
+         : set_false "opt_hone_aye" ;
+      }
+   }
+
+   odd_dir_note : subroutine {
+      : match "se _;sw _;ne _;nw _" {
+         : print "You don't need to use diagonal directions. Only the four main cardinal directions, and (at the start) up/down." ;
+         : done ;
+      }
+      : match "u _;d _;enter _;in _;exit _;out _" {
+         : print "Only the four main cardinal directions are used here, and (at the start) up/down." ;
+         : done ;
+      }
+   }
+}
+
+themes {
+   my_theme : theme {
+      status_bar {
+         : header_text ;
+         : dynamic_text "my_score" ;
+      }
+      theme_settings {
+         parser_delay  = 0
+      }
+      colors {
+         status_bar_pen   = 15
+         status_bar_paper = #222
+      }
+      system_messages {
+
+   i_cant_do_that = That's a valid command, but not right here and now.
+   not_present = You can't see ${entity} here.
+   ask_new_game                                   = Would you like to restart {wowt}?
+   ask_quit                                       = \"Sign out. *SIGH*, nowt!\", you mutter under your breath.\"\nDo you wish to quit {wowt}?
+   invalid_choice                                 = {yn_or_12_or_14}
+   post_quit = I hope you enjoyed the experience. Pressing {key_enter} will restart {wowt}.
+   unknown_verb                                   = {custom_unknown_verb_error}
+   you_cant_go_that_direction                     = {exits_err}
+   you_see_nothing_special = {nospecial_custom}
+   you_see_nothing_special_2 = {nospecial_custom}
+      }
+   }
+}
+
+## Print the objective when the game starts
+
+on_startup {
+   : print "{wowt}: an {ecomp} Petite Mort 2026 entry.";
+   : if (won_yet) {
+      : print "Thanks for replaying, but this is a reminder to look at the other {ecomp} entries, too!" ;
+      : press_any_key ;
+   }
+   : print "Intro." ;
+   : press_any_key ;
+   : clear_screen;
+}
+
+## Execute this every time a player moves or redescribes a location
+
+on_describe {
+}
+
+## Test VERB NOUN that the player types and executes conditional actions
+
+on_command {
+   : match "xyzzy _" {
+      : print "A hollow voice intones \"Our gaol: argh, ail!\" It's so spooky, you don't dare quibble over details of pronunciation." ;
+      : done ;
+   }
+   : mask {
+      : match "load -" {
+         : print "You hear a low \"Do load, ooh!\"" ;
+      }
+      : match "restore -" {
+         : print "You hear a tune. It could be called a re-load reel/ode, I guess." ;
+      }
+      : match "save -" {
+         : print "A ghostly apparition with \"Save? Illun', Say!\" Villain written on its front taunts your very reasonable precaution. But you don't need to listen to such meanies." ;
+      }
+   }
+   : gosub "check_options" ;
+   : gosub "odd_dir_note" ;
+   : match "z _;wait _" {
+      : print "\"Loaf, right? Lo, fright!\"" ;
+      : if (!wait_yet) {
+         : print "{one_time}This is just a silly general response. Waiting gives no penalty or benefit." ;
+         : set_true "wait_yet" ;
+      }
+   }
+   : match "about _" {
+      : print "{wowt} was written for {ecomp} Petite Mort 2026, with runoff from the 2025 version." ;
+      : print "I used Python scripts to generate a lot of the code to keep the development time under 4 hours." ;
+      : print "I'm grateful to the organizers for not having image creation time count against these four hours." ;
+      : print "{wowt} has the same mechanic as two games I wrote in Inform 7: {l_wp} and {l_ut}." ;
+      : print "{wowt} is meant to be a fairly straightforward game with ten rooms and twelve points to score." ;
+      : print "Every point scoring command is an unusual verb, which it is indicated by the location, or something in the location." ;
+      : print "Some text is color-coded. <Green<#0f0>> is a clickable link, and <Orange<#f80>> or purple indicates a verb you can use. <Lavender<#88f>> text clues what to focus on." ;
+   }
+   : match "credits _;credit _" {
+      : print "Thanks to Allyson Gray for testing." ;
+      : print "Thanks to the administrators Ruber Eaglenest and Alyshkalia for holding {ecomp}, as well as former administrators like JJ Guest and Duncan Bowsman." ;
+      : print "Thanks to Chris Ainsley for creating Adventuron." ;
+   }
+   : match "help _;hint _;hints _" {
+      : if (!me_x_yet) {
+         : print "There are no specific hints now you've gotten past the first puzzle, but {xme} will give you a hint item which may be intuitive, but if not, come back here for an explanation." ;
+      } : else {
+         : cycle key = "help_general" predictable_order = "true" skip_interval = "0" {
+            : print "Ahead is an explanation of {xtats}, which gives a number that clues what you need to do in the current room. Note that it doesn't track whether or not you're ready to, though you can still guess, and {vm_think} will hold it for later." ;
+            : print "The number 0 means there is nothing else left to do." ;
+            : print "A two-digit number tells you something about the two words you need. I didn't make it too out-there, I hope." ;
+            : print "The tens digit is the length of the first word, and the ones digit is the length of the second." ;
+            : print "So, for instance, using the tats for the first puzzle would give 44, as each of the first puzzle has four letters." ;
+            : print "First words range from 1 to 6 letters. Second words range from 2 to 7. This is the final clue. The clues will now cycle." ;
+         }
+      }
+      : print "Fill in later." ;
+   }
+   : match "history _;version _;versions _" {
+      : print "The first release of {wowt} was October 30, 2026, for {ecomp} Petite Mort." ;
+   }
+   : match "score _" {
+      : print "You've currently scored {score} of {max_score} total points. There are no bonus points." ;
+      : if (!warn_score_header) {
+         : print "{one_time}This is tracked in the upper left." ;
+         : set_true "warn_score_header" ;
+      }
+   }
+   : match "think _" {
+      : if (!think_any) {
+         : print "You haven't had any good ideas you weren't able to execute yet." ;
+         : done ;
+      }
+   }
+   : match "verbs _;verb _" {
+      : print "To complete {wowt}, you only need the four compass directions (well, the exit from the first room is up) and the twelve special commands clued by descriptions." ;
+      : print "There are also metaverbs: {vm_about} gives general information, {vm_credits} gives credits, and {vm_versions} shows version history and release dates." ;
+      : print "Finally, there is an option: {hone_aye} blocks off exits to done rooms and what is behind them, while {ho_nigh} lets you traverse freely." ;
+   }
+   : match "take _;drop _" {
+      : print "You don't need to TAKE or DROP anything here. It's all done for you." ;
+      : done ;
+   }
+   : match "x me;x myself" {
+      : if (!me_x_yet) {
+         : print "Weird. You see some numbers on your arm that seem to morph a bit. Perhaps they can help in some way. Let's call them fey stats/phase-tats." ;
+         : pocket "phase_tats" ;
+         : set_true "me_x_yet" ;
+      } : else {
+         : print "Nothing on you but the tats which can give hints." ;
+      }
+      : done ;
+   }
+   : if (me_x_yet) {
+      : match "_ tats;_ fey;_ phase;_ stats" {
+         : print "The tats swirl and form a number: {tats_number}." ;
+         : done ;
+      }
+   }
+}
+
+on_tick {
+   : if (!showed_first_note) {
+      : print "{one_time}{vm_about} will give general game information. {vm_verbs} will describe {wowt}'s stripped-down parser." ;
+      : set_true "showed_first_note" ;
+   }
+}
+
+on_render {
+   : if (!show_overlay) {
+      : done ;
+   }
+}
+
+assets {
+   graphics {
+      r0_1 : base64_png "iVBORw0KGgoAAAANSUhEUgAAAQAAAAAoAQMAAAArNLbKAAAAA1BMVEUAAACnej3aAAAAE0lEQVR4XmPAC0bBKBgFo2AUAAAFKAABhzzafQAAAABJRU5ErkJggg==" ;
+   }
+}
