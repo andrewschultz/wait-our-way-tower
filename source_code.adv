@@ -236,6 +236,7 @@ booleans {
 
    # points
    point_can_do     : boolean "false" ; # 00
+   point_thief_lore : boolean "false" ; # 01
    # silly random
    r00_jail : boolean "false" ;
 
@@ -289,6 +290,31 @@ locations {
                }
                : gosub "say_half" ;
                : done ;
+            }
+         }
+         : if (point_can_do) {
+            : match "thief lore" {
+               : if (point_thief_lore) {
+                  : print "You don't find anything else hidden in the floor." ;
+                  : done ;
+               }
+               : print "You think back to what thief lore you might know. You only know surface stuff. You think of stuff you could use to pick the lock on the outside. Perhaps it was buried under the floor by the last inhabitant. And what do you know? You find something! A yellow pin! All right!" ;
+               : print "The euphoria wears off after you find the pin, though. There's no lock to put it into, and it's too flimsy. But it's something." ;
+               : set_true "point_thief_lore" ;
+               : set_integer var="tempint" "1" ;
+               : gosub "add_point" ;
+               : done ;
+            }
+            : if (!point_thief_lore) {
+               : match "thief _;_ lore" {
+                  : set_integer var="tempint" "1" ;
+                  : set_false "first_half" ;
+                  : match "thief _" {
+                     : set_true "first_half" ;
+                  }
+                  : gosub "say_half" ;
+                  : done ;
+               }
             }
          }
       }
