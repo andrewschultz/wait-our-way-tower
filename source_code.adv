@@ -11,7 +11,7 @@ game_information {
    uuid                         = b3c1f8e2-5d4a-4f9b-8c3d-2a7e5f6a9b1c
    year_of_release              = 2026
    copyright_message            = Free to distribute, voluntary payments welcome
-   short_synopsis               = EctoComp 2026 Petite Mort entry, in the vein of {l_wp} and {l_ut}
+   short_synopsis               = IFComp 2026 entry, in the vein of {l_wp} and {l_ut}, but in Adventuron
 }
 
 
@@ -22,7 +22,7 @@ strings {
    wowt : string "<Wait-Our-Way Tower<#f80>>" ;
    l_ut : string "<Us Too<#0f0>>[http://andrewschultz.itch.io/us-too]" ;
    l_wp : string "<Why Pout<#0f0>>[http://andrewschultz.itch.io/why-pout]" ;
-   ecomp : string "<EctoComp<#f80>>[https://itch.io/jam/ectocomp-2026]" ;
+   ifcomp : string "<IFComp<#f80>>[https://ifcomp.org]" ;
 
    # basics
    my_score : string "{score}/{max_score}" ;
@@ -183,9 +183,9 @@ themes {
 ## Print the objective when the game starts
 
 on_startup {
-   : print "{wowt}: an {ecomp} Petite Mort 2026 entry.";
+   : print "{wowt}: an {ifcomp} Petite Mort 2026 entry.";
    : if (won_yet) {
-      : print "Thanks for replaying, but this is a reminder to look at the other {ecomp} entries, too!" ;
+      : print "Thanks for replaying, but this is a reminder to look at the other {ifcomp} entries, too!" ;
       : press_any_key ;
    }
    : if (random(1) == 1) {
@@ -231,17 +231,14 @@ on_command {
       }
    }
    : match "about _" {
-      : print "{wowt} was written for {ecomp} Petite Mort 2026, with runoff from the 2025 version." ;
-      : print "I used Python scripts to generate a lot of the code to keep the development time under 4 hours." ;
-      : print "I'm grateful to the organizers for not having image creation time count against these four hours." ;
-      : print "{wowt} has the same mechanic as two games I wrote in Inform 7: {l_wp} and {l_ut}." ;
-      : print "{wowt} is meant to be a fairly straightforward game with ten rooms and twelve points to score." ;
+      : print "{wowt} was written for {ifcomp} 2026." ;
+      : print "{wowt} has the same mechanic as two games I wrote in Inform 7: {l_wp} and {l_ut}. It's about their size. I have other three games in a similar vein." ;
       : print "Every point scoring command is an unusual verb, which it is indicated by the location, or something in the location." ;
       : print "Some text is color-coded. <Green<#0f0>> is a clickable link, and <Orange<#f80>> or purple indicates a verb you can use. <Lavender<#88f>> text clues what to focus on." ;
    }
    : match "credits _;credit _" {
-      : print "Thanks to Allyson Gray for testing." ;
-      : print "Thanks to the administrators Ruber Eaglenest and Alyshkalia for holding {ecomp}, as well as former administrators like JJ Guest and Duncan Bowsman." ;
+      : print "Thanks to (testers)." ;
+      : print "Thanks to IFComp administrators past and present and to reviewers and judges past and present. Without then, I would not have dived into this enjoyable (hey, at least for me) nonsense." ;
       : print "Thanks to Chris Ainsley for creating Adventuron." ;
    }
    : match "help _;hint _;hints _" {
@@ -260,7 +257,7 @@ on_command {
       : print "Fill in later." ;
    }
    : match "history _;version _;versions _" {
-      : print "The first release of {wowt} was October 30, 2026, for {ecomp} Petite Mort." ;
+      : print "The first release of {wowt} was September 1, 2026, for {ifcomp} Petite Mort." ;
    }
    : match "score _" {
       : print "You've currently scored {score} of {max_score} total points. There are no bonus points." ;
