@@ -14,7 +14,6 @@ game_information {
    short_synopsis               = IFComp 2026 entry, in the vein of {l_wp} and {l_ut}, but in Adventuron
 }
 
-
 ## Defines locations in the world
 
 strings {
@@ -30,7 +29,7 @@ strings {
    exits_err : dynamic_string {( "Can't go that way." )} ;
 
    # parser stuff
-   nospecial_custom : string "You see no specific item like that--time limits mean I couldn't implement noncritical things. To examine a room, <LOOK<#0f0>>. Note that the parser may not recognize adjectives as synonyms, so using a noun works best." ;
+   nospecial_custom : string "You see no specific item like that. To examine a room, <LOOK<#0f0>>. Note that the parser may not recognize adjectives as synonyms, so using a noun works best." ;
    yn_or_12_or_14 : dynamic_string {( (verb_is "save" || verb_is "load") ? "Please choose from 1 to 4." : in_number_choice ? "Please choose 1 or 2." : "Please choose YES/Y or NO/N." )}
 
    # noting stuff
@@ -64,6 +63,141 @@ integers {
       is_at "r00" ? r00_hintnum : 0
       )} ;
    r00_hintnum : dynamic_integer {( !point_can_do ? 32 : 0 )} ;
+}
+
+collections {
+
+   num_to_word : list {
+      items = [
+         "zero",
+         "one",
+         "two",
+         "three",
+         "four",
+         "five",
+         "six",
+         "seven"
+      ]
+   };
+
+   tried_combo_core : list {
+      items = [
+         "false",
+         "false",
+         "false",
+         "false",
+      ]
+   }
+
+   situations_core : list {
+      items = [
+         "{here_r00}",
+         "{here_r00}",
+         "{here_r00}",
+         "{here_hall}"
+      ]
+   }
+
+   think_first_core : list {
+      items = [
+         "<CAN<#f80>>",
+         "<THIEF<#f80>>",
+         "<YELL<#f80>>",
+         "<HALT<#f80>>"
+      ]
+   }
+
+   think_second_core : list {
+      items = [
+         "<DO<#f80>>",
+         "<LORE<#f80>>",
+         "<OPEN<#f80>>",
+         "<ERROR<#f80>>"
+      ]
+   }
+
+   got_first_core : list {
+      items = [
+         "false",
+         "false",
+         "false",
+         "false"
+      ]
+   }
+
+   got_second_core : list {
+      items = [
+         "false",
+         "false",
+         "false",
+         "false"
+      ]
+   }
+
+   tried_combo_bonus : list {
+      items = [
+         0,
+         0,
+         0,
+         0,
+         0,
+         0,
+         0,
+         0,
+         0,
+         0,
+         0,
+         0,
+         0,
+         0,
+         0,
+         0,
+         0
+      ]
+   }
+
+   situations_bonus : list {
+      items = [
+         "anywhere"
+      ]
+   }
+
+   got_first_bonus : list {
+      items = [
+         "false"
+      ]
+   }
+
+   think_first_bonus : list {
+      items = [
+         "<GOLDEN<#f80>>"
+      ]
+   }
+
+   got_second_bonus : list {
+      items = [
+         "false"
+      ]
+   }
+
+   think_second_bonus : list {
+      items = [
+         "<BELOW<#f80>>"
+      ]
+   }
+
+   bonus_not_found_text : list {
+      items = [
+         "(unfound yet)"
+      ]
+   };
+
+   bonus_half_status : list {
+      items = [
+         0
+      ]
+   };
+
 }
 
 booleans {
