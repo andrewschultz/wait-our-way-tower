@@ -237,6 +237,7 @@ booleans {
    # points
    point_can_do     : boolean "false" ; # 00
    point_thief_lore : boolean "false" ; # 01
+   point_yell_open  : boolean "false" ; # 02
    # silly random
    r00_jail : boolean "false" ;
 
@@ -317,6 +318,36 @@ locations {
                }
             }
          }
+         : if (point_thief_lore) {
+            : match "yell open" {
+               : if (point_yell_open) {
+                  : print "No need to yell open again!" ;
+                  : done ;
+               }
+               : print "The yellow pin glows in your hand and explodes." ;
+               : set_integer var="tempint" "2" ;
+               : set_true "point_yell_open" ;
+               : gosub "add_point" ;
+               : done ;
+            }
+            : if (!point_yell_open) {
+               : match "* pin" {
+                  : print "You fumble with the pin a bit. Whatever you need to do with it doesn't require dexterity..." ;
+                  : done ;
+               }
+               : match "yell _;_ open" {
+                  : set_integer var="tempint" "3" ;
+                  : set_false "first_half" ;
+                  : match "yell _" {
+                     : set_true "first_half" ;
+                  }
+                  : gosub "say_half" ;
+                  : done ;
+               }
+            }
+         }
+      }
+   }
       }
    }
 }
