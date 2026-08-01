@@ -57,6 +57,8 @@ strings {
    r00_loc : string "Here you have enough space to, well, wheeze and pace in worry about your predicament. And you do, constantly repeating {clue_canned_ooh}." ;
    r00_header : string "Wheeze/Pace Wee Space" ;
 
+   r1_loc : string "The hall leads north and south." ;
+   r1_header : string "Hall" ;
    # item(s)
    i_fspt : string "<Fey Stats Phase Tats<#ccc>>" ;
 
@@ -236,6 +238,7 @@ booleans {
 
    # points
    point_can_do     : boolean "false" ; # 00
+   point_halt_error : boolean "false" ; # 03
    point_thief_lore : boolean "false" ; # 01
    point_yell_open  : boolean "false" ; # 02
    # silly random
@@ -348,6 +351,32 @@ locations {
          }
       }
    }
+   r01 : location "{r01_loc}" header="{r01_header}" graphic="r00_1" {
+      on_command {
+         : match "halt error" {
+            : if (point_halt_error) {
+               : print "Already done!" ;
+               : done ;
+            }
+            : print "Narrative text." ;
+            : set_integer var="tempint" "3" ;
+            : set_true "point_halt_error" ;
+            : gosub "add_point" ;
+            : done ;
+         }
+         : if (!point_halt_error) {
+            : match "halt _;_ error" {
+               : set_integer var="tempint" "3" ;
+               : set_false "first_half" ;
+               : match "halt _" {
+                  : set_true "first_half" ;
+               }
+               : gosub "say_half" ;
+               : done ;
+            }
+         }
+      }
+   }
       }
    }
 }
@@ -357,15 +386,19 @@ objects {
    phase_tats : object "{i_fspt}" ;
 }
 
-#connections {
+connections {
 
-#}
+   from, direction, to = [
+      r00, east, r01
+   ]
+
+}
 
 barriers {
-   block_hone_r0 : block {
-      location = r0
-      block_when = r0_hone_block
-      message = No need to go back. You found the light source to leave.
+   block_hone_r00 : block {
+      location = r01
+      block_when_not = point_yell_open
+      message = You have no way out yet.
    }
 }
 
@@ -423,7 +456,7 @@ subroutines {
 
    odd_dir_note : subroutine {
       : match "se _;sw _;ne _;nw _" {
-         : print "You don't need to use diagonal directions. Only the four main cardinal directions, and (at the start) up/down." ;
+         : print "You don't need to use diagonal directions. Only the four main cardinal directions, and (where indicated) up/down." ;
          : done ;
       }
       : match "u _;d _;enter _;in _;exit _;out _" {
