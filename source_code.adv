@@ -215,6 +215,23 @@ booleans {
    # silly random
    r00_jail : boolean "false" ;
 
+   # think variables
+   already_got_command : boolean "false" ;
+   first_half : boolean "false" ;
+   half_bonus : boolean "false" ;
+   bonus_obfuscated_note_yet : boolean "false" ;
+   bonus_half_note : boolean "false" ;
+   think_core_yet : boolean "false" ;
+   think_bonus_yet : boolean "false" ;
+   think_text_yet : boolean "false" ;
+   print_bonus_nag_after : boolean "false" scope="survivor" ;
+   print_core_nag_after : boolean "false" ;
+   solved_both_parts_core_nag : boolean "false" ;
+   solved_both_parts_bonus_nag : boolean "false" ;
+
+   in_bonus_half : boolean "false" ;
+   unneeded_half : dynamic_boolean {( tempint == 0 && !in_bonus_half )} ;
+
    # blocker dynamic booleans
    r00_hone_block : dynamic_boolean {( opt_hone_aye )} ;
 
@@ -251,12 +268,40 @@ barriers {
 
 subroutines {
    add_point : subroutine {
+      : collection_modify { collection = "tried_combo_core" index -> (tempint) content -> ("true") } ;
       : print "<Your score has just gone up by a point!<#ff0>>" ;
 	  : increment "score" ;
 	  : update_graphic ;
    }
    say_half : subroutine {
-      : print "You got half right." ;
+      : match "* -;- *" {
+         : print "Feels right, but what to pair that word with?" ;
+         : done ;
+      }
+      : cycle key = "one_right" predictable_order = "true" skip_interval = "0" max_loops = "1" {
+         : print "One of those words felt right, but the other didn't. You must be halfway there{for_bonus}.{already_got_check}" ;
+         : print "Again, you feel like you got halfway there{for_bonus}.{already_got_check}" ;
+         on_exhausted {
+            : print "One word right, one word wrong{for_bonus}.{already_got_check}" ;
+         }
+      }
+      : if (first_half) {
+         : if (half_bonus) {
+            : collection_modify { collection = "got_first_bonus" index -> (tempint) content -> ("true") ; }
+         } : else {
+            : collection_modify { collection = "got_first_core" index -> (tempint) content -> ("true") ; }
+         }
+      } : else {
+         : if (half_bonus) {
+            : collection_modify { collection = "got_second_bonus" index -> (tempint) content -> ("true") ; }
+         } : else {
+            : collection_modify { collection = "got_second_core" index -> (tempint) content -> ("true") ; }
+         }
+      }
+      : set_false "already_got_command" ;
+      : if (!half_bonus) {
+         : done ;
+      }
    }
 
    check_options : subroutine {
@@ -283,6 +328,31 @@ subroutines {
          : done ;
       }
    }
+
+   #########################################diagnostics
+
+   diagnostic_think_core_half : subroutine {
+      : set_integer var="counter" "0" ;
+      : set_false "think_core_yet" ;
+      : while (counter < max_score) {
+         : if ((collection_get{ collection -> ("tried_combo_core") index -> ( counter )} == "false")) {
+            : if (part_core_score > 0) {
+               : if (!think_core_yet) {
+                  : print "{think_here_also} is a summary of correct bonus command half-guesses:" ;
+                  : set_true "think_core_yet" ;
+                  : set_true "think_text_yet" ;
+               }
+               : print {( (part_core_score != 2 ? (collection_get{ collection -> ("think_first_core") index -> (counter) }) : "{noguess_c_1}") + " " + (part_core_score >= 2 ? (collection_get{ collection -> ("think_second_core") index -> (counter) }) : "{noguess}") + " " + (collection_get{ collection -> ("situations_core") index -> (counter) }) )} ;
+               : if (!solved_both_parts_core_nag && part_core_score == 3) {
+                  : set_true "print_core_nag_after" ;
+               }
+            }
+         }
+         : increment "counter" ;
+      }
+   }
+
+
 }
 
 themes {
@@ -401,6 +471,21 @@ on_command {
       }
    }
    : match "think _" {
+      : set_false "think_text_yet" ;
+      : if (commands_figured > 0) {
+         : print {( "Here " + (commands_figured > 1 ? "are {number_as_word} things that seemed like they" : "is something that seemed like it") + " should work, but you didn't have the resources yet:" )} ;
+      }
+      : gosub "diagnostic_think_core_half" ;
+      : if (print_core_nag_after) {
+         : print "{one_time}You have figured each half of a point-scoring command, but you haven't typed them both together. That still might not work if you haven't prepared by solving other puzzles, but if that's the case, {vd_think} will remind you with context until it does." ;
+         : set_true "solved_both_parts_core_nag" ;
+         : set_false "print_core_nag_after" ;
+      }
+      : if (print_bonus_nag_after) {
+         : print "{one_time}You have figured each half of a bonus point scoring command, but you haven't typed them both together. {vd_think} will remind you of this try until it works, though game state changes may make, or have made, this undoable until you replay." ;
+         : set_true "solved_both_parts_bonus_nag" ;
+         : set_false "print_bonus_nag_after" ;
+      }
       : if (!think_any) {
          : print "You haven't had any good ideas you weren't able to execute yet." ;
          : done ;
