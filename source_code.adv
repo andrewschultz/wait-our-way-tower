@@ -390,7 +390,7 @@ locations {
             }
             : print "Ace, Inc. slowly sinks. You hope the message about no humans being there is true. You hear no screams or confusions, just robots whirring and glitching." ;
             : print "What is revealed is a garish cube land." ;
-            : set_integer var="tempint" "0" ;
+            : set_integer var="tempint" "100" ;
             : set_true "point_eh_sink" ;
             : gosub "add_point" ;
             : done ;
@@ -437,16 +437,26 @@ barriers {
 
 subroutines {
    add_point : subroutine {
+      : gosub "check_100" ;
       : collection_modify { collection = "tried_combo_core" index -> (tempint) content -> ("true") } ;
       : print "<Your score has just gone up by a point!<#ff0>>" ;
 	  : increment "score" ;
 	  : update_graphic ;
+   }
+   check_100 : subroutine {
+      : if (tempint >= 100) {
+         : cycle key = "one_right_bug" predictable_order = "true" skip_interval = "0" max_loops = "1" {
+            : print "One word right, one word wrong. (NOTE: this text shouldn't come up in release, but if it does, it's a bug. Not a game breaking one, but it affects THINK and showing half-right guesses. So I need to give this point-scoring command a proper index. Let me know which puzzle.)
+            : print "One word right, one word wrong. (Again, bug, needs index, let me know which puzzle.)
+         }
+      }
    }
    say_half : subroutine {
       : match "* -;- *" {
          : print "Feels right, but what to pair that word with?" ;
          : done ;
       }
+      : gosub "check_100" ;
       : cycle key = "one_right" predictable_order = "true" skip_interval = "0" max_loops = "1" {
          : print "One of those words felt right, but the other didn't. You must be halfway there{for_bonus}.{already_got_check}" ;
          : print "Again, you feel like you got halfway there{for_bonus}.{already_got_check}" ;
