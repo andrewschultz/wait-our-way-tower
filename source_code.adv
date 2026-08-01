@@ -48,6 +48,11 @@ strings {
    xtats : string "<X TATS<#f80>>" ;
    xme : string "<X ME<#0f0>>" ;
 
+   puz_point_can_do     : dynamic_string {( opt_color_coding ? "<canned ooh<#f80>>" : "canned ooh" )} ; #00
+   puz_point_halt_error : dynamic_string {( opt_color_coding ? "<halt error<#f80>>" : "halt error" )} ; #03
+   puz_point_the_floor  : dynamic_string {( opt_color_coding ? "<the floor<#f80>>" : "the floor" )} ;   #01
+   puz_point_yell_open  : dynamic_string {( opt_color_coding ? "<yell open<#f80>>" : "yell open" )} ;   #02
+
    # room(s)
    r00_loc : string "Here you have enough space to, well, wheeze and pace in worry about your predicament. And you do, constantly repeating {clue_canned_ooh}." ;
    r00_header : string "Wheeze/Pace Wee Space" ;
@@ -227,6 +232,7 @@ booleans {
 
    # option(s)
    opt_hone_aye : boolean "false" ;
+   opt_color_coding : boolean "false" ;
 
    # silly random
    r00_jail : boolean "false" ;
