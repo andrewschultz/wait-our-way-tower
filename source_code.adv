@@ -54,15 +54,31 @@ strings {
 
    # item(s)
    i_fspt : string "<Fey Stats Phase Tats<#ccc>>" ;
+
+   # think text and interpretive stuff
+   already_got_check : dynamic_string {( already_got_command ? " Though you already got the full command, which you can revisit with {vd_think}." : "" )} ;
+   noguess : string "<(unknown)<#888>>" ;
+   noguess_c_1 : dynamic_string {( unneeded_half ? "<(unneeded)<#888>>" : "<(unknown)<#888>>" )} ;
+   think_here_also : dynamic_string {( think_text_yet ? "Also, here" : "Here" )} ;
 }
 
 integers {
    score : integer "0" ;
-   max_score : integer "12" ;
+   max_score : integer "4" ;
+
    tats_number : dynamic_integer {(
       is_at "r00" ? r00_hintnum : 0
       )} ;
    r00_hintnum : dynamic_integer {( !point_can_do ? 32 : 0 )} ;
+
+# auxiliary
+   tempint : integer "0" ;
+   counter : integer "0" ;
+   commands_figured : dynamic_integer {( 0
+   )} ;
+   # for half THINK
+   part_core_score : dynamic_integer {( ((collection_get{ collection -> ("got_first_core") index -> ( counter ) } == "true") ? 1 : 0) + ((collection_get{ collection -> ("got_second_core") index -> ( counter ) } == "true") ? 2 : 0) )} ; # this is a really bad hack, but I couldn't find a concise way to code things. Maybe I could use a dynamic boolean.
+   part_bonus_score : dynamic_integer {( ((collection_get{ collection -> ("got_first_bonus") index -> ( counter ) } == "true") ? 1 : 0) + ((collection_get{ collection -> ("got_second_bonus") index -> ( counter ) } == "true") ? 2 : 0) )} ; # this is a really bad hack, but I couldn't find a concise way to code things. Maybe I could use a dynamic boolean.
 }
 
 collections {
