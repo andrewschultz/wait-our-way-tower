@@ -83,7 +83,7 @@ strings {
 
 integers {
    score : integer "0" ;
-   max_score : integer "4" ;
+   max_score : integer "6" ;
 
    tats_number : dynamic_integer {(
       is_at "r00" ? r00_hintnum : 0
@@ -461,6 +461,30 @@ locations {
          }
       }
    }
+   r13: location "{r13_loc}" header="{r13_header}" {
+      on_command {
+         : match "hate rash" {
+            : if (point_hate_rash) {
+               : print "Already done!" ;
+               : done ;
+            }
+            : print "Narrative text." ;
+            : set_integer var="tempint" "5" ;
+            : set_true "point_hate_rash" ;
+            : gosub "add_point" ;
+            : done ;
+         }
+         : if (!point_hate_rash) {
+            : match "hate _;_ rash" {
+               : set_integer var="tempint" "5" ;
+               : set_false "first_half" ;
+               : match "hate _" {
+                  : set_true "first_half" ;
+               }
+               : gosub "say_half" ;
+               : done ;
+            }
+         }
       }
    }
    ud01: location "{ud01_loc}" header="{ud01_header}" {
