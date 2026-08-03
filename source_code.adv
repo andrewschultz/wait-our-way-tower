@@ -285,6 +285,7 @@ booleans {
    # option(s)
    opt_hone_aye : boolean "false" ;
    opt_color_coding : boolean "false" ;
+   opt_score_notify : boolean "true" scope="survivor" ;
 
    # game state (critical)
    gamestate_r12_e : boolean "false" ;
@@ -305,6 +306,9 @@ booleans {
 
    # silly random
    r02_jail : boolean "false" ;
+
+   # auxiliary variables
+   opt_on_off : boolean "false" ;
 
    # general go-blocking
    goblock_12 : dynamic_boolean {( !point_yell_open)} ;
@@ -745,6 +749,22 @@ subroutines {
       : done ;
    }
 
+   options_score_notify : subroutine {
+      : set_boolean var="opt_on_off" {( opt_score_notify )} ;
+      : match "notify yes" {
+         : print "Score notify is now on.";
+         : set_true "opt_score_notify";
+         : done ;
+      }
+      : match "notify no" {
+         : print "Score notify is now off.";
+         : set_false "opt_score_notify";
+         : done ;
+      }
+      : set_string var="tempopt" text="{optt_notify}" ;
+      : gosub "option_err_stub" ;
+   }
+
    ############################ rejects
 
    odd_dir_note : subroutine {
@@ -906,10 +926,7 @@ on_command {
    }
    : match "score _" {
       : print "You've currently scored {score} of {max_score} total points. There are no bonus points." ;
-      : if (!warn_score_header) {
-         : print "{one_time}This is tracked in the upper left." ;
-         : set_true "warn_score_header" ;
-      }
+      : gosub "note_score_upper_right" ;
    }
    : match "listen _" {
       : gosub "listen_stub" ;
