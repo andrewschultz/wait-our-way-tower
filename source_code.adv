@@ -37,8 +37,6 @@ strings {
    key_enter : string "the <ENTER<#f88>>/<RETURN<#f88>> key" ;
 
    # meta-verbs
-   hone_aye : string "<HONE AYE<#ff0>>/<HONE EYE<#ff0>>" ;
-   ho_nigh : string "<HO NIGH<#ff0>>" ;
    vm_about : string "<ABOUT<#f80>>" ;
    vm_credits : string "<CREDITS<#f80>>" ;
    vm_think : string "<THINK<#f80>>" ;
@@ -48,12 +46,20 @@ strings {
    xtats : string "<X TATS<#f80>>" ;
    xme : string "<X ME<#0f0>>" ;
 
-   puz_point_can_do     : dynamic_string {( opt_color_coding ? "<canned ooh<#f80>>" : "canned ooh" )} ; #00
-   puz_point_eh_sink    : dynamic_string {( opt_color_coding ? "<Ace, Inc.<#f80>>" : "Ace, Inc." )}   ; #101
-   puz_point_cue_bland  : dynamic_string {( opt_color_coding ? "<cue bland<#f80>>" : "cue bland" )}   ; #101
-   puz_point_halt_error : dynamic_string {( opt_color_coding ? "<halt error<#f80>>" : "halt error" )} ; #03
-   puz_point_the_floor  : dynamic_string {( opt_color_coding ? "<the floor<#f80>>" : "the floor" )}   ; #01
-   puz_point_yell_open  : dynamic_string {( opt_color_coding ? "<yell open<#f80>>" : "yell open" )}   ; #02
+   # verb option strings
+   # options, game specific
+   vo_hone_aye : string "<HONE AYE<#ff0>>/<HONE EYE<#ff0>>" ;
+   vo_ho_nigh : string "<HO NIGH<#ff0>>" ;
+
+   # puzzle strings
+   puz_point_canned_ooh  : dynamic_string {( opt_color_coding ? "<Canned, ooh<#f80>>" : "Canned, ooh" )}  ; #00
+   puz_point_cue_bland   : dynamic_string {( opt_color_coding ? "<cue bland<#f80>>" : "cue bland" )}      ; #101
+   puz_point_eh_sink     : dynamic_string {( opt_color_coding ? "<Ace, Inc.<#f80>>" : "Ace, Inc." )}      ; #101
+   puz_point_fellas_leap : dynamic_string {( opt_color_coding ? "<FELLAS, LEAP<#f80>>" : "fell asleep" )} ; #04
+   puz_point_halt_error  : dynamic_string {( opt_color_coding ? "<halt error<#f80>>" : "halt error" )}    ; #03
+   puz_point_hey_trash : dynamic_string {( opt_color_coding ? "<hey trash<#f80>>" : "hey trash" )} ; # 05
+   puz_point_the_floor   : dynamic_string {( opt_color_coding ? "<the floor<#f80>>" : "the floor" )}      ; #01
+   puz_point_yell_open   : dynamic_string {( opt_color_coding ? "<yell open<#f80>>" : "yell open" )}      ; #02
 
    # room(s)
    r02_loc : string "Here you have enough space to, well, wheeze and pace in worry about your predicament. And you do, constantly repeating \"{puz_point_canned_ooh}.\"" ;
@@ -253,14 +259,16 @@ booleans {
    gamestate_r12_e : boolean "false" ;
 
    # points
-   point_can_do     : boolean "false" ; # 00
-   point_halt_error : boolean "false" ; # 03
-   point_thief_lore : boolean "false" ; # 01
-   point_yell_open  : boolean "false" ; # 02
+   point_can_do      : boolean "false" ; # 00
+   point_fell_asleep : boolean "false" ; # 04
+   point_halt_error  : boolean "false" ; # 03
+   point_hate_rash   : boolean "false" ; # 05
+   point_thief_lore  : boolean "false" ; # 01
+   point_yell_open   : boolean "false" ; # 02
 
    # not in place yet
-   point_cue_bland  : boolean "false" ; #101
-   point_eh_sink    : boolean "false" ; #101
+   point_cue_bland  : boolean "false" ; # 101
+   point_eh_sink    : boolean "false" ; # 101
 
    # silly random
    r02_jail : boolean "false" ;
@@ -513,8 +521,8 @@ subroutines {
    check_100 : subroutine {
       : if (tempint >= 100) {
          : cycle key = "one_right_bug" predictable_order = "true" skip_interval = "0" max_loops = "1" {
-            : print "One word right, one word wrong. (NOTE: this text shouldn't come up in release, but if it does, it's a bug. Not a game breaking one, but it affects THINK and showing half-right guesses. So I need to give this point-scoring command a proper index. Let me know which puzzle.)
-            : print "One word right, one word wrong. (Again, bug, needs index, let me know which puzzle.)
+            : print "One word right, one word wrong. (NOTE: this text shouldn't come up in release, but if it does, it's a bug. Not a game breaking one, but it affects THINK and showing half-right guesses. So I need to give this point-scoring command a proper index. Let me know which puzzle.)" ;
+            : print "One word right, one word wrong. (Again, bug, needs index, let me know which puzzle.)" ;
          }
       }
    }
@@ -550,6 +558,8 @@ subroutines {
       }
    }
 
+   ########################## options
+
    check_options : subroutine {
       : match "hone aye;hone eye" {
          : print {( "Available exits are " + (opt_hone_aye ? "already" : "now") + " honed to ones you still need to use to win." )} ;
@@ -564,13 +574,15 @@ subroutines {
       }
    }
 
+   ############################ rejects
+
    odd_dir_note : subroutine {
       : match "se _;sw _;ne _;nw _" {
          : print "You don't need to use diagonal directions. Only the four main cardinal directions, and (where indicated) up/down." ;
          : done ;
       }
       : match "u _;d _;enter _;in _;exit _;out _" {
-         : print "Only the four main cardinal directions are used here, and (at the start) up/down." ;
+         : print "Only the four main cardinal directions are used here, and (only when indicated) up/down." ;
          : done ;
       }
    }
@@ -597,6 +609,8 @@ subroutines {
          : increment "counter" ;
       }
    }
+
+########################## options
 
 
 }
