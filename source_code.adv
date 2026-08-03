@@ -583,6 +583,18 @@ barriers {
 }
 
 subroutines {
+# first standard verbs
+# second auxiliary
+# third options
+   listen_stub : subroutine {
+      : if (is_at "r02") {
+         : print "You hear nothing but occasionally mutter to yourself <rue my room, aye<#888>>." ;
+      } : else_if (is_at "r12") {
+         : print {( point_fell_asleep ? "It's quiet now." : point_halt_error ? (gamestate_r12_e ? "The \"{puz_point_fellas_leep}\" order echoes in your head." : "Quiet, for the moment.") : "The hall terror is making all kinds of noise." )} ;
+      } : else {
+         : print "Nothing." ;
+      }
+   }
    add_point : subroutine {
       : gosub "check_100" ;
       : collection_modify { collection = "tried_combo_core" index -> (tempint) content -> ("true") } ;
@@ -811,6 +823,9 @@ on_command {
          : print "{one_time}This is tracked in the upper left." ;
          : set_true "warn_score_header" ;
       }
+   }
+   : match "listen _" {
+      : gosub "listen_stub" ;
    }
    : match "think _" {
       : set_false "think_text_yet" ;
