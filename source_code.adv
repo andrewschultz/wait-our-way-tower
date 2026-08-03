@@ -79,6 +79,11 @@ strings {
    noguess : string "<(unknown)<#888>>" ;
    noguess_c_1 : dynamic_string {( unneeded_half ? "<(unneeded)<#888>>" : "<(unknown)<#888>>" )} ;
    think_here_also : dynamic_string {( think_text_yet ? "Also, here" : "Here" )} ;
+
+   #auxiliary for options
+   tempopt : string "" ;
+   txt_on_off : dynamic_string {( opt_on_off ? "<ON<#f0f>>" : "<OFF<#f0f>>" )} ;
+
 }
 
 integers {
@@ -274,6 +279,7 @@ booleans {
    me_x_yet : boolean "false" ;
    won_yet : boolean "false" scope="survivor" ;
    in_number_choice : boolean "false" ;
+   noted_upper_right : boolean "false" ;
    think_note_yet : boolean "false" ;
 
    # option(s)
@@ -655,6 +661,12 @@ subroutines {
          : print "Nothing." ;
       }
    }
+   note_score_upper_right : subroutine {
+      : if (!noted_upper_right) {
+         : print "{one_time}you can toggle score notifications with {optt_notify} {yn}. The score is always tracked in the upper right." ;
+         : set_true "noted_upper_right" ;
+      }
+   }
    add_point : subroutine {
       : gosub "check_100" ;
       : collection_modify { collection = "tried_combo_core" index -> (tempint) content -> ("true") } ;
@@ -722,6 +734,15 @@ subroutines {
          : print {( "Exits are " + (opt_hone_aye ? "already" : "now") + " all available, even ones you don't need to revisited." )} ;
          : set_false "opt_hone_aye" ;
       }
+   }
+
+   option_err_stub : subroutine {
+      : match "_ -" {
+         : print "Toggling {tempopt} without an argument ({yn}) is not supported." ;
+         : done ;
+      }
+      : print "Toggling {tempopt} requires one of {yn} as an argument." ;
+      : done ;
    }
 
    ############################ rejects
