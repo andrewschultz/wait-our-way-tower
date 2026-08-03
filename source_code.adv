@@ -49,9 +49,11 @@ strings {
    xme : string "<X ME<#0f0>>" ;
 
    puz_point_can_do     : dynamic_string {( opt_color_coding ? "<canned ooh<#f80>>" : "canned ooh" )} ; #00
+   puz_point_eh_sink    : dynamic_string {( opt_color_coding ? "<Ace, Inc.<#f80>>" : "Ace, Inc." )}   ; #101
+   puz_point_cue_bland  : dynamic_string {( opt_color_coding ? "<cue bland<#f80>>" : "cue bland" )}   ; #101
    puz_point_halt_error : dynamic_string {( opt_color_coding ? "<halt error<#f80>>" : "halt error" )} ; #03
-   puz_point_the_floor  : dynamic_string {( opt_color_coding ? "<the floor<#f80>>" : "the floor" )} ;   #01
-   puz_point_yell_open  : dynamic_string {( opt_color_coding ? "<yell open<#f80>>" : "yell open" )} ;   #02
+   puz_point_the_floor  : dynamic_string {( opt_color_coding ? "<the floor<#f80>>" : "the floor" )}   ; #01
+   puz_point_yell_open  : dynamic_string {( opt_color_coding ? "<yell open<#f80>>" : "yell open" )}   ; #02
 
    # room(s)
    r00_loc : string "Here you have enough space to, well, wheeze and pace in worry about your predicament. And you do, constantly repeating {clue_canned_ooh}." ;
@@ -243,7 +245,8 @@ booleans {
    point_yell_open  : boolean "false" ; # 02
 
    # not in place yet
-   point_eh_sink : boolean "false" ;
+   point_cue_bland  : boolean "false" ; #101
+   point_eh_sink    : boolean "false" ; #101
 
    # silly random
    r00_jail : boolean "false" ;
@@ -400,6 +403,31 @@ locations {
             : set_true "point_eh_sink" ;
             : gosub "add_point" ;
             : done ;
+         }
+         : if (point_eh_sink) {
+            : match "cue bland" {
+               : if (point_cue_bland) {
+                  : print "Already done!" ;
+                  : done ;
+               }
+               : print "Narrative text." ;
+               : set_integer var="tempint" "point_cue_bland" ;
+               : set_true "point_cue_bland" ;
+               : gosub "add_point" ;
+               : done ;
+            }
+            : if (!point_cue_bland) {
+               : match "cue _;_ bland" {
+                  : set_integer var="tempint" "101" ;
+                  : set_integer var="already_got_command" {( think_cue_bland && !point_cue_bland )} ; # this is optional. Delete if point does not rely on any other variables.
+                  : set_false "first_half" ;
+                  : match "cue _" {
+                     : set_true "first_half" ;
+                  }
+                  : gosub "say_half" ;
+                  : done ;
+               }
+            }
          }
          : if (!point_eh_sink) {
             : match "sink *" {
