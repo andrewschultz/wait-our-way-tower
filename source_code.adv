@@ -248,6 +248,12 @@ booleans {
    # silly random
    r00_jail : boolean "false" ;
 
+   #core blockers
+   coreblock_00 : dynamic_boolean {( opt_block_done && point_yell_open )} ;
+
+   #bonus blockers
+   bonusblock_00 : dynamic_boolean {( opt_block_done && point_yell_open )} ;
+
    # think variables
    already_got_command : boolean "false" ;
    first_half : boolean "false" ;
@@ -428,10 +434,17 @@ connections {
 }
 
 barriers {
-   block_hone_r00 : block {
+
+   block_go_r01 : block {
       location = r01
-      block_when_not = point_yell_open
-      message = You have no way out yet.
+      block_when = coreblock_00
+      message = THE DOOR blocks you.
+   }
+
+   block_bonus_r00 : block {
+      location = r00
+      block_when = bonusblock_00
+      message = You have nothing left to do back where you started.
    }
 }
 
