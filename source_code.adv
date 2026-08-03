@@ -487,7 +487,7 @@ locations {
          }
       }
    }
-   ud01: location "{ud01_loc}" header="{ud01_header}" {
+   r14: location "{r14_loc}" header="{r14_header}" {
       on_command {
          : match "eh sink" {
             : if (point_eh_sink) {
@@ -508,7 +508,7 @@ locations {
                   : done ;
                }
                : print "Narrative text." ;
-               : set_integer var="tempint" "point_cue_bland" ;
+               : set_integer var="tempint" "101" ;
                : set_true "point_cue_bland" ;
                : gosub "add_point" ;
                : done ;
@@ -516,7 +516,7 @@ locations {
             : if (!point_cue_bland) {
                : match "cue _;_ bland" {
                   : set_integer var="tempint" "101" ;
-                  : set_integer var="already_got_command" {( think_cue_bland && !point_cue_bland )} ; # this is optional. Delete if point does not rely on any other variables.
+                  : set_boolean var="already_got_command" {( think_cue_bland && !point_cue_bland )} ; # this is optional. Delete if point does not rely on any other variables.
                   : set_false "first_half" ;
                   : match "cue _" {
                      : set_true "first_half" ;
