@@ -1,4 +1,4 @@
-start_at = "r02"
+start_at = "r20"
 start_theme = my_theme
 
 #cch.py makes sure of things
@@ -27,8 +27,8 @@ strings {
    my_score : string "{score}/{max_score}" ;
    custom_unknown_verb_error : dynamic_string {( "Nothing special happens. You can use {vm_verbs} for a general overview of standard verbs." )} ;
    exits_err : dynamic_string {(
-      is_at "r02" ? "THE DOOR east is the only exit." :
-      is_at "r12" ? "Can't go that way." :
+      is_at "r20" ? "THE DOOR east is the only exit." :
+      is_at "r21" ? "Can't go that way." :
       "Can't go that way."
       )} ;
 
@@ -56,18 +56,19 @@ strings {
    vo_ho_nigh : string "<HO NIGH<#ff0>>" ;
 
    # puzzle strings
-   puz_point_canned_ooh  : dynamic_string {( opt_color_coding ? "<Canned, ooh<#f80>>" : "Canned, ooh" )}  ; #00
-   puz_point_cue_bland   : dynamic_string {( opt_color_coding ? "<cue bland<#f80>>" : "cue bland" )}      ; #101
-   puz_point_eh_sink     : dynamic_string {( opt_color_coding ? "<Ace, Inc.<#f80>>" : "Ace, Inc." )}      ; #101
-   puz_point_fellas_leap : dynamic_string {( opt_color_coding ? "<FELLAS, LEAP<#f80>>" : "fell asleep" )} ; #04
-   puz_point_halt_error  : dynamic_string {( opt_color_coding ? "<halt error<#f80>>" : "halt error" )}    ; #03
-   puz_point_hey_trash : dynamic_string {( opt_color_coding ? "<hey trash<#f80>>" : "hey trash" )} ; # 05
-   puz_point_the_floor   : dynamic_string {( opt_color_coding ? "<the floor<#f80>>" : "the floor" )}      ; #01
-   puz_point_yell_open   : dynamic_string {( opt_color_coding ? "<yell open<#f80>>" : "yell open" )}      ; #02
+   puz_point_canned_ooh  : dynamic_string {( opt_color_coding ? "<Canned, ooh<#f80>>" : "Canned, ooh" )}  ; # 00
+   puz_point_cue_bland   : dynamic_string {( opt_color_coding ? "<cue bland<#f80>>" : "cue bland" )}      ; # 101
+   puz_point_dork_loud   : dynamic_string {( opt_color_coding ? "<dork loud<#f80>>" : "dork loud" )}      ; # 100
+   puz_point_eh_sink     : dynamic_string {( opt_color_coding ? "<Ace, Inc.<#f80>>" : "Ace, Inc." )}      ; # 101
+   puz_point_fellas_leap : dynamic_string {( opt_color_coding ? "<FELLAS, LEAP<#f80>>" : "fell asleep" )} ; # 04
+   puz_point_halt_error  : dynamic_string {( opt_color_coding ? "<halt error<#f80>>" : "halt error" )}    ; # 03
+   puz_point_hey_trash   : dynamic_string {( opt_color_coding ? "<hey trash<#f80>>" : "hey trash" )}      ; # 05
+   puz_point_the_floor   : dynamic_string {( opt_color_coding ? "<the floor<#f80>>" : "the floor" )}      ; # 01
+   puz_point_yell_open   : dynamic_string {( opt_color_coding ? "<yell open<#f80>>" : "yell open" )}      ; # 02
 
    # room(s)
-   r02_loc : string "Here you have enough space to, well, wheeze and pace in worry about your predicament. And you do, constantly repeating \"{puz_point_canned_ooh}.\"" ;
-   r02_header : string "Wheeze/Pace Wee Space" ;
+   r20_loc : string "Here you have enough space to, well, wheeze and pace in worry about your predicament. And you do, constantly repeating \"{puz_point_canned_ooh}.\"" ;
+   r20_header : string "Wheeze/Pace Wee Space" ;
 
    r1_loc : string "The hall leads north and south." ;
    r1_header : string "Hall" ;
@@ -91,21 +92,21 @@ integers {
    max_score : integer "6" ;
 
    tats_number : dynamic_integer {(
-      is_at "r02" ? r02_hintnum :
-      is_at "r03" ? r03_hintnum :
-      is_at "r12" ? r12_hintnum :
-      is_at "r13" ? r13_hintnum :
+      is_at "r20" ? r20_hintnum :
+      is_at "r30" ? r30_hintnum :
+      is_at "r21" ? r21_hintnum :
+      is_at "r31" ? r31_hintnum :
       0 )} ;
-   r02_hintnum : dynamic_integer {( !point_can_do ? 32 :
+   r20_hintnum : dynamic_integer {( !point_can_do ? 32 :
       !point_thief_lore ? 54 :
       !point_yell_open ? 44 :
       0 )} ;
-   r03_hintnum : dynamic_integer {( !point_door_cloud ? 45 :
+   r30_hintnum : dynamic_integer {( !point_door_cloud ? 45 :
       0 )} ;
-   r12_hintnum : dynamic_integer {( !point_halt_error ? 45 :
+   r21_hintnum : dynamic_integer {( !point_halt_error ? 45 :
       !point_thief_lore ? 54 :
       0 )} ;
-   r13_hintnum : dynamic_integer {( !point_hate_rash ? 44 :
+   r31_hintnum : dynamic_integer {( !point_hate_rash ? 44 :
       0 )} ;
 
 # auxiliary
@@ -147,13 +148,13 @@ collections {
 
    situations_core : list {
       items = [
-         "{here_r02}",
-         "{here_r02}",
-         "{here_r02}",
-         "{here_r12}",
-         "{here_r12}",
-         "{here_r13}",
-         "{here_r03}"
+         "{here_r20}",
+         "{here_r20}",
+         "{here_r20}",
+         "{here_r21}",
+         "{here_r21}",
+         "{here_r31}",
+         "{here_r30}"
       ]
    }
 
@@ -288,7 +289,7 @@ booleans {
    opt_score_notify : boolean "true" scope="survivor" ;
 
    # game state (critical)
-   gamestate_r12_e : boolean "false" ;
+   gamestate_r21_e : boolean "false" ;
 
    # points
    point_can_do      : boolean "false" ; # 00
@@ -305,7 +306,7 @@ booleans {
    point_tufty_key  : boolean "false" ; # 101
 
    # silly random
-   r02_jail : boolean "false" ;
+   r20_jail : boolean "false" ;
 
    # auxiliary variables
    opt_on_off : boolean "false" ;
@@ -341,7 +342,7 @@ booleans {
    think_door_cloud : boolean "false" ;
 
    # blocker dynamic booleans
-   r02_hone_block : dynamic_boolean {( opt_hone_aye )} ;
+   r20_hone_block : dynamic_boolean {( opt_hone_aye )} ;
 
    think_any : dynamic_boolean {( 1 == 0 )} ;
    show_overlay : boolean "true" ;
@@ -351,7 +352,7 @@ vocabulary {
 }
 
 locations {
-   r02 : location "{r02_loc}" header="{r02_header}" graphic="r02_1" {
+   r20 : location "{r20_loc}" header="{r20_header}" graphic="r20_1" {
       on_command {
          : match "can do" {
             : if (point_can_do) {
@@ -430,7 +431,75 @@ locations {
          }
       }
    }
-   r03 : location "{r03_loc}" header="{r02_header}" {
+   r21 : location "{r21_loc}" header="{r21_header}" {
+      on_command {
+         : if (!point_halt_error) {
+            : match "n _;s _;e _" {
+               : print "Not with the hall terror blocking the way." ;
+               : done ;
+            }
+         }
+         : if (point_halt_error && !point_fell_asleep) {
+            : match "e _" {
+               : cycle key = "r21_e_block" predictable_order = "true" skip_interval = "0" max_loops = "1" {
+                  : print "The way seems a bit dark, but before you get too far, you hear a loud voice shout \"{puz_point_fellas_leap}!\" Nope, bad idea to go there as-is." ;
+                  : print "Still the voice yelling \"{puz_point_fellas_leap}!\"" ;
+               }
+               : set_true "gamestate_r21_e" ;
+            }
+         }
+         : match "halt error" {
+            : if (point_halt_error) {
+               : print "Already done!" ;
+               : done ;
+            }
+            : print "What good can such words do against a terror? But they're worth a try. Surprisingly, the terror lets up a bit. It seems to do some calculations then mentioned, you are not the optimal person to be terrorizing at the time, if you said something like that. It goes in search of other prey. You hear voices after this." ;
+            : set_integer var="tempint" "3" ;
+            : set_true "point_halt_error" ;
+            : gosub "add_point" ;
+            : done ;
+         }
+         : if (!point_halt_error) {
+            : match "halt _;_ error" {
+               : set_integer var="tempint" "3" ;
+               : set_false "first_half" ;
+               : match "halt _" {
+                  : set_true "first_half" ;
+               }
+               : gosub "say_half" ;
+               : done ;
+            }
+         }
+         : if (point_halt_error && !point_fell_asleep) {
+            : gosub "listen_stub" ;
+         }
+         : if (gamestate_r21_e) {
+            : match "fell asleep" {
+               : if (point_fell_asleep) {
+                  : print "You don't want to oversell this." ;
+                  : done ;
+               }
+               : print "Narrative text." ;
+               : set_integer var="tempint" "4" ;
+               : set_true "point_fell_asleep" ;
+               : gosub "add_point" ;
+               : done ;
+            }
+            : if (!point_fell_asleep) {
+               : match "fell _;_ asleep" {
+                  : set_integer var="tempint" "4" ;
+                  : set_false "first_half" ;
+                  : match "fell _" {
+                     : set_true "first_half" ;
+                  }
+                  : gosub "say_half" ;
+                  : done ;
+               }
+            }
+         }
+      }
+   }
+   r30 : location "{r30_loc}" header="{r20_header}" {
       on_command {
          : match "door cloud" {
             : if (!point_tufty_key) {
@@ -462,75 +531,7 @@ locations {
          }
       }
    }
-   r12 : location "{r12_loc}" header="{r12_header}" {
-      on_command {
-         : if (!point_halt_error) {
-            : match "n _;s _;e _" {
-               : print "Not with the hall terror blocking the way." ;
-               : done ;
-            }
-         }
-         : if (point_halt_error && !point_fell_asleep) {
-            : match "e _" {
-               : cycle key = "r12_e_block" predictable_order = "true" skip_interval = "0" max_loops = "1" {
-                  : print "The way seems a bit dark, but before you get too far, you hear a loud voice shout \"{puz_point_fellas_leap}!\" Nope, bad idea to go there as-is." ;
-                  : print "Still the voice yelling \"{puz_point_fellas_leap}!\"" ;
-               }
-               : set_true "gamestate_r12_e" ;
-            }
-         }
-         : match "halt error" {
-            : if (point_halt_error) {
-               : print "Already done!" ;
-               : done ;
-            }
-            : print "What good can such words do against a terror? But they're worth a try. Surprisingly, the terror lets up a bit. It seems to do some calculations then mentioned, you are not the optimal person to be terrorizing at the time, if you said something like that. It goes in search of other prey. You hear voices after this." ;
-            : set_integer var="tempint" "3" ;
-            : set_true "point_halt_error" ;
-            : gosub "add_point" ;
-            : done ;
-         }
-         : if (!point_halt_error) {
-            : match "halt _;_ error" {
-               : set_integer var="tempint" "3" ;
-               : set_false "first_half" ;
-               : match "halt _" {
-                  : set_true "first_half" ;
-               }
-               : gosub "say_half" ;
-               : done ;
-            }
-         }
-         : if (point_halt_error && !point_fell_asleep) {
-            : gosub "listen_stub" ;
-         }
-         : if (gamestate_r12_e) {
-            : match "fell asleep" {
-               : if (point_fell_asleep) {
-                  : print "You don't want to oversell this." ;
-                  : done ;
-               }
-               : print "Narrative text." ;
-               : set_integer var="tempint" "4" ;
-               : set_true "point_fell_asleep" ;
-               : gosub "add_point" ;
-               : done ;
-            }
-            : if (!point_fell_asleep) {
-               : match "fell _;_ asleep" {
-                  : set_integer var="tempint" "4" ;
-                  : set_false "first_half" ;
-                  : match "fell _" {
-                     : set_true "first_half" ;
-                  }
-                  : gosub "say_half" ;
-                  : done ;
-               }
-            }
-         }
-      }
-   }
-   r13: location "{r13_loc}" header="{r13_header}" {
+   r31: location "{r31_loc}" header="{r31_header}" {
       on_command {
          : match "hate rash" {
             : if (point_hate_rash) {
@@ -556,7 +557,7 @@ locations {
          }
       }
    }
-   r14: location "{r14_loc}" header="{r14_header}" {
+   r41: location "{r41_loc}" header="{r41_header}" {
       on_command {
          : match "eh sink" {
             : if (point_eh_sink) {
@@ -622,8 +623,8 @@ objects {
 connections {
 
    from, direction, to = [
-      r02, east, r12,
-      r12, north, r13
+      r20, east, r21,
+      r21, north, r31
    ]
 
 }
@@ -631,22 +632,22 @@ connections {
 barriers {
 
    # general block going
-   block_go_r12 : block {
-      location = r12
+   block_go_r21 : block {
+      location = r21
       block_when = goblock_12
       message = THE DOOR blocks you.
    }
 
    # block going with HONE/bonus
-   block_core_r02 : block {
-      location = r02
+   block_core_r20 : block {
+      location = r20
       block_when = coreblock_02
       message = You have nothing left to do back where you started.
    }
 
    # block going with HONE/core
-   block_bonus_r02 : block {
-      location = r12
+   block_bonus_r20 : block {
+      location = r21
       block_when = bonusblock_02
       message = You have nothing left to do back where you started.
    }
@@ -657,10 +658,10 @@ subroutines {
 # second auxiliary
 # third options
    listen_stub : subroutine {
-      : if (is_at "r02") {
+      : if (is_at "r20") {
          : print "You hear nothing but occasionally mutter to yourself <rue my room, aye<#888>>." ;
-      } : else_if (is_at "r12") {
-         : print {( point_fell_asleep ? "It's quiet now." : point_halt_error ? (gamestate_r12_e ? "The \"{puz_point_fellas_leep}\" order echoes in your head." : "Quiet, for the moment.") : "The hall terror is making all kinds of noise." )} ;
+      } : else_if (is_at "r21") {
+         : print {( point_fell_asleep ? "It's quiet now." : point_halt_error ? (gamestate_r21_e ? "The \"{puz_point_fellas_leep}\" order echoes in your head." : "Quiet, for the moment.") : "The hall terror is making all kinds of noise." )} ;
       } : else {
          : print "Nothing." ;
       }
@@ -844,9 +845,9 @@ on_startup {
       : press_any_key ;
    }
    : if (random(1) == 1) {
-      : set_true "r02_jail" ;
+      : set_true "r20_jail" ;
    } : else {
-      : set_false "r02_jail" ;
+      : set_false "r20_jail" ;
    }
    : print "Intro." ;
    : press_any_key ;
@@ -996,11 +997,11 @@ on_render {
    : if (!show_overlay) {
       : done ;
    }
-   : if (is_at "r02") {
-      : if (r02_jail) {
-         : overlay "r02_rand_1" x="0" y="0" ;
+   : if (is_at "r20") {
+      : if (r20_jail) {
+         : overlay "r20_rand_1" x="0" y="0" ;
       } : else {
-         : overlay "r02_rand_2" x="0" y="0" ;
+         : overlay "r20_rand_2" x="0" y="0" ;
       }
    }
 }
@@ -1008,8 +1009,8 @@ on_render {
 assets {
    graphics {
       r_blank : base64_png "iVBORw0KGgoAAAANSUhEUgAAAQAAAAAYAQMAAAAvTrFnAAAAA1BMVEX//wCKxvRFAAAAD0lEQVR4XmPAAKNgFIwCAAMYAAFrMpCEAAAAAElFTkSuQmCC" ;
-      r02_1 : base64_png "iVBORw0KGgoAAAANSUhEUgAAAQAAAAAoAQMAAAArNLbKAAAAA1BMVEUAAACnej3aAAAAE0lEQVR4XmPAC0bBKBgFo2AUAAAFKAABhzzafQAAAABJRU5ErkJggg==" ;
-      r02_rand_1 : base64_png "iVBORw0KGgoAAAANSUhEUgAAABUAAAAPAQMAAAAxlBYoAAAABlBMVEUAAAD///+l2Z/dAAAALUlEQVR4XmMAgfr/Hxhc3AUYQvMDgBhChwAxWDw8gCEXiHPA9AcG30CIOBAAAP4GEalNIq2XAAAAAElFTkSuQmCC" ;
-      r02_rand_2 : base64_png "iVBORw0KGgoAAAANSUhEUgAAABUAAAAPAQMAAAAxlBYoAAAABlBMVEUAAAD///+l2Z/dAAAALElEQVR4XmMAgfr/Hxhc3AUYQvMDgBhChwAxSNyzPIAhGogjwTSQLwgRBwIAAdsRs8NGrrsAAAAASUVORK5CYII=" ;
+      r20_1 : base64_png "iVBORw0KGgoAAAANSUhEUgAAAQAAAAAoAQMAAAArNLbKAAAAA1BMVEUAAACnej3aAAAAE0lEQVR4XmPAC0bBKBgFo2AUAAAFKAABhzzafQAAAABJRU5ErkJggg==" ;
+      r20_rand_1 : base64_png "iVBORw0KGgoAAAANSUhEUgAAABUAAAAPAQMAAAAxlBYoAAAABlBMVEUAAAD///+l2Z/dAAAALUlEQVR4XmMAgfr/Hxhc3AUYQvMDgBhChwAxWDw8gCEXiHPA9AcG30CIOBAAAP4GEalNIq2XAAAAAElFTkSuQmCC" ;
+      r20_rand_2 : base64_png "iVBORw0KGgoAAAANSUhEUgAAABUAAAAPAQMAAAAxlBYoAAAABlBMVEUAAAD///+l2Z/dAAAALElEQVR4XmMAgfr/Hxhc3AUYQvMDgBhChwAxSNyzPIAhGogjwTSQLwgRBwIAAdsRs8NGrrsAAAAASUVORK5CYII=" ;
    }
 }
