@@ -86,9 +86,19 @@ integers {
    max_score : integer "6" ;
 
    tats_number : dynamic_integer {(
-      is_at "r00" ? r00_hintnum : 0
-      )} ;
-   r00_hintnum : dynamic_integer {( !point_can_do ? 32 : 0 )} ;
+      is_at "r02" ? r02_hintnum :
+      is_at "r12" ? r12_hintnum :
+      is_at "r13" ? r13_hintnum :
+      0 )} ;
+   r02_hintnum : dynamic_integer {( !point_can_do ? 32 :
+      !point_thief_lore ? 54 :
+      !point_yell_open ? 44 :
+      0 )} ;
+   r12_hintnum : dynamic_integer {( !point_halt_error ? 45 :
+      !point_thief_lore ? 54 :
+      0 )} ;
+   r13_hintnum : dynamic_integer {( !point_hate_rash ? 44 :
+      0 )} ;
 
 # auxiliary
    tempint : integer "0" ;
@@ -302,6 +312,9 @@ booleans {
 
    in_bonus_half : boolean "false" ;
    unneeded_half : dynamic_boolean {( tempint == 0 && !in_bonus_half )} ;
+
+   # think variables
+   think_cue_bland : boolean "false" ;
 
    # blocker dynamic booleans
    r02_hone_block : dynamic_boolean {( opt_hone_aye )} ;
@@ -554,6 +567,7 @@ connections {
 
    from, direction, to = [
       r02, east, r12,
+      r12, north, r13
    ]
 
 }
