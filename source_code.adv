@@ -432,6 +432,35 @@ locations {
                : done ;
             }
          }
+         : if (point_halt_error && !point_fell_asleep) {
+            : gosub "listen_stub" ;
+         }
+         : if (gamestate_r12_e) {
+            : match "fell asleep" {
+               : if (point_fell_asleep) {
+                  : print "You don't want to oversell this." ;
+                  : done ;
+               }
+               : print "Narrative text." ;
+               : set_integer var="tempint" "4" ;
+               : set_true "point_fell_asleep" ;
+               : gosub "add_point" ;
+               : done ;
+            }
+            : if (!point_fell_asleep) {
+               : match "fell _;_ asleep" {
+                  : set_integer var="tempint" "4" ;
+                  : set_false "first_half" ;
+                  : match "fell _" {
+                     : set_true "first_half" ;
+                  }
+                  : gosub "say_half" ;
+                  : done ;
+               }
+            }
+         }
+      }
+   }
       }
    }
    ud01: location "{ud01_loc}" header="{ud01_header}" {
