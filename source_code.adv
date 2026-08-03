@@ -1,4 +1,4 @@
-start_at = "r00"
+start_at = "r02"
 start_theme = my_theme
 
 #cch.py makes sure of things
@@ -56,8 +56,8 @@ strings {
    puz_point_yell_open  : dynamic_string {( opt_color_coding ? "<yell open<#f80>>" : "yell open" )}   ; #02
 
    # room(s)
-   r00_loc : string "Here you have enough space to, well, wheeze and pace in worry about your predicament. And you do, constantly repeating {clue_canned_ooh}." ;
-   r00_header : string "Wheeze/Pace Wee Space" ;
+   r02_loc : string "Here you have enough space to, well, wheeze and pace in worry about your predicament. And you do, constantly repeating \"{puz_point_canned_ooh}.\"" ;
+   r02_header : string "Wheeze/Pace Wee Space" ;
 
    r1_loc : string "The hall leads north and south." ;
    r1_header : string "Hall" ;
@@ -111,15 +111,18 @@ collections {
          "false",
          "false",
          "false",
+         "false",
+         "false"
       ]
    }
 
    situations_core : list {
       items = [
-         "{here_r00}",
-         "{here_r00}",
-         "{here_r00}",
-         "{here_hall}"
+         "{here_r02}",
+         "{here_r02}",
+         "{here_r02}",
+         "{here_r12}",
+         "{here_r12}"
       ]
    }
 
@@ -128,7 +131,9 @@ collections {
          "<CAN<#f80>>",
          "<THIEF<#f80>>",
          "<YELL<#f80>>",
-         "<HALT<#f80>>"
+         "<HALT<#f80>>",
+         "<FELL<#f80>>",
+         "<HEY<#f80>>"
       ]
    }
 
@@ -137,12 +142,16 @@ collections {
          "<DO<#f80>>",
          "<LORE<#f80>>",
          "<OPEN<#f80>>",
-         "<ERROR<#f80>>"
+         "<ERROR<#f80>>",
+         "<ASLEEP<#f80>>",
+         "<TRASH<#f80>>"
       ]
    }
 
    got_first_core : list {
       items = [
+         "false",
+         "false",
          "false",
          "false",
          "false",
@@ -152,6 +161,8 @@ collections {
 
    got_second_core : list {
       items = [
+         "false",
+         "false",
          "false",
          "false",
          "false",
@@ -238,6 +249,9 @@ booleans {
    opt_hone_aye : boolean "false" ;
    opt_color_coding : boolean "false" ;
 
+   # game state (critical)
+   gamestate_r12_e : boolean "false" ;
+
    # points
    point_can_do     : boolean "false" ; # 00
    point_halt_error : boolean "false" ; # 03
@@ -249,13 +263,16 @@ booleans {
    point_eh_sink    : boolean "false" ; #101
 
    # silly random
-   r00_jail : boolean "false" ;
+   r02_jail : boolean "false" ;
 
-   #core blockers
-   coreblock_00 : dynamic_boolean {( opt_block_done && point_yell_open )} ;
+   # general go-blocking
+   goblock_12 : dynamic_boolean {( !point_yell_open)} ;
 
-   #bonus blockers
-   bonusblock_00 : dynamic_boolean {( opt_block_done && point_yell_open )} ;
+   #core points-done blockers
+   coreblock_02 : dynamic_boolean {( opt_hone_aye && point_yell_open )} ;
+
+   #bonus points-done blockers
+   bonusblock_02 : dynamic_boolean {( opt_hone_aye && point_yell_open )} ;
 
    # think variables
    already_got_command : boolean "false" ;
@@ -275,7 +292,7 @@ booleans {
    unneeded_half : dynamic_boolean {( tempint == 0 && !in_bonus_half )} ;
 
    # blocker dynamic booleans
-   r00_hone_block : dynamic_boolean {( opt_hone_aye )} ;
+   r02_hone_block : dynamic_boolean {( opt_hone_aye )} ;
 
    think_any : dynamic_boolean {( 1 == 0 )} ;
    show_overlay : boolean "true" ;
@@ -285,7 +302,7 @@ vocabulary {
 }
 
 locations {
-   r00 : location "{r00_loc}" header="{r00_header}" graphic="r00_1" {
+   r02 : location "{r02_loc}" header="{r02_header}" graphic="r02_1" {
       on_command {
          : match "can do" {
             : if (point_can_do) {
@@ -364,7 +381,7 @@ locations {
          }
       }
    }
-   r01 : location "{r01_loc}" header="{r01_header}" graphic="r00_1" {
+   r12 : location "{r12_loc}" header="{r12_header}" {
       on_command {
          : match "halt error" {
             : if (point_halt_error) {
@@ -456,22 +473,31 @@ objects {
 connections {
 
    from, direction, to = [
-      r00, east, r01
+      r02, east, r12,
    ]
 
 }
 
 barriers {
 
-   block_go_r01 : block {
-      location = r01
-      block_when = coreblock_00
+   # general block going
+   block_go_r12 : block {
+      location = r12
+      block_when = goblock_12
       message = THE DOOR blocks you.
    }
 
-   block_bonus_r00 : block {
-      location = r00
-      block_when = bonusblock_00
+   # block going with HONE/bonus
+   block_core_r02 : block {
+      location = r02
+      block_when = coreblock_02
+      message = You have nothing left to do back where you started.
+   }
+
+   # block going with HONE/core
+   block_bonus_r02 : block {
+      location = r12
+      block_when = bonusblock_02
       message = You have nothing left to do back where you started.
    }
 }
@@ -613,9 +639,9 @@ on_startup {
       : press_any_key ;
    }
    : if (random(1) == 1) {
-      : set_true "r00_jail" ;
+      : set_true "r02_jail" ;
    } : else {
-      : set_false "r00_jail" ;
+      : set_false "r02_jail" ;
    }
    : print "Intro." ;
    : press_any_key ;
@@ -765,11 +791,11 @@ on_render {
    : if (!show_overlay) {
       : done ;
    }
-   : if (is_at "r00") {
-      : if (r00_jail) {
-         : overlay "r00_rand_1" x="0" y="0" ;
+   : if (is_at "r02") {
+      : if (r02_jail) {
+         : overlay "r02_rand_1" x="0" y="0" ;
       } : else {
-         : overlay "r00_rand_2" x="0" y="0" ;
+         : overlay "r02_rand_2" x="0" y="0" ;
       }
    }
 }
@@ -777,8 +803,8 @@ on_render {
 assets {
    graphics {
       r_blank : base64_png "iVBORw0KGgoAAAANSUhEUgAAAQAAAAAYAQMAAAAvTrFnAAAAA1BMVEX//wCKxvRFAAAAD0lEQVR4XmPAAKNgFIwCAAMYAAFrMpCEAAAAAElFTkSuQmCC" ;
-      r00_1 : base64_png "iVBORw0KGgoAAAANSUhEUgAAAQAAAAAoAQMAAAArNLbKAAAAA1BMVEUAAACnej3aAAAAE0lEQVR4XmPAC0bBKBgFo2AUAAAFKAABhzzafQAAAABJRU5ErkJggg==" ;
-      r00_rand_1 : base64_png "iVBORw0KGgoAAAANSUhEUgAAABUAAAAPAQMAAAAxlBYoAAAABlBMVEUAAAD///+l2Z/dAAAALUlEQVR4XmMAgfr/Hxhc3AUYQvMDgBhChwAxWDw8gCEXiHPA9AcG30CIOBAAAP4GEalNIq2XAAAAAElFTkSuQmCC" ;
-      r00_rand_2 : base64_png "iVBORw0KGgoAAAANSUhEUgAAABUAAAAPAQMAAAAxlBYoAAAABlBMVEUAAAD///+l2Z/dAAAALElEQVR4XmMAgfr/Hxhc3AUYQvMDgBhChwAxSNyzPIAhGogjwTSQLwgRBwIAAdsRs8NGrrsAAAAASUVORK5CYII=" ;
+      r02_1 : base64_png "iVBORw0KGgoAAAANSUhEUgAAAQAAAAAoAQMAAAArNLbKAAAAA1BMVEUAAACnej3aAAAAE0lEQVR4XmPAC0bBKBgFo2AUAAAFKAABhzzafQAAAABJRU5ErkJggg==" ;
+      r02_rand_1 : base64_png "iVBORw0KGgoAAAANSUhEUgAAABUAAAAPAQMAAAAxlBYoAAAABlBMVEUAAAD///+l2Z/dAAAALUlEQVR4XmMAgfr/Hxhc3AUYQvMDgBhChwAxWDw8gCEXiHPA9AcG30CIOBAAAP4GEalNIq2XAAAAAElFTkSuQmCC" ;
+      r02_rand_2 : base64_png "iVBORw0KGgoAAAANSUhEUgAAABUAAAAPAQMAAAAxlBYoAAAABlBMVEUAAAD///+l2Z/dAAAALElEQVR4XmMAgfr/Hxhc3AUYQvMDgBhChwAxSNyzPIAhGogjwTSQLwgRBwIAAdsRs8NGrrsAAAAASUVORK5CYII=" ;
    }
 }
