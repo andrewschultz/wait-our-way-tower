@@ -718,6 +718,12 @@ on_command {
          : done ;
       }
    }
+
+   : match "can _;eh _;halt _;sink _;thief _;yell _" { #obfuscation of non solutions, regular points
+      : print "{custom_unknown_verb_error}" ;
+      : done ;
+   }
+
 }
 
 on_tick {
