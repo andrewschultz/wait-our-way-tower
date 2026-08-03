@@ -274,6 +274,7 @@ booleans {
    me_x_yet : boolean "false" ;
    won_yet : boolean "false" scope="survivor" ;
    in_number_choice : boolean "false" ;
+   think_note_yet : boolean "false" ;
 
    # option(s)
    opt_hone_aye : boolean "false" ;
@@ -660,6 +661,12 @@ subroutines {
       : print "<Your score has just gone up by a point!<#ff0>>" ;
 	  : increment "score" ;
 	  : update_graphic ;
+   }
+   note_thinks : subroutine {
+      : if (!think_note_yet) {
+         : print "{note_once}{vd_think} will track any command that you need to retry later, after preparation. Also, the status line in the upper left will show +1 or more, for commands you've guessed right but still need prep for." ;
+         : set_true "think_note_yet" ;
+      }
    }
    check_100 : subroutine {
       : if (tempint >= 100) {
