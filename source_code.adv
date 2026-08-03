@@ -26,7 +26,11 @@ strings {
    # basics
    my_score : string "{score}/{max_score}" ;
    custom_unknown_verb_error : dynamic_string {( "Nothing special happens. You can use {vm_verbs} for a general overview of standard verbs." )} ;
-   exits_err : dynamic_string {( "Can't go that way." )} ;
+   exits_err : dynamic_string {(
+      is_at "r02" ? "THE DOOR east is the only exit." :
+      is_at "r12" ? "Can't go that way." :
+      "Can't go that way."
+      )} ;
 
    # parser stuff
    nospecial_custom : string "You see no specific item like that. To examine a room, <LOOK<#0f0>>. Note that the parser may not recognize adjectives as synonyms, so using a noun works best." ;
