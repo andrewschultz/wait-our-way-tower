@@ -58,6 +58,7 @@ strings {
    # puzzle strings
    puz_point_bleah_stable   : dynamic_string {( opt_color_coding ? "<bleah stable<#f80>>" : "bleah stable" )}     ; # 998
    puz_point_boss_lumping   : dynamic_string {( opt_color_coding ? "<boss lumping<#f80>>" : "boss lumping" )}     ; # 997
+   puz_point_bro_class      : dynamic_string {( opt_color_coding ? "<Bro Class<#f80>>" : "Bro Class" )}           ; # 996
    puz_point_canned_ooh     : dynamic_string {( opt_color_coding ? "<Canned, ooh<#f80>>" : "Canned, ooh" )}       ; # 00
    puz_point_chess_training : dynamic_string {( opt_color_coding ? "<chess training<#f80>>" : "chess training" )} ; # 13
    puz_point_coy_novations  : dynamic_string {( opt_color_coding ? "<coy novations<#f80>>" : "coy novations" )}   ; # 10
@@ -284,10 +285,11 @@ collections {
          "false",
          "false",
          "false",
-         "false",
 
          "false",
 
+         "false",
+         "false",
          "false",
          "false",
          "false",
@@ -311,10 +313,11 @@ collections {
          "{here_r02}",
          "{here_r02}",
          "{here_r32}",
-         "{here_r35}",
 
          "{here_r30}",
 
+         "{here_r35}",
+         "{here_r35}",
          "{here_r15}",
          "{here_r26}",
          "{here_r27}",
@@ -338,10 +341,11 @@ collections {
          "<TIGHTENED<#f80>>",
          "<PITCH<#f80>>",
          "<CHEST<#f80>>",
-         "<MAGE<#f80>>",
 
          "<DOOR<#f80>>",
 
+         "<MAGE<#f80>>",
+         "<BROKE<#f80>>",
          "<RIGHT<#f80>>",
          "<BAH<#f80>>",
          "<BLEST<#f80>>",
@@ -365,10 +369,11 @@ collections {
          "<ROUSING<#f80>>",
          "<EARNING<#f80>>",
          "<REIGNING<#f80>>",
-         "<URGENT<#f80>>",
 
          "<CLOUD<#f80>>",
 
+         "<URGENT<#f80>>",
+         "<LASS<#f80>>",
          "<ANGLES<#f80>>",
          "<SLUMPING<#f80>>",
          "<ABLE<#f80>>",
@@ -392,10 +397,11 @@ collections {
          "false",
          "false",
          "false",
-         "false",
 
          "false",
 
+         "false",
+         "false",
          "false",
          "false",
          "false",
@@ -419,10 +425,11 @@ collections {
          "false",
          "false",
          "false",
-         "false",
 
          "false",
 
+         "false",
+         "false",
          "false",
          "false",
          "false",
@@ -519,6 +526,7 @@ booleans {
    # points (sorted, beginning or end)
    point_bah_slumping      : boolean "false" ; # 997
    point_blest_able        : boolean "false" ; # 998
+   point_broke_lass        : boolean "false" ; # 996
    point_can_do            : boolean "false" ; # 00
    point_chest_reigning    : boolean "false" ; # 13
    point_coin_ovations     : boolean "false" ; # 10
@@ -1142,21 +1150,21 @@ locations {
       }
    }
    r35 : location "{r35_loc}" header="{r35_header}" {
+      on_command {
          : match "mage urgent" {
             : if (point_mage_urgent) {
                : print "Already done!" ;
                : done ;
             }
             : print "Narrative text." ;
-            : set_integer var="tempint" "35" ;
+            : set_integer var="tempint" "995" ;
             : set_true "point_mage_urgent" ;
             : gosub "add_point" ;
             : done ;
          }
          : if (!point_mage_urgent) {
             : match "mage _;_ urgent" {
-               : set_integer var="tempint" "35" ;
-               : set_boolean var="already_got_command" {( think_mage_urgent && !point_mage_urgent )} ; # this is optional. Delete if point does not rely on any other variables.
+               : set_integer var="tempint" 995" ;
                : set_false "first_half" ;
                : match "mage _" {
                   : set_true "first_half" ;
@@ -1165,7 +1173,29 @@ locations {
                : done ;
             }
          }
-      on_command {
+         : match "broke lass" {
+            : if (point_broke_lass) {
+               : print "Already done!" ;
+               : done ;
+            }
+            : print "Narrative text." ;
+            : set_integer var="tempint" "996" ;
+            : set_true "point_broke_lass" ;
+            : gosub "add_point" ;
+            : done ;
+         }
+         : if (!point_broke_lass) {
+            : match "broke _;_ lass" {
+               : set_integer var="tempint" "996" ;
+               : set_boolean var="already_got_command" {( think_broke_lass && !point_broke_lass )} ;
+               : set_false "first_half" ;
+               : match "broke _" {
+                  : set_true "first_half" ;
+               }
+               : gosub "say_half" ;
+               : done ;
+            }
+         }
       }
    }
    r40 : location "{r40_loc}" header="{r40_header}" {
