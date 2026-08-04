@@ -60,6 +60,7 @@ strings {
    puz_point_canned_ooh   : dynamic_string {( opt_color_coding ? "<Canned, ooh<#f80>>" : "Canned, ooh" )}   ; # 00
    puz_point_cue_bland    : dynamic_string {( opt_color_coding ? "<cue bland<#f80>>" : "cue bland" )}       ; # 101
    puz_point_dork_loud    : dynamic_string {( opt_color_coding ? "<dork loud<#f80>>" : "dork loud" )}       ; # 100
+   puz_point_dump_arable : dynamic_string {( opt_color_coding ? "<dump arable<#f80>>" : "dump arable" )} ; # 555
    puz_point_eh_sink      : dynamic_string {( opt_color_coding ? "<Ace, Inc.<#f80>>" : "Ace, Inc." )}       ; # 101
    puz_point_fellas_leap  : dynamic_string {( opt_color_coding ? "<FELLAS, LEAP<#f80>>" : "FELLAS, LEAP" )} ; # 04
    puz_point_halt_error   : dynamic_string {( opt_color_coding ? "<halt error<#f80>>" : "halt error" )}     ; # 03
@@ -178,10 +179,13 @@ integers {
    max_score : integer "6" ;
 
    tats_number : dynamic_integer {(
+      is_at "r01" ? r01_hintnum :
       is_at "r20" ? r20_hintnum :
       is_at "r30" ? r30_hintnum :
       is_at "r21" ? r21_hintnum :
       is_at "r31" ? r31_hintnum :
+      0 )} ;
+   r01_hintnum : dynamic_integer {( !point_dumb_parable ? 47 :
       0 )} ;
    r20_hintnum : dynamic_integer {( !point_can_do ? 32 :
       !point_thief_lore ? 54 :
@@ -229,6 +233,9 @@ collections {
          "false",
          "false",
          "false",
+         "false",
+         "false",
+         "false",
          "false"
       ]
    }
@@ -242,7 +249,11 @@ collections {
          "{here_r21}",
          "{here_r31}",
          "{here_r30}",
-         "{here_r26}"
+         "{here_r01}",
+
+         "{here_r26}",
+         "{here_r27}",
+         "{here_r27}"
       ]
    }
 
@@ -254,8 +265,12 @@ collections {
          "<HALT<#f80>>",
          "<FELL<#f80>>",
          "<HEY<#f80>>",
-         "<DOOR<#f80>>"
+         "<DOOR<#f80>>",
+         "<DUMB<#f80>>",
+
          "<BAH<#f80>>",
+         "<BLEST<#f80>>",
+         "<ROW<#f80>>"
       ]
    }
 
@@ -268,12 +283,19 @@ collections {
          "<ASLEEP<#f80>>",
          "<TRASH<#f80>>",
          "<CLOUD<#f80>>",
-         "<SLUMPING<#f80>>"
+         "<PARABLE<#f80>>",
+
+         "<SLUMPING<#f80>>",
+         "<ABLE<#f80>>",
+         "<MENDING<#f80>>"
       ]
-   } # unsorted beyond CLOUD
+   }
 
    got_first_core : list {
       items = [
+         "false",
+         "false",
+         "false",
          "false",
          "false",
          "false",
@@ -287,6 +309,9 @@ collections {
 
    got_second_core : list {
       items = [
+         "false",
+         "false",
+         "false",
          "false",
          "false",
          "false",
@@ -454,6 +479,28 @@ locations {
    }
    r01 : location "{r01_loc}" header="{r01_header}" {
       on_command {
+         : match "dumb parable" {
+            : if (point_dumb_parable) {
+               : print "Already done!" ;
+               : done ;
+            }
+            : print "Inspired, perhaps ironically, to construct a dumb parable, you built one out of simple honesty and a new simplicity and some back to nature stuff and the sort of details that make rich people feel they really really do connect with poor people. It's actually kinda somewhat convincing, if you don't think too hard. It's not something that stands up under serious rigor, but it might be nice to pass off to people who don't know better." ;
+            : set_integer var="tempint" "555" ;
+            : set_true "point_dumb_parable" ;
+            : gosub "add_point" ;
+            : done ;
+         }
+         : if (!point_dumb_parable) {
+            : match "dumb _;_ parable" {
+               : set_integer var="tempint" "555" ;
+               : set_false "first_half" ;
+               : match "dumb _" {
+                  : set_true "first_half" ;
+               }
+               : gosub "say_half" ;
+               : done ;
+            }
+         }
       }
    }
    r02 : location "{r02_loc}" header="{r02_header}" {
