@@ -382,6 +382,7 @@ booleans {
 
    # game state (critical)
    gamestate_r21_e : boolean "false" ;
+   r22_secondary_block : dynamic_boolean {( gamestate_r21_e && !point_fell_asleep )} ;
 
    # points
    point_can_do        : boolean "false" ; # 00
@@ -405,13 +406,17 @@ booleans {
    opt_on_off : boolean "false" ;
 
    # general go-blocking
-   goblock_12 : dynamic_boolean {( !point_yell_open)} ;
+   goblock_21 : dynamic_boolean {( !point_yell_open)} ;
 
    #core points-done blockers
-   coreblock_02 : dynamic_boolean {( opt_hone_aye && point_yell_open )} ;
+   coreblock_20 : dynamic_boolean {( opt_hone_aye && point_yell_open )} ;
 
    #bonus points-done blockers
-   bonusblock_02 : dynamic_boolean {( opt_hone_aye && point_yell_open )} ;
+   bonusblock_20 : dynamic_boolean {( opt_hone_aye && point_yell_open )} ;
+
+   # blocker dynamic booleans
+   r20_hone_block : dynamic_boolean {( opt_hone_aye )} ;
+
 
    # think variables
    already_got_command : boolean "false" ;
@@ -873,7 +878,7 @@ barriers {
    # general block going
    block_go_r21 : block {
       location = r21
-      block_when = goblock_12
+      block_when = goblock_21
       message = THE DOOR blocks you.
    }
 
@@ -886,14 +891,14 @@ barriers {
    # block going with HONE/bonus
    block_core_r20 : block {
       location = r20
-      block_when = coreblock_02
+      block_when = coreblock_20
       message = You have nothing left to do back where you started.
    }
 
    # block going with HONE/core
    block_bonus_r20 : block {
       location = r21
-      block_when = bonusblock_02
+      block_when = bonusblock_20
       message = You have nothing left to do back where you started.
    }
 }
