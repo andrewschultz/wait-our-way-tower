@@ -61,6 +61,7 @@ strings {
    puz_point_canned_ooh    : dynamic_string {( opt_color_coding ? "<Canned, ooh<#f80>>" : "Canned, ooh" )}     ; # 00
    puz_point_cue_bland     : dynamic_string {( opt_color_coding ? "<cue bland<#f80>>" : "cue bland" )}         ; # 102
    puz_point_dork_loud     : dynamic_string {( opt_color_coding ? "<dork loud<#f80>>" : "dork loud" )}         ; # 150
+   puz_point_dull_oozing   : dynamic_string {( opt_color_coding ? "<dull oozing<#f80>>" : "dull oozing" )}     ; # 06
    puz_point_dump_arable   : dynamic_string {( opt_color_coding ? "<dump arable<#f80>>" : "dump arable" )}     ; # 555
    puz_point_eh_sink       : dynamic_string {( opt_color_coding ? "<Ace, Inc.<#f80>>" : "Ace, Inc." )}         ; # 101
    puz_point_fellas_leap   : dynamic_string {( opt_color_coding ? "<FELLAS, LEAP<#f80>>" : "FELLAS, LEAP" )}   ; # 04
@@ -195,7 +196,8 @@ integers {
    r03_hintnum : dynamic_integer {( 0 )} ;
    r04_hintnum : dynamic_integer {( 0 )} ;
    r10_hintnum : dynamic_integer {( 0 )} ;
-   r11_hintnum : dynamic_integer {( 0 )} ;
+   r11_hintnum : dynamic_integer {( !point_duh_losing : 36 :
+      0 )} ;
    r12_hintnum : dynamic_integer {( 0 )} ;
    r13_hintnum : dynamic_integer {( 0 )} ;
    r14_hintnum : dynamic_integer {( 0 )} ;
@@ -282,6 +284,7 @@ collections {
          "{here_r31}",
          "{here_r30}",
          "{here_r01}",
+         "{here_r11}",
 
          "{here_r26}",
          "{here_r27}",
@@ -299,6 +302,7 @@ collections {
          "<HEY<#f80>>",
          "<DOOR<#f80>>",
          "<DUMB<#f80>>",
+         "<DUH<#f80>>",
 
          "<BAH<#f80>>",
          "<BLEST<#f80>>",
@@ -316,6 +320,7 @@ collections {
          "<TRASH<#f80>>",
          "<CLOUD<#f80>>",
          "<PARABLE<#f80>>",
+         "<LOSING<#f80>>",
 
          "<SLUMPING<#f80>>",
          "<ABLE<#f80>>",
@@ -445,6 +450,7 @@ booleans {
    point_bah_slumping  : boolean "false" ; # 997
    point_blest_able    : boolean "false" ; # 998
    point_can_do        : boolean "false" ; # 00
+   point_duh_losing    : boolean "false" ; # 06
    point_fell_asleep   : boolean "false" ; # 04
    point_halt_error    : boolean "false" ; # 03
    point_hate_rash     : boolean "false" ; # 05
@@ -556,6 +562,28 @@ locations {
    }
    r11 : location "{r11_loc}" header="{r11_header}" {
       on_command {
+         : match "duh losing" {
+            : if (point_duh_losing) {
+               : print "No need to reiterate things." ;
+               : done ;
+            }
+            : print "You recognize the dull oozing for what it is: blather that just prevents other people from trying for what they want. You're simply not going to put up with that sort of thing any more. Well, not in that form, at least." ;
+            : set_integer var="tempint" "6" ;
+            : set_true "point_duh_losing" ;
+            : gosub "add_point" ;
+            : done ;
+         }
+         : if (!point_duh_losing) {
+            : match "duh _;_ losing" {
+               : set_integer var="tempint" "6" ;
+               : set_false "first_half" ;
+               : match "duh _" {
+                  : set_true "first_half" ;
+               }
+               : gosub "say_half" ;
+               : done ;
+            }
+         }
       }
    }
    r12 : location "{r12_loc}" header="{r12_header}" {
