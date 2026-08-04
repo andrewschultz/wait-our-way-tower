@@ -68,6 +68,7 @@ strings {
    puz_point_fellas_leap   : dynamic_string {( opt_color_coding ? "<FELLAS, LEAP<#f80>>" : "FELLAS, LEAP" )}   ; # 04
    puz_point_halt_error    : dynamic_string {( opt_color_coding ? "<halt error<#f80>>" : "halt error" )}       ; # 03
    puz_point_hey_trash     : dynamic_string {( opt_color_coding ? "<hey trash<#f80>>" : "hey trash" )}         ; # 05
+   puz_point_knowin_juries : dynamic_string {( opt_color_coding ? "<knowin juries<#f80>>" : "knowin juries" )} ; # 09
    puz_point_true_pleading : dynamic_string {( opt_color_coding ? "<true pleading<#f80>>" : "true pleading" )} ; # 999
    puz_point_the_floor     : dynamic_string {( opt_color_coding ? "<the floor<#f80>>" : "the floor" )}         ; # 01
    puz_point_wry_tangles : dynamic_string {( opt_color_coding ? "<Wry Tangles<#f80>>" : "Wry Tangles" )}       ; # 994
@@ -273,6 +274,7 @@ collections {
          "false",
          "false",
          "false",
+         "false",
 
          "false",
 
@@ -294,6 +296,7 @@ collections {
          "{here_r11}",
          "{here_r10}",
          "{here_r01}",
+         "{here_r12}",
 
          "{here_r30}",
 
@@ -315,6 +318,7 @@ collections {
          "<DUH<#f80>>",
          "<DRY<#f80>>",
          "<DUMB<#f80>>",
+         "<NO<#f80>>",
 
          "<DOOR<#f80>>",
 
@@ -336,6 +340,7 @@ collections {
          "<LOSING<#f80>>",
          "<VENDORS<#f80>>",
          "<PARABLE<#f80>>",
+         "<INJURIES<#f80>>",
 
          "<CLOUD<#f80>>",
 
@@ -357,6 +362,7 @@ collections {
          "false",
          "false",
          "false",
+         "false",
 
          "false",
 
@@ -369,6 +375,7 @@ collections {
 
    got_second_core : list {
       items = [
+         "false",
          "false",
          "false",
          "false",
@@ -484,6 +491,7 @@ booleans {
    point_fell_asleep   : boolean "false" ; # 04
    point_halt_error    : boolean "false" ; # 03
    point_hate_rash     : boolean "false" ; # 05
+   point_no_injuries   : boolean "false" ; # 09
    point_troop_leading : boolean "false" ; # 999
    point_thief_lore    : boolean "false" ; # 01
    point_right_angles  : boolean "false" ; # 994
@@ -640,6 +648,29 @@ locations {
    }
    r12 : location "{r12_loc}" header="{r12_header}" {
       on_command {
+         : match "no injuries" {
+            : if (point_no_injuries) {
+               : print "Already done!" ;
+               : done ;
+            }
+            : print "Narrative text." ;
+            : set_integer var="tempint" "9" ;
+            : set_true "point_no_injuries" ;
+            : gosub "add_point" ;
+            : done ;
+         }
+         : if (!point_no_injuries) {
+            : match "no _;_ injuries" {
+               : set_integer var="tempint" "9" ;
+               : set_boolean var="already_got_command" {( think_no_injuries && !point_no_injuries )} ; # this is optional. Delete if point does not rely on any other variables.
+               : set_false "first_half" ;
+               : match "no _" {
+                  : set_true "first_half" ;
+               }
+               : gosub "say_half" ;
+               : done ;
+            }
+         }
       }
    }
    r13 : location "{r13_loc}" header="{r13_header}" {
