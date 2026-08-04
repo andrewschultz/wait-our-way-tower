@@ -71,6 +71,7 @@ strings {
    puz_point_halt_error     : dynamic_string {( opt_color_coding ? "<halt error<#f80>>" : "halt error" )}         ; # 03
    puz_point_hey_trash      : dynamic_string {( opt_color_coding ? "<hey trash<#f80>>" : "hey trash" )}           ; # 05
    puz_point_knowin_juries  : dynamic_string {( opt_color_coding ? "<knowin juries<#f80>>" : "knowin juries" )}   ; # 09
+   puz_point_major_gent     : dynamic_string {( opt_color_coding ? "<major gent<#f80>>" : "major gent" )}         ; # 995
    puz_point_pit_churning   : dynamic_string {( opt_color_coding ? "<pit churning<#f80>>" : "pit churning" )}     ; # 12
    puz_point_titan_drowsing : dynamic_string {( opt_color_coding ? "<titan drowsing<#f80>>" : "titan drowsing" )} ; # 11
    puz_point_true_pleading  : dynamic_string {( opt_color_coding ? "<true pleading<#f80>>" : "true pleading" )}   ; # 999
@@ -283,6 +284,7 @@ collections {
          "false",
          "false",
          "false",
+         "false",
 
          "false",
 
@@ -309,6 +311,7 @@ collections {
          "{here_r02}",
          "{here_r02}",
          "{here_r32}",
+         "{here_r35}",
 
          "{here_r30}",
 
@@ -335,6 +338,7 @@ collections {
          "<TIGHTENED<#f80>>",
          "<PITCH<#f80>>",
          "<CHEST<#f80>>",
+         "<MAGE<#f80>>",
 
          "<DOOR<#f80>>",
 
@@ -361,6 +365,7 @@ collections {
          "<ROUSING<#f80>>",
          "<EARNING<#f80>>",
          "<REIGNING<#f80>>",
+         "<URGENT<#f80>>",
 
          "<CLOUD<#f80>>",
 
@@ -387,6 +392,7 @@ collections {
          "false",
          "false",
          "false",
+         "false",
 
          "false",
 
@@ -399,6 +405,7 @@ collections {
 
    got_second_core : list {
       items = [
+         "false",
          "false",
          "false",
          "false",
@@ -521,6 +528,7 @@ booleans {
    point_fell_asleep       : boolean "false" ; # 04
    point_halt_error        : boolean "false" ; # 03
    point_hate_rash         : boolean "false" ; # 05
+   point_mage_urgent       : boolean "false" ; # 995
    point_no_injuries       : boolean "false" ; # 09
    point_pitch_earning     : boolean "false" ; # 12
    point_thief_lore        : boolean "false" ; # 01
@@ -1134,6 +1142,29 @@ locations {
       }
    }
    r35 : location "{r35_loc}" header="{r35_header}" {
+         : match "mage urgent" {
+            : if (point_mage_urgent) {
+               : print "Already done!" ;
+               : done ;
+            }
+            : print "Narrative text." ;
+            : set_integer var="tempint" "35" ;
+            : set_true "point_mage_urgent" ;
+            : gosub "add_point" ;
+            : done ;
+         }
+         : if (!point_mage_urgent) {
+            : match "mage _;_ urgent" {
+               : set_integer var="tempint" "35" ;
+               : set_boolean var="already_got_command" {( think_mage_urgent && !point_mage_urgent )} ; # this is optional. Delete if point does not rely on any other variables.
+               : set_false "first_half" ;
+               : match "mage _" {
+                  : set_true "first_half" ;
+               }
+               : gosub "say_half" ;
+               : done ;
+            }
+         }
       on_command {
       }
    }
