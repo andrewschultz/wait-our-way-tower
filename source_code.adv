@@ -70,6 +70,7 @@ strings {
    puz_point_hey_trash     : dynamic_string {( opt_color_coding ? "<hey trash<#f80>>" : "hey trash" )}         ; # 05
    puz_point_true_pleading : dynamic_string {( opt_color_coding ? "<true pleading<#f80>>" : "true pleading" )} ; # 999
    puz_point_the_floor     : dynamic_string {( opt_color_coding ? "<the floor<#f80>>" : "the floor" )}         ; # 01
+   puz_point_wry_tangles : dynamic_string {( opt_color_coding ? "<Wry Tangles<#f80>>" : "Wry Tangles" )}       ; # 994
    puz_point_yellow_pin    : dynamic_string {( opt_color_coding ? "<yellow pin<#f80>>" : "yellow pin" )}       ; # 02
 
    # room(s)
@@ -277,6 +278,7 @@ collections {
 
          "false",
          "false",
+         "false",
          "false"
       ]
    }
@@ -289,12 +291,13 @@ collections {
          "{here_r21}",
          "{here_r21}",
          "{here_r31}",
-         "{here_r01}",
-         "{here_r10}",
          "{here_r11}",
+         "{here_r10}",
+         "{here_r01}",
 
          "{here_r30}",
 
+         "{here_r15}",
          "{here_r26}",
          "{here_r27}",
          "{here_r27}"
@@ -308,13 +311,14 @@ collections {
          "<YELL<#f80>>",
          "<HALT<#f80>>",
          "<FELL<#f80>>",
-         "<HEY<#f80>>",
-         "<DUMB<#f80>>",
+         "<HATE<#f80>>",
          "<DUH<#f80>>",
          "<DRY<#f80>>",
+         "<DUMB<#f80>>",
 
          "<DOOR<#f80>>",
 
+         "<RIGHT<#f80>>",
          "<BAH<#f80>>",
          "<BLEST<#f80>>",
          "<ROW<#f80>>"
@@ -328,13 +332,14 @@ collections {
          "<OPEN<#f80>>",
          "<ERROR<#f80>>",
          "<ASLEEP<#f80>>",
-         "<TRASH<#f80>>",
-         "<PARABLE<#f80>>",
+         "<RASH<#f80>>",
          "<LOSING<#f80>>",
          "<VENDORS<#f80>>",
+         "<PARABLE<#f80>>",
 
          "<CLOUD<#f80>>",
 
+         "<ANGLES<#f80>>",
          "<SLUMPING<#f80>>",
          "<ABLE<#f80>>",
          "<MENDING<#f80>>"
@@ -357,6 +362,7 @@ collections {
 
          "false",
          "false",
+         "false",
          "false"
       ]
    }
@@ -375,6 +381,7 @@ collections {
 
          "false",
 
+         "false",
          "false",
          "false",
          "false"
@@ -473,17 +480,18 @@ booleans {
    point_can_do        : boolean "false" ; # 00
    point_dry_vendors   : boolean "false" ; # 07
    point_duh_losing    : boolean "false" ; # 06
+   point_dumb_parable  : boolean "false" ; # 08
    point_fell_asleep   : boolean "false" ; # 04
    point_halt_error    : boolean "false" ; # 03
    point_hate_rash     : boolean "false" ; # 05
-   point_troop_leading   : boolean "false" ; # 999
+   point_troop_leading : boolean "false" ; # 999
    point_thief_lore    : boolean "false" ; # 01
+   point_right_angles  : boolean "false" ; # 994
    point_yell_open     : boolean "false" ; # 02
 
    # not in place yet
    point_cue_bland    : boolean "false" ; # 102
    point_door_cloud   : boolean "false" ; # 150
-   point_dumb_parable : boolean "false" ; # 555
    point_eh_sink      : boolean "false" ; # 101
    point_tufty_key    : boolean "false" ; # 101
 
@@ -644,6 +652,29 @@ locations {
    }
    r15 : location "{r15_loc}" header="{r15_header}" {
       on_command {
+         : match "right angles" {
+            : if (point_right_angles) {
+               : print "Already done!" ;
+               : done ;
+            }
+            : print "Narrative text." ;
+            : set_integer var="tempint" "994" ;
+            : set_true "point_right_angles" ;
+            : gosub "add_point" ;
+            : done ;
+         }
+         : if (!point_right_angles) {
+            : match "right _;_ angles" {
+               : set_integer var="tempint" "994" ;
+               : set_boolean var="already_got_command" {( think_right_angles && !point_right_angles )} ; # this is optional. Delete if point does not rely on any other variables.
+               : set_false "first_half" ;
+               : match "right _" {
+                  : set_true "first_half" ;
+               }
+               : gosub "say_half" ;
+               : done ;
+            }
+         }
       }
    }
    r20 : location "{r20_loc}" header="{r20_header}" graphic="r20_1" {
