@@ -74,6 +74,7 @@ strings {
    puz_point_eh_sink        : dynamic_string {( opt_color_coding ? "<Ace, Inc.<#f80>>" : "Ace, Inc." )}           ; # 101
    puz_point_field_erring   : dynamic_string {( opt_color_coding ? "<field erring<#f80>>" : "field erring" )}     ; # 15
    puz_point_fellas_leap    : dynamic_string {( opt_color_coding ? "<FELLAS, LEAP<#f80>>" : "FELLAS, LEAP" )}     ; # 04
+   puz_point_freak_rusty    : dynamic_string {( opt_color_coding ? "<freak rusty<#f80>>" : "freak rusty" )}       ; # 16
    puz_point_halt_error     : dynamic_string {( opt_color_coding ? "<halt error<#f80>>" : "halt error" )}         ; # 03
    puz_point_hey_trash      : dynamic_string {( opt_color_coding ? "<hey trash<#f80>>" : "hey trash" )}           ; # 05
    puz_point_knowin_juries  : dynamic_string {( opt_color_coding ? "<knowin juries<#f80>>" : "knowin juries" )}   ; # 09
@@ -325,6 +326,7 @@ collections {
          "{here_r32}",
          "{here_r32}",
          "{here_r22}",
+         "{here_r22}",
 
          "{here_r30}",
 
@@ -354,6 +356,8 @@ collections {
          "<PITCH<#f80>>",
          "<CHEST<#f80>>",
          "<DUMP<#f80>>",
+         "<FEEL<#f80>>",
+         "<FREE<#f80>>",
 
          "<DOOR<#f80>>",
 
@@ -383,6 +387,8 @@ collections {
          "<EARNING<#f80>>",
          "<REIGNING<#f80>>",
          "<LIARS<#f80>>",
+         "<DARING<#f80>>",
+         "<CRUSTY<#f80>>",
 
          "<CLOUD<#f80>>",
 
@@ -561,6 +567,7 @@ booleans {
    point_dump_liars        : boolean "false" ; # 14
    point_feel_daring       : boolean "false" ; # 15
    point_fell_asleep       : boolean "false" ; # 04
+   point_free_crusty       : boolean "false" ; # 16
    point_halt_error        : boolean "false" ; # 03
    point_hate_rash         : boolean "false" ; # 05
    point_mage_urgent       : boolean "false" ; # 995
@@ -618,6 +625,7 @@ booleans {
    think_broke_lass    : boolean "false" ;
    think_cue_bland     : boolean "false" ;
    think_door_cloud    : boolean "false" ;
+   think_free_crusty   : boolean "false" ;
    think_pitch_earning : boolean "false" ;
 
    think_any : dynamic_boolean {( 1 == 0 )} ;
@@ -1017,6 +1025,31 @@ locations {
                }
                : gosub "say_half" ;
                : done ;
+            }
+         }
+         : if (!point_free_crusty) {
+            : match "free crusty" {
+               : if (point_free_crusty) {
+                  : print "Already done!" ;
+                  : done ;
+               }
+               : print "Narrative text." ;
+               : set_integer var="tempint" "16" ;
+               : set_true "point_free_crusty" ;
+               : gosub "add_point" ;
+               : done ;
+            }
+            : if (!point_free_crusty) {
+               : match "free _;_ crusty" {
+                  : set_integer var="tempint" "16" ;
+                  : set_boolean var="already_got_command" {( think_free_crusty && !point_free_crusty )} ; # this is optional. Delete if point does not rely on any other variables.
+                  : set_false "first_half" ;
+                  : match "free _" {
+                     : set_true "first_half" ;
+                  }
+                  : gosub "say_half" ;
+                  : done ;
+               }
             }
          }
       }
