@@ -597,9 +597,6 @@ locations {
                : done ;
             }
          }
-         : if (point_halt_error && !point_fell_asleep) {
-            : gosub "listen_stub" ;
-         }
          : if (gamestate_r21_e) {
             : match "fell asleep" {
                : if (point_fell_asleep) {
@@ -1097,6 +1094,9 @@ on_command {
          : print "Well, you now have a yellow pin, which is something." ;
          : done ;
       }
+      : if (carried() == 0) {
+         : print "With your yellow pin gone" ;
+      }
    }
    : gosub "check_options" ;
    : gosub "odd_dir_note" ;
@@ -1167,10 +1167,10 @@ on_command {
    : match "verbs _;verb _" {
       : print "To complete {wowt}, you only need the four compass directions (well, the exit from the first room is up) and the twelve special commands clued by descriptions." ;
       : print "There are also metaverbs: {vm_about} gives general information, {vm_credits} gives credits, and {vm_versions} shows version history and release dates." ;
-      : print "Finally, there is an option: {hone_aye} blocks off exits to done rooms and what is behind them, while {ho_nigh} lets you traverse freely." ;
+      : print "Finally, there is an option: {vo_hone_aye} blocks off exits to done rooms and what is behind them, while {vo_ho_nigh} lets you traverse freely." ;
    }
    : match "take _;drop _" {
-      : print "You don't need to TAKE or DROP anything here. It's all done for you." ;
+      : print "You don't need to <TAKE<#f80>> or <DROP<#f80>> anything here. It's all done for you." ;
       : done ;
    }
    : match "x me;x myself" {
