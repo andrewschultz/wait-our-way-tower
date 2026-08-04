@@ -72,6 +72,7 @@ strings {
    puz_point_dumb_pliers    : dynamic_string {( opt_color_coding ? "<dumb pliers<#f80>>" : "dumb pliers" )}       ; # 14
    puz_point_dump_arable    : dynamic_string {( opt_color_coding ? "<dump arable<#f80>>" : "dump arable" )}       ; # 555
    puz_point_eh_sink        : dynamic_string {( opt_color_coding ? "<Ace, Inc.<#f80>>" : "Ace, Inc." )}           ; # 101
+   puz_point_field_erring   : dynamic_string {( opt_color_coding ? "<field erring<#f80>>" : "field erring" )}     ; # 15
    puz_point_fellas_leap    : dynamic_string {( opt_color_coding ? "<FELLAS, LEAP<#f80>>" : "FELLAS, LEAP" )}     ; # 04
    puz_point_halt_error     : dynamic_string {( opt_color_coding ? "<halt error<#f80>>" : "halt error" )}         ; # 03
    puz_point_hey_trash      : dynamic_string {( opt_color_coding ? "<hey trash<#f80>>" : "hey trash" )}           ; # 05
@@ -290,6 +291,10 @@ collections {
          "false",
          "false",
          "false",
+         "false",
+         "false",
+         "false",
+         "false",
 
          "false",
 
@@ -319,6 +324,7 @@ collections {
          "{here_r02}",
          "{here_r32}",
          "{here_r32}",
+         "{here_r22}",
 
          "{here_r30}",
 
@@ -406,6 +412,10 @@ collections {
          "false",
          "false",
          "false",
+         "false",
+         "false",
+         "false",
+         "false",
 
          "false",
 
@@ -420,6 +430,10 @@ collections {
 
    got_second_core : list {
       items = [
+         "false",
+         "false",
+         "false",
+         "false",
          "false",
          "false",
          "false",
@@ -545,6 +559,7 @@ booleans {
    point_duh_losing        : boolean "false" ; # 06
    point_dumb_parable      : boolean "false" ; # 08
    point_dump_liars        : boolean "false" ; # 14
+   point_feel_daring       : boolean "false" ; # 15
    point_fell_asleep       : boolean "false" ; # 04
    point_halt_error        : boolean "false" ; # 03
    point_hate_rash         : boolean "false" ; # 05
@@ -982,6 +997,28 @@ locations {
    }
    r22 : location "{r22_loc}" header="{r22_header}" {
       on_command {
+         : match "feel daring" {
+            : if (point_feel_daring) {
+               : print "Already done!" ;
+               : done ;
+            }
+            : print "Narrative text." ;
+            : set_integer var="tempint" "15" ;
+            : set_true "point_feel_daring" ;
+            : gosub "add_point" ;
+            : done ;
+         }
+         : if (!point_feel_daring) {
+            : match "feel _;_ daring" {
+               : set_integer var="tempint" "15" ;
+               : set_false "first_half" ;
+               : match "feel _" {
+                  : set_true "first_half" ;
+               }
+               : gosub "say_half" ;
+               : done ;
+            }
+         }
       }
    }
    r23 : location "{r23_loc}" header="{r23_header}" {
