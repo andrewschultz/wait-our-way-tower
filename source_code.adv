@@ -1022,10 +1022,9 @@ subroutines {
    }
    check_100 : subroutine {
       : if (tempint >= 100) {
-         : cycle key = "one_right_bug" predictable_order = "true" skip_interval = "0" max_loops = "1" {
-            : print "One word right, one word wrong. (NOTE: this text shouldn't come up in release, but if it does, it's a bug. Not a game breaking one, but it affects THINK and showing half-right guesses. So I need to give this point-scoring command a proper index. Let me know which puzzle.)" ;
-            : print "One word right, one word wrong. (Again, bug, needs index, let me know which puzzle.)" ;
-         }
+         : print "This hasn't been sorted yet. This won't kill gameplay but will detect how things are sorted for half-right guesses. And you get a point." ;
+         : increment "score" ;
+         : done ;
       }
    }
    say_half : subroutine {
