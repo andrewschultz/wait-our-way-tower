@@ -744,14 +744,14 @@ locations {
                : done ;
             }
             : print "Narrative text." ;
-            : set_integer var="tempint" "100" ;
+            : set_integer var="tempint" "150" ;
             : set_true "point_door_cloud" ;
             : gosub "add_point" ;
             : done ;
          }
          : if (!point_door_cloud) {
             : match "door _;_ cloud" {
-               : set_integer var="tempint" "100" ;
+               : set_integer var="tempint" "150" ;
                : set_false "first_half" ;
                : match "door _" {
                   : set_true "first_half" ;
@@ -829,14 +829,14 @@ locations {
                   : done ;
                }
                : print "Narrative text." ;
-               : set_integer var="tempint" "101" ;
+               : set_integer var="tempint" "102" ;
                : set_true "point_cue_bland" ;
                : gosub "add_point" ;
                : done ;
             }
             : if (!point_cue_bland) {
                : match "cue _;_ bland" {
-                  : set_integer var="tempint" "101" ;
+                  : set_integer var="tempint" "102" ;
                   : set_boolean var="already_got_command" {( think_cue_bland && !point_cue_bland )} ; # this is optional. Delete if point does not rely on any other variables.
                   : set_false "first_half" ;
                   : match "cue _" {
@@ -961,6 +961,8 @@ barriers {
       message = You need to make sure the {puz_point_fellas_leap} order is neutralized.
    }
 
+   block_go_r27 : block {
+      location = r27
       block_when_not = point_bah_slumping
       message = The {puz_point_boss_lumping} insults at you won't let you buy.
    }
