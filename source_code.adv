@@ -55,6 +55,9 @@ strings {
    vo_hone_aye : string "<HONE AYE<#ff0>>/<HONE EYE<#ff0>>" ;
    vo_ho_nigh : string "<HO NIGH<#ff0>>" ;
 
+   optt_ch : string "<CH<#88f>> or <COLORHINT<#88f>>" ;
+   optt_notify : string "<NOTIFY<#88f>>" ;
+
    # puzzle strings
    puz_point_bleah_stable   : dynamic_string {( opt_color_coding ? "<bleah stable<#f80>>" : "bleah stable" )}     ; # 998
    puz_point_boss_lumping   : dynamic_string {( opt_color_coding ? "<boss lumping<#f80>>" : "boss lumping" )}     ; # 997
@@ -1493,6 +1496,12 @@ subroutines {
    ########################## options
 
    check_options : subroutine {
+      : match "ch _" {
+         : gosub "options_colorhint" ;
+      }
+      : match "notify _" {
+         : gosub "options_score_notify" ;
+      }
       : match "hone aye;hone eye" {
          : print {( "Available exits are " + (opt_hone_aye ? "already" : "now") + " honed to ones you still need to use to win." )} ;
          : if (tats_number == 0 && !opt_hone_aye) {
@@ -1513,6 +1522,22 @@ subroutines {
       }
       : print "Toggling {tempopt} requires one of {yn} as an argument." ;
       : done ;
+   }
+
+   options_colorhint : subroutine {
+      : set_boolean var="opt_on_off" {( opt_color_coding )} ;
+      : match "ch yes" {
+         : print "Now {optt_ch} is activated." ;
+         : set_true "opt_color_coding" ;
+         : done ;
+      }
+      : match "ch no" {
+         : print "Now {optt_ch} is deactivated." ;
+         : set_false "opt_color_coding" ;
+         : done ;
+      }
+      : set_string var="tempopt" text="{optt_ch}" ;
+      : gosub "option_err_stub" ;
    }
 
    options_score_notify : subroutine {
