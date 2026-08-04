@@ -959,6 +959,11 @@ locations {
 # Defines things in the world (scenery cannot be carried)
 objects {
    phase_tats : object "{i_fspt}" ;
+   major_gent : object "A bit too nice here." at = "r35" conspicuous = "false" ;
+   mage_urgent : object "The former major gent has now swung a bit too much the other way." at = "r35" conspicuous = "false" ;
+   wry_tangles : object "Very interesting, but not quite for you." at = "r15" conspicuous="false";
+   thug_round : object "{trtg_status}." at = "r25" conspicuous = "false";
+}
 
 zones {
    top_zone : zone {
@@ -1269,6 +1274,9 @@ on_startup {
 ## Execute this every time a player moves or redescribes a location
 
 on_describe {
+  : if (is_present "thug_round") {
+     : print {( "The {trtg} " + (is_at("r25") ? "stands here, blocking further passages. How to get around it?" : is_at("r24") ? "chases after you." : "continues to chase after you.") )} ;
+  }
 }
 
 ## Test VERB NOUN that the player types and executes conditional actions
