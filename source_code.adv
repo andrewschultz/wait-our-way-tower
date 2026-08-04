@@ -182,23 +182,44 @@ integers {
    tats_number : dynamic_integer {(
       is_at "r01" ? r01_hintnum :
       is_at "r20" ? r20_hintnum :
+      is_at "r20" ? r20_hintnum :
       is_at "r30" ? r30_hintnum :
       is_at "r21" ? r21_hintnum :
       is_at "r31" ? r31_hintnum :
       0 )} ;
+   r00_hintnum : dynamic_integer {( 0 )} ;
    r01_hintnum : dynamic_integer {( !point_dumb_parable ? 47 :
       0 )} ;
+   r02_hintnum : dynamic_integer {( 0 )} ;
+   r03_hintnum : dynamic_integer {( 0 )} ;
+   r04_hintnum : dynamic_integer {( 0 )} ;
+   r10_hintnum : dynamic_integer {( 0 )} ;
+   r11_hintnum : dynamic_integer {( 0 )} ;
+   r12_hintnum : dynamic_integer {( 0 )} ;
+   r13_hintnum : dynamic_integer {( 0 )} ;
+   r14_hintnum : dynamic_integer {( 0 )} ;
    r20_hintnum : dynamic_integer {( !point_can_do ? 32 :
       !point_thief_lore ? 54 :
       !point_yell_open ? 44 :
       0 )} ;
-   r30_hintnum : dynamic_integer {( !point_door_cloud ? 45 :
-      0 )} ;
    r21_hintnum : dynamic_integer {( !point_halt_error ? 45 :
       !point_thief_lore ? 54 :
       0 )} ;
+   r22_hintnum : dynamic_integer {( 0 )} ;
+   r23_hintnum : dynamic_integer {( 0 )} ;
+   r24_hintnum : dynamic_integer {( 0 )} ;
+   r30_hintnum : dynamic_integer {( !point_door_cloud ? 45 :
+      0 )} ;
    r31_hintnum : dynamic_integer {( !point_hate_rash ? 44 :
       0 )} ;
+   r32_hintnum : dynamic_integer {( 0 )} ;
+   r33_hintnum : dynamic_integer {( 0 )} ;
+   r34_hintnum : dynamic_integer {( 0 )} ;
+   r40_hintnum : dynamic_integer {( 0 )} ;
+   r41_hintnum : dynamic_integer {( 0 )} ;
+   r42_hintnum : dynamic_integer {( 0 )} ;
+   r43_hintnum : dynamic_integer {( 0 )} ;
+   r44_hintnum : dynamic_integer {( 0 )} ;
 
    # endgame stuff
    r25_hintnum : dynamic_integer {( 0 )} ;
