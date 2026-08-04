@@ -56,6 +56,7 @@ strings {
    vo_ho_nigh : string "<HO NIGH<#ff0>>" ;
 
    # puzzle strings
+   puz_point_bleah_stable : dynamic_string {( opt_color_coding ? "<bleah stable<#f80>>" : "bleah stable" )} ; # 998
    puz_point_boss_lumping : dynamic_string {( opt_color_coding ? "<boss lumping<#f80>>" : "boss lumping" )} ; # 997
    puz_point_canned_ooh   : dynamic_string {( opt_color_coding ? "<Canned, ooh<#f80>>" : "Canned, ooh" )}   ; # 00
    puz_point_cue_bland    : dynamic_string {( opt_color_coding ? "<cue bland<#f80>>" : "cue bland" )}       ; # 101
@@ -198,6 +199,15 @@ integers {
       0 )} ;
    r31_hintnum : dynamic_integer {( !point_hate_rash ? 44 :
       0 )} ;
+
+   # endgame stuff
+   r25_hintnum : dynamic_integer {( 0 )} ;
+   r26_hintnum : dynamic_integer {( !point_bah_slumping ? 37 : 0 )} ; #?? remember could be negative
+   r27_hintnum : dynamic_integer {( !point_blest_able ? 54 :
+      !point_troop_leading ? 37 :
+      0 )} ;
+   r15_hintnum : dynamic_integer {( 0 )} ;
+   r35_hintnum : dynamic_integer {( 0 )} ;
 
 # auxiliary
    tempint : integer "0" ;
@@ -409,18 +419,21 @@ booleans {
    gamestate_r21_e : boolean "false" ;
    r22_secondary_block : dynamic_boolean {( gamestate_r21_e && !point_fell_asleep )} ;
 
-   # points
+   # points (sorted, beginning or end)
+   point_bah_slumping  : boolean "false" ; # 997
+   point_blest_able    : boolean "false" ; # 998
    point_can_do        : boolean "false" ; # 00
    point_fell_asleep   : boolean "false" ; # 04
    point_halt_error    : boolean "false" ; # 03
    point_hate_rash     : boolean "false" ; # 05
+   point_troop_leading   : boolean "false" ; # 999
    point_thief_lore    : boolean "false" ; # 01
    point_yell_open     : boolean "false" ; # 02
 
    # not in place yet
-   point_bah_slumping : boolean "false" ; # 997
-   point_cue_bland    : boolean "false" ; # 101
-   point_door_cloud   : boolean "false" ; # 101
+   point_cue_bland    : boolean "false" ; # 102
+   point_door_cloud   : boolean "false" ; # 150
+   point_dumb_parable : boolean "false" ; # 555
    point_eh_sink      : boolean "false" ; # 101
    point_tufty_key    : boolean "false" ; # 101
 
@@ -728,6 +741,49 @@ locations {
    }
    r27 : location "{r27_loc}" header="{r27_header}" {
       on_command {
+         : match "blest able" {
+            : if (point_blest_able) {
+               : print "Already done!" ;
+               : done ;
+            }
+            : print "Narrative text." ;
+            : set_integer var="tempint" "998" ;
+            : set_true "point_blest_able" ;
+            : gosub "add_point" ;
+            : done ;
+         }
+         : if (!point_blest_able) {
+            : match "blest _;_ able" {
+               : set_integer var="tempint" "998" ;
+               : set_false "first_half" ;
+               : match "blest _" {
+                  : set_true "first_half" ;
+               }
+               : gosub "say_half" ;
+               : done ;
+            }
+         }
+         : if (point_blest_able) {
+            : match "troop leading" {
+               : print "You win! But you don't want to just sit and do nothing. You make a whole row for mending ... whatever. Surprisingly, it's popular." ;
+               : win_game ; # move this once we get the right TEMPINT
+               : set_integer var="tempint" "999" ;
+               : set_true "point_troop_leading" ;
+               : gosub "add_point" ;
+               : done ;
+            }
+            : if (!point_troop_leading) {
+               : match "troop _;_ leading" {
+                  : set_integer var="tempint" "999" ;
+                  : set_false "first_half" ;
+                  : match "row _" {
+                     : set_true "first_half" ;
+                  }
+                  : gosub "say_half" ;
+                  : done ;
+               }
+            }
+         }
       }
    }
    r30 : location "{r30_loc}" header="{r30_header}" {
