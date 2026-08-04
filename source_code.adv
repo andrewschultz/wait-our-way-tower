@@ -66,6 +66,7 @@ strings {
    puz_point_dork_loud      : dynamic_string {( opt_color_coding ? "<dork loud<#f80>>" : "dork loud" )}           ; # 150
    puz_point_drive_enders   : dynamic_string {( opt_color_coding ? "<drive enders<#f80>>" : "drive enders" )}     ; # 07
    puz_point_dull_oozing    : dynamic_string {( opt_color_coding ? "<dull oozing<#f80>>" : "dull oozing" )}       ; # 06
+   puz_point_dumb_pliers    : dynamic_string {( opt_color_coding ? "<dumb pliers<#f80>>" : "dumb pliers" )}       ; # 14
    puz_point_dump_arable    : dynamic_string {( opt_color_coding ? "<dump arable<#f80>>" : "dump arable" )}       ; # 555
    puz_point_eh_sink        : dynamic_string {( opt_color_coding ? "<Ace, Inc.<#f80>>" : "Ace, Inc." )}           ; # 101
    puz_point_fellas_leap    : dynamic_string {( opt_color_coding ? "<FELLAS, LEAP<#f80>>" : "FELLAS, LEAP" )}     ; # 04
@@ -285,6 +286,7 @@ collections {
          "false",
          "false",
          "false",
+         "false",
 
          "false",
 
@@ -312,6 +314,7 @@ collections {
          "{here_r12}",
          "{here_r02}",
          "{here_r02}",
+         "{here_r32}",
          "{here_r32}",
 
          "{here_r30}",
@@ -341,6 +344,7 @@ collections {
          "<TIGHTENED<#f80>>",
          "<PITCH<#f80>>",
          "<CHEST<#f80>>",
+         "<DUMP<#f80>>",
 
          "<DOOR<#f80>>",
 
@@ -369,6 +373,7 @@ collections {
          "<ROUSING<#f80>>",
          "<EARNING<#f80>>",
          "<REIGNING<#f80>>",
+         "<LIARS<#f80>>",
 
          "<CLOUD<#f80>>",
 
@@ -397,6 +402,7 @@ collections {
          "false",
          "false",
          "false",
+         "false",
 
          "false",
 
@@ -411,6 +417,7 @@ collections {
 
    got_second_core : list {
       items = [
+         "false",
          "false",
          "false",
          "false",
@@ -533,6 +540,7 @@ booleans {
    point_dry_vendors       : boolean "false" ; # 07
    point_duh_losing        : boolean "false" ; # 06
    point_dumb_parable      : boolean "false" ; # 08
+   point_dump_liars        : boolean "false" ; # 14
    point_fell_asleep       : boolean "false" ; # 04
    point_halt_error        : boolean "false" ; # 03
    point_hate_rash         : boolean "false" ; # 05
@@ -1137,6 +1145,30 @@ locations {
                }
                : gosub "say_half" ;
                : done ;
+            }
+         }
+         : if (point_chest_reigning && !point_dump_liars) {
+            : match "dump liars" {
+               : if (point_dump_liars) {
+                  : print "Already done!" ;
+                  : done ;
+               }
+               : print "Narrative text." ;
+               : set_integer var="tempint" "14" ;
+               : set_true "point_dump_liars" ;
+               : gosub "add_point" ;
+               : done ;
+            }
+            : if (!point_dump_liars) {
+               : match "dump _;_ liars" {
+                  : set_integer var="tempint" "14" ;
+                  : set_false "first_half" ;
+                  : match "dump _" {
+                     : set_true "first_half" ;
+                  }
+                  : gosub "say_half" ;
+                  : done ;
+               }
             }
          }
       }
