@@ -599,6 +599,7 @@ booleans {
 
    # think variables
    think_bah_slumping  : boolean "false" ;
+   think_broke_lass    : boolean "false" ;
    think_cue_bland     : boolean "false" ;
    think_door_cloud    : boolean "false" ;
    think_pitch_earning : boolean "false" ;
@@ -1048,6 +1049,7 @@ locations {
          : if (point_blest_able) {
             : match "troop leading" {
                : print "You win! But you don't want to just sit and do nothing. You make a whole row for mending ... whatever. Surprisingly, it's popular." ;
+               : set_true "won_yet" ;
                : win_game ; # move this once we get the right TEMPINT
                : set_integer var="tempint" "999" ;
                : set_true "point_troop_leading" ;
@@ -1199,7 +1201,7 @@ locations {
          }
          : if (!point_mage_urgent) {
             : match "mage _;_ urgent" {
-               : set_integer var="tempint" 995" ;
+               : set_integer var="tempint" "995" ;
                : set_false "first_half" ;
                : match "mage _" {
                   : set_true "first_half" ;
@@ -1629,7 +1631,7 @@ themes {
 ## Print the objective when the game starts
 
 on_startup {
-   : print "{wowt}: an {ifcomp} Petite Mort 2026 entry.";
+   : print "{wowt}: an {ifcomp} 2026 entry.";
    : if (won_yet) {
       : print "Thanks for replaying, but this is a reminder to look at the other {ifcomp} entries, too!" ;
       : press_any_key ;
