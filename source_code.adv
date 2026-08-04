@@ -282,6 +282,7 @@ collections {
          "false",
          "false",
          "false",
+         "false",
 
          "false",
 
@@ -307,6 +308,7 @@ collections {
          "{here_r12}",
          "{here_r02}",
          "{here_r02}",
+         "{here_r32}",
 
          "{here_r30}",
 
@@ -332,6 +334,7 @@ collections {
          "<COIN<#f80>>",
          "<TIGHTENED<#f80>>",
          "<PITCH<#f80>>",
+         "<CHEST<#f80>>",
 
          "<DOOR<#f80>>",
 
@@ -357,6 +360,7 @@ collections {
          "<OVATIONS<#f80>>",
          "<ROUSING<#f80>>",
          "<EARNING<#f80>>",
+         "<REIGNING<#f80>>",
 
          "<CLOUD<#f80>>",
 
@@ -382,6 +386,7 @@ collections {
          "false",
          "false",
          "false",
+         "false",
 
          "false",
 
@@ -394,6 +399,7 @@ collections {
 
    got_second_core : list {
       items = [
+         "false",
          "false",
          "false",
          "false",
@@ -507,6 +513,7 @@ booleans {
    point_bah_slumping      : boolean "false" ; # 997
    point_blest_able        : boolean "false" ; # 998
    point_can_do            : boolean "false" ; # 00
+   point_chest_reigning    : boolean "false" ; # 13
    point_coin_ovations     : boolean "false" ; # 10
    point_dry_vendors       : boolean "false" ; # 07
    point_duh_losing        : boolean "false" ; # 06
@@ -1094,6 +1101,28 @@ locations {
    }
    r32 : location "{r32_loc}" header="{r32_header}" {
       on_command {
+         : match "chest reigning" {
+            : if (point_chest_reigning) {
+               : print "Already done!" ;
+               : done ;
+            }
+            : print "Narrative text." ;
+            : set_integer var="tempint" "13" ;
+            : set_true "point_chest_reigning" ;
+            : gosub "add_point" ;
+            : done ;
+         }
+         : if (!point_chest_reigning) {
+            : match "chest _;_ reigning" {
+               : set_integer var="tempint" "13" ;
+               : set_false "first_half" ;
+               : match "chest _" {
+                  : set_true "first_half" ;
+               }
+               : gosub "say_half" ;
+               : done ;
+            }
+         }
       }
    }
    r33 : location "{r33_loc}" header="{r33_header}" {
