@@ -67,11 +67,94 @@ strings {
    puz_point_yell_open   : dynamic_string {( opt_color_coding ? "<yell open<#f80>>" : "yell open" )}      ; # 02
 
    # room(s)
+   r00_loc : string "Nothing yet." ;
+   r00_header : string "Fly Traps" ;
+
+   r01_loc : string "Nothing yet." ;
+   r01_header : string "Dump, Arable" ;
+
+   r02_loc : string "Nothing yet." ;
+   r02_header : string "The Spit-Thus Pit" ;
+
+   r03_loc : string "Nothing yet." ;
+   r03_header : string "Sunk Etching" ;
+
+   r04_loc : string "Nothing yet." ;
+   r04_header : string "Meager Oath" ;
+
+   r10_loc : string "Nothing yet." ;
+   r10_header : string "Drive Enders" ;
+
+   r11_loc : string "Nothing yet." ;
+   r11_header : string "Note 'Eres No Tears" ;
+
+   r12_loc : string "Nothing yet." ;
+   r12_header : string "Knowin' Juries" ;
+
+   r13_loc : string "Nothing yet." ;
+   r13_header : string "Post, Easing" ;
+
+   r14_loc : string "Nothing yet." ;
+   r14_header : string "Claw, Throbbing" ;
+
+   r15_loc : string "Nothing yet." ;
+   r15_header : string "Lie-Bury Libe, Airy" ;
    r20_loc : string "Here you have enough space to, well, wheeze and pace in worry about your predicament. And you do, constantly repeating \"{puz_point_canned_ooh}.\"" ;
    r20_header : string "Wheeze/Pace Wee Space" ;
 
    r1_loc : string "The hall leads north and south." ;
    r1_header : string "Hall" ;
+   r22_loc : string "Nothing yet." ;
+   r22_header : string "Notch Acing" ;
+
+   r23_loc : string "Nothing yet." ;
+   r23_header : string "Sunk Etching" ;
+
+   r24_loc : string "Nothing yet." ;
+   r24_header : string "Meager Oath" ;
+
+   r25_loc : string "Nothing yet." ;
+   r25_header : string "The Groom-Thug Room" ;
+
+   r26_loc : string "Nothing yet." ;
+   r26_header : string "Meager Oath" ;
+
+   r27_loc : string "Nothing yet." ;
+   r27_header : string "Meager Oath" ;
+
+   r30_loc : string "Nothing yet." ;
+   r30_header : string "Fly Traps" ;
+
+   r31_loc : string "Nothing yet." ;
+   r31_header : string "Dump, Arable" ;
+
+   r32_loc : string "Nothing yet." ;
+   r32_header : string "The Spit-Thus Pit" ;
+
+   r33_loc : string "Nothing yet." ;
+   r33_header : string "Sunk Etching" ;
+
+   r34_loc : string "Nothing yet." ;
+   r34_header : string "Meager Oath" ;
+
+   r35_loc : string "Nothing yet." ;
+   r35_header : string "Bro Class" ;
+
+   r40_loc : string "Nothing yet." ;
+   r40_header : string "Fly Traps" ;
+
+   r41_loc : string "Nothing yet." ;
+   r41_header : string "Dump, Arable" ;
+
+   r42_loc : string "Nothing yet." ;
+   r42_header : string "The Spit-Thus Pit" ;
+
+   r43_loc : string "Nothing yet." ;
+   r43_header : string "Sunk Etching" ;
+
+   r44_loc : string "Nothing yet." ;
+   r44_header : string "Meager Oath" ;
+
    # item(s)
    i_fspt : string "<Fey Stats Phase Tats<#ccc>>" ;
 
@@ -352,6 +435,50 @@ vocabulary {
 }
 
 locations {
+   r00 : location "{r00_loc}" header="{r00_header}" {
+      on_command {
+      }
+   }
+   r01 : location "{r01_loc}" header="{r01_header}" {
+      on_command {
+      }
+   }
+   r02 : location "{r02_loc}" header="{r02_header}" {
+      on_command {
+      }
+   }
+   r03 : location "{r03_loc}" header="{r03_header}" {
+      on_command {
+      }
+   }
+   r04 : location "{r04_loc}" header="{r04_header}" {
+      on_command {
+      }
+   }
+   r10 : location "{r10_loc}" header="{r10_header}" {
+      on_command {
+      }
+   }
+   r11 : location "{r11_loc}" header="{r11_header}" {
+      on_command {
+      }
+   }
+   r12 : location "{r12_loc}" header="{r12_header}" {
+      on_command {
+      }
+   }
+   r13 : location "{r13_loc}" header="{r13_header}" {
+      on_command {
+      }
+   }
+   r14 : location "{r14_loc}" header="{r14_header}" {
+      on_command {
+      }
+   }
+   r15 : location "{r15_loc}" header="{r15_header}" {
+      on_command {
+      }
+   }
    r20 : location "{r20_loc}" header="{r20_header}" graphic="r20_1" {
       on_command {
          : match "can do" {
@@ -499,7 +626,31 @@ locations {
          }
       }
    }
-   r30 : location "{r30_loc}" header="{r20_header}" {
+   r22 : location "{r22_loc}" header="{r22_header}" {
+      on_command {
+      }
+   }
+   r23 : location "{r23_loc}" header="{r23_header}" {
+      on_command {
+      }
+   }
+   r24 : location "{r24_loc}" header="{r24_header}" {
+      on_command {
+      }
+   }
+   r25 : location "{r25_loc}" header="{r25_header}" {
+      on_command {
+      }
+   }
+   r26 : location "{r26_loc}" header="{r26_header}" {
+      on_command {
+      }
+   }
+   r27 : location "{r27_loc}" header="{r27_header}" {
+      on_command {
+      }
+   }
+   r30 : location "{r30_loc}" header="{r30_header}" {
       on_command {
          : match "door cloud" {
             : if (!point_tufty_key) {
@@ -555,6 +706,26 @@ locations {
                : done ;
             }
          }
+      }
+   }
+   r32 : location "{r32_loc}" header="{r32_header}" {
+      on_command {
+      }
+   }
+   r33 : location "{r33_loc}" header="{r33_header}" {
+      on_command {
+      }
+   }
+   r34 : location "{r34_loc}" header="{r34_header}" {
+      on_command {
+      }
+   }
+   r35 : location "{r35_loc}" header="{r35_header}" {
+      on_command {
+      }
+   }
+   r40 : location "{r40_loc}" header="{r40_header}" {
+      on_command {
       }
    }
    r41: location "{r41_loc}" header="{r41_header}" {
@@ -613,6 +784,18 @@ locations {
          }
       }
    }
+   r42 : location "{r42_loc}" header="{r42_header}" {
+      on_command {
+      }
+   }
+   r43 : location "{r43_loc}" header="{r43_header}" {
+      on_command {
+      }
+   }
+   r44 : location "{r44_loc}" header="{r44_header}" {
+      on_command {
+      }
+   }
 }
 
 # Defines things in the world (scenery cannot be carried)
@@ -624,7 +807,35 @@ connections {
 
    from, direction, to = [
       r20, east, r21,
-      r21, north, r31
+      r21, north, r31,
+      r21, south, r11,
+      r21, east, r22,
+      r22, east, r23,
+      r23, east, r24,
+      r24, east, r25,
+      r25, east, r26,
+      r25, north, r35,
+      r25, south, r15,
+      r26, east, r27,
+      r31, north, r41,
+      r31, west, r30,
+      r31, east, r32,
+      r30, north, r40,
+      r32, east, r33,
+      r33, east, r34,
+      r33, north, r43,
+      r34, north, r44,
+      r11, west, r10,
+      r11, east, r12,
+      r11, south, r01,
+      r01, west, r00,
+      r01, east, r02,
+      r12, east, r13,
+      r13, east, r14,
+      r13, south, r03,
+      r03, east, r04,
+      r14, south, r04
+      ## this is one that is not revealed until late
    ]
 
 }
