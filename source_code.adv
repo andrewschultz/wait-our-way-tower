@@ -929,10 +929,32 @@ barriers {
       message = THE DOOR blocks you.
    }
 
-   block_go_r26 : block {
-      location = r26
+   block_go_r31 : block {
+      location = r31
+      block_when_not = point_halt_error
+      message = Not with the hall terror in the way.
+   }
+
+   block_go_r22 : block {
+      location = r22
+      block_when_not = point_halt_error
+      message = Not with the hall terror in the way.
+   }
+
+   block_go_r22_fellas : block {
+      location = r22
+      block_when = point_halt_error
+      message = You need to make sure the {puz_point_fellas_leap} order is neutralized.
+   }
+
       block_when_not = point_bah_slumping
       message = The {puz_point_boss_lumping} insults at you won't let you buy.
+   }
+
+   block_go_r11 : block {
+      location = r11
+      block_when_not = point_halt_error
+      message = Not with the hall terror in the way.
    }
 
    # block going with HONE/bonus
