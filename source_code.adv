@@ -56,25 +56,27 @@ strings {
    vo_ho_nigh : string "<HO NIGH<#ff0>>" ;
 
    # puzzle strings
-   puz_point_bleah_stable  : dynamic_string {( opt_color_coding ? "<bleah stable<#f80>>" : "bleah stable" )}   ; # 998
-   puz_point_boss_lumping  : dynamic_string {( opt_color_coding ? "<boss lumping<#f80>>" : "boss lumping" )}   ; # 997
-   puz_point_canned_ooh    : dynamic_string {( opt_color_coding ? "<Canned, ooh<#f80>>" : "Canned, ooh" )}     ; # 00
-   puz_point_coy_novations : dynamic_string {( opt_color_coding ? "<coy novations<#f80>>" : "coy novations" )} ; # 10
-   puz_point_cue_bland     : dynamic_string {( opt_color_coding ? "<cue bland<#f80>>" : "cue bland" )}         ; # 102
-   puz_point_dork_loud     : dynamic_string {( opt_color_coding ? "<dork loud<#f80>>" : "dork loud" )}         ; # 150
-   puz_point_drive_enders  : dynamic_string {( opt_color_coding ? "<drive enders<#f80>>" : "drive enders" )}   ; # 07
-   puz_point_dull_oozing   : dynamic_string {( opt_color_coding ? "<dull oozing<#f80>>" : "dull oozing" )}     ; # 06
-   puz_point_dump_arable   : dynamic_string {( opt_color_coding ? "<dump arable<#f80>>" : "dump arable" )}     ; # 555
-   puz_point_eh_sink       : dynamic_string {( opt_color_coding ? "<Ace, Inc.<#f80>>" : "Ace, Inc." )}         ; # 101
-   puz_point_fellas_leap   : dynamic_string {( opt_color_coding ? "<FELLAS, LEAP<#f80>>" : "FELLAS, LEAP" )}   ; # 04
-   puz_point_halt_error    : dynamic_string {( opt_color_coding ? "<halt error<#f80>>" : "halt error" )}       ; # 03
-   puz_point_hey_trash     : dynamic_string {( opt_color_coding ? "<hey trash<#f80>>" : "hey trash" )}         ; # 05
-   puz_point_knowin_juries : dynamic_string {( opt_color_coding ? "<knowin juries<#f80>>" : "knowin juries" )} ; # 09
+   puz_point_bleah_stable   : dynamic_string {( opt_color_coding ? "<bleah stable<#f80>>" : "bleah stable" )}     ; # 998
+   puz_point_boss_lumping   : dynamic_string {( opt_color_coding ? "<boss lumping<#f80>>" : "boss lumping" )}     ; # 997
+   puz_point_canned_ooh     : dynamic_string {( opt_color_coding ? "<Canned, ooh<#f80>>" : "Canned, ooh" )}       ; # 00
+   puz_point_chess_training : dynamic_string {( opt_color_coding ? "<chess training<#f80>>" : "chess training" )} ; # 13
+   puz_point_coy_novations  : dynamic_string {( opt_color_coding ? "<coy novations<#f80>>" : "coy novations" )}   ; # 10
+   puz_point_cue_bland      : dynamic_string {( opt_color_coding ? "<cue bland<#f80>>" : "cue bland" )}           ; # 102
+   puz_point_dork_loud      : dynamic_string {( opt_color_coding ? "<dork loud<#f80>>" : "dork loud" )}           ; # 150
+   puz_point_drive_enders   : dynamic_string {( opt_color_coding ? "<drive enders<#f80>>" : "drive enders" )}     ; # 07
+   puz_point_dull_oozing    : dynamic_string {( opt_color_coding ? "<dull oozing<#f80>>" : "dull oozing" )}       ; # 06
+   puz_point_dump_arable    : dynamic_string {( opt_color_coding ? "<dump arable<#f80>>" : "dump arable" )}       ; # 555
+   puz_point_eh_sink        : dynamic_string {( opt_color_coding ? "<Ace, Inc.<#f80>>" : "Ace, Inc." )}           ; # 101
+   puz_point_fellas_leap    : dynamic_string {( opt_color_coding ? "<FELLAS, LEAP<#f80>>" : "FELLAS, LEAP" )}     ; # 04
+   puz_point_halt_error     : dynamic_string {( opt_color_coding ? "<halt error<#f80>>" : "halt error" )}         ; # 03
+   puz_point_hey_trash      : dynamic_string {( opt_color_coding ? "<hey trash<#f80>>" : "hey trash" )}           ; # 05
+   puz_point_knowin_juries  : dynamic_string {( opt_color_coding ? "<knowin juries<#f80>>" : "knowin juries" )}   ; # 09
+   puz_point_pit_churning   : dynamic_string {( opt_color_coding ? "<pit churning<#f80>>" : "pit churning" )}     ; # 12
    puz_point_titan_drowsing : dynamic_string {( opt_color_coding ? "<titan drowsing<#f80>>" : "titan drowsing" )} ; # 11
-   puz_point_true_pleading : dynamic_string {( opt_color_coding ? "<true pleading<#f80>>" : "true pleading" )} ; # 999
-   puz_point_the_floor     : dynamic_string {( opt_color_coding ? "<the floor<#f80>>" : "the floor" )}         ; # 01
-   puz_point_wry_tangles : dynamic_string {( opt_color_coding ? "<Wry Tangles<#f80>>" : "Wry Tangles" )}       ; # 994
-   puz_point_yellow_pin    : dynamic_string {( opt_color_coding ? "<yellow pin<#f80>>" : "yellow pin" )}       ; # 02
+   puz_point_true_pleading  : dynamic_string {( opt_color_coding ? "<true pleading<#f80>>" : "true pleading" )}   ; # 999
+   puz_point_the_floor      : dynamic_string {( opt_color_coding ? "<the floor<#f80>>" : "the floor" )}           ; # 01
+   puz_point_wry_tangles    : dynamic_string {( opt_color_coding ? "<Wry Tangles<#f80>>" : "Wry Tangles" )}       ; # 994
+   puz_point_yellow_pin     : dynamic_string {( opt_color_coding ? "<yellow pin<#f80>>" : "yellow pin" )}         ; # 02
 
    # room(s)
    r00_loc : string "Nothing yet." ;
@@ -83,8 +85,8 @@ strings {
    r01_loc : string "Nothing yet." ;
    r01_header : string "Dump, Arable" ;
 
-   r02_loc : string "Nothing yet." ;
-   r02_header : string "The Spit-Thus Pit" ;
+   r02_loc : dynamic_string {( (point_pitch_earning ? "The pit still churns, but the titan is gone. You see nothing else to do here." : point_tightened_rousing ? "The titan is now awake." : "You see a {puz_titan_drowsing} here.") + "\nThe pit rises high all directions except back west." )} ;
+   r02_header : string "Pit, Churning" ; # the spit-thus pit
 
    r03_loc : string "Nothing yet." ;
    r03_header : string "Sunk Etching" ;
@@ -140,8 +142,8 @@ strings {
    r31_loc : string "Nothing yet." ;
    r31_header : string "Way-Still Waste, Ill" ;
 
-   r32_loc : string "Nothing yet." ;
-   r32_header : string "The Spit-Thus Pit" ;
+   r32_loc : string "Here all sorts of weird entities train at chess." ;
+   r32_header : string "Chess Training" ; # ?? the spit thus pit
 
    r33_loc : string "Nothing yet." ;
    r33_header : string "Sunk Etching" ;
@@ -279,6 +281,7 @@ collections {
          "false",
          "false",
          "false",
+         "false",
 
          "false",
 
@@ -302,6 +305,7 @@ collections {
          "{here_r01}",
          "{here_r12}",
          "{here_r12}",
+         "{here_r02}",
          "{here_r02}",
 
          "{here_r30}",
@@ -327,6 +331,7 @@ collections {
          "<NO<#f80>>",
          "<COIN<#f80>>",
          "<TIGHTENED<#f80>>",
+         "<PITCH<#f80>>",
 
          "<DOOR<#f80>>",
 
@@ -351,6 +356,7 @@ collections {
          "<INJURIES<#f80>>",
          "<OVATIONS<#f80>>",
          "<ROUSING<#f80>>",
+         "<EARNING<#f80>>",
 
          "<CLOUD<#f80>>",
 
@@ -375,6 +381,7 @@ collections {
          "false",
          "false",
          "false",
+         "false",
 
          "false",
 
@@ -387,6 +394,7 @@ collections {
 
    got_second_core : list {
       items = [
+         "false",
          "false",
          "false",
          "false",
@@ -507,6 +515,7 @@ booleans {
    point_halt_error        : boolean "false" ; # 03
    point_hate_rash         : boolean "false" ; # 05
    point_no_injuries       : boolean "false" ; # 09
+   point_pitch_earning     : boolean "false" ; # 12
    point_thief_lore        : boolean "false" ; # 01
    point_tightened_rousing : boolean "false" ; # 11
    point_troop_leading     : boolean "false" ; # 999
@@ -537,7 +546,6 @@ booleans {
    # blocker dynamic booleans
    r20_hone_block : dynamic_boolean {( opt_hone_aye )} ;
 
-
    # think variables
    already_got_command : boolean "false" ;
    first_half : boolean "false" ;
@@ -556,9 +564,10 @@ booleans {
    unneeded_half : dynamic_boolean {( tempint == 0 && !in_bonus_half )} ;
 
    # think variables
-   think_bah_slumping : boolean "false" ;
-   think_cue_bland    : boolean "false" ;
-   think_door_cloud   : boolean "false" ;
+   think_bah_slumping  : boolean "false" ;
+   think_cue_bland     : boolean "false" ;
+   think_door_cloud    : boolean "false" ;
+   think_pitch_earning : boolean "false" ;
 
    think_any : dynamic_boolean {( 1 == 0 )} ;
    show_overlay : boolean "true" ;
@@ -614,9 +623,31 @@ locations {
          : if (!point_tightened_rousing) {
             : match "tightened _;_ rousing" {
                : set_integer var="tempint" "11" ;
-               : set_boolean var="already_got_command" {( think_tightened_rousing && !point_tightened_rousing )} ; # this is optional. Delete if point does not rely on any other variables.
                : set_false "first_half" ;
                : match "tightened _" {
+                  : set_true "first_half" ;
+               }
+               : gosub "say_half" ;
+               : done ;
+            }
+         }
+         : match "pitch earning" {
+            : if (point_pitch_earning) {
+               : print "Already done!" ;
+               : done ;
+            }
+            : print "Narrative text." ;
+            : set_integer var="tempint" "12" ;
+            : set_true "point_pitch_earning" ;
+            : gosub "add_point" ;
+            : done ;
+         }
+         : if (!point_pitch_earning) {
+            : match "pitch _;_ earning" {
+               : set_integer var="tempint" "12" ;
+               : set_boolean var="already_got_command" {( think_pitch_earning && !point_pitch_earning )} ; # this is optional. Delete if point does not rely on any other variables.
+               : set_false "first_half" ;
+               : match "pitch _" {
                   : set_true "first_half" ;
                }
                : gosub "say_half" ;
@@ -701,7 +732,6 @@ locations {
          : if (!point_no_injuries) {
             : match "no _;_ injuries" {
                : set_integer var="tempint" "9" ;
-               : set_boolean var="already_got_command" {( think_no_injuries && !point_no_injuries )} ; # this is optional. Delete if point does not rely on any other variables.
                : set_false "first_half" ;
                : match "no _" {
                   : set_true "first_half" ;
@@ -725,7 +755,6 @@ locations {
             : if (!point_coin_ovations) {
                : match "coin _;_ ovations" {
                   : set_integer var="tempint" "10" ;
-                  : set_boolean var="already_got_command" {( think_coin_ovations && !point_coin_ovations )} ; # this is optional. Delete if point does not rely on any other variables.
                   : set_false "first_half" ;
                   : match "coin _" {
                      : set_true "first_half" ;
@@ -761,7 +790,6 @@ locations {
          : if (!point_right_angles) {
             : match "right _;_ angles" {
                : set_integer var="tempint" "994" ;
-               : set_boolean var="already_got_command" {( think_right_angles && !point_right_angles )} ; # this is optional. Delete if point does not rely on any other variables.
                : set_false "first_half" ;
                : match "right _" {
                   : set_true "first_half" ;
