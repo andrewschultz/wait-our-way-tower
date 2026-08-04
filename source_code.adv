@@ -61,6 +61,7 @@ strings {
    puz_point_canned_ooh    : dynamic_string {( opt_color_coding ? "<Canned, ooh<#f80>>" : "Canned, ooh" )}     ; # 00
    puz_point_cue_bland     : dynamic_string {( opt_color_coding ? "<cue bland<#f80>>" : "cue bland" )}         ; # 102
    puz_point_dork_loud     : dynamic_string {( opt_color_coding ? "<dork loud<#f80>>" : "dork loud" )}         ; # 150
+   puz_point_drive_enders  : dynamic_string {( opt_color_coding ? "<drive enders<#f80>>" : "drive enders" )}   ; # 07
    puz_point_dull_oozing   : dynamic_string {( opt_color_coding ? "<dull oozing<#f80>>" : "dull oozing" )}     ; # 06
    puz_point_dump_arable   : dynamic_string {( opt_color_coding ? "<dump arable<#f80>>" : "dump arable" )}     ; # 555
    puz_point_eh_sink       : dynamic_string {( opt_color_coding ? "<Ace, Inc.<#f80>>" : "Ace, Inc." )}         ; # 101
@@ -195,7 +196,9 @@ integers {
    r02_hintnum : dynamic_integer {( 0 )} ;
    r03_hintnum : dynamic_integer {( 0 )} ;
    r04_hintnum : dynamic_integer {( 0 )} ;
-   r10_hintnum : dynamic_integer {( 0 )} ;
+   r10_hintnum : dynamic_integer {( !point_dry_vendors ? 36 :
+   0 )} ;
+   # : !point_say_four ? 34 :
    r11_hintnum : dynamic_integer {( !point_duh_losing : 36 :
       0 )} ;
    r12_hintnum : dynamic_integer {( 0 )} ;
@@ -284,6 +287,7 @@ collections {
          "{here_r31}",
          "{here_r30}",
          "{here_r01}",
+         "{here_r10}",
          "{here_r11}",
 
          "{here_r26}",
@@ -303,6 +307,7 @@ collections {
          "<DOOR<#f80>>",
          "<DUMB<#f80>>",
          "<DUH<#f80>>",
+         "<DRY<#f80>>",
 
          "<BAH<#f80>>",
          "<BLEST<#f80>>",
@@ -321,6 +326,7 @@ collections {
          "<CLOUD<#f80>>",
          "<PARABLE<#f80>>",
          "<LOSING<#f80>>",
+         "<VENDORS<#f80>>",
 
          "<SLUMPING<#f80>>",
          "<ABLE<#f80>>",
@@ -340,12 +346,14 @@ collections {
          "false",
          "false",
          "false",
+         "false",
          "false"
       ]
    }
 
    got_second_core : list {
       items = [
+         "false",
          "false",
          "false",
          "false",
@@ -450,6 +458,7 @@ booleans {
    point_bah_slumping  : boolean "false" ; # 997
    point_blest_able    : boolean "false" ; # 998
    point_can_do        : boolean "false" ; # 00
+   point_dry_vendors   : boolean "false" ; # 07
    point_duh_losing    : boolean "false" ; # 06
    point_fell_asleep   : boolean "false" ; # 04
    point_halt_error    : boolean "false" ; # 03
@@ -558,6 +567,29 @@ locations {
    }
    r10 : location "{r10_loc}" header="{r10_header}" {
       on_command {
+         : match "dry vendors" {
+            : if (point_dry_vendors) {
+               : print "Already done!" ;
+               : done ;
+            }
+            : print "Narrative text." ;
+            : set_integer var="tempint" "100" ;
+            : set_true "point_dry_vendors" ;
+            : gosub "add_point" ;
+            : done ;
+         }
+         : if (!point_dry_vendors) {
+            : match "dry _;_ vendors" {
+               : set_integer var="tempint" "100" ;
+               : set_boolean var="already_got_command" {( think_dry_vendors && !point_dry_vendors )} ; # this is optional. Delete if point does not rely on any other variables.
+               : set_false "first_half" ;
+               : match "dry _" {
+                  : set_true "first_half" ;
+               }
+               : gosub "say_half" ;
+               : done ;
+            }
+         }
       }
    }
    r11 : location "{r11_loc}" header="{r11_header}" {
