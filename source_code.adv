@@ -56,15 +56,16 @@ strings {
    vo_ho_nigh : string "<HO NIGH<#ff0>>" ;
 
    # puzzle strings
-   puz_point_canned_ooh  : dynamic_string {( opt_color_coding ? "<Canned, ooh<#f80>>" : "Canned, ooh" )}  ; # 00
-   puz_point_cue_bland   : dynamic_string {( opt_color_coding ? "<cue bland<#f80>>" : "cue bland" )}      ; # 101
-   puz_point_dork_loud   : dynamic_string {( opt_color_coding ? "<dork loud<#f80>>" : "dork loud" )}      ; # 100
-   puz_point_eh_sink     : dynamic_string {( opt_color_coding ? "<Ace, Inc.<#f80>>" : "Ace, Inc." )}      ; # 101
-   puz_point_fellas_leap : dynamic_string {( opt_color_coding ? "<FELLAS, LEAP<#f80>>" : "FELLAS, LEAP" )} ; # 04
-   puz_point_halt_error  : dynamic_string {( opt_color_coding ? "<halt error<#f80>>" : "halt error" )}    ; # 03
-   puz_point_hey_trash   : dynamic_string {( opt_color_coding ? "<hey trash<#f80>>" : "hey trash" )}      ; # 05
-   puz_point_the_floor   : dynamic_string {( opt_color_coding ? "<the floor<#f80>>" : "the floor" )}      ; # 01
-   puz_point_yellow_pin   : dynamic_string {( opt_color_coding ? "<yellow pin<#f80>>" : "yellow pin" )}      ; # 02
+   puz_point_boss_lumping : dynamic_string {( opt_color_coding ? "<boss lumping<#f80>>" : "boss lumping" )} ; # 997
+   puz_point_canned_ooh   : dynamic_string {( opt_color_coding ? "<Canned, ooh<#f80>>" : "Canned, ooh" )}   ; # 00
+   puz_point_cue_bland    : dynamic_string {( opt_color_coding ? "<cue bland<#f80>>" : "cue bland" )}       ; # 101
+   puz_point_dork_loud    : dynamic_string {( opt_color_coding ? "<dork loud<#f80>>" : "dork loud" )}       ; # 100
+   puz_point_eh_sink      : dynamic_string {( opt_color_coding ? "<Ace, Inc.<#f80>>" : "Ace, Inc." )}       ; # 101
+   puz_point_fellas_leap  : dynamic_string {( opt_color_coding ? "<FELLAS, LEAP<#f80>>" : "FELLAS, LEAP" )} ; # 04
+   puz_point_halt_error   : dynamic_string {( opt_color_coding ? "<halt error<#f80>>" : "halt error" )}     ; # 03
+   puz_point_hey_trash    : dynamic_string {( opt_color_coding ? "<hey trash<#f80>>" : "hey trash" )}       ; # 05
+   puz_point_the_floor    : dynamic_string {( opt_color_coding ? "<the floor<#f80>>" : "the floor" )}       ; # 01
+   puz_point_yellow_pin   : dynamic_string {( opt_color_coding ? "<yellow pin<#f80>>" : "yellow pin" )}     ; # 02
 
    # room(s)
    r00_loc : string "Nothing yet." ;
@@ -118,8 +119,8 @@ strings {
    r25_loc : string "Nothing yet." ;
    r25_header : string "The Groom-Thug Room" ;
 
-   r26_loc : string "Nothing yet." ;
-   r26_header : string "Meager Oath" ;
+   r26_loc : dynamic_string {( !point_bah_slumping ? "Well this is pretty miserable. A boss, lumping abuse on you, blocks the way to the east.\nAnd with such sophistry! Such common sense! Did you come here so far for nothing?\nYou can go back west, if you want." : "Well, you've achieved no great power. But you've achieved relief from the boss. You can go east as well as west now." )} ;
+   r26_header : string "\"Know Power? NOPE\" Hour" ;
 
    r27_loc : string "Nothing yet." ;
    r27_header : string "Meager Oath" ;
@@ -227,6 +228,7 @@ collections {
          "false",
          "false",
          "false",
+         "false",
          "false"
       ]
    }
@@ -239,7 +241,8 @@ collections {
          "{here_r21}",
          "{here_r21}",
          "{here_r31}",
-         "{here_r30}"
+         "{here_r30}",
+         "{here_r26}"
       ]
    }
 
@@ -252,6 +255,7 @@ collections {
          "<FELL<#f80>>",
          "<HEY<#f80>>",
          "<DOOR<#f80>>"
+         "<BAH<#f80>>",
       ]
    }
 
@@ -262,10 +266,11 @@ collections {
          "<OPEN<#f80>>",
          "<ERROR<#f80>>",
          "<ASLEEP<#f80>>",
-         "<TRASH<#f80>>"
+         "<TRASH<#f80>>",
          "<CLOUD<#f80>>",
+         "<SLUMPING<#f80>>"
       ]
-   }
+   } # unsorted beyond CLOUD
 
    got_first_core : list {
       items = [
@@ -274,8 +279,9 @@ collections {
          "false",
          "false",
          "false",
-         "false"
          "false",
+         "false",
+         "false"
       ]
    }
 
@@ -286,8 +292,9 @@ collections {
          "false",
          "false",
          "false",
-         "false"
          "false",
+         "false",
+         "false"
       ]
    }
 
@@ -377,18 +384,19 @@ booleans {
    gamestate_r21_e : boolean "false" ;
 
    # points
-   point_can_do      : boolean "false" ; # 00
-   point_fell_asleep : boolean "false" ; # 04
-   point_halt_error  : boolean "false" ; # 03
-   point_hate_rash   : boolean "false" ; # 05
-   point_thief_lore  : boolean "false" ; # 01
-   point_yell_open   : boolean "false" ; # 02
+   point_can_do        : boolean "false" ; # 00
+   point_fell_asleep   : boolean "false" ; # 04
+   point_halt_error    : boolean "false" ; # 03
+   point_hate_rash     : boolean "false" ; # 05
+   point_thief_lore    : boolean "false" ; # 01
+   point_yell_open     : boolean "false" ; # 02
 
    # not in place yet
-   point_cue_bland  : boolean "false" ; # 101
-   point_door_cloud : boolean "false" ; # 101
-   point_eh_sink    : boolean "false" ; # 101
-   point_tufty_key  : boolean "false" ; # 101
+   point_bah_slumping : boolean "false" ; # 997
+   point_cue_bland    : boolean "false" ; # 101
+   point_door_cloud   : boolean "false" ; # 101
+   point_eh_sink      : boolean "false" ; # 101
+   point_tufty_key    : boolean "false" ; # 101
 
    # silly random
    r20_jail : boolean "false" ;
@@ -423,11 +431,9 @@ booleans {
    unneeded_half : dynamic_boolean {( tempint == 0 && !in_bonus_half )} ;
 
    # think variables
-   think_cue_bland  : boolean "false" ;
-   think_door_cloud : boolean "false" ;
-
-   # blocker dynamic booleans
-   r20_hone_block : dynamic_boolean {( opt_hone_aye )} ;
+   think_bah_slumping : boolean "false" ;
+   think_cue_bland    : boolean "false" ;
+   think_door_cloud   : boolean "false" ;
 
    think_any : dynamic_boolean {( 1 == 0 )} ;
    show_overlay : boolean "true" ;
@@ -643,6 +649,29 @@ locations {
    }
    r26 : location "{r26_loc}" header="{r26_header}" {
       on_command {
+         : match "bah slumping" {
+            : if (point_bah_slumping) {
+               : print "Don't rub it in. The boss is long gone, anyway." ;
+               : done ;
+            }
+            : print "Narrative text." ;
+            : set_integer var="tempint" "997" ;
+            : set_true "point_bah_slumping" ;
+            : gosub "add_point" ;
+            : done ;
+         }
+         : if (!point_bah_slumping) {
+            : match "bah _;_ slumping" {
+               : set_integer var="tempint" "997" ;
+               : set_boolean var="already_got_command" {( think_bah_slumping && !point_bah_slumping )} ;
+               : set_false "first_half" ;
+               : match "bah _" {
+                  : set_true "first_half" ;
+               }
+               : gosub "say_half" ;
+               : done ;
+            }
+         }
       }
    }
    r27 : location "{r27_loc}" header="{r27_header}" {
@@ -846,6 +875,12 @@ barriers {
       location = r21
       block_when = goblock_12
       message = THE DOOR blocks you.
+   }
+
+   block_go_r26 : block {
+      location = r26
+      block_when_not = point_bah_slumping
+      message = The {puz_point_boss_lumping} insults at you won't let you buy.
    }
 
    # block going with HONE/bonus
