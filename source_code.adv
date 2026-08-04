@@ -59,6 +59,7 @@ strings {
    puz_point_bleah_stable  : dynamic_string {( opt_color_coding ? "<bleah stable<#f80>>" : "bleah stable" )}   ; # 998
    puz_point_boss_lumping  : dynamic_string {( opt_color_coding ? "<boss lumping<#f80>>" : "boss lumping" )}   ; # 997
    puz_point_canned_ooh    : dynamic_string {( opt_color_coding ? "<Canned, ooh<#f80>>" : "Canned, ooh" )}     ; # 00
+   puz_point_coy_novations : dynamic_string {( opt_color_coding ? "<coy novations<#f80>>" : "coy novations" )} ; # 10
    puz_point_cue_bland     : dynamic_string {( opt_color_coding ? "<cue bland<#f80>>" : "cue bland" )}         ; # 102
    puz_point_dork_loud     : dynamic_string {( opt_color_coding ? "<dork loud<#f80>>" : "dork loud" )}         ; # 150
    puz_point_drive_enders  : dynamic_string {( opt_color_coding ? "<drive enders<#f80>>" : "drive enders" )}   ; # 07
@@ -69,6 +70,7 @@ strings {
    puz_point_halt_error    : dynamic_string {( opt_color_coding ? "<halt error<#f80>>" : "halt error" )}       ; # 03
    puz_point_hey_trash     : dynamic_string {( opt_color_coding ? "<hey trash<#f80>>" : "hey trash" )}         ; # 05
    puz_point_knowin_juries : dynamic_string {( opt_color_coding ? "<knowin juries<#f80>>" : "knowin juries" )} ; # 09
+   puz_point_titan_drowsing : dynamic_string {( opt_color_coding ? "<titan drowsing<#f80>>" : "titan drowsing" )} ; # 11
    puz_point_true_pleading : dynamic_string {( opt_color_coding ? "<true pleading<#f80>>" : "true pleading" )} ; # 999
    puz_point_the_floor     : dynamic_string {( opt_color_coding ? "<the floor<#f80>>" : "the floor" )}         ; # 01
    puz_point_wry_tangles : dynamic_string {( opt_color_coding ? "<Wry Tangles<#f80>>" : "Wry Tangles" )}       ; # 994
@@ -275,6 +277,8 @@ collections {
          "false",
          "false",
          "false",
+         "false",
+         "false",
 
          "false",
 
@@ -297,6 +301,8 @@ collections {
          "{here_r10}",
          "{here_r01}",
          "{here_r12}",
+         "{here_r12}",
+         "{here_r02}",
 
          "{here_r30}",
 
@@ -319,6 +325,8 @@ collections {
          "<DRY<#f80>>",
          "<DUMB<#f80>>",
          "<NO<#f80>>",
+         "<COIN<#f80>>",
+         "<TIGHTENED<#f80>>",
 
          "<DOOR<#f80>>",
 
@@ -341,6 +349,8 @@ collections {
          "<VENDORS<#f80>>",
          "<PARABLE<#f80>>",
          "<INJURIES<#f80>>",
+         "<OVATIONS<#f80>>",
+         "<ROUSING<#f80>>",
 
          "<CLOUD<#f80>>",
 
@@ -363,6 +373,8 @@ collections {
          "false",
          "false",
          "false",
+         "false",
+         "false",
 
          "false",
 
@@ -375,6 +387,8 @@ collections {
 
    got_second_core : list {
       items = [
+         "false",
+         "false",
          "false",
          "false",
          "false",
@@ -482,26 +496,28 @@ booleans {
    r22_secondary_block : dynamic_boolean {( gamestate_r21_e && !point_fell_asleep )} ;
 
    # points (sorted, beginning or end)
-   point_bah_slumping  : boolean "false" ; # 997
-   point_blest_able    : boolean "false" ; # 998
-   point_can_do        : boolean "false" ; # 00
-   point_dry_vendors   : boolean "false" ; # 07
-   point_duh_losing    : boolean "false" ; # 06
-   point_dumb_parable  : boolean "false" ; # 08
-   point_fell_asleep   : boolean "false" ; # 04
-   point_halt_error    : boolean "false" ; # 03
-   point_hate_rash     : boolean "false" ; # 05
-   point_no_injuries   : boolean "false" ; # 09
-   point_troop_leading : boolean "false" ; # 999
-   point_thief_lore    : boolean "false" ; # 01
-   point_right_angles  : boolean "false" ; # 994
-   point_yell_open     : boolean "false" ; # 02
+   point_bah_slumping      : boolean "false" ; # 997
+   point_blest_able        : boolean "false" ; # 998
+   point_can_do            : boolean "false" ; # 00
+   point_coin_ovations     : boolean "false" ; # 10
+   point_dry_vendors       : boolean "false" ; # 07
+   point_duh_losing        : boolean "false" ; # 06
+   point_dumb_parable      : boolean "false" ; # 08
+   point_fell_asleep       : boolean "false" ; # 04
+   point_halt_error        : boolean "false" ; # 03
+   point_hate_rash         : boolean "false" ; # 05
+   point_no_injuries       : boolean "false" ; # 09
+   point_thief_lore        : boolean "false" ; # 01
+   point_tightened_rousing : boolean "false" ; # 11
+   point_troop_leading     : boolean "false" ; # 999
+   point_right_angles      : boolean "false" ; # 994
+   point_yell_open         : boolean "false" ; # 02
 
    # not in place yet
-   point_cue_bland    : boolean "false" ; # 102
-   point_door_cloud   : boolean "false" ; # 150
-   point_eh_sink      : boolean "false" ; # 101
-   point_tufty_key    : boolean "false" ; # 101
+   point_cue_bland        : boolean "false" ; # 102
+   point_door_cloud       : boolean "false" ; # 150
+   point_eh_sink          : boolean "false" ; # 101
+   point_tufty_key        : boolean "false" ; # 101
 
    # silly random
    r20_jail : boolean "false" ;
@@ -584,6 +600,29 @@ locations {
    }
    r02 : location "{r02_loc}" header="{r02_header}" {
       on_command {
+         : match "tightened rousing" {
+            : if (point_tightened_rousing) {
+               : print "Already done!" ;
+               : done ;
+            }
+            : print "Narrative text." ;
+            : set_integer var="tempint" "11" ;
+            : set_true "point_tightened_rousing" ;
+            : gosub "add_point" ;
+            : done ;
+         }
+         : if (!point_tightened_rousing) {
+            : match "tightened _;_ rousing" {
+               : set_integer var="tempint" "11" ;
+               : set_boolean var="already_got_command" {( think_tightened_rousing && !point_tightened_rousing )} ; # this is optional. Delete if point does not rely on any other variables.
+               : set_false "first_half" ;
+               : match "tightened _" {
+                  : set_true "first_half" ;
+               }
+               : gosub "say_half" ;
+               : done ;
+            }
+         }
       }
    }
    r03 : location "{r03_loc}" header="{r03_header}" {
@@ -669,6 +708,31 @@ locations {
                }
                : gosub "say_half" ;
                : done ;
+            }
+         }
+         : if (point_no_injuries) {
+            : match "coin ovations" {
+               : if (point_coin_ovations) {
+                  : print "Already done!" ;
+                  : done ;
+               }
+               : print "Narrative text." ;
+               : set_integer var="tempint" "10" ;
+               : set_true "point_coin_ovations" ;
+               : gosub "add_point" ;
+               : done ;
+            }
+            : if (!point_coin_ovations) {
+               : match "coin _;_ ovations" {
+                  : set_integer var="tempint" "10" ;
+                  : set_boolean var="already_got_command" {( think_coin_ovations && !point_coin_ovations )} ; # this is optional. Delete if point does not rely on any other variables.
+                  : set_false "first_half" ;
+                  : match "coin _" {
+                     : set_true "first_half" ;
+                  }
+                  : gosub "say_half" ;
+                  : done ;
+               }
             }
          }
       }
