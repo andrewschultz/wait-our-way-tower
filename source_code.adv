@@ -199,7 +199,7 @@ integers {
    r10_hintnum : dynamic_integer {( !point_dry_vendors ? 36 :
    0 )} ;
    # : !point_say_four ? 34 :
-   r11_hintnum : dynamic_integer {( !point_duh_losing : 36 :
+   r11_hintnum : dynamic_integer {( !point_duh_losing ? 36 :
       0 )} ;
    r12_hintnum : dynamic_integer {( 0 )} ;
    r13_hintnum : dynamic_integer {( 0 )} ;
@@ -272,6 +272,10 @@ collections {
          "false",
          "false",
          "false",
+
+         "false",
+
+         "false",
          "false",
          "false"
       ]
@@ -285,10 +289,11 @@ collections {
          "{here_r21}",
          "{here_r21}",
          "{here_r31}",
-         "{here_r30}",
          "{here_r01}",
          "{here_r10}",
          "{here_r11}",
+
+         "{here_r30}",
 
          "{here_r26}",
          "{here_r27}",
@@ -304,10 +309,11 @@ collections {
          "<HALT<#f80>>",
          "<FELL<#f80>>",
          "<HEY<#f80>>",
-         "<DOOR<#f80>>",
          "<DUMB<#f80>>",
          "<DUH<#f80>>",
          "<DRY<#f80>>",
+
+         "<DOOR<#f80>>",
 
          "<BAH<#f80>>",
          "<BLEST<#f80>>",
@@ -323,10 +329,11 @@ collections {
          "<ERROR<#f80>>",
          "<ASLEEP<#f80>>",
          "<TRASH<#f80>>",
-         "<CLOUD<#f80>>",
          "<PARABLE<#f80>>",
          "<LOSING<#f80>>",
          "<VENDORS<#f80>>",
+
+         "<CLOUD<#f80>>",
 
          "<SLUMPING<#f80>>",
          "<ABLE<#f80>>",
@@ -345,6 +352,9 @@ collections {
          "false",
          "false",
          "false",
+
+         "false",
+
          "false",
          "false",
          "false"
@@ -362,6 +372,9 @@ collections {
          "false",
          "false",
          "false",
+
+         "false",
+
          "false",
          "false",
          "false"
@@ -581,7 +594,6 @@ locations {
          : if (!point_dry_vendors) {
             : match "dry _;_ vendors" {
                : set_integer var="tempint" "100" ;
-               : set_boolean var="already_got_command" {( think_dry_vendors && !point_dry_vendors )} ; # this is optional. Delete if point does not rely on any other variables.
                : set_false "first_half" ;
                : match "dry _" {
                   : set_true "first_half" ;
@@ -1139,7 +1151,7 @@ subroutines {
       : if (is_at "r20") {
          : print "You hear nothing but occasionally mutter to yourself <rue my room, aye<#888>>." ;
       } : else_if (is_at "r21") {
-         : print {( point_fell_asleep ? "It's quiet now." : point_halt_error ? (gamestate_r21_e ? "The \"{puz_point_fellas_leap}\" order echoes in your head." : "Quiet, for the moment.") : "The hall terror is making all kinds of noise." )} ;
+         : print {( point_fell_asleep ? "It's quiet now." : point_halt_error ? (r22_secondary_block ? "The \"{puz_point_fellas_leap}\" order echoes in your head." : "Quiet, for the moment.") : "The hall terror is making all kinds of noise." )} ;
       } : else {
          : print "Nothing." ;
       }
