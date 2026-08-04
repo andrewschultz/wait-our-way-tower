@@ -56,18 +56,19 @@ strings {
    vo_ho_nigh : string "<HO NIGH<#ff0>>" ;
 
    # puzzle strings
-   puz_point_bleah_stable : dynamic_string {( opt_color_coding ? "<bleah stable<#f80>>" : "bleah stable" )} ; # 998
-   puz_point_boss_lumping : dynamic_string {( opt_color_coding ? "<boss lumping<#f80>>" : "boss lumping" )} ; # 997
-   puz_point_canned_ooh   : dynamic_string {( opt_color_coding ? "<Canned, ooh<#f80>>" : "Canned, ooh" )}   ; # 00
-   puz_point_cue_bland    : dynamic_string {( opt_color_coding ? "<cue bland<#f80>>" : "cue bland" )}       ; # 101
-   puz_point_dork_loud    : dynamic_string {( opt_color_coding ? "<dork loud<#f80>>" : "dork loud" )}       ; # 100
-   puz_point_dump_arable : dynamic_string {( opt_color_coding ? "<dump arable<#f80>>" : "dump arable" )} ; # 555
-   puz_point_eh_sink      : dynamic_string {( opt_color_coding ? "<Ace, Inc.<#f80>>" : "Ace, Inc." )}       ; # 101
-   puz_point_fellas_leap  : dynamic_string {( opt_color_coding ? "<FELLAS, LEAP<#f80>>" : "FELLAS, LEAP" )} ; # 04
-   puz_point_halt_error   : dynamic_string {( opt_color_coding ? "<halt error<#f80>>" : "halt error" )}     ; # 03
-   puz_point_hey_trash    : dynamic_string {( opt_color_coding ? "<hey trash<#f80>>" : "hey trash" )}       ; # 05
-   puz_point_the_floor    : dynamic_string {( opt_color_coding ? "<the floor<#f80>>" : "the floor" )}       ; # 01
-   puz_point_yellow_pin   : dynamic_string {( opt_color_coding ? "<yellow pin<#f80>>" : "yellow pin" )}     ; # 02
+   puz_point_bleah_stable  : dynamic_string {( opt_color_coding ? "<bleah stable<#f80>>" : "bleah stable" )}   ; # 998
+   puz_point_boss_lumping  : dynamic_string {( opt_color_coding ? "<boss lumping<#f80>>" : "boss lumping" )}   ; # 997
+   puz_point_canned_ooh    : dynamic_string {( opt_color_coding ? "<Canned, ooh<#f80>>" : "Canned, ooh" )}     ; # 00
+   puz_point_cue_bland     : dynamic_string {( opt_color_coding ? "<cue bland<#f80>>" : "cue bland" )}         ; # 102
+   puz_point_dork_loud     : dynamic_string {( opt_color_coding ? "<dork loud<#f80>>" : "dork loud" )}         ; # 150
+   puz_point_dump_arable   : dynamic_string {( opt_color_coding ? "<dump arable<#f80>>" : "dump arable" )}     ; # 555
+   puz_point_eh_sink       : dynamic_string {( opt_color_coding ? "<Ace, Inc.<#f80>>" : "Ace, Inc." )}         ; # 101
+   puz_point_fellas_leap   : dynamic_string {( opt_color_coding ? "<FELLAS, LEAP<#f80>>" : "FELLAS, LEAP" )}   ; # 04
+   puz_point_halt_error    : dynamic_string {( opt_color_coding ? "<halt error<#f80>>" : "halt error" )}       ; # 03
+   puz_point_hey_trash     : dynamic_string {( opt_color_coding ? "<hey trash<#f80>>" : "hey trash" )}         ; # 05
+   puz_point_true_pleading : dynamic_string {( opt_color_coding ? "<true pleading<#f80>>" : "true pleading" )} ; # 999
+   puz_point_the_floor     : dynamic_string {( opt_color_coding ? "<the floor<#f80>>" : "the floor" )}         ; # 01
+   puz_point_yellow_pin    : dynamic_string {( opt_color_coding ? "<yellow pin<#f80>>" : "yellow pin" )}       ; # 02
 
    # room(s)
    r00_loc : string "Nothing yet." ;
