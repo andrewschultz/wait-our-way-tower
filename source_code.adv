@@ -1570,6 +1570,12 @@ locations {
    r26 : location "{r26_loc}" header="{r26_header}" {
       on_command {
          : match "bah slumping" {
+            : if (!point_broke_lass) {
+               : print {( "You lack conviction and support. " + (point_mage_urgent ? "Well, the mage gives some support, but not enough." : "Once you have it, you could send the boss slumping, though.") )} ;
+               : set_true "think_bah_slumping" ;
+               : gosub "note_thinks" ;
+               : done ;
+            }
             : if (point_bah_slumping) {
                : print "Don't rub it in. The boss is long gone, anyway." ;
                : done ;
