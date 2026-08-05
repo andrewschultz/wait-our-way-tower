@@ -97,7 +97,7 @@ strings {
    puz_point_fray_merging   : dynamic_string {( opt_color_coding ? "<fray merging<#f80>>" : "fray merging" )}     ; # 30
    puz_point_freak_rusty    : dynamic_string {( opt_color_coding ? "<freak rusty<#f80>>" : "freak rusty" )}       ; # 16
    puz_point_grr_lonely     : dynamic_string {( opt_color_coding ? "<grr lonely<#f80>>" : "grr lonely" )}         ; # 32
-   puz_point_halt_error     : dynamic_string {( opt_color_coding ? "<halt error<#f80>>" : "halt error" )}         ; # 03
+   puz_point_hall_terror    : dynamic_string {( opt_color_coding ? "<hall terror<#f80>>" : "hall terror" )}       ; # 03
    puz_point_her_doll       : dynamic_string {( opt_color_coding ? "<her doll<#f80>>" : "her doll" )}             ; # 38 36
    puz_point_hey_trash      : dynamic_string {( opt_color_coding ? "<hey trash<#f80>>" : "hey trash" )}           ; # 05
    puz_point_knowin_juries  : dynamic_string {( opt_color_coding ? "<knowin juries<#f80>>" : "knowin juries" )}   ; # 09
@@ -934,8 +934,8 @@ locations {
                : print "Already done!" ;
                : done ;
             }
-            : print "Inspired, perhaps ironically, to construct a dumb parable, you built one out of simple honesty and a new simplicity and some back to nature stuff and the sort of details that make rich people feel they really really do connect with poor people. It's actually kinda somewhat convincing, if you don't think too hard. It's not something that stands up under serious rigor, but it might be nice to pass off to people who don't know better." ;
-            : set_integer var="tempint" "555" ;
+            : print "Inspired, perhaps ironically, to construct a dumb parable, you built one out of simple honesty and a new simplicity and some back to nature stuff and the sort of details that make rich people feel they really really do connect with poor people, at least, poor people willing to do anything not to be poor any more. It's actually kinda somewhat convincing, if you don't think too hard. It's not something that stands up under serious rigor, but it might be nice to pass off to people who don't know better." ;
+            : set_integer var="tempint" "8" ;
             : set_true "point_dumb_parable" ;
             : gosub "add_point" ;
             : done ;
@@ -1102,7 +1102,7 @@ locations {
                : done ;
             }
          }
-         : if (point_dry_vendors && !point_say_four)
+         : if (point_dry_vendors && !point_say_four) {
             : match "say four" {
                : if (point_say_four) {
                   : print "Already done!" ;
@@ -1320,7 +1320,7 @@ locations {
                   : print "You don't find anything else hidden in the floor." ;
                   : done ;
                }
-               : print "You think back to what thief lore you might know. You only know surface stuff. You think of stuff you could use to pick the lock on the outside. Perhaps it was buried under the floor by the last inhabitant. And what do you know? You find something! A yellow pin! All right!" ;
+               : print "You think back to what thief lore you might know. You only know surface stuff. You think of stuff you could use to pick the lock on the outside. Perhaps it was buried under the floor by the last inhabitant. And what do you know? You find something! A {puz_point_yellow_pin}! All right!" ;
                : print "The euphoria wears off after you find the pin, though. There's no lock to put it into, and it's too flimsy. But it's something." ;
                : set_true "point_thief_lore" ;
                : set_integer var="tempint" "1" ;
@@ -1373,7 +1373,7 @@ locations {
       on_command {
          : if (!point_halt_error) {
             : match "n _;s _;e _" {
-               : print "Not with the {puz_hall_terror} blocking the way." ;
+               : print "Not with the {puz_point_hall_terror} blocking the way." ;
                : done ;
             }
          }
@@ -1828,14 +1828,14 @@ locations {
                : done ;
             }
             : print "Narrative text." ;
-            : set_integer var="tempint" "996" ;
+            : set_integer var="tempint" "44" ;
             : set_true "point_broke_lass" ;
             : gosub "add_point" ;
             : done ;
          }
          : if (!point_broke_lass) {
             : match "broke _;_ lass" {
-               : set_integer var="tempint" "996" ;
+               : set_integer var="tempint" "44" ;
                : set_boolean var="already_got_command" {( think_broke_lass && !point_broke_lass )} ;
                : set_false "first_half" ;
                : match "broke _" {
@@ -2193,6 +2193,7 @@ subroutines {
 # second auxiliary
 # third options
 # fourth game specific GOTO
+# fifth TESTJUMP
 
    listen_stub : subroutine {
       : if (is_at "r20") {
@@ -2218,7 +2219,7 @@ subroutines {
    }
    note_thinks : subroutine {
       : if (!think_note_yet) {
-         : print "{note_once}{vd_think} will track any command that you need to retry later, after preparation. Also, the status line in the upper left will show +1 or more, for commands you've guessed right but still need prep for." ;
+         : print "{one_time}{vd_think} will track any command that you need to retry later, after preparation. Also, the status line in the upper left will show +1 or more, for commands you've guessed right but still need prep for." ;
          : set_true "think_note_yet" ;
       }
    }
