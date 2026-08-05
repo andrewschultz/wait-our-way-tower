@@ -138,7 +138,7 @@ strings {
    r01_loc : string "Nothing yet." ;
    r01_header : string "Dump, Arable" ;
 
-   r02_loc : dynamic_string {( (point_pitch_earning ? "The pit still churns, but the titan is gone. You see nothing else to do here." : point_tightened_rousing ? "The titan is now awake." : "You see a {puz_titan_drowsing} here.") + "\nThe pit rises high all directions except back west." )} ;
+   r02_loc : dynamic_string {( (point_pitch_earning ? "The pit still churns, but the titan is gone. You see nothing else to do here." : point_tightened_rousing ? "The titan is now awake." : "You see a {puz_point_titan_drowsing} here.") + "\nThe pit rises high all directions except back west." )} ;
    r02_header : string "Pit, Churning" ; # the spit-thus pit
 
    r03_loc : string "The trail runs north to east here." ;
@@ -998,7 +998,7 @@ locations {
          : match "pitch earning" {
             : if (!point_tightened_rousing) {
                : print "Good idea. Even better idea with the titan not drowsing!" ;
-               : set_true "think_tightened_rousing" ;
+               : set_true "think_pitch_earning" ;
                : gosub "note_thinks" ;
                : done ;
             }
@@ -1110,14 +1110,14 @@ locations {
                : done ;
             }
             : print "Narrative text." ;
-            : set_integer var="tempint" "100" ;
+            : set_integer var="tempint" "7" ;
             : set_true "point_dry_vendors" ;
             : gosub "add_point" ;
             : done ;
          }
          : if (!point_dry_vendors) {
             : match "dry _;_ vendors" {
-               : set_integer var="tempint" "100" ;
+               : set_integer var="tempint" "7" ;
                : set_false "first_half" ;
                : match "dry _" {
                   : set_true "first_half" ;
