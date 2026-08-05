@@ -88,6 +88,8 @@ strings {
    puz_point_eh_sink        : dynamic_string {( opt_color_coding ? "<Ace, Inc.<#f80>>" : "Ace, Inc." )}           ; # 26
    puz_point_field_erring   : dynamic_string {( opt_color_coding ? "<field erring<#f80>>" : "field erring" )}     ; # 15
    puz_point_fellas_leap    : dynamic_string {( opt_color_coding ? "<FELLAS, LEAP<#f80>>" : "FELLAS, LEAP" )}     ; # 04
+   puz_point_flight_wraps   : dynamic_string {( opt_color_coding ? "<flight wraps<#f80>>" : "flight wraps" )}     ; # 33
+   puz_point_flight_wraps_u : dynamic_string {( opt_color_coding ? "<Flight wraps<#f80>>" : "Flight wraps" )}     ; # 33
    puz_point_float_rippling : dynamic_string {( opt_color_coding ? "<float_rippling<#f80>>" : "float-rippling" )} ; # 23
    puz_point_fray_merging   : dynamic_string {( opt_color_coding ? "<fray merging<#f80>>" : "fray merging" )}     ; # 30
    puz_point_freak_rusty    : dynamic_string {( opt_color_coding ? "<freak rusty<#f80>>" : "freak rusty" )}       ; # 16
@@ -736,6 +738,7 @@ booleans {
    point_eh_sink           : boolean "false" ; # 26
    point_feel_daring       : boolean "false" ; # 15
    point_fell_asleep       : boolean "false" ; # 04
+   point_fly_traps         : boolean "false" ; # 33
    point_flow_tripling     : boolean "false" ; # 23 #?? don't annoy water gods too much
    point_frame_urging      : boolean "false" ; # 30
    point_free_crusty       : boolean "false" ; # 16
@@ -828,6 +831,28 @@ vocabulary {
 locations {
    r00 : location "{r00_loc}" header="{r00_header}" {
       on_command {
+         : match "fly traps" {
+            : if (point_fly_traps) {
+               : print "Already done!" ;
+               : done ;
+            }
+            : print "Narrative text." ;
+            : set_integer var="tempint" "33" ;
+            : set_true "point_fly_traps" ;
+            : gosub "add_point" ;
+            : done ;
+         }
+         : if (!point_fly_traps) {
+            : match "fly _;_ traps" {
+               : set_integer var="tempint" "33" ;
+               : set_false "first_half" ;
+               : match "fly _" {
+                  : set_true "first_half" ;
+               }
+               : gosub "say_half" ;
+               : done ;
+            }
+         }
       }
    }
    r01 : location "{r01_loc}" header="{r01_header}" {
