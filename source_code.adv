@@ -314,7 +314,7 @@ integers {
 # auxiliary
    tempint : integer "0" ;
    counter : integer "0" ;
-   commands_figured : dynamic_integer {( (think_bah_slumping ? 1 : 0) + ( think_broke_lass ? 1 : 0) + ( think_cloth_robbing ? 1 : 0) + ( think_cue_bland ? 1 : 0) + ( think_door_cloud ? 1 : 0) + ( think_fey_loops ? 1 : 0) + ( think_frame_urging ? 1 : 0) + ( think_free_crusty ? 1 : 0) + ( think_herd_all ? 1 : 0) + ( think_heard_all ? 1 : 0) + ( think_pitch_earning ? 1 : 0) + ( think_ply_towels ? 1 : 0) + ( think_right_angles ? 1 : 0) + ( think_say_four ? 1 : 0) + ( think_say_loaners ? 1 : 0) + ( think_tense_ops ? 1 : 0) + ( think_vine_eater ? 1 : 0) + ( think_warm_acres ? 1 : 0) )} ;
+   commands_figured : dynamic_integer {( (think_bah_slumping ? 1 : 0) + ( think_broke_lass ? 1 : 0) + ( think_cloth_robbing ? 1 : 0) + ( think_coin_ovations ? 1 : 0) + ( think_door_cloud ? 1 : 0) + ( think_fey_loops ? 1 : 0) + ( think_frame_urging ? 1 : 0) + ( think_free_crusty ? 1 : 0) + ( think_herd_all ? 1 : 0) + ( think_heard_all ? 1 : 0) + ( think_pitch_earning ? 1 : 0) + ( think_ply_towels ? 1 : 0) + ( think_right_angles ? 1 : 0) + ( think_say_four ? 1 : 0) + ( think_say_loaners ? 1 : 0) + ( think_tense_ops ? 1 : 0) + ( think_vine_eater ? 1 : 0) + ( think_warm_acres ? 1 : 0) )} ;
    # for half THINK
    part_core_score : dynamic_integer {( ((collection_get{ collection -> ("got_first_core") index -> ( counter ) } == "true") ? 1 : 0) + ((collection_get{ collection -> ("got_second_core") index -> ( counter ) } == "true") ? 2 : 0) )} ; # this is a really bad hack, but I couldn't find a concise way to code things. Maybe I could use a dynamic boolean.
    part_bonus_score : dynamic_integer {( ((collection_get{ collection -> ("got_first_bonus") index -> ( counter ) } == "true") ? 1 : 0) + ((collection_get{ collection -> ("got_second_bonus") index -> ( counter ) } == "true") ? 2 : 0) )} ; # this is a really bad hack, but I couldn't find a concise way to code things. Maybe I could use a dynamic boolean.
@@ -842,7 +842,7 @@ booleans {
    think_bah_slumping  : boolean "false" ;
    think_broke_lass    : boolean "false" ;
    think_cloth_robbing : boolean "false" ;
-   think_cue_bland     : boolean "false" ;
+   think_coin_ovations : boolean "false" ;
    think_door_cloud    : boolean "false" ;
    think_fey_loops     : boolean "false" ;
    think_frame_urging  : boolean "false" ;
@@ -931,6 +931,7 @@ locations {
                }
                : print "Narrative text." ;
                : set_integer var="tempint" "36" ;
+               : set_false "think_herd_all" ;
                : set_true "point_herd_all" ;
                : gosub "add_point" ;
                : done ;
@@ -1013,6 +1014,7 @@ locations {
             }
             : print "Narrative text." ;
             : set_integer var="tempint" "12" ;
+            : set_false "think_pitch_earning" ;
             : set_true "point_pitch_earning" ;
             : gosub "add_point" ;
             : done ;
@@ -1133,12 +1135,18 @@ locations {
          }
          : if (point_dry_vendors && !point_say_four) {
             : match "say four" {
+               : if (!point_pitch_earnings) {
+                  : print "Four oars? But you can't afford one!" ;
+                  : set_true "think_say_four" ;
+                  : done ;
+               }
                : if (point_say_four) {
                   : print "Already done!" ;
                   : done ;
                }
                : print "Narrative text." ;
                : set_integer var="tempint" "17" ;
+               : set_false "think_say_four" ;
                : set_true "point_say_four" ;
                : gosub "add_point" ;
                : done ;
@@ -1214,8 +1222,14 @@ locations {
                   : print "Already done!" ;
                   : done ;
                }
+               : if (point_coin_ovations) {
+                  : print "The jury is not impressed by your story. You gain neither coin nor ovations. You need to spice the story up somehow." ;
+                  : set_true "think_coin_ovations" ;
+                  : done ;
+               }
                : print "Narrative text." ;
                : set_integer var="tempint" "10" ;
+               : set_false "think_coin_ovations" ;
                : set_true "point_coin_ovations" ;
                : gosub "add_point" ;
                : done ;
@@ -1306,6 +1320,7 @@ locations {
             }
             : print "Narrative text." ;
             : set_integer var="tempint" "25" ;
+            : set_false "think_cloth_robbing" ;
             : set_true "point_cloth_robbing" ;
             : gosub "add_point" ;
             : done ;
@@ -1339,6 +1354,7 @@ locations {
             }
             : print "Narrative text." ;
             : set_integer var="tempint" "42" ;
+            : set_false "think_right_angles" ;
             : set_true "point_right_angles" ;
             : gosub "add_point" ;
             : done ;
@@ -1538,6 +1554,7 @@ locations {
                }
                : print "Narrative text." ;
                : set_integer var="tempint" "16" ;
+               : set_false "think_free_crusty" ;
                : set_true "point_free_crusty" ;
                : gosub "add_point" ;
                : done ;
@@ -1572,6 +1589,7 @@ locations {
             }
             : print "With your experience helping the ten sops, you're able to hammer out some sort of agreement. They hand you an 'I'd Agree, Aye' degree." ;
             : set_integer var="tempint" "31" ;
+            : set_false "think_frame_urging" ;
             : set_true "point_frame_urging" ;
             : gosub "add_point" ;
             : done ;
@@ -1605,6 +1623,7 @@ locations {
             }
             : print "Narrative text." ;
             : set_integer var="tempint" "40" ;
+            : set_false "think_warm_acres" ;
             : set_true "point_warm_acres" ;
             : gosub "add_point" ;
             : done ;
@@ -1642,6 +1661,7 @@ locations {
             }
             : print "Narrative text." ;
             : set_integer var="tempint" "45" ;
+            : set_false "think_bah_slumping" ;
             : set_true "point_bah_slumping" ;
             : gosub "add_point" ;
             : done ;
@@ -1723,6 +1743,7 @@ locations {
             }
             : print "Narrative text." ;
             : set_integer var="tempint" "22" ;
+            : set_false "think_door_cloud" ;
             : set_true "point_door_cloud" ;
             : gosub "add_point" ;
             : done ;
@@ -1819,12 +1840,23 @@ locations {
    r33 : location "{r33_loc}" header="{r33_header}" {
       on_command {
          : match "say loaners" {
+            : if (!point_pitch_earnings) {
+               : print "But you can't afford a loan of a craft!" ;
+               : set_true "think_say_loaners" ;
+               : done ;
+            }
+            : if (!point_say_four) {
+               : print "But you have nothing to steer a craft!" ;
+               : set_true "think_say_loaners" ;
+               : done ;
+            }
             : if (point_say_loaners) {
                : print "Already done!" ;
                : done ;
             }
             : print "Narrative text." ;
             : set_integer var="tempint" "18" ;
+            : set_false "think_say_loaners" ;
             : set_true "point_say_loaners" ;
             : gosub "add_point" ;
             : done ;
@@ -1858,6 +1890,7 @@ locations {
             }
             : print "Narrative text." ;
             : set_integer var="tempint" "28" ;
+            : set_false "think_ply_towels" ;
             : set_true "point_ply_towels" ;
             : gosub "add_point" ;
             : done ;
@@ -1921,6 +1954,7 @@ locations {
             }
             : print "Narrative text." ;
             : set_integer var="tempint" "44" ;
+            : set_false "think_broke_lass" ;
             : set_true "point_broke_lass" ;
             : gosub "add_point" ;
             : done ;
@@ -1985,6 +2019,7 @@ locations {
                }
                : print "Narrative text." ;
                : set_integer var="tempint" "38" ;
+               : set_false "think_heard_all" ;
                : set_true "point_heard_all" ;
                : gosub "add_point" ;
                : done ;
@@ -2151,6 +2186,7 @@ locations {
             }
             : print "You get their eternal thanks for sorting things out. Which isn't fungible, but it is a confidence booster." ;
             : set_integer var="tempint" "29" ;
+            : set_false "think_tense_ops" ;
             : set_true "point_tense_ops" ;
             : gosub "add_point" ;
             : done ;
@@ -3139,6 +3175,7 @@ on_command {
          }
          : print "Surprisingly, you find some fey loops to the north, which create the first (and only) loop in the game map." ;
          : set_integer var="tempint" "41" ;
+         : set_false "think_fey_loops" ;
          : set_true "point_fey_loops" ;
          : gosub "add_point" ;
          : done ;
