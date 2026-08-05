@@ -78,13 +78,13 @@ strings {
    puz_point_canned_ooh     : dynamic_string {( opt_color_coding ? "<Canned, ooh<#f80>>" : "Canned, ooh" )}       ; # 00
    puz_point_chess_training : dynamic_string {( opt_color_coding ? "<chess training<#f80>>" : "chess training" )} ; # 13
    puz_point_coy_novations  : dynamic_string {( opt_color_coding ? "<coy novations<#f80>>" : "coy novations" )}   ; # 10
-   puz_point_cue_bland      : dynamic_string {( opt_color_coding ? "<cue bland<#f80>>" : "cue bland" )}           ; # 102
+   puz_point_cue_bland      : dynamic_string {( opt_color_coding ? "<cue bland<#f80>>" : "cue bland" )}           ; # 27
    puz_point_dork_loud      : dynamic_string {( opt_color_coding ? "<dork loud<#f80>>" : "dork loud" )}           ; # 150
    puz_point_drive_enders   : dynamic_string {( opt_color_coding ? "<drive enders<#f80>>" : "drive enders" )}     ; # 07
    puz_point_dull_oozing    : dynamic_string {( opt_color_coding ? "<dull oozing<#f80>>" : "dull oozing" )}       ; # 06
    puz_point_dumb_pliers    : dynamic_string {( opt_color_coding ? "<dumb pliers<#f80>>" : "dumb pliers" )}       ; # 14
    puz_point_dump_arable    : dynamic_string {( opt_color_coding ? "<dump arable<#f80>>" : "dump arable" )}       ; # 555
-   puz_point_eh_sink        : dynamic_string {( opt_color_coding ? "<Ace, Inc.<#f80>>" : "Ace, Inc." )}           ; # 101
+   puz_point_eh_sink        : dynamic_string {( opt_color_coding ? "<Ace, Inc.<#f80>>" : "Ace, Inc." )}           ; # 26
    puz_point_field_erring   : dynamic_string {( opt_color_coding ? "<field erring<#f80>>" : "field erring" )}     ; # 15
    puz_point_fellas_leap    : dynamic_string {( opt_color_coding ? "<FELLAS, LEAP<#f80>>" : "FELLAS, LEAP" )}     ; # 04
    puz_point_freak_rusty    : dynamic_string {( opt_color_coding ? "<freak rusty<#f80>>" : "freak rusty" )}       ; # 16
@@ -715,10 +715,12 @@ booleans {
    point_can_do            : boolean "false" ; # 00
    point_chest_reigning    : boolean "false" ; # 13
    point_coin_ovations     : boolean "false" ; # 10
+   point_cue_bland         : boolean "false" ; # 27
    point_dry_vendors       : boolean "false" ; # 07
    point_duh_losing        : boolean "false" ; # 06
    point_dumb_parable      : boolean "false" ; # 08
    point_dump_liars        : boolean "false" ; # 14
+   point_eh_sink           : boolean "false" ; # 26
    point_feel_daring       : boolean "false" ; # 15
    point_fell_asleep       : boolean "false" ; # 04
    point_free_crusty       : boolean "false" ; # 16
@@ -736,9 +738,7 @@ booleans {
    point_yell_open         : boolean "false" ; # 02
 
    # not in place yet
-   point_cue_bland        : boolean "false" ; # 102
    point_door_cloud       : boolean "false" ; # 150
-   point_eh_sink          : boolean "false" ; # 101
    point_tufty_key        : boolean "false" ; # 101
 
    # silly random
@@ -1525,10 +1525,25 @@ locations {
             }
             : print "Ace, Inc. slowly sinks. You hope the message about no humans being there is true. You hear no screams or confusions, just robots whirring and glitching." ;
             : print "What is revealed is a garish cube land." ;
-            : set_integer var="tempint" "100" ;
+            : set_integer var="tempint" "26" ;
             : set_true "point_eh_sink" ;
             : gosub "add_point" ;
             : done ;
+         }
+         : if (!point_eh_sink) {
+            : match "sink *" {
+               : print "Right idea, but a giant sink might be impassable. Or it might drown you. And {puz_ace_inc} couldn't be changed to a SMALL sink." ;
+               : done ;
+            }
+            : match "eh _;_ sink" {
+               : set_integer var="tempint" "26" ;
+               : set_false "first_half" ;
+               : match "eh _" {
+                  : set_true "first_half" ;
+               }
+               : gosub "say_half" ;
+               : done ;
+            }
          }
          : if (point_eh_sink) {
             : match "cue bland" {
@@ -1537,14 +1552,14 @@ locations {
                   : done ;
                }
                : print "Narrative text." ;
-               : set_integer var="tempint" "102" ;
+               : set_integer var="tempint" "27" ;
                : set_true "point_cue_bland" ;
                : gosub "add_point" ;
                : done ;
             }
             : if (!point_cue_bland) {
                : match "cue _;_ bland" {
-                  : set_integer var="tempint" "102" ;
+                  : set_integer var="tempint" "27" ;
                   : set_boolean var="already_got_command" {( think_cue_bland && !point_cue_bland )} ; # this is optional. Delete if point does not rely on any other variables.
                   : set_false "first_half" ;
                   : match "cue _" {
@@ -1555,9 +1570,6 @@ locations {
                }
             }
          }
-         : if (!point_eh_sink) {
-            : match "sink *" {
-               : print "Right idea, but a giant sink might be impassable. Or it might drown you. And {puz_ace_inc} couldn't be changed to a SMALL sink." ;
                : done ;
             }
             : match "eh _;_ sink" {
