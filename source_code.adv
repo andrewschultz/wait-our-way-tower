@@ -227,8 +227,9 @@ strings {
    endgame_plural : dynamic_string {( point_broke_lass ? "" : "s" )} ;
 
    # block strings
-   block_pose_teasing : string {( "The Bros wonder why you need to be running around like this. You need to chillax! Life will be easier that way. And no offense, but if you do have an exciting life, it's a bit unfair. They deserve it a bit more than you do. So you shouldn't rub it in by just walking past them like that." )} ;
-   block_weep_lucky : string {( "" )} ;
+   block_pose_teasing : string "The Bros wonder why you need to be running around like this. You need to chillax! Life will be easier that way. And no offense, but if you do have an exciting life, it's a bit unfair. They deserve it a bit more than you do. So you shouldn't rub it in by just walking past them like that." ;
+   block_weep_lucky : string "The bros weep about how YOU get all the adventure here. You've been through this before, but since you last visited, you do sort of have to admit you've had a lot of adventures. You feel bad for them. They feel like they're the lovablde underdogs here, that they should get a chance, but noooooo." ;
+   block_04_14 : string "Weird! It almost feels like there should be passage that way. You can't say why, but there should. There isn't, now." ;
 
    # item(s)
    i_fspt : string "<Fey Stats Phase Tats<#ccc>>" ;
@@ -2292,7 +2293,7 @@ barriers {
    }
 
    block_go_r14 : block {
-      location = r03
+      location = r14
       block_when_not = point_pose_teasing
       message = {block_pose_teasing}
    }
