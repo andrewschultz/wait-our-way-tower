@@ -2263,6 +2263,21 @@ subroutines {
 
    ########################## options
 
+   colorclue_choice : subroutine {
+      : if (won_yet) {
+         : return ;
+      }
+      : ask_bool {
+         question   = {this_game} puts critical words in <PURPLE<#f0f>> to help you know what to work with. The option can be changed in-game with {optt_ch} (on/off are reserved by Adventuron.)
+         yes_answer = Yes, I'd like to use color-coded hinting. (<RECOMMENDED<#0f0>>)
+         no_answer  = No, I'd prefer not to use color-coded hinting.
+         var        = opt_color_coding
+      }
+      : print {( "Color-coded hinting is " + (opt_color_coding ? "now available." : "disabled.") + " We're ready to start the game, now!" )} ;
+      : press_any_key ;
+      : clear_screen ;
+   }
+
    check_options : subroutine {
       : match "ch _" {
          : gosub "options_colorhint" ;
@@ -2761,12 +2776,13 @@ on_startup {
       : print "Thanks for replaying, but this is a reminder to look at the other {ifcomp} entries, too!" ;
       : press_any_key ;
    }
+   : gosub "colorclue_choice" ;
    : if (random(1) == 1) {
       : set_true "r20_jail" ;
    } : else {
       : set_false "r20_jail" ;
    }
-   : print "Intro." ;
+   : print "It's not a jail! It's a tower! Where you wait! In fact, you need to ... wait our way." ;
    : press_any_key ;
    : clear_screen;
 }
