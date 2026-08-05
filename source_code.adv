@@ -750,6 +750,7 @@ booleans {
    point_girl_only         : boolean "false" ; # 32
    point_halt_error        : boolean "false" ; # 03
    point_hate_rash         : boolean "false" ; # 05
+   point_heard_all         : boolean "false" ; # 38
    point_herd_all          : boolean "false" ; # 36
    point_mage_urgent       : boolean "false" ; # 43
    point_me_growth         : boolean "false" ; # 24
@@ -1831,6 +1832,37 @@ locations {
                }
                : gosub "say_half" ;
                : done ;
+            }
+         }
+         : if (point_shape_up) {
+            : match "heard all" {
+               : if (!point_girl_only) {
+                  : print "You need to do something first!" ;
+                  : set_true "think_heard_all" ;
+                  : gosub "note_thinks" ;
+                  : done ;
+               }
+               : if (point_heard_all) {
+                  : print "Already done!" ;
+                  : done ;
+               }
+               : print "Narrative text." ;
+               : set_integer var="tempint" "38" ;
+               : set_true "point_heard_all" ;
+               : gosub "add_point" ;
+               : done ;
+            }
+            : if (!point_heard_all) {
+               : match "heard _;_ all" {
+                  : set_integer var="tempint" "38" ;
+                  : set_boolean var="already_got_command" {( think_heard_all && !point_heard_all )} ; # this is optional. Delete if point does not rely on any other variables.
+                  : set_false "first_half" ;
+                  : match "heard _" {
+                     : set_true "first_half" ;
+                  }
+                  : gosub "say_half" ;
+                  : done ;
+               }
             }
          }
       }
