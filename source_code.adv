@@ -243,7 +243,7 @@ strings {
    noguess_c_1 : dynamic_string {( unneeded_half ? "<(unneeded)<#888>>" : "<(unknown)<#888>>" )} ;
    think_here_also : dynamic_string {( think_text_yet ? "Also, here" : "Here" )} ;
    number_as_word : dynamic_string {( collection_get { collection -> ("num_to_word") index -> ( commands_figured ) } )} ;
-   plus_in_header : dynamic_string {( commands_figured > 0 ? "+{commands_figured}" : "" )} ;
+   plus_in_header : dynamic_string {( think_any ? "+{commands_figured}" : "" )} ;
 
    #auxiliary for options
    tempopt : string "" ;
@@ -314,7 +314,25 @@ integers {
 # auxiliary
    tempint : integer "0" ;
    counter : integer "0" ;
-   commands_figured : dynamic_integer {( (think_bah_slumping ? 1 : 0) + ( think_broke_lass ? 1 : 0) + ( think_cloth_robbing ? 1 : 0) + ( think_coin_ovations ? 1 : 0) + ( think_door_cloud ? 1 : 0) + ( think_fey_loops ? 1 : 0) + ( think_frame_urging ? 1 : 0) + ( think_free_crusty ? 1 : 0) + ( think_herd_all ? 1 : 0) + ( think_heard_all ? 1 : 0) + ( think_pitch_earning ? 1 : 0) + ( think_ply_towels ? 1 : 0) + ( think_right_angles ? 1 : 0) + ( think_say_four ? 1 : 0) + ( think_say_loaners ? 1 : 0) + ( think_tense_ops ? 1 : 0) + ( think_vine_eater ? 1 : 0) + ( think_warm_acres ? 1 : 0) )} ;
+   commands_figured : dynamic_integer {( (think_bah_slumping ? 1 : 0) +
+      ( think_broke_lass ? 1 : 0) +
+      ( think_cloth_robbing ? 1 : 0) +
+      ( think_coin_ovations ? 1 : 0) +
+      ( think_door_cloud ? 1 : 0) +
+      ( think_fey_loops ? 1 : 0) +
+      ( think_frame_urging ? 1 : 0) +
+      ( think_free_crusty ? 1 : 0) +
+      ( think_heard_all ? 1 : 0) +
+      ( think_herd_all ? 1 : 0) +
+      ( think_pitch_earning ? 1 : 0) +
+      ( think_ply_towels ? 1 : 0) +
+      ( think_right_angles ? 1 : 0) +
+      ( think_say_four ? 1 : 0) +
+      ( think_say_loaners ? 1 : 0) +
+      ( think_tense_ops ? 1 : 0) +
+      ( think_vine_eater ? 1 : 0) +
+      ( think_warm_acres ? 1 : 0)
+      )} ;
    # for half THINK
    part_core_score : dynamic_integer {( ((collection_get{ collection -> ("got_first_core") index -> ( counter ) } == "true") ? 1 : 0) + ((collection_get{ collection -> ("got_second_core") index -> ( counter ) } == "true") ? 2 : 0) )} ; # this is a really bad hack, but I couldn't find a concise way to code things. Maybe I could use a dynamic boolean.
    part_bonus_score : dynamic_integer {( ((collection_get{ collection -> ("got_first_bonus") index -> ( counter ) } == "true") ? 1 : 0) + ((collection_get{ collection -> ("got_second_bonus") index -> ( counter ) } == "true") ? 2 : 0) )} ; # this is a really bad hack, but I couldn't find a concise way to code things. Maybe I could use a dynamic boolean.
@@ -847,8 +865,8 @@ booleans {
    think_fey_loops     : boolean "false" ;
    think_frame_urging  : boolean "false" ;
    think_free_crusty   : boolean "false" ;
-   think_herd_all      : boolean "false" ;
    think_heard_all     : boolean "false" ;
+   think_herd_all      : boolean "false" ;
    think_pitch_earning : boolean "false" ;
    think_ply_towels    : boolean "false" ;
    think_right_angles  : boolean "false" ;
@@ -858,7 +876,7 @@ booleans {
    think_vine_eater    : boolean "false" ;
    think_warm_acres    : boolean "false" ;
 
-   think_any : dynamic_boolean {( 1 == 0 )} ;
+   think_any : dynamic_boolean {( commands_figured > 0 )} ;
    show_overlay : boolean "true" ;
 }
 
@@ -1222,9 +1240,10 @@ locations {
                   : print "Already done!" ;
                   : done ;
                }
-               : if (point_coin_ovations) {
+               : if (!point_dumb_parable) {
                   : print "The jury is not impressed by your story. You gain neither coin nor ovations. You need to spice the story up somehow." ;
                   : set_true "think_coin_ovations" ;
+                  : gosub "note_thinks" ;
                   : done ;
                }
                : print "Narrative text." ;
@@ -3264,7 +3283,7 @@ on_command {
       : print "The first release of {wowt} was September 1, 2026, for {ifcomp} Petite Mort." ;
    }
    : match "score _" {
-      : print "You've currently scored {score} of {max_score} total points. There are no bonus points." ;
+      : print {( "You've currently scored {score} of {max_score} total core points." + (think_any ? "You have also figured {number_as_word} point-scoring command" + ( commands_figured > 1 ? "s" : "" ) + " before you had the necessary support. Type {vd_think} for details." : "" ) )};
       : gosub "note_score_upper_right" ;
    }
    : match "listen _" {
@@ -3272,8 +3291,56 @@ on_command {
    }
    : match "think _" {
       : set_false "think_text_yet" ;
-      : if (commands_figured > 0) {
+      : if (think_any) {
          : print {( "Here " + (commands_figured > 1 ? "are {number_as_word} things that seemed like they" : "is something that seemed like it") + " should work, but you didn't have the resources yet:" )} ;
+      }
+      : if (think_bah_slumping) {
+         : print "You tried to say <BAH SLUMPING<#f80>> to the boss lumping insults at you {here_r26} but didn't have enough support yet." ;
+      }
+      : if (think_broke_lass) {
+         : print "You tried to summon the <BROKE LASS<#f80>> {here_r35} but the major gent was too irritating." ;
+      }
+      : if (think_cloth_robbing) {
+         : print "You tried to go <CLOTH ROBBING<#f80>> {here_r14} but didn't have the proper tool(s)." ;
+      }
+      : if (think_coin_ovations) {
+         : print "You tried to get <COIN OVATIONS<#f80>> from the Knowin' Juries but didn't have the storytelling ability yet." ;
+      }
+      : if (think_door_cloud) {
+         : print "You tried to ask the dork, loud to show you a <DOOR CLOUD<#f80>> but couldn't point them to the right one." ;
+      }
+      : if (think_fey_loops) {
+         : print "You tried to find <FEY LOOPS<#f80>> but weren't in an area that might support them." ;
+      }
+      : if (think_heard_all) {
+         : print "You tried to say <HEARD ALL<#f80>> but there weren't enough entities to hear." ;
+      }
+      : if (think_herd_all) {
+         : print "You tried to say <HERD ALL<#f80>> but there weren't enough entities to herd." ;
+      }
+      : if (think_pitch_earning) {
+         : print "You tried to <PITCH EARNING<#f80>> to the titan, but it wasn't in a state to hear you yet." ;
+      }
+      : if (think_ply_towels) {
+         : print "You tried to <PLY TOWELS<#f80>> to the plight owls, but you didn't have any towels yet." ;
+      }
+      : if (think_right_angles) {
+         : print "You discovered <RIGHT ANGLED<#f80>> in Wry Tangles, but maybe they'd help someone else grow more." ;
+      }
+      : if (think_say_four) {
+         : print "You tried to <SAY FOUR<#f80>> to buy safe oars, but you didn't have the money yet." ;
+      }
+      : if (think_say_loaners) {
+         : print "You tried to <SAY LOANERS<#f80>> to the sail owners, but you needed both money and equipment." ;
+      }
+      : if (think_tense_ops) {
+         : print "You tried to sort out <TENSE OPS<#f80>> with the ten sops, but you didn't have the self-confidence yet." ;
+      }
+      : if (think_vine_eater) {
+         : print "You tried to activate the <VINE EATER<#f80>>, but there was no vegetation that needed culling." ;
+      }
+      : if (think_warm_acres) {
+         : print "You tried to make <WARM ACRES<#f80>>, but you didn't have the support, so the war makers stood their cold ground." ;
       }
       : gosub "diagnostic_think_core_half" ;
       : if (print_core_nag_after) {
