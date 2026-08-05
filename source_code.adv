@@ -93,6 +93,7 @@ strings {
    puz_point_hey_trash      : dynamic_string {( opt_color_coding ? "<hey trash<#f80>>" : "hey trash" )}           ; # 05
    puz_point_knowin_juries  : dynamic_string {( opt_color_coding ? "<knowin juries<#f80>>" : "knowin juries" )}   ; # 09
    puz_point_major_gent     : dynamic_string {( opt_color_coding ? "<major gent<#f80>>" : "major gent" )}         ; # 43
+   puz_point_meager_oath    : dynamic_string {( opt_color_coding ? "<meager oath<#f80>>" : "meager oath" )}       ; # 24
    puz_point_pit_churning   : dynamic_string {( opt_color_coding ? "<pit churning<#f80>>" : "pit churning" )}     ; # 12
    puz_point_post_easing    : dynamic_string {( opt_color_coding ? "<post easing<#f80>>" : "post easing" )}       ; # 19
    puz_point_safe_oar       : dynamic_string {( opt_color_coding ? "<safe oar<#f80>>" : "safe oar" )}             ; # 17
@@ -733,6 +734,7 @@ booleans {
    point_halt_error        : boolean "false" ; # 03
    point_hate_rash         : boolean "false" ; # 05
    point_mage_urgent       : boolean "false" ; # 43
+   point_me_growth         : boolean "false" ; # 24
    point_no_injuries       : boolean "false" ; # 09
    point_pitch_earning     : boolean "false" ; # 12
    point_pose_teasing      : boolean "false" ; # 19
@@ -933,6 +935,28 @@ locations {
    }
    r04 : location "{r04_loc}" header="{r04_header}" {
       on_command {
+         : match "me growth" {
+            : if (point_me_growth) {
+               : print "Already done!" ;
+               : done ;
+            }
+            : print "Narrative text." ;
+            : set_integer var="tempint" "24" ;
+            : set_true "point_me_growth" ;
+            : gosub "add_point" ;
+            : done ;
+         }
+         : if (!point_me_growth) {
+            : match "me _;_ growth" {
+               : set_integer var="tempint" "24" ;
+               : set_false "first_half" ;
+               : match "me _" {
+                  : set_true "first_half" ;
+               }
+               : gosub "say_half" ;
+               : done ;
+            }
+         }
       }
    }
    r10 : location "{r10_loc}" header="{r10_header}" {
