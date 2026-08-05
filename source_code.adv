@@ -72,14 +72,14 @@ strings {
    yn : string "<YES<#f88>>/<Y<#f88>> or <NO<#f88>>/<N<#f88>>" ;
 
    # puzzle strings
-   puz_point_bleah_stable   : dynamic_string {( opt_color_coding ? "<bleah stable<#f80>>" : "bleah stable" )}     ; # 998
-   puz_point_boss_lumping   : dynamic_string {( opt_color_coding ? "<boss lumping<#f80>>" : "boss lumping" )}     ; # 997
-   puz_point_bro_class      : dynamic_string {( opt_color_coding ? "<Bro Class<#f80>>" : "Bro Class" )}           ; # 996
+   puz_point_bleah_stable   : dynamic_string {( opt_color_coding ? "<bleah stable<#f80>>" : "bleah stable" )}     ; # 46
+   puz_point_boss_lumping   : dynamic_string {( opt_color_coding ? "<boss lumping<#f80>>" : "boss lumping" )}     ; # 45
+   puz_point_bro_class      : dynamic_string {( opt_color_coding ? "<Bro Class<#f80>>" : "Bro Class" )}           ; # 44
    puz_point_canned_ooh     : dynamic_string {( opt_color_coding ? "<Canned, ooh<#f80>>" : "Canned, ooh" )}       ; # 00
    puz_point_chess_training : dynamic_string {( opt_color_coding ? "<chess training<#f80>>" : "chess training" )} ; # 13
    puz_point_coy_novations  : dynamic_string {( opt_color_coding ? "<coy novations<#f80>>" : "coy novations" )}   ; # 10
    puz_point_cue_bland      : dynamic_string {( opt_color_coding ? "<cue bland<#f80>>" : "cue bland" )}           ; # 27
-   puz_point_dork_loud      : dynamic_string {( opt_color_coding ? "<dork loud<#f80>>" : "dork loud" )}           ; # 150
+   puz_point_dork_loud      : dynamic_string {( opt_color_coding ? "<dork loud<#f80>>" : "dork loud" )}           ; # 22
    puz_point_drive_enders   : dynamic_string {( opt_color_coding ? "<drive enders<#f80>>" : "drive enders" )}     ; # 07
    puz_point_dull_oozing    : dynamic_string {( opt_color_coding ? "<dull oozing<#f80>>" : "dull oozing" )}       ; # 06
    puz_point_dumb_pliers    : dynamic_string {( opt_color_coding ? "<dumb pliers<#f80>>" : "dumb pliers" )}       ; # 14
@@ -91,14 +91,14 @@ strings {
    puz_point_halt_error     : dynamic_string {( opt_color_coding ? "<halt error<#f80>>" : "halt error" )}         ; # 03
    puz_point_hey_trash      : dynamic_string {( opt_color_coding ? "<hey trash<#f80>>" : "hey trash" )}           ; # 05
    puz_point_knowin_juries  : dynamic_string {( opt_color_coding ? "<knowin juries<#f80>>" : "knowin juries" )}   ; # 09
-   puz_point_major_gent     : dynamic_string {( opt_color_coding ? "<major gent<#f80>>" : "major gent" )}         ; # 995
+   puz_point_major_gent     : dynamic_string {( opt_color_coding ? "<major gent<#f80>>" : "major gent" )}         ; # 43
    puz_point_pit_churning   : dynamic_string {( opt_color_coding ? "<pit churning<#f80>>" : "pit churning" )}     ; # 12
    puz_point_safe_oar       : dynamic_string {( opt_color_coding ? "<safe oar<#f80>>" : "safe oar" )}             ; # 17
    puz_point_sail_owners    : dynamic_string {( opt_color_coding ? "<sail owners<#f80>>" : "sail owners" )}       ; # 18
    puz_point_titan_drowsing : dynamic_string {( opt_color_coding ? "<titan drowsing<#f80>>" : "titan drowsing" )} ; # 11
-   puz_point_true_pleading  : dynamic_string {( opt_color_coding ? "<true pleading<#f80>>" : "true pleading" )}   ; # 999
+   puz_point_true_pleading  : dynamic_string {( opt_color_coding ? "<true pleading<#f80>>" : "true pleading" )}   ; # 47
    puz_point_the_floor      : dynamic_string {( opt_color_coding ? "<the floor<#f80>>" : "the floor" )}           ; # 01
-   puz_point_wry_tangles    : dynamic_string {( opt_color_coding ? "<Wry Tangles<#f80>>" : "Wry Tangles" )}       ; # 994
+   puz_point_wry_tangles    : dynamic_string {( opt_color_coding ? "<Wry Tangles<#f80>>" : "Wry Tangles" )}       ; # 42
    puz_point_yellow_pin     : dynamic_string {( opt_color_coding ? "<yellow pin<#f80>>" : "yellow pin" )}         ; # 02
 
    # room(s)
@@ -709,13 +709,14 @@ booleans {
    r22_secondary_block : dynamic_boolean {( gamestate_r21_e && !point_fell_asleep )} ;
 
    # points (sorted, beginning or end)
-   point_bah_slumping      : boolean "false" ; # 997
-   point_blest_able        : boolean "false" ; # 998
-   point_broke_lass        : boolean "false" ; # 996
+   point_bah_slumping      : boolean "false" ; # 45
+   point_blest_able        : boolean "false" ; # 46
+   point_broke_lass        : boolean "false" ; # 44
    point_can_do            : boolean "false" ; # 00
    point_chest_reigning    : boolean "false" ; # 13
    point_coin_ovations     : boolean "false" ; # 10
    point_cue_bland         : boolean "false" ; # 27
+   point_door_cloud        : boolean "false" ; # 22
    point_dry_vendors       : boolean "false" ; # 07
    point_duh_losing        : boolean "false" ; # 06
    point_dumb_parable      : boolean "false" ; # 08
@@ -726,20 +727,17 @@ booleans {
    point_free_crusty       : boolean "false" ; # 16
    point_halt_error        : boolean "false" ; # 03
    point_hate_rash         : boolean "false" ; # 05
-   point_mage_urgent       : boolean "false" ; # 995
+   point_mage_urgent       : boolean "false" ; # 43
    point_no_injuries       : boolean "false" ; # 09
    point_pitch_earning     : boolean "false" ; # 12
+   point_right_angles      : boolean "false" ; # 42
    point_say_four          : boolean "false" ; # 17
    point_say_loaners       : boolean "false" ; # 18
    point_thief_lore        : boolean "false" ; # 01
    point_tightened_rousing : boolean "false" ; # 11
-   point_troop_leading     : boolean "false" ; # 999
-   point_right_angles      : boolean "false" ; # 994
+   point_troop_leading     : boolean "false" ; # 47
+   point_tufty_key         : boolean "false" ; # 21
    point_yell_open         : boolean "false" ; # 02
-
-   # not in place yet
-   point_door_cloud       : boolean "false" ; # 150
-   point_tufty_key        : boolean "false" ; # 101
 
    # silly random
    r20_jail : boolean "false" ;
@@ -816,7 +814,7 @@ locations {
          }
          : if (!point_dumb_parable) {
             : match "dumb _;_ parable" {
-               : set_integer var="tempint" "555" ;
+               : set_integer var="tempint" "8" ;
                : set_false "first_half" ;
                : match "dumb _" {
                   : set_true "first_half" ;
@@ -1027,14 +1025,14 @@ locations {
                : done ;
             }
             : print "Narrative text." ;
-            : set_integer var="tempint" "994" ;
+            : set_integer var="tempint" "42" ;
             : set_true "point_right_angles" ;
             : gosub "add_point" ;
             : done ;
          }
          : if (!point_right_angles) {
             : match "right _;_ angles" {
-               : set_integer var="tempint" "994" ;
+               : set_integer var="tempint" "42" ;
                : set_false "first_half" ;
                : match "right _" {
                   : set_true "first_half" ;
@@ -1260,14 +1258,14 @@ locations {
                : done ;
             }
             : print "Narrative text." ;
-            : set_integer var="tempint" "997" ;
+            : set_integer var="tempint" "45" ;
             : set_true "point_bah_slumping" ;
             : gosub "add_point" ;
             : done ;
          }
          : if (!point_bah_slumping) {
             : match "bah _;_ slumping" {
-               : set_integer var="tempint" "997" ;
+               : set_integer var="tempint" "45" ;
                : set_boolean var="already_got_command" {( think_bah_slumping && !point_bah_slumping )} ;
                : set_false "first_half" ;
                : match "bah _" {
@@ -1287,14 +1285,14 @@ locations {
                : done ;
             }
             : print "Narrative text." ;
-            : set_integer var="tempint" "998" ;
+            : set_integer var="tempint" "46" ;
             : set_true "point_blest_able" ;
             : gosub "add_point" ;
             : done ;
          }
          : if (!point_blest_able) {
             : match "blest _;_ able" {
-               : set_integer var="tempint" "998" ;
+               : set_integer var="tempint" "46" ;
                : set_false "first_half" ;
                : match "blest _" {
                   : set_true "first_half" ;
@@ -1307,15 +1305,15 @@ locations {
             : match "troop leading" {
                : print "You win! But you don't want to just sit and do nothing. You make a whole row for mending ... whatever. Surprisingly, it's popular." ;
                : set_true "won_yet" ;
-               : win_game ; # move this once we get the right TEMPINT
-               : set_integer var="tempint" "999" ;
+               : set_integer var="tempint" "47" ;
                : set_true "point_troop_leading" ;
                : gosub "add_point" ;
+               : win_game ;
                : done ;
             }
             : if (!point_troop_leading) {
                : match "troop _;_ leading" {
-                  : set_integer var="tempint" "999" ;
+                  : set_integer var="tempint" "47" ;
                   : set_false "first_half" ;
                   : match "row _" {
                      : set_true "first_half" ;
@@ -1341,14 +1339,14 @@ locations {
                : done ;
             }
             : print "Narrative text." ;
-            : set_integer var="tempint" "150" ;
+            : set_integer var="tempint" "22" ;
             : set_true "point_door_cloud" ;
             : gosub "add_point" ;
             : done ;
          }
          : if (!point_door_cloud) {
             : match "door _;_ cloud" {
-               : set_integer var="tempint" "150" ;
+               : set_integer var="tempint" "22" ;
                : set_false "first_half" ;
                : match "door _" {
                   : set_true "first_half" ;
@@ -1474,14 +1472,14 @@ locations {
                : done ;
             }
             : print "Narrative text." ;
-            : set_integer var="tempint" "995" ;
+            : set_integer var="tempint" "43" ;
             : set_true "point_mage_urgent" ;
             : gosub "add_point" ;
             : done ;
          }
          : if (!point_mage_urgent) {
             : match "mage _;_ urgent" {
-               : set_integer var="tempint" "995" ;
+               : set_integer var="tempint" "43" ;
                : set_false "first_half" ;
                : match "mage _" {
                   : set_true "first_half" ;
