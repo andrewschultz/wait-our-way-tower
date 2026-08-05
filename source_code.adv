@@ -101,6 +101,7 @@ strings {
    puz_point_post_easing    : dynamic_string {( opt_color_coding ? "<post easing<#f80>>" : "post easing" )}       ; # 19
    puz_point_safe_oar       : dynamic_string {( opt_color_coding ? "<safe oar<#f80>>" : "safe oar" )}             ; # 17
    puz_point_sail_owners    : dynamic_string {( opt_color_coding ? "<sail owners<#f80>>" : "sail owners" )}       ; # 18
+   puz_point_seacrest       : dynamic_string {( opt_color_coding ? "<seacrest<#f80>>" : "seacrest" )}             ; # 31
    puz_point_sunk_etching   : dynamic_string {( opt_color_coding ? "<sunk etching<#f80>>" : "sunk etching" )}     ; # 20
    puz_point_ten_sops       : dynamic_string {( opt_color_coding ? "<ten sops<#f80>>" : "ten sops" )}             ; # 29
    puz_point_titan_drowsing : dynamic_string {( opt_color_coding ? "<titan drowsing<#f80>>" : "titan drowsing" )} ; # 11
@@ -748,6 +749,7 @@ booleans {
    point_right_angles      : boolean "false" ; # 42
    point_say_four          : boolean "false" ; # 17
    point_say_loaners       : boolean "false" ; # 18
+   point_seek_rest         : boolean "false" ; # 31
    point_sun_catching      : boolean "false" ; # 20
    point_tense_ops         : boolean "false" ; # 29
    point_thief_lore        : boolean "false" ; # 01
@@ -1775,22 +1777,32 @@ locations {
                }
             }
          }
+      }
+   }
+   r42 : location "{r42_loc}" header="{r42_header}" {
+      on_command {
+         : match "seek rest" {
+            : if (point_seek_rest) {
+               : print "You already sought and found." ;
                : done ;
             }
-            : match "eh _;_ sink" {
-               : set_integer var="tempint" "100" ;
+            : print "You hear a {puz_grr_lonely} now." ;
+            : set_integer var="tempint" "30" ;
+            : set_true "point_seek_rest" ;
+            : gosub "add_point" ;
+            : done ;
+         }
+         : if (!point_seek_rest) {
+            : match "seek _;_ rest" {
+               : set_integer var="tempint" "30" ;
                : set_false "first_half" ;
-               : match "eh _" {
+               : match "seek _" {
                   : set_true "first_half" ;
                }
                : gosub "say_half" ;
                : done ;
             }
          }
-      }
-   }
-   r42 : location "{r42_loc}" header="{r42_header}" {
-      on_command {
       }
    }
    r43 : location "{r43_loc}" header="{r43_header}" {
