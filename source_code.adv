@@ -86,9 +86,9 @@ strings {
    puz_point_drive_enders   : dynamic_string {( opt_color_coding ? "<drive enders<#f80>>" : "drive enders" )}     ; # 07
    puz_point_dull_oozing    : dynamic_string {( opt_color_coding ? "<dull oozing<#f80>>" : "dull oozing" )}       ; # 06
    puz_point_dumb_pliers    : dynamic_string {( opt_color_coding ? "<dumb pliers<#f80>>" : "dumb pliers" )}       ; # 14
-   puz_point_dump_arable    : dynamic_string {( opt_color_coding ? "<dump, arable<#f80>>" : "dump, arable" )}       ; # 555
+   puz_point_dump_arable    : dynamic_string {( opt_color_coding ? "<dump, arable<#f80>>" : "dump, arable" )}     ; # 08
    puz_point_eh_sink        : dynamic_string {( opt_color_coding ? "<Ace, Inc.<#f80>>" : "Ace, Inc." )}           ; # 26
-   puz_point_fail_oops      : dynamic_string {( opt_color_coding ? "<fail_oops<#f80>>" : "fail_oops" )}           ; # 41
+   puz_point_fail_oops      : dynamic_string {( opt_color_coding ? "<\"Fail! Oops!\"<#f80>>" : "fail_oops" )}     ; # 41
    puz_point_field_erring   : dynamic_string {( opt_color_coding ? "<field erring<#f80>>" : "field erring" )}     ; # 15
    puz_point_fellas_leap    : dynamic_string {( opt_color_coding ? "<FELLAS, LEAP<#f80>>" : "FELLAS, LEAP" )}     ; # 04
    puz_point_flight_wraps   : dynamic_string {( opt_color_coding ? "<flight wraps<#f80>>" : "flight wraps" )}     ; # 33
@@ -99,7 +99,7 @@ strings {
    puz_point_grr_lonely     : dynamic_string {( opt_color_coding ? "<grr lonely<#f80>>" : "grr lonely" )}         ; # 32
    puz_point_hall_terror    : dynamic_string {( opt_color_coding ? "<hall terror<#f80>>" : "hall terror" )}       ; # 03
    puz_point_her_doll       : dynamic_string {( opt_color_coding ? "<her doll<#f80>>" : "her doll" )}             ; # 38 36
-   puz_point_hey_trash      : dynamic_string {( opt_color_coding ? "<hey trash<#f80>>" : "hey trash" )}           ; # 05
+   puz_point_hey_trash      : dynamic_string {( opt_color_coding ? "<\"HEY, TRASH\"<#f80>>" : "\"HEY, TRASH\"" )} ; # 05
    puz_point_knowin_juries  : dynamic_string {( opt_color_coding ? "<knowin juries<#f80>>" : "knowin juries" )}   ; # 09
    puz_point_major_gent     : dynamic_string {( opt_color_coding ? "<major gent<#f80>>" : "major gent" )}         ; # 43
    puz_point_meager_oath    : dynamic_string {( opt_color_coding ? "<meager oath<#f80>>" : "meager oath" )}       ; # 24
@@ -1159,7 +1159,7 @@ locations {
          }
          : if (point_dry_vendors && !point_say_four) {
             : match "say four" {
-               : if (!point_pitch_earnings) {
+               : if (!point_pitch_earning) {
                   : print "Four oars? But you can't afford one!" ;
                   : set_true "think_say_four" ;
                   : done ;
@@ -1865,7 +1865,7 @@ locations {
    r33 : location "{r33_loc}" header="{r33_header}" {
       on_command {
          : match "say loaners" {
-            : if (!point_pitch_earnings) {
+            : if (!point_pitch_earning) {
                : print "But you can't afford a loan of a craft!" ;
                : set_true "think_say_loaners" ;
                : done ;
@@ -2254,7 +2254,7 @@ zones {
       locations = [ r00, r01, r02, r03, r04, r10, r11, r12, r13, r14 ]
    }
    end_zone : zone {
-		locations = [ r25, r26, r27, r15, r35 ]
+      locations = [ r25, r26, r27, r15, r35 ]
    }
 }
 
@@ -2529,8 +2529,8 @@ subroutines {
       : gosub "check_100" ;
       : collection_modify { collection = "tried_combo_core" index -> (tempint) content -> ("true") } ;
       : print "<Your score has just gone up by a point!<#ff0>>" ;
-	  : increment "score" ;
-	  : update_graphic ;
+      : increment "score" ;
+      : update_graphic ;
    }
    note_thinks : subroutine {
       : if (!think_note_yet) {
