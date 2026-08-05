@@ -1273,6 +1273,12 @@ locations {
    r15 : location "{r15_loc}" header="{r15_header}" {
       on_command {
          : match "right angles" {
+            : if (!point_mage_urgent) {
+               : print "It's amusing and insightful and all, but you get no really big leaps from it. Perhaps it's more appropriate for someone who needs to make those big leaps and doesn't want to feel forced to." ;
+               : set_true "think_right_angles" ;
+               : gosub "note_thinks" ;
+               : done ;
+            }
             : if (point_right_angles) {
                : print "Already done!" ;
                : done ;
@@ -1814,6 +1820,8 @@ locations {
             : print "Narrative text." ;
             : set_integer var="tempint" "43" ;
             : set_true "point_mage_urgent" ;
+            : destroy "major_gent" ;
+            : create "mage_urgent" ;
             : gosub "add_point" ;
             : done ;
          }
@@ -1833,6 +1841,18 @@ locations {
                : print "Already done!" ;
                : done ;
             }
+            : if (!point_mage_urgent) {
+               : print "Ugh. The major gent would be a bit too awkward right now. He needs change, somehow." ;
+               : set_true "think_broke_lass" ;
+               : gosub "note_thinks" ;
+               : done ;
+            }
+            : if (!point_right_angles) {
+               : print "Ugh. The mage, urgent, would try a bit too hard to impress any Broke Lass right now. You'll need to change him, again, before you can gain a new companion." ;
+               : set_true "think_broke_lass" ;
+               : gosub "note_thinks" ;
+               : done ;
+            }
             : print "Narrative text." ;
             : set_integer var="tempint" "44" ;
             : set_true "point_broke_lass" ;
@@ -1849,6 +1869,14 @@ locations {
                }
                : gosub "say_half" ;
                : done ;
+            }
+         }
+      }
+      on_describe {
+         : if (is_present "major_gent") {
+            : cycle key = "gent_hi" predictable_order = "true" skip_interval = "0" max_loops = "1" {
+                  : print "A major gent stands up and greets you, perhaps a bit too politely. He's not quite who he wants to be." ;
+                  : print "The major gent continues to move around nervously." ;
             }
          }
       }
