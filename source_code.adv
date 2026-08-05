@@ -1854,7 +1854,7 @@ locations {
                : print "Already done!" ;
                : done ;
             }
-            : print "Narrative text." ;
+            : print "You don't have MUCH. You get, not a great sailboat, but a more modest Mo'-Tried-Moat-Ride. And thus, your riches disappear. But you can go north!" ;
             : set_integer var="tempint" "18" ;
             : set_false "think_say_loaners" ;
             : set_true "point_say_loaners" ;
@@ -2075,6 +2075,7 @@ locations {
                   : done ;
                }
                : print "Narrative text." ;
+               : get "vie_neater" ;
                : set_integer var="tempint" "27" ;
                : set_true "point_cue_bland" ;
                : gosub "add_point" ;
@@ -2083,7 +2084,6 @@ locations {
             : if (!point_cue_bland) {
                : match "cue _;_ bland" {
                   : set_integer var="tempint" "27" ;
-                  : set_boolean var="already_got_command" {( think_cue_bland && !point_cue_bland )} ; # this is optional. Delete if point does not rely on any other variables.
                   : set_false "first_half" ;
                   : match "cue _" {
                      : set_true "first_half" ;
@@ -2102,7 +2102,7 @@ locations {
                : print "You already sought and found." ;
                : done ;
             }
-            : print "You hear a {puz_grr_lonely} now." ;
+            : print "You hear a {puz_point_grr_lonely} now." ;
             : set_integer var="tempint" "30" ;
             : set_true "point_seek_rest" ;
             : gosub "add_point" ;
@@ -2255,7 +2255,7 @@ connections {
       r33, east, r34,
       r33, north, r43,
       r34, north, r44,
-      r43, east, r42,
+      r43, west, r42,
       r11, west, r10,
       r11, east, r12,
       r11, south, r01,
