@@ -25,7 +25,7 @@ strings {
    ifcomp : string "<IFComp<#f80>>[https://ifcomp.org]" ;
 
    # basics
-   my_score : string "{score}/{max_score}" ;
+   my_score : dynamic_string {( tutorial_0_in_tutorial ? "Tutorial progress: {tutorial_score}/{max_tutorial_score}" : "{score}{plus_in_header}/{max_score}" )} ;
    custom_unknown_verb_error : dynamic_string {( "Nothing special happens. You can use {vm_verbs} for a general overview of standard verbs." )} ;
    exits_err : dynamic_string {(
       is_at "r20" ? "THE DOOR east is the only exit." :
@@ -135,20 +135,20 @@ strings {
    )} ;
    r00_header : dynamic_string {( point_fly_traps ? "Fly Traps" : "Flight Wraps" )} ;
 
-   r01_loc : string "Nothing yet." ;
+   r01_loc : dynamic_string {( "This is, well, a {puz_point_dump_arable}. " + (point_dumb_parable ? "You've gotten something out of it, though there isn't much left, so it's best just to find" : "Is this really just a connecting passage, or is there more to it? At any rate, not much is here, yet, which is kind of nice, since nothing blocks") + " passage north, east or west." )} ;
    r01_header : string "Dump, Arable" ;
 
-   r02_loc : dynamic_string {( (point_pitch_earning ? "The pit still churns, but the titan is gone. You see nothing else to do here." : point_tightened_rousing ? "The titan is now awake." : "You see a {puz_point_titan_drowsing} here.") + "\nThe pit rises high all directions except back west." )} ;
+   r02_loc : dynamic_string {( (point_pitch_earning ? "The pit still churns, but the titan is gone. You see nothing else to do here." : point_tightened_rousing ? "The titan is now awake. It's looking for something to do. Maybe you can help it." : "You see a {puz_point_titan_drowsing} here.") + "\nThe pit rises high all directions except back west." )} ;
    r02_header : string "Pit, Churning" ; # the spit-thus pit
 
    r03_loc : string "The trail runs north to east here." ;
    r03_header : string "Sunk Etching" ;
 
-   r04_loc : string "Nothing yet." ;
+   r04_loc : dynamic_string {( "A {puz_point_meager_oath} reverberates through here in this open ground. Its words are not important. " + (point_me_growth ? "You've gotten its essence." : "Perhaps you can get what you need to from it." ) + "\nPassage leads back west" + (point_fey_loops ? " and, as part of the fey loops, north." : ".") )} ;
    r04_header : string "Meager Oath" ;
 
-   r10_loc : string "Nothing yet." ;
-   r10_header : string "Drive Enders" ;
+   r10_loc : dynamic_string {( (point_dry_vendors ? "Dry vendors have parked themselves here. A safe oar rests behind them." : "You haven't seen any cars or bikes or whatever around, so it's weird this small selection of dead ends should be called dive enders, but it is.") + "\nPassage leads back east." )} ;
+   r10_header : dynamic_string {( point_dry_vendors ? "Dry Vendors" : "Drive Enders" )} ;
 
    r11_loc : dynamic_string {( point_duh_losing ? "You feel up to going in any four directions now that the dull oozing has died down." : "Here {puz_point_dull_oozing}, physical and audible, surrounds you. There's nothing terribly dangerous any way but back north, but right now, your general feeling is, \"Ehh, why bother?\"" )} ;
    r11_header : string "Note 'Eres No Tears" ;
@@ -192,7 +192,7 @@ strings {
    r30_loc : dynamic_string {( ( point_door_cloud ? "You opened a door in a door-cloud leading north." : "A {puz_point_dork_loud} stands here, going on about how they'd LIKE to let people see great stuff to the north, but peope just AREN'T organized." ) + "\nYou can go back east, too." )} ;
    r30_header : string "Way-Bland Wabe Land" ;
 
-   r31_loc : string "Nothing yet." ;
+   r31_loc : dynamic_string {( point_hate_rash ? "The yelling is gone now, but even if it wasn't, you are pretty sure you could zone it out. You can go all four directions without nuisance now." : "This place would be kind of unappetizing without the constant echo of {puz_point_hey_trash} from the north, west and east. At least you can go back south." )} ;
    r31_header : string "Way-Still Waste, Ill" ;
 
    r32_loc : string "Here all sorts of weird entities train at chess." ;
@@ -201,23 +201,23 @@ strings {
    r33_loc : string "You might be able to take a boat north. You can definitely go east or back west." ;
    r33_header : string "Sail Owners" ;
 
-   r34_loc : string "Nothing yet." ;
-   r34_header : string "Meager Oath" ;
+   r34_loc : dynamic_string {( ( point_ply_towels ? "The owls no longer block the way north." : "You see {puz_point_plight_owls} blocking passage north. They look wet and unhappy." ) + "\nThere is also passage back west." )} ;
+   r34_header : string "Go/Drain/Goad Rain" ;
 
    r35_loc : string "You can only go back south here." ;
    r35_header : string "Bro Class" ;
 
    r40_loc : string "Nothing yet." ;
-   r40_header : string "Fly Traps" ;
+   r40_header : string "Chez Pup" ;
 
    r41_loc : string "Nothing yet." ;
-   r41_header : string "Dump, Arable" ;
+   r41_header : dynamic_string {( point_eh_sink ? "Cube Land" : "Ace, Inc." )} ;
 
    r42_loc : string "Nothing yet." ;
    r42_header : string "Gray Vile Grave Isle" ;
 
    r43_loc : string "Nothing yet." ;
-   r43_header : string "Sunk Etching" ;
+   r43_header : string "Aww-Flake-Off Lake" ;
 
    r44_loc : string "Nothing yet." ;
    r44_header : string "Meager Oath" ;
@@ -241,6 +241,8 @@ strings {
    noguess : string "<(unknown)<#888>>" ;
    noguess_c_1 : dynamic_string {( unneeded_half ? "<(unneeded)<#888>>" : "<(unknown)<#888>>" )} ;
    think_here_also : dynamic_string {( think_text_yet ? "Also, here" : "Here" )} ;
+   number_as_word : dynamic_string {( collection_get { collection -> ("num_to_word") index -> ( commands_figured ) } )} ;
+   plus_in_header : dynamic_string {( commands_figured > 0 ? "+{commands_figured}" : "" )} ;
 
    #auxiliary for options
    tempopt : string "" ;
