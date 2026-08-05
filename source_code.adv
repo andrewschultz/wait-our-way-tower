@@ -57,6 +57,7 @@ strings {
 
    optt_ch : string "<CH<#88f>> or <COLORHINT<#88f>>" ;
    optt_notify : string "<NOTIFY<#88f>>" ;
+   yn : string "<YES<#f88>>/<Y<#f88>> or <NO<#f88>>/<N<#f88>>" ;
 
    # puzzle strings
    puz_point_bleah_stable   : dynamic_string {( opt_color_coding ? "<bleah stable<#f80>>" : "bleah stable" )}     ; # 998
@@ -98,7 +99,7 @@ strings {
    r02_loc : dynamic_string {( (point_pitch_earning ? "The pit still churns, but the titan is gone. You see nothing else to do here." : point_tightened_rousing ? "The titan is now awake." : "You see a {puz_titan_drowsing} here.") + "\nThe pit rises high all directions except back west." )} ;
    r02_header : string "Pit, Churning" ; # the spit-thus pit
 
-   r03_loc : string "Nothing yet." ;
+   r03_loc : string "The trail runs north to east here." ;
    r03_header : string "Sunk Etching" ;
 
    r04_loc : string "Nothing yet." ;
@@ -171,7 +172,7 @@ strings {
    r41_header : string "Dump, Arable" ;
 
    r42_loc : string "Nothing yet." ;
-   r42_header : string "The Spit-Thus Pit" ;
+   r42_header : string "Gray Vile Grave Isle" ;
 
    r43_loc : string "Nothing yet." ;
    r43_header : string "Sunk Etching" ;
