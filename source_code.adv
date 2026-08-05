@@ -1850,7 +1850,7 @@ locations {
                : print "Already done!" ;
                : done ;
             }
-            : if (!point_ply_towels) {
+            : if (!point_cloth_robbing) {
                : print "But you have no towels, or things that could be passed off as towels, to ply!" ;
                : set_true "think_ply_towels" ;
                : gosub "note_thinks" ;
@@ -2012,7 +2012,7 @@ locations {
                : done ;
             }
             : print "Ace, Inc. slowly sinks. You hope the message about no humans being there is true. You hear no screams or confusions, just robots whirring and glitching." ;
-            : print "What is revealed is a garish cube land." ;
+            : print "What is revealed is a garish {puz_point_cube_land}." ;
             : set_integer var="tempint" "26" ;
             : set_true "point_eh_sink" ;
             : gosub "add_point" ;
@@ -2149,7 +2149,7 @@ locations {
                : print "Already done!" ;
                : done ;
             }
-            : print "You get a \"Vie Neater\" t-shirt you can't take off." ;
+            : print "You get their eternal thanks for sorting things out. Which isn't fungible, but it is a confidence booster." ;
             : set_integer var="tempint" "29" ;
             : set_true "point_tense_ops" ;
             : gosub "add_point" ;
@@ -2219,6 +2219,7 @@ connections {
       r33, east, r34,
       r33, north, r43,
       r34, north, r44,
+      r43, east, r42,
       r11, west, r10,
       r11, east, r12,
       r11, south, r01,
@@ -3178,7 +3179,13 @@ on_command {
          : done ;
       }
       : if (carried() == 0) {
-         : print "With your yellow pin gone" ;
+         : print "With your yellow pin gone, you have nothing on you. But you will find more." ;
+      }
+      : if (score > 40) {
+         : print "You're carrying nothing, but surely all you need is your keen wit and insight to finish things off." ;
+      }
+      : if (point_tense_ops && !point_frame_urging) {
+         : print "You have more confidence in yourself after dealing with the ten sops. Maybe you can tackle bigger things!" ;
       }
    }
    : gosub "check_options" ;
