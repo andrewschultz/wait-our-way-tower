@@ -241,7 +241,7 @@ strings {
    noguess : string "<(unknown)<#888>>" ;
    noguess_c_1 : dynamic_string {( unneeded_half ? "<(unneeded)<#888>>" : "<(unknown)<#888>>" )} ;
    think_here_also : dynamic_string {( think_text_yet ? "Also, here" : "Here" )} ;
-   number_as_word : dynamic_string {( collection_get { collection -> ("num_to_word") index -> ( commands_figured ) } )} ;
+   number_as_word : dynamic_string {( commands_figured >= collection_count("num_to_word") ? "many" : collection_get { collection -> ("num_to_word") index -> ( commands_figured ) } )} ;
    plus_in_header : dynamic_string {( commands_figured > 0 ? "+{commands_figured}" : "" )} ;
 
    #auxiliary for options
@@ -313,8 +313,7 @@ integers {
 # auxiliary
    tempint : integer "0" ;
    counter : integer "0" ;
-   commands_figured : dynamic_integer {( 0
-   )} ;
+   commands_figured : dynamic_integer {( (think_bah_slumping ? 1 : 0) + ( think_broke_lass ? 1 : 0) + ( think_cloth_robbing ? 1 : 0) + ( think_cue_bland ? 1 : 0) + ( think_door_cloud ? 1 : 0) + ( think_fey_loops ? 1 : 0) + ( think_frame_urging ? 1 : 0) + ( think_free_crusty ? 1 : 0) + ( think_herd_all ? 1 : 0) + ( think_heard_all ? 1 : 0) + ( think_pitch_earning ? 1 : 0) + ( think_ply_towels ? 1 : 0) + ( think_right_angles ? 1 : 0) + ( think_say_four ? 1 : 0) + ( think_say_loaners ? 1 : 0) + ( think_tense_ops ? 1 : 0) + ( think_vine_eater ? 1 : 0) + ( think_warm_acres ? 1 : 0) )} ;
    # for half THINK
    part_core_score : dynamic_integer {( ((collection_get{ collection -> ("got_first_core") index -> ( counter ) } == "true") ? 1 : 0) + ((collection_get{ collection -> ("got_second_core") index -> ( counter ) } == "true") ? 2 : 0) )} ; # this is a really bad hack, but I couldn't find a concise way to code things. Maybe I could use a dynamic boolean.
    part_bonus_score : dynamic_integer {( ((collection_get{ collection -> ("got_first_bonus") index -> ( counter ) } == "true") ? 1 : 0) + ((collection_get{ collection -> ("got_second_bonus") index -> ( counter ) } == "true") ? 2 : 0) )} ; # this is a really bad hack, but I couldn't find a concise way to code things. Maybe I could use a dynamic boolean.
@@ -331,7 +330,10 @@ collections {
          "four",
          "five",
          "six",
-         "seven"
+         "seven",
+         "eight",
+         "nine",
+         "ten",
       ]
    };
 
