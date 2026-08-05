@@ -121,8 +121,12 @@ strings {
    puz_point_yellow_pin     : dynamic_string {( opt_color_coding ? "<yellow pin<#f80>>" : "yellow pin" )}         ; # 02
 
    # room(s)
-   r00_loc : string "Nothing yet." ;
-   r00_header : string "Fly Traps" ;
+   r00_loc : dynamic_string {( point_catch_ill ? "The cat, chill explores here." :
+      point_vine_eater ? "With the fly traps removed, there's a {puz_point_cat_chill} here." :
+      point_fly_traps ? "Fly traps have replaced what was here. Perhaps you could cut through them somehow." :
+      "{puz_point_flight_wraps_u} cover the area here. What are {puz_point_flight_wraps}? Well, they just prevent people, or their ideas, from taking flight."
+   )} ;
+   r00_header : dynamic_string {( point_fly_traps ? "Fly Traps" : "Flight Wraps" )} ;
 
    r01_loc : string "Nothing yet." ;
    r01_header : string "Dump, Arable" ;
@@ -139,7 +143,7 @@ strings {
    r10_loc : string "Nothing yet." ;
    r10_header : string "Drive Enders" ;
 
-   r11_loc : string "Nothing yet." ;
+   r11_loc : dynamic_string {( point_duh_losing ? "You feel up to going in any four directions now that the dull oozing has died down." : "Here {puz_point_dull_oozing}, physical and audible, surrounds you. There's nothing terribly dangerous any way but back north, but right now, your general feeling is, \"Ehh, why bother?\"" )} ;
    r11_header : string "Note 'Eres No Tears" ;
 
    r12_loc : string "Nothing yet." ;
@@ -157,14 +161,14 @@ strings {
    r20_loc : dynamic_string {( "Here you have enough space to, well, wheeze and pace in worry about your predicament. " + (!point_can_do ? "And you do, constantly repeating \"{puz_point_canned_ooh}.\"" : !point_thief_lore ? "As you wheeze and pace, you find you're gazing a lot at {puz_point_the_floor}." : !point_yell_open ? "But you'd like to get out. How could your {puz_point_yellow_pin} help?" : "You can get out now." ) )} ;
    r20_header : string "Wheeze/Pace Wee Space" ;
 
-   r21_loc : dynamic_string {( "The hall leads north and south, with a darker passage east. " + (!point_halt_error ? "A hall terror, though, wraps itself around to cover those three exits." : (r22_secondary_block ? "You're worried fellas might leap at you if you go east." : "No fellas will leap you if you try to go east now.")) + "\nYou could go back west to your cell, too, but that's no fun." )} ;
+   r21_loc : dynamic_string {( "The hall leads north and south, with a darker passage east. " + (!point_halt_error ? "A {puz_point_hall_terror}, though, wraps itself around to cover those three exits." : (r22_secondary_block ? "You're worried fellas might leap at you if you go east." : point_fell_asleep ? "No fellas will leap you if you try to go east now." : "" )) + "\nYou could go back west to your cell, too, but that's no fun." )} ;
    r21_header : string "Dredge-Ailing/Dread Jailing" ;
 
    r22_loc : string "Nothing yet." ;
-   r22_header : string "Notch Acing" ;
+   r22_header : string "Field, Erring" ;
 
    r23_loc : string "Nothing yet." ;
-   r23_header : string "Sunk Etching" ;
+   r23_header : string "Fray, Measly" ;
 
    r24_loc : string "Nothing yet." ;
    r24_header : string "War Makers" ;
@@ -175,11 +179,11 @@ strings {
    r26_loc : dynamic_string {( !point_bah_slumping ? "Well this is pretty miserable. A boss, lumping abuse on you, blocks the way to the east.\nAnd with such sophistry! Such common sense! Did you come here so far for nothing?\nYou can go back west, if you want." : "Well, you've achieved no great power. But you've achieved relief from the boss. You can go east as well as west now." )} ;
    r26_header : string "\"Know Power? NOPE\" Hour" ;
 
-   r27_loc : dynamic_string {( point_blest_able ? "You feel good here. The healing process begins in this row, mending. Yet you still feel restless. Perhaps you need to get the right phrase to say, one more time, to close the book." : "This stable here is pretty bleah. Is it really what the boss was guarding? At least it's well, stable. Bleah, stable ... do you deserve more in life? You guess you do, but you know you're biased." )} ;
+   r27_loc : dynamic_string {( point_blest_able ? "You feel good here. Yet there's still more. You hear and feel {puz_point_true_pleading}, not i-have-to-have, but interest in seeing and doing and offering more.\nSo you still feel restless. Perhaps you need to get the right phrase to say, one more time, to close the book." : "This stable here is pretty bleah. Is it really what the boss was guarding? At least it's well, stable. Bleah, stable ... do you deserve more in life? You guess you do, but you know you're biased." )} ;
    r27_header : string "Bleah Stable" ;
 
-   r30_loc : string "Nothing yet." ;
-   r30_header : string "Fly Traps" ;
+   r30_loc : dynamic_string {( ( point_door_cloud ? "You opened a door in a door-cloud leading north." : "A {puz_point_dork_loud} stands here, going on about how they'd LIKE to let people see great stuff to the north, but peope just AREN'T organized." ) + "\nYou can go back east, too." )} ;
+   r30_header : string "Way-Bland Wabe Land" ;
 
    r31_loc : string "Nothing yet." ;
    r31_header : string "Way-Still Waste, Ill" ;
