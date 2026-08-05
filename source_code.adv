@@ -78,6 +78,7 @@ strings {
    puz_point_canned_ooh     : dynamic_string {( opt_color_coding ? "<Canned, ooh<#f80>>" : "Canned, ooh" )}       ; # 00
    puz_point_cat_chill      : dynamic_string {( opt_color_coding ? "<cat chill<#f80>>" : "cat chill" )}           ; # 35
    puz_point_chess_training : dynamic_string {( opt_color_coding ? "<chess training<#f80>>" : "chess training" )} ; # 13
+   puz_point_chez_pup       : dynamic_string {( opt_color_coding ? "<chez pup<#f80>>" : "chez pup" )}             ; # 37
    puz_point_claw_throbbing : dynamic_string {( opt_color_coding ? "<claw throbbing<#f80>>" : "claw throbbing" )} ; # 25
    puz_point_coy_novations  : dynamic_string {( opt_color_coding ? "<coy novations<#f80>>" : "coy novations" )}   ; # 10
    puz_point_cue_bland      : dynamic_string {( opt_color_coding ? "<cue bland<#f80>>" : "cue bland" )}           ; # 27
@@ -760,6 +761,7 @@ booleans {
    point_say_four          : boolean "false" ; # 17
    point_say_loaners       : boolean "false" ; # 18
    point_seek_rest         : boolean "false" ; # 31
+   point_shape_up          : boolean "false" ; # 37
    point_sun_catching      : boolean "false" ; # 20
    point_tense_ops         : boolean "false" ; # 29
    point_thief_lore        : boolean "false" ; # 01
@@ -1809,6 +1811,28 @@ locations {
    }
    r40 : location "{r40_loc}" header="{r40_header}" {
       on_command {
+         : match "shape up" {
+            : if (point_shape_up) {
+               : print "Already done!" ;
+               : done ;
+            }
+            : print "Narrative text." ;
+            : set_integer var="tempint" "37" ;
+            : set_true "point_shape_up" ;
+            : gosub "add_point" ;
+            : done ;
+         }
+         : if (!point_shape_up) {
+            : match "shape _;_ up" {
+               : set_integer var="tempint" "37" ;
+               : set_false "first_half" ;
+               : match "shape _" {
+                  : set_true "first_half" ;
+               }
+               : gosub "say_half" ;
+               : done ;
+            }
+         }
       }
    }
    r41: location "{r41_loc}" header="{r41_header}" {
