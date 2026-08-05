@@ -111,6 +111,7 @@ strings {
    puz_point_true_pleading  : dynamic_string {( opt_color_coding ? "<true pleading<#f80>>" : "true pleading" )}   ; # 47
    puz_point_the_floor      : dynamic_string {( opt_color_coding ? "<the floor<#f80>>" : "the floor" )}           ; # 01
    puz_point_tough_tiki     : dynamic_string {( opt_color_coding ? "<tough tiki<#f80>>" : "tough tiki" )}         ; # 21
+   puz_point_vie_neater     : dynamic_string {( opt_color_coding ? "<vie neater<#f80>>" : "vie neater" )}         ; # 34
    puz_point_wry_tangles    : dynamic_string {( opt_color_coding ? "<Wry Tangles<#f80>>" : "Wry Tangles" )}       ; # 42
    puz_point_yellow_pin     : dynamic_string {( opt_color_coding ? "<yellow pin<#f80>>" : "yellow pin" )}         ; # 02
 
@@ -761,6 +762,7 @@ booleans {
    point_tightened_rousing : boolean "false" ; # 11
    point_troop_leading     : boolean "false" ; # 47
    point_tufty_key         : boolean "false" ; # 21
+   point_vine_eater        : boolean "false" ; # 34
    point_yell_open         : boolean "false" ; # 02
 
    # silly random
@@ -2633,6 +2635,39 @@ on_tick {
 }
 
 on_command {
+   : if (is_carried("vie_neater")) {
+      : match "vine eater" {
+         : if (!is_at "r00" && !point_fly_traps) {
+            : print "You see nothing resembling vines that can be eaten. Well, not here and now." ;
+            : set_true "think_vine_eater" ;
+            : gosub "note_thinks" ;
+            : done ;
+         }
+         : if (point_vine_eater) {
+            : print "You already got vines eaten!" ;
+            : done ;
+         }
+         : print "Your Vie-Neater summoning brings a Vine Eater which gobbles the fly traps. It nods to you. You crumble the Vie-Neater in a ball, throw it in the Eater's mouth, then watch as the Eater ambles away." ;
+         : destroy "vie_neater" ;
+         : set_integer var="tempint" "34" ;
+         : set_false "think_vine_eater" ;
+         : set_true "point_vine_eater" ;
+         : gosub "add_point" ;
+         : done ;
+      }
+      : if (!point_vine_eater) {
+         : match "vine _;_ eater" {
+            : set_integer var="tempint" "34" ;
+            : set_boolean var="already_got_command" {( think_vine_eater && !point_vine_eater )} ; # this is optional. Delete if point does not rely on any other variables.
+            : set_false "first_half" ;
+            : match "vine _" {
+               : set_true "first_half" ;
+            }
+            : gosub "say_half" ;
+            : done ;
+         }
+      }
+   }
    : match "xyzzy _" {
       : print "A hollow voice intones \"Our gaol: argh, ail!\" It's so spooky, you don't dare quibble over details of pronunciation." ;
       : done ;
