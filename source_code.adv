@@ -88,6 +88,7 @@ strings {
    puz_point_dumb_pliers    : dynamic_string {( opt_color_coding ? "<dumb pliers<#f80>>" : "dumb pliers" )}       ; # 14
    puz_point_dump_arable    : dynamic_string {( opt_color_coding ? "<dump arable<#f80>>" : "dump arable" )}       ; # 555
    puz_point_eh_sink        : dynamic_string {( opt_color_coding ? "<Ace, Inc.<#f80>>" : "Ace, Inc." )}           ; # 26
+   puz_point_fail_oops      : dynamic_string {( opt_color_coding ? "<fail_oops<#f80>>" : "fail_oops" )}           ; # 41
    puz_point_field_erring   : dynamic_string {( opt_color_coding ? "<field erring<#f80>>" : "field erring" )}     ; # 15
    puz_point_fellas_leap    : dynamic_string {( opt_color_coding ? "<FELLAS, LEAP<#f80>>" : "FELLAS, LEAP" )}     ; # 04
    puz_point_flight_wraps   : dynamic_string {( opt_color_coding ? "<flight wraps<#f80>>" : "flight wraps" )}     ; # 33
@@ -744,6 +745,7 @@ booleans {
    point_eh_sink           : boolean "false" ; # 26
    point_feel_daring       : boolean "false" ; # 15
    point_fell_asleep       : boolean "false" ; # 04
+   point_fey_loops         : boolean "false" ; # 41
    point_fly_traps         : boolean "false" ; # 33
    point_flow_tripling     : boolean "false" ; # 23 #?? don't annoy water gods too much
    point_frame_urging      : boolean "false" ; # 30
@@ -2067,11 +2069,13 @@ locations {
 
 # Defines things in the world (scenery cannot be carried)
 objects {
+   vie_neater : object "The VIE NEATER voucher you got from the Cue, Bland" ;
    phase_tats : object "{i_fspt}" ;
    major_gent : object "A bit too nice here." at = "r35" conspicuous = "false" ;
-   mage_urgent : object "The former major gent has now swung a bit too much the other way." at = "r35" conspicuous = "false" ;
+   mage_urgent : object "The former major gent has now swung a bit too much the other way." conspicuous = "false" ;
+   broke_lass : object "The broke lass doesn't seem that broke, or broken." conspicuous = "false" ;
    wry_tangles : object "Very interesting, but not quite for you." at = "r15" conspicuous="false";
-   thug_round : object "{trtg_status}." at = "r25" conspicuous = "false";
+   thug : object "{trtg_status}." at = "r25" conspicuous = "false";
 }
 
 zones {
@@ -2766,9 +2770,31 @@ on_startup {
 ## Execute this every time a player moves or redescribes a location
 
 on_describe {
-  : if (is_present "thug_round") {
-     : print {( "The {trtg} " + (is_at("r25") ? "stands here, blocking further passages. How to get around it?" : is_at("r24") ? "chases after you." : "continues to chase after you.") )} ;
-  }
+   : if (is_present "thug") {
+      : print {( "The {trtg} " + (is_at("r25") ? "stands here, blocking further passages. How to get around it?" : is_at("r24") ? "chases after you." : "continues to chase after you.") )} ;
+   }
+   : if (gamestate_end_companions) {
+      : if (is_just_entered()) {
+         : if (is_present "mage_urgent") {
+            : print "{endgame_friends} welcome{endgame_plural} you back." ;
+            : done ;
+         }
+         : if (is_at "end_zone") {
+            : print {( "{endgame_friends} follow{endgame_plural} you here." )};
+            : create "mage_urgent" ;
+            : if (point_broke_lass) {
+               : create "broke_lass" ;
+            }
+         } : else_if (!gameflag_note_pals_stay_end) {
+            : print "{one_time}any companions you meet in the endgame won't follow you back to the main area." ;
+            : set_true "gameflag_note_pals_stay_end" ;
+            : done ;
+         }
+      } : else_if (is_present "mage_urgent") {
+         : print "{endgame_friends} wait{endgame_plural} around, ready to follow." ;
+         : done ;
+	  }
+   }
 }
 
 ## Test VERB NOUN that the player types and executes conditional actions
@@ -2777,6 +2803,20 @@ on_tick {
    : if (!showed_first_note) {
       : print "{one_time}{vm_about} will give general game information. {vm_verbs} will describe {wowt}'s stripped-down parser." ;
       : set_true "showed_first_note" ;
+   }
+   : if (is_present("thug") && previous_location() != current_location() && !is_at "r25") {
+      : cycle key = "thug_fail" predictable_order = "true" skip_interval = "0" {
+	     : print "Thud. The thug got you. It snickers {puz_point_fail_oops} before lumbering away back to its ground." ;
+	     : print "Thud. The thug got you again. It again snickers {puz_point_fail_oops} before lumbering away back to its ground." ;
+      }
+      : create "thug" target="r25" ;
+      : set_false "gamestate_thug_chase" ;
+   }
+   : if (gamestate_thug_chase && ((is_at "r04" && previous_location() == "r03") || (is_at "r04" && previous_location() == "r03"))) {
+      : print "You send the thug running in loops! It eventually runs out of breath as you run around in loops, until it wanders off to sulk. Bye bye thug!" ;
+      : set_false "gamestate_thug_gone" ;
+      : set_false "gamestate_thug_chase" ;
+      : destroy "thug" ;
    }
 }
 
@@ -2812,6 +2852,31 @@ on_command {
             : gosub "say_half" ;
             : done ;
          }
+      }
+   }
+   : if (gamestate_fail_oops_known && !point_fey_loops) {
+      : match "fey loops" {
+         : if (!is_at "r04" && !is_at "r14") {
+            : print "You look for fey loops that might catch the enemy, but not here. Perhaps there is not potential enough for looping here." ;
+            : set_true "think_fey_loops" ;
+            : gosub "note_thinks" ;
+            : done ;
+         }
+         : print "Surprisingly, you find some fey loops to the north, which create the first (and only) loop in the game map." ;
+         : set_integer var="tempint" "41" ;
+         : set_true "point_fey_loops" ;
+         : gosub "add_point" ;
+         : done ;
+      }
+      : match "fey _;_ loops" {
+         : set_integer var="tempint" "41" ;
+         : set_boolean var="already_got_command" {( think_fey_loops && !point_fey_loops )} ; # this is optional. Delete if point does not rely on any other variables.
+         : set_false "first_half" ;
+         : match "fey _" {
+            : set_true "first_half" ;
+         }
+         : gosub "say_half" ;
+         : done ;
       }
    }
    : match "xyzzy _" {
