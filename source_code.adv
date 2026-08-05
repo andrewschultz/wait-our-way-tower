@@ -91,6 +91,7 @@ strings {
    puz_point_float_rippling : dynamic_string {( opt_color_coding ? "<float_rippling<#f80>>" : "float-rippling" )} ; # 23
    puz_point_fray_merging   : dynamic_string {( opt_color_coding ? "<fray merging<#f80>>" : "fray merging" )}     ; # 30
    puz_point_freak_rusty    : dynamic_string {( opt_color_coding ? "<freak rusty<#f80>>" : "freak rusty" )}       ; # 16
+   puz_point_grr_lonely     : dynamic_string {( opt_color_coding ? "<grr lonely<#f80>>" : "grr lonely" )}         ; # 32
    puz_point_halt_error     : dynamic_string {( opt_color_coding ? "<halt error<#f80>>" : "halt error" )}         ; # 03
    puz_point_hey_trash      : dynamic_string {( opt_color_coding ? "<hey trash<#f80>>" : "hey trash" )}           ; # 05
    puz_point_knowin_juries  : dynamic_string {( opt_color_coding ? "<knowin juries<#f80>>" : "knowin juries" )}   ; # 09
@@ -738,6 +739,7 @@ booleans {
    point_flow_tripling     : boolean "false" ; # 23 #?? don't annoy water gods too much
    point_frame_urging      : boolean "false" ; # 30
    point_free_crusty       : boolean "false" ; # 16
+   point_girl_only         : boolean "false" ; # 32
    point_halt_error        : boolean "false" ; # 03
    point_hate_rash         : boolean "false" ; # 05
    point_mage_urgent       : boolean "false" ; # 43
@@ -1801,6 +1803,30 @@ locations {
                }
                : gosub "say_half" ;
                : done ;
+            }
+         }
+         : if (point_seek_rest) {
+            : match "girl only" {
+               : if (point_girl_only) {
+                  : print "Already done!" ;
+                  : done ;
+               }
+               : print "Narrative text." ;
+               : set_integer var="tempint" "32" ;
+               : set_true "point_girl_only" ;
+               : gosub "add_point" ;
+               : done ;
+            }
+            : if (!point_girl_only) {
+               : match "girl _;_ only" {
+                  : set_integer var="tempint" "32" ;
+                  : set_false "first_half" ;
+                  : match "girl _" {
+                     : set_true "first_half" ;
+                  }
+                  : gosub "say_half" ;
+                  : done ;
+               }
             }
          }
       }
