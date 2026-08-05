@@ -791,6 +791,9 @@ booleans {
 }
 
 vocabulary {
+
+   : verb / aliases = [tj, testjump] ;
+
 }
 
 locations {
@@ -2221,6 +2224,32 @@ subroutines {
       }
    }
 
+##################################testjumps
+
+   testjump : subroutine {
+      : if (score > 0) {
+         : print "Too late to TESTJUMP. Start and try again with 0 points." ;
+         : done ;
+      }
+      : match "testjump 1" {
+         : gosub "testjump_part_1" ;
+         : set_integer var="score" "5" ;
+         : goto "r21" ;
+         : redescribe ;
+         : done ;
+      }
+      : print "TESTJUMP 1 sends you to outside the cell, hall cleared, 5 points." ;
+      : done ;
+   }
+
+   testjump_part_1 : subroutine {
+      : set_true "point_can_do" ;
+      : set_true "point_thief_lore" ;
+      : set_true "point_yell_open" ;
+      : set_true "point_halt_error" ;
+      : set_true "point_fell_asleep" ;
+   }
+
 }
 
 themes {
@@ -2279,6 +2308,13 @@ on_describe {
 }
 
 ## Test VERB NOUN that the player types and executes conditional actions
+
+on_tick {
+   : if (!showed_first_note) {
+      : print "{one_time}{vm_about} will give general game information. {vm_verbs} will describe {wowt}'s stripped-down parser." ;
+      : set_true "showed_first_note" ;
+   }
+}
 
 on_command {
    : match "xyzzy _" {
@@ -2407,13 +2443,10 @@ on_command {
       : done ;
    }
 
-}
-
-on_tick {
-   : if (!showed_first_note) {
-      : print "{one_time}{vm_about} will give general game information. {vm_verbs} will describe {wowt}'s stripped-down parser." ;
-      : set_true "showed_first_note" ;
+   : match "testjump _" {
+      : gosub "testjump" ;
    }
+
 }
 
 on_render {
