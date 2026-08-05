@@ -76,6 +76,7 @@ strings {
    puz_point_boss_lumping   : dynamic_string {( opt_color_coding ? "<boss lumping<#f80>>" : "boss lumping" )}     ; # 45
    puz_point_bro_class      : dynamic_string {( opt_color_coding ? "<Bro Class<#f80>>" : "Bro Class" )}           ; # 44
    puz_point_canned_ooh     : dynamic_string {( opt_color_coding ? "<Canned, ooh<#f80>>" : "Canned, ooh" )}       ; # 00
+   puz_point_cat_chill      : dynamic_string {( opt_color_coding ? "<cat chill<#f80>>" : "cat chill" )}           ; # 35
    puz_point_chess_training : dynamic_string {( opt_color_coding ? "<chess training<#f80>>" : "chess training" )} ; # 13
    puz_point_claw_throbbing : dynamic_string {( opt_color_coding ? "<claw throbbing<#f80>>" : "claw throbbing" )} ; # 25
    puz_point_coy_novations  : dynamic_string {( opt_color_coding ? "<coy novations<#f80>>" : "coy novations" )}   ; # 10
@@ -727,6 +728,7 @@ booleans {
    point_blest_able        : boolean "false" ; # 46
    point_broke_lass        : boolean "false" ; # 44
    point_can_do            : boolean "false" ; # 00
+   point_catch_ill         : boolean "false" ; # 35
    point_chest_reigning    : boolean "false" ; # 13
    point_cloth_robbing     : boolean "false" ; # 25
    point_coin_ovations     : boolean "false" ; # 10
@@ -853,6 +855,30 @@ locations {
                }
                : gosub "say_half" ;
                : done ;
+            }
+         }
+         : if (point_vine_eater) {
+            : match "catch ill" {
+               : if (point_catch_ill) {
+                  : print "Already done!" ;
+                  : done ;
+               }
+               : print "Narrative text." ;
+               : set_integer var="tempint" "35" ;
+               : set_true "point_catch_ill" ;
+               : gosub "add_point" ;
+               : done ;
+            }
+            : if (!point_catch_ill) {
+               : match "catch _;_ ill" {
+                  : set_integer var="tempint" "35" ;
+                  : set_false "first_half" ;
+                  : match "catch _" {
+                     : set_true "first_half" ;
+                  }
+                  : gosub "say_half" ;
+                  : done ;
+               }
             }
          }
       }
