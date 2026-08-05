@@ -235,7 +235,7 @@ strings {
    i_fspt : string "<Fey Stats Phase Tats<#ccc>>" ;
 
    # NPC(s)
-   trrg : string "<Thug 'Round the Ground<#ccc>>" ;
+   trtg : string "<Thug 'Round the Ground<#ccc>>" ;
 
    # think text and interpretive stuff
    already_got_check : dynamic_string {( already_got_command ? " Though you already got the full command, which you can revisit with {vd_think}." : "" )} ;
@@ -759,6 +759,7 @@ booleans {
    # game state (critical)
    gamestate_bros_second_trigger : boolean "false" ;
    gamestate_bros_second_placed  : boolean "false" ;
+   gamestate_thug_activated      : boolean "false" ;
    gamestate_thug_chase          : boolean "false" ;
    gamestate_thug_gone           : boolean "false" ;
    gamestate_r21_e               : boolean "false" ;
@@ -1669,6 +1670,12 @@ locations {
    }
    r25 : location "{r25_loc}" header="{r25_header}" {
       on_command {
+      }
+      on_describe {
+         : if (!gamestate_thug_gone) {
+            : print "The {trtg} starts running after you!" ;
+            : set_true "gamestate_thug_chase" ;
+         }
       }
    }
    r26 : location "{r26_loc}" header="{r26_header}" {
@@ -3177,7 +3184,7 @@ on_describe {
       } : else_if (is_present "mage_urgent") {
          : print "{endgame_friends} wait{endgame_plural} around, ready to follow." ;
          : done ;
-	  }
+      }
    }
 }
 
@@ -3188,19 +3195,26 @@ on_tick {
       : print "{one_time}{vm_about} will give general game information. {vm_verbs} will describe {wowt}'s stripped-down parser." ;
       : set_true "showed_first_note" ;
    }
-   : if (is_present("thug") && previous_location() != current_location() && !is_at "r25") {
+   : if (is_present("thug") && previous_location() == current_location() && !is_at "r25") {
       : cycle key = "thug_fail" predictable_order = "true" skip_interval = "0" {
-	     : print "Thud. The thug got you. It snickers {puz_point_fail_oops} before lumbering away back to its ground." ;
-	     : print "Thud. The thug got you again. It again snickers {puz_point_fail_oops} before lumbering away back to its ground." ;
+         : print "Thud. The thug got you. It snickers {puz_point_fail_oops} before lumbering away back to its ground." ;
+         : print "Thud. The thug got you again. It again snickers {puz_point_fail_oops} before lumbering away back to its ground." ;
       }
+      : set_true "gamestate_fail_oops_known" ;
       : create "thug" target="r25" ;
       : set_false "gamestate_thug_chase" ;
    }
-   : if (gamestate_thug_chase && ((is_at "r04" && previous_location() == "r03") || (is_at "r04" && previous_location() == "r03"))) {
+   : if (gamestate_thug_chase && ((is_at "r04" && previous_location() == "r14") || (is_at "r14" && previous_location() == "r04"))) {
       : print "You send the thug running in loops! It eventually runs out of breath as you run around in loops, until it wanders off to sulk. Bye bye thug!" ;
-      : set_false "gamestate_thug_gone" ;
+      : set_true "gamestate_thug_gone" ;
       : set_false "gamestate_thug_chase" ;
       : destroy "thug" ;
+      : press_any_key ;
+      : done ;
+   }
+   : if (gamestate_thug_chase) {
+      : print "The thug follows you." ;
+      : create "thug" ;
    }
 }
 
