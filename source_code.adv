@@ -117,6 +117,7 @@ strings {
    puz_point_tough_tiki     : dynamic_string {( opt_color_coding ? "<tough tiki<#f80>>" : "tough tiki" )}         ; # 21
    puz_point_vie_neater     : dynamic_string {( opt_color_coding ? "<vie neater<#f80>>" : "vie neater" )}         ; # 34
    puz_point_war_makers     : dynamic_string {( opt_color_coding ? "<war makers<#f80>>" : "war makers" )}         ; # 40
+   puz_point_weep_lucky     : dynamic_string {( opt_color_coding ? "<weep \"lucky\"<#f80>>" : "weep \"lucky\"" )} ; # 39
    puz_point_wry_tangles    : dynamic_string {( opt_color_coding ? "<Wry Tangles<#f80>>" : "Wry Tangles" )}       ; # 42
    puz_point_yellow_pin     : dynamic_string {( opt_color_coding ? "<yellow pin<#f80>>" : "yellow pin" )}         ; # 02
 
@@ -224,6 +225,10 @@ strings {
    # flavor text
    endgame_friends : dynamic_string {( point_broke_lass ? "Your two friends" : "The mage, urgent" )} ;
    endgame_plural : dynamic_string {( point_broke_lass ? "" : "s" )} ;
+
+   # block strings
+   block_pose_teasing : string {( "The Bros wonder why you need to be running around like this. You need to chillax! Life will be easier that way. And no offense, but if you do have an exciting life, it's a bit unfair. They deserve it a bit more than you do. So you shouldn't rub it in by just walking past them like that." )} ;
+   block_weep_lucky : string {( "" )} ;
 
    # item(s)
    i_fspt : string "<Fey Stats Phase Tats<#ccc>>" ;
@@ -376,6 +381,7 @@ collections {
          "false",
          "false",
          "false",
+         "false",
          "false"
       ]
    }
@@ -421,7 +427,7 @@ collections {
          "{here_r00}",
          "{here_r40}",
          "{maybe_r40}",
-         "{here_r14}",
+         "{here_r13}",
          "{here_r24}",
          "somewhere, you're not sure where",
          "{here_r15}",
@@ -728,13 +734,18 @@ booleans {
    opt_score_notify : boolean "true" scope="survivor" ;
 
    # game state (critical)
-   gamestate_thug_chase        : boolean "false" ;
-   gamestate_thug_gone         : boolean "false" ;
-   gamestate_r21_e             : boolean "false" ;
-   gamestate_fail_oops_known   : boolean "false" ;
-   gameflag_note_pals_stay_end : boolean "false" ;
-   gamestate_no_oops_yet       : dynamic_boolean {( (is_at "r03" || is_at "r04") && !point_fey_loops )} ;
-   gamestate_end_companions    : dynamic_boolean {( point_mage_urgent && !point_bah_slumping )} ;
+   gamestate_bros_second_trigger : boolean "false" ;
+   gamestate_bros_second_placed  : boolean "false" ;
+   gamestate_thug_chase          : boolean "false" ;
+   gamestate_thug_gone           : boolean "false" ;
+   gamestate_r21_e               : boolean "false" ;
+   gamestate_fail_oops_known     : boolean "false" ;
+   gameflag_note_pals_stay_end   : boolean "false" ;
+   gamestate_no_oops_yet         : dynamic_boolean {( (is_at "r14" || is_at "r04") && !point_fey_loops )} ;
+   gamestate_end_companions      : dynamic_boolean {( point_mage_urgent && !point_bah_slumping )} ;
+
+   #blocker(s) derived from gamestate
+   r13_secondary_block : dynamic_boolean {( gamestate_bros_second_placed && !point_whee_plucky )} ;
    r22_secondary_block : dynamic_boolean {( gamestate_r21_e && !point_fell_asleep )} ;
 
    # points (sorted, beginning or end)
@@ -784,6 +795,7 @@ booleans {
    point_tufty_key         : boolean "false" ; # 21
    point_vine_eater        : boolean "false" ; # 34
    point_warm_acres        : boolean "false" ; # 40
+   point_whee_plucky       : boolean "false" ; # 39
    point_yell_open         : boolean "false" ; # 02
 
    # silly random
@@ -1240,6 +1252,37 @@ locations {
                : gosub "say_half" ;
                : done ;
             }
+         }
+         : if (gamestate_bros_second_placed) {
+            : match "whee plucky" {
+               : if (point_whee_plucky) {
+                  : print "Already done!" ;
+                  : done ;
+               }
+               : print "Narrative text." ;
+               : set_integer var="tempint" "39" ;
+               : set_true "point_whee_plucky" ;
+               : set_false "gamestate_bros_second_placed" ;
+               : gosub "add_point" ;
+               : done ;
+            }
+            : if (!point_whee_plucky) {
+               : match "whee _;_ plucky" {
+                  : set_integer var="tempint" "39" ;
+                  : set_false "first_half" ;
+                  : match "whee _" {
+                     : set_true "first_half" ;
+                  }
+                  : gosub "say_half" ;
+                  : done ;
+               }
+            }
+         }
+      }
+      on_describe {
+         : if (gamestate_bros_second_trigger) {
+            : set_true "gamestate_bros_second_placed" ;
+            : print "The Bros are back at it again. They ask how you've been. You mention you've been doing stuff since last you chatted. They all {puz_point_weep_lucky} ... what a stupid guilt trip. But for whatever reason, it works, and you're going to have to change your mindset to get out of this one." ;
          }
       }
    }
