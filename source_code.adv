@@ -984,6 +984,12 @@ locations {
             }
          }
          : match "pitch earning" {
+            : if (!point_tightened_rousing) {
+               : print "Good idea. Even better idea with the titan not drowsing!" ;
+               : set_true "think_tightened_rousing" ;
+               : gosub "note_thinks" ;
+               : done ;
+            }
             : if (point_pitch_earning) {
                : print "Already done!" ;
                : done ;
@@ -1472,6 +1478,12 @@ locations {
          }
          : if (!point_free_crusty) {
             : match "free crusty" {
+               : if (!point_feel_daring) {
+                  : print "You don't have the courage to talk to the freak yet, sadly!" ;
+                  : set_true "think_free_crusty" ;
+                  : gosub "note_thinks" ;
+                  : done ;
+               }
                : if (point_free_crusty) {
                   : print "Already done!" ;
                   : done ;
