@@ -101,6 +101,7 @@ strings {
    puz_point_safe_oar       : dynamic_string {( opt_color_coding ? "<safe oar<#f80>>" : "safe oar" )}             ; # 17
    puz_point_sail_owners    : dynamic_string {( opt_color_coding ? "<sail owners<#f80>>" : "sail owners" )}       ; # 18
    puz_point_sunk_etching   : dynamic_string {( opt_color_coding ? "<sunk etching<#f80>>" : "sunk etching" )}     ; # 20
+   puz_point_ten_sops       : dynamic_string {( opt_color_coding ? "<ten sops<#f80>>" : "ten sops" )}             ; # 29
    puz_point_titan_drowsing : dynamic_string {( opt_color_coding ? "<titan drowsing<#f80>>" : "titan drowsing" )} ; # 11
    puz_point_true_pleading  : dynamic_string {( opt_color_coding ? "<true pleading<#f80>>" : "true pleading" )}   ; # 47
    puz_point_the_floor      : dynamic_string {( opt_color_coding ? "<the floor<#f80>>" : "the floor" )}           ; # 01
@@ -746,6 +747,7 @@ booleans {
    point_say_four          : boolean "false" ; # 17
    point_say_loaners       : boolean "false" ; # 18
    point_sun_catching      : boolean "false" ; # 20
+   point_tense_ops         : boolean "false" ; # 29
    point_thief_lore        : boolean "false" ; # 01
    point_tightened_rousing : boolean "false" ; # 11
    point_troop_leading     : boolean "false" ; # 47
@@ -1788,6 +1790,35 @@ locations {
    }
    r44 : location "{r44_loc}" header="{r44_header}" {
       on_command {
+         : match "tense ops" {
+            : if (!point_me_growth) {
+               : print "You just don't have the wherewithal to deal with tension yet! Still, good idea for later." ;
+               : set_true "think_tense_ops" ;
+               : gosub "note_thinks" ;
+               : done ;
+            }
+            : if (point_tense_ops) {
+               : print "Already done!" ;
+               : done ;
+            }
+            : print "You get a \"Vie Neater\" t-shirt you can't take off." ;
+            : set_integer var="tempint" "29" ;
+            : set_true "point_tense_ops" ;
+            : gosub "add_point" ;
+            : done ;
+         }
+         : if (!point_tense_ops) {
+            : match "tense _;_ ops" {
+               : set_integer var="tempint" "29" ;
+               : set_boolean var="already_got_command" {( think_tense_ops && !point_tense_ops )} ; # this is optional. Delete if point does not rely on any other variables.
+               : set_false "first_half" ;
+               : match "tense _" {
+                  : set_true "first_half" ;
+               }
+               : gosub "say_half" ;
+               : done ;
+            }
+         }
       }
    }
 }
