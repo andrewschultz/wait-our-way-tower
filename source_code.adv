@@ -2249,10 +2249,10 @@ barriers {
       message = {block_pose_teasing}
    }
 
-   block_secret_r03 : block {
+   block_go_r03_p2 : block {
       location = r03
-      block_when = gamestate_no_oops_yet
-      message = {block_03_04}
+      block_when = r13_secondary_block
+      message = {block_weep_lucky}
    }
 
    # r04 free movement from r01, sort of
@@ -2260,7 +2260,7 @@ barriers {
    block_secret_r04 : block {
       location = r04
       block_when = gamestate_no_oops_yet
-      message = {block_03_04}
+      message = {block_04_14}
    }
 
    block_go_r10 : block {
@@ -2291,6 +2291,18 @@ barriers {
       location = r03
       block_when_not = point_pose_teasing
       message = {block_pose_teasing}
+   }
+
+   block_secret_r14 : block {
+      location = r14
+      block_when = gamestate_no_oops_yet
+      message = {block_04_14}
+   }
+
+   block_go_r14_p2 : block {
+      location = r14
+      block_when = r13_secondary_block
+      message = {block_weep_lucky}
    }
 
    block_go_r15 : block {
