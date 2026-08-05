@@ -1026,6 +1026,12 @@ locations {
                : gosub "note_thinks" ;
                : done ;
             }
+            : if (!point_coin_ovations) {
+               : print "Unfortunately, you have no money to prove that you've earned something, so your pitch would fall flat!" ;
+               : set_true "think_pitch_earning" ;
+               : gosub "note_thinks" ;
+               : done ;
+            }
             : if (point_pitch_earning) {
                : print "Already done!" ;
                : done ;
