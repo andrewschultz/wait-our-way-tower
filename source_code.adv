@@ -115,6 +115,7 @@ strings {
    puz_point_the_floor      : dynamic_string {( opt_color_coding ? "<the floor<#f80>>" : "the floor" )}           ; # 01
    puz_point_tough_tiki     : dynamic_string {( opt_color_coding ? "<tough tiki<#f80>>" : "tough tiki" )}         ; # 21
    puz_point_vie_neater     : dynamic_string {( opt_color_coding ? "<vie neater<#f80>>" : "vie neater" )}         ; # 34
+   puz_point_war_makers     : dynamic_string {( opt_color_coding ? "<war makers<#f80>>" : "war makers" )}         ; # 40
    puz_point_wry_tangles    : dynamic_string {( opt_color_coding ? "<Wry Tangles<#f80>>" : "Wry Tangles" )}       ; # 42
    puz_point_yellow_pin     : dynamic_string {( opt_color_coding ? "<yellow pin<#f80>>" : "yellow pin" )}         ; # 02
 
@@ -770,6 +771,7 @@ booleans {
    point_troop_leading     : boolean "false" ; # 47
    point_tufty_key         : boolean "false" ; # 21
    point_vine_eater        : boolean "false" ; # 34
+   point_warm_acres        : boolean "false" ; # 40
    point_yell_open         : boolean "false" ; # 02
 
    # silly random
@@ -1512,6 +1514,35 @@ locations {
    }
    r24 : location "{r24_loc}" header="{r24_header}" {
       on_command {
+         : match "warm acres" {
+            : if (herd_score != 2) {
+               : print {( "You don't have " + (herd_score == 1 ? "enough" : "anything") + " to try to warm the hearts of the war makers!" )} ;
+               : set_true "think_warm_acres" ;
+               : gosub "note_thinks" ;
+               : done ;
+            }
+            : if (point_warm_acres) {
+               : print "Already done!" ;
+               : done ;
+            }
+            : print "Narrative text." ;
+            : set_integer var="tempint" "40" ;
+            : set_true "point_warm_acres" ;
+            : gosub "add_point" ;
+            : done ;
+         }
+         : if (!point_warm_acres) {
+            : match "warm _;_ acres" {
+               : set_integer var="tempint" "40" ;
+               : set_boolean var="already_got_command" {( think_warm_acres && !point_warm_acres )} ; # this is optional. Delete if point does not rely on any other variables.
+               : set_false "first_half" ;
+               : match "warm _" {
+                  : set_true "first_half" ;
+               }
+               : gosub "say_half" ;
+               : done ;
+            }
+         }
       }
    }
    r25 : location "{r25_loc}" header="{r25_header}" {
