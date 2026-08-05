@@ -135,7 +135,7 @@ strings {
    )} ;
    r00_header : dynamic_string {( point_fly_traps ? "Fly Traps" : "Flight Wraps" )} ;
 
-   r01_loc : dynamic_string {( "This is, well, a {puz_point_dump_arable}. " + (point_dumb_parable ? "You've gotten something out of it, though there isn't much left, so it's best just to find" : "Is this really just a connecting passage, or is there more to it? At any rate, not much is here, yet, which is kind of nice, since nothing blocks") + " passage north, east or west." )} ;
+   r01_loc : dynamic_string {( (point_dumb_parable ? "You've gotten something out of the dump (arable,) and since there isn't much left, it's probably best just to find" : "This is, well, a {puz_point_dump_arable}. Is it really just a connecting passage, or is there more to it? At any rate, not much is here, yet, which is kind of nice, since nothing blocks") + " passage north, east or west." )} ;
    r01_header : string "Dump, Arable" ;
 
    r02_loc : dynamic_string {( (point_pitch_earning ? "The pit still churns, but the titan is gone. You see nothing else to do here." : point_tightened_rousing ? "The titan is now awake. It's looking for something to do. Maybe you can help it." : "You see a {puz_point_titan_drowsing} here.") + "\nThe pit rises high all directions except back west." )} ;
@@ -147,7 +147,7 @@ strings {
    r04_loc : dynamic_string {( "A {puz_point_meager_oath} reverberates through here in this open ground. Its words are not important. " + (point_me_growth ? "You've gotten its essence." : "Perhaps you can get what you need to from it." ) + "\nPassage leads back west" + (point_fey_loops ? " and, as part of the fey loops, north." : ".") )} ;
    r04_header : string "Meager Oath" ;
 
-   r10_loc : dynamic_string {( (point_dry_vendors ? "Dry vendors have parked themselves here. A safe oar rests behind them." : "You haven't seen any cars or bikes or whatever around, so it's weird this small selection of dead ends should be called dive enders, but it is.") + "\nPassage leads back east." )} ;
+   r10_loc : dynamic_string {( (point_dry_vendors ? "Dry vendors have parked themselves here. A {puz_point_safe_oar} rests behind them." : "You haven't seen any cars or bikes or whatever around, so it's weird this small selection of dead ends should be called {puz_point_drive_enders}, but it is.") + "\nPassage leads back east." )} ;
    r10_header : dynamic_string {( point_dry_vendors ? "Dry Vendors" : "Drive Enders" )} ;
 
    r11_loc : dynamic_string {( point_duh_losing ? "You feel up to going in any four directions now that the dull oozing has died down." : "Here {puz_point_dull_oozing}, physical and audible, surrounds you. There's nothing terribly dangerous any way but back north, but right now, your general feeling is, \"Ehh, why bother?\"" )} ;
@@ -195,10 +195,10 @@ strings {
    r31_loc : dynamic_string {( point_hate_rash ? "The yelling is gone now, but even if it wasn't, you are pretty sure you could zone it out. You can go all four directions without nuisance now." : "This place would be kind of unappetizing without the constant echo of {puz_point_hey_trash} from the north, west and east. At least you can go back south." )} ;
    r31_header : string "Way-Still Waste, Ill" ;
 
-   r32_loc : string "Here all sorts of weird entities train at chess." ;
+   r32_loc : dynamic_string {( (point_chest_reigning ? "A big majestic chest lies here in this east-west passage." + (point_dump_liars ? " The chest is empty now." : " Also, some dumb pliers are in the chest. You were discouraged from taking them.") : "Here in this east-west passage all sorts of weird entities train at chess. What could possibly be more important or rewarding than chess? It's the game of royalty, you know!")  )} ;
    r32_header : string "Chess Training" ; # ?? the spit thus pit
 
-   r33_loc : string "You might be able to take a boat north. You can definitely go east or back west." ;
+   r33_loc : dynamic_string {( (point_say_loaners ? "Your Mo'-Tried Moat Ride can take you north." : "Water blocks foot passage north.") + " However, you can definitely go east or back west." )} ;
    r33_header : string "Sail Owners" ;
 
    r34_loc : dynamic_string {( ( point_ply_towels ? "The owls no longer block the way north." : "You see {puz_point_plight_owls} blocking passage north. They look wet and unhappy." ) + "\nThere is also passage back west." )} ;
@@ -219,8 +219,8 @@ strings {
    r43_loc : string "Nothing yet." ;
    r43_header : string "Aww-Flake-Off Lake" ;
 
-   r44_loc : string "Nothing yet." ;
-   r44_header : string "Meager Oath" ;
+   r44_loc : dynamic_string {( "In this small building, " + (point_tense_ops ? "the {puz_point_ten_sops} ignore you now you've helped them, but hey, you're glad they can focus." : "{puz_point_ten_sops} mill around here, discussing plans that don't have much chance of coming off as-is.")  + "\nThe only way out of this small building is south." )} ;
+   r44_header : string "Ten Sops" ;
 
    # flavor text
    endgame_friends : dynamic_string {( point_broke_lass ? "Your two friends" : "The mage, urgent" )} ;
