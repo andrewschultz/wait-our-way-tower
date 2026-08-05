@@ -96,6 +96,7 @@ strings {
    puz_point_major_gent     : dynamic_string {( opt_color_coding ? "<major gent<#f80>>" : "major gent" )}         ; # 43
    puz_point_meager_oath    : dynamic_string {( opt_color_coding ? "<meager oath<#f80>>" : "meager oath" )}       ; # 24
    puz_point_pit_churning   : dynamic_string {( opt_color_coding ? "<pit churning<#f80>>" : "pit churning" )}     ; # 12
+   puz_point_plight_owls    : dynamic_string {( opt_color_coding ? "<plight owls<#f80>>" : "plight owls" )}       ; # 28
    puz_point_post_easing    : dynamic_string {( opt_color_coding ? "<post easing<#f80>>" : "post easing" )}       ; # 19
    puz_point_safe_oar       : dynamic_string {( opt_color_coding ? "<safe oar<#f80>>" : "safe oar" )}             ; # 17
    puz_point_sail_owners    : dynamic_string {( opt_color_coding ? "<sail owners<#f80>>" : "sail owners" )}       ; # 18
@@ -739,6 +740,7 @@ booleans {
    point_me_growth         : boolean "false" ; # 24
    point_no_injuries       : boolean "false" ; # 09
    point_pitch_earning     : boolean "false" ; # 12
+   point_ply_towels        : boolean "false" ; # 28
    point_pose_teasing      : boolean "false" ; # 19
    point_right_angles      : boolean "false" ; # 42
    point_say_four          : boolean "false" ; # 17
@@ -1602,6 +1604,35 @@ locations {
    }
    r34 : location "{r34_loc}" header="{r34_header}" {
       on_command {
+         : match "ply towels" {
+            : if (point_ply_towels) {
+               : print "Already done!" ;
+               : done ;
+            }
+            : if (!point_ply_towels) {
+               : print "But you have no towels, or things that could be passed off as towels, to ply!" ;
+               : set_true "think_ply_towels" ;
+               : gosub "note_thinks" ;
+               : done ;
+            }
+            : print "Narrative text." ;
+            : set_integer var="tempint" "28" ;
+            : set_true "point_ply_towels" ;
+            : gosub "add_point" ;
+            : done ;
+         }
+         : if (!point_ply_towels) {
+            : match "ply _;_ towels" {
+               : set_integer var="tempint" "28" ;
+               : set_boolean var="already_got_command" {( think_ply_towels && !point_ply_towels )} ; # this is optional. Delete if point does not rely on any other variables.
+               : set_false "first_half" ;
+               : match "ply _" {
+                  : set_true "first_half" ;
+               }
+               : gosub "say_half" ;
+               : done ;
+            }
+         }
       }
    }
    r35 : location "{r35_loc}" header="{r35_header}" {
