@@ -120,6 +120,12 @@ strings {
    puz_point_wry_tangles    : dynamic_string {( opt_color_coding ? "<Wry Tangles<#f80>>" : "Wry Tangles" )}       ; # 42
    puz_point_yellow_pin     : dynamic_string {( opt_color_coding ? "<yellow pin<#f80>>" : "yellow pin" )}         ; # 02
 
+   # blocking strings
+   block_03_04       : string "Weird! It feels like there could almost be something there. But it's disorienting even to plan out a route. For now." ;
+   block_dull_oozing : string "Ehh ... the {puz_point_dull_oozing} slows you down. It's probably wrong, and trekking further is probably harmless, but what if it isn't?" ;
+   block_hey_trash   : string "The call of {puz_point_hey_trash} freezes you. You half want to show them, whomever they are, and whatever you want to show. You'll decide that later. Also, you worry if you go farther, there'll be more people like that, which could put you in danger. So, for now, no." ;
+   block_trrg        : string "Not with the {trrg} around you can't explore somewhere new." ;
+
    # room(s)
    r00_loc : dynamic_string {( point_catch_ill ? "The cat, chill explores here." :
       point_vine_eater ? "With the fly traps removed, there's a {puz_point_cat_chill} here." :
@@ -2137,16 +2143,77 @@ connections {
 barriers {
 
    # general block going
+
+   # r00 free movement from r01
+
+   block_go_r01 : block {
+      location = r01
+      block_when_not = point_duh_losing
+      message = {block_dull_oozing}
+   }
+
+   # r02 free movement from r01
+
+   block_go_r03 : block {
+      location = r03
+      block_when_not = point_pose_teasing
+      message = {block_pose_teasing}
+   }
+
+   block_secret_r03 : block {
+      location = r03
+      block_when = gamestate_no_oops_yet
+      message = {block_03_04}
+   }
+
+   # r04 free movement from r01, sort of
+
+   block_secret_r04 : block {
+      location = r04
+      block_when = gamestate_no_oops_yet
+      message = {block_03_04}
+   }
+
+   block_go_r10 : block {
+      location = r10
+      block_when_not = point_duh_losing
+      message = {block_dull_oozing}
+   }
+
+   block_go_r11 : block {
+      location = r11
+      block_when_not = point_halt_error
+      message = Not with the hall terror in the way.
+   }
+
+   block_go_r12 : block {
+      location = r12
+      block_when_not = point_duh_losing
+      message = {block_dull_oozing}
+   }
+
+   block_go_r13 : block {
+      location = r13
+      block_when_not = point_no_injuries
+      message = The knowin' juries scold you. "It might not be safe. You never know. What if you have, like, pre-existing conditions?" They outnumber you. How to convince them you're willing to take that risk, that you'd be safe? Or, at the very least, not worth bugging?"
+   }
+
+   block_go_r14 : block {
+      location = r03
+      block_when_not = point_pose_teasing
+      message = {block_pose_teasing}
+   }
+
+   block_go_r15 : block {
+      location = r15
+      block_when_not = gamestate_thug_gone
+      message = {block_trrg}
+   }
+
    block_go_r21 : block {
       location = r21
       block_when = goblock_21
       message = THE DOOR blocks you.
-   }
-
-   block_go_r31 : block {
-      location = r31
-      block_when_not = point_halt_error
-      message = Not with the hall terror in the way.
    }
 
    block_go_r22 : block {
@@ -2157,8 +2224,32 @@ barriers {
 
    block_go_r22_fellas : block {
       location = r22
-      block_when = point_halt_error
+      block_when = r22_secondary_block
       message = You need to make sure the {puz_point_fellas_leap} order is neutralized.
+   }
+
+   block_go_r23 : block {
+      location = r23
+      block_when_not = point_free_crusty
+      message = The {puz_point_freak_rusty} to the east regales you with tales of potentially horrible things east. I mean, they're not dangerous, but you feel like you could help them first.
+   }
+
+   block_go_r24 : block {
+      location = r24
+      block_when_not = point_frame_urging
+      message = Not with the fray going on.
+   }
+
+   block_go_r25 : block {
+      location = r25
+      block_when_not = point_warm_acres
+      message = The war hasn't started yet, but perhaps it's a good idea to prevent it. You let these people plan long enough, they seem harmless, but they aren't.
+   }
+
+   block_go_r26 : block {
+      location = r26
+      block_when_not = gamestate_thug_gone
+      message = {block_trrg}
    }
 
    block_go_r27 : block {
@@ -2167,10 +2258,66 @@ barriers {
       message = The {puz_point_boss_lumping} insults at you won't let you buy.
    }
 
-   block_go_r11 : block {
-      location = r11
+   block_go_r30 : block {
+      location = r30
+      block_when_not = point_hate_rash
+      message = {block_hey_trash}
+   }
+
+   block_go_r31 : block {
+      location = r31
       block_when_not = point_halt_error
       message = Not with the hall terror in the way.
+   }
+
+   block_go_r32 : block {
+      location = r32
+      block_when_not = point_hate_rash
+      message = {block_hey_trash}
+   }
+
+   block_go_r33 : block {
+      location = r33
+      block_when_not = point_dump_liars
+      message = \"You don't know what's that way! You need to calculate all the possibilities before you move!\" They're probably wrong, but what if they're not?
+   }
+
+   # r34 free movement from r33
+
+   block_go_r35 : block {
+      location = r35
+      block_when_not = gamestate_thug_gone
+      message = {block_trrg}
+   }
+
+   block_go_r40 : block {
+      location = r40
+      block_when_not = point_door_cloud
+      message = \"Uggggh, let me tell you, kid-o,\" says the {puz_point_dork_loud}. \"Ain't a DANG THING to the north here. Not that you deserve to see anywhere interesting. Just, I'm saving you from your own worst urges. Why does it always fall to me?\" The {puz_point_dork_loud} then proceeds to disparage people who have too-slick social skills.
+   }
+
+   block_go_r41 : block {
+      location = r41
+      block_when_not = point_hate_rash
+      message = {block_hey_trash}
+   }
+
+   block_go_r42 : block {
+      location = r42
+      block_when_not = point_flow_tripling
+      message = The lake is too calm to sail to the west at the moment.
+   }
+
+   block_go_r43 : block {
+      location = r43
+      block_when_not = point_say_loaners
+      message = You'll need a boat to get on the water.
+   }
+
+   block_go_r44 : block {
+      location = r44
+      block_when_not = point_ply_towels
+      message = The plight owls outnumber you, and they want you to understand or alleviate their plight before making way to the north. They're just barely hiding out as-is.
    }
 
    # block going with HONE/bonus
