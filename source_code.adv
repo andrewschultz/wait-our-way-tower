@@ -93,6 +93,7 @@ strings {
    puz_point_knowin_juries  : dynamic_string {( opt_color_coding ? "<knowin juries<#f80>>" : "knowin juries" )}   ; # 09
    puz_point_major_gent     : dynamic_string {( opt_color_coding ? "<major gent<#f80>>" : "major gent" )}         ; # 43
    puz_point_pit_churning   : dynamic_string {( opt_color_coding ? "<pit churning<#f80>>" : "pit churning" )}     ; # 12
+   puz_point_post_easing    : dynamic_string {( opt_color_coding ? "<post easing<#f80>>" : "post easing" )}       ; # 19
    puz_point_safe_oar       : dynamic_string {( opt_color_coding ? "<safe oar<#f80>>" : "safe oar" )}             ; # 17
    puz_point_sail_owners    : dynamic_string {( opt_color_coding ? "<sail owners<#f80>>" : "sail owners" )}       ; # 18
    puz_point_titan_drowsing : dynamic_string {( opt_color_coding ? "<titan drowsing<#f80>>" : "titan drowsing" )} ; # 11
@@ -730,6 +731,7 @@ booleans {
    point_mage_urgent       : boolean "false" ; # 43
    point_no_injuries       : boolean "false" ; # 09
    point_pitch_earning     : boolean "false" ; # 12
+   point_pose_teasing      : boolean "false" ; # 19
    point_right_angles      : boolean "false" ; # 42
    point_say_four          : boolean "false" ; # 17
    point_say_loaners       : boolean "false" ; # 18
@@ -1011,6 +1013,28 @@ locations {
    }
    r13 : location "{r13_loc}" header="{r13_header}" {
       on_command {
+         : match "pose teasing" {
+            : if (point_pose_teasing) {
+               : print "Already done!" ;
+               : done ;
+            }
+            : print "Narrative text." ;
+            : set_integer var="tempint" "19" ;
+            : set_true "point_pose_teasing" ;
+            : gosub "add_point" ;
+            : done ;
+         }
+         : if (!point_pose_teasing) {
+            : match "pose _;_ teasing" {
+               : set_integer var="tempint" "19" ;
+               : set_false "first_half" ;
+               : match "pose _" {
+                  : set_true "first_half" ;
+               }
+               : gosub "say_half" ;
+               : done ;
+            }
+         }
       }
    }
    r14 : location "{r14_loc}" header="{r14_header}" {
