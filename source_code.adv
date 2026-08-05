@@ -77,6 +77,7 @@ strings {
    puz_point_bro_class      : dynamic_string {( opt_color_coding ? "<Bro Class<#f80>>" : "Bro Class" )}           ; # 44
    puz_point_canned_ooh     : dynamic_string {( opt_color_coding ? "<Canned, ooh<#f80>>" : "Canned, ooh" )}       ; # 00
    puz_point_chess_training : dynamic_string {( opt_color_coding ? "<chess training<#f80>>" : "chess training" )} ; # 13
+   puz_point_claw_throbbing : dynamic_string {( opt_color_coding ? "<claw throbbing<#f80>>" : "claw throbbing" )} ; # 25
    puz_point_coy_novations  : dynamic_string {( opt_color_coding ? "<coy novations<#f80>>" : "coy novations" )}   ; # 10
    puz_point_cue_bland      : dynamic_string {( opt_color_coding ? "<cue bland<#f80>>" : "cue bland" )}           ; # 27
    puz_point_dork_loud      : dynamic_string {( opt_color_coding ? "<dork loud<#f80>>" : "dork loud" )}           ; # 22
@@ -719,6 +720,7 @@ booleans {
    point_broke_lass        : boolean "false" ; # 44
    point_can_do            : boolean "false" ; # 00
    point_chest_reigning    : boolean "false" ; # 13
+   point_cloth_robbing     : boolean "false" ; # 25
    point_coin_ovations     : boolean "false" ; # 10
    point_cue_bland         : boolean "false" ; # 27
    point_door_cloud        : boolean "false" ; # 22
@@ -786,12 +788,22 @@ booleans {
    # think variables
    think_bah_slumping  : boolean "false" ;
    think_broke_lass    : boolean "false" ;
+   think_cloth_robbing : boolean "false" ;
    think_cue_bland     : boolean "false" ;
    think_door_cloud    : boolean "false" ;
+   think_fey_loops     : boolean "false" ;
+   think_frame_urging  : boolean "false" ;
    think_free_crusty   : boolean "false" ;
+   think_herd_all      : boolean "false" ;
+   think_heard_all     : boolean "false" ;
    think_pitch_earning : boolean "false" ;
+   think_ply_towels    : boolean "false" ;
+   think_right_angles  : boolean "false" ;
    think_say_four      : boolean "false" ;
    think_say_loaners   : boolean "false" ;
+   think_tense_ops     : boolean "false" ;
+   think_vine_eater    : boolean "false" ;
+   think_warm_acres    : boolean "false" ;
 
    think_any : dynamic_boolean {( 1 == 0 )} ;
    show_overlay : boolean "true" ;
@@ -1114,6 +1126,35 @@ locations {
    }
    r14 : location "{r14_loc}" header="{r14_header}" {
       on_command {
+         : match "cloth robbing" {
+            : if (!point_dump_liars) {
+               : print "But you don't have any sort of tool that could push the {puz_claw_throbbing} out of the way!" ;
+               : set_true "think_cloth_robbing" ;
+               : gosub "note_thinks" ;
+               : done ;
+            }
+            : if (point_cloth_robbing) {
+               : print "Already done!" ;
+               : done ;
+            }
+            : print "Narrative text." ;
+            : set_integer var="tempint" "25" ;
+            : set_true "point_cloth_robbing" ;
+            : gosub "add_point" ;
+            : done ;
+         }
+         : if (!point_cloth_robbing) {
+            : match "cloth _;_ robbing" {
+               : set_integer var="tempint" "25" ;
+               : set_boolean var="already_got_command" {( think_cloth_robbing && !point_cloth_robbing )} ; # this is optional. Delete if point does not rely on any other variables.
+               : set_false "first_half" ;
+               : match "cloth _" {
+                  : set_true "first_half" ;
+               }
+               : gosub "say_half" ;
+               : done ;
+            }
+         }
       }
    }
    r15 : location "{r15_loc}" header="{r15_header}" {
