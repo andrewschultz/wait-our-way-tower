@@ -25,7 +25,7 @@ strings {
    ifcomp : string "<IFComp<#f80>>[https://ifcomp.org]" ;
 
    # basics
-   my_score : dynamic_string {( tutorial_0_in_tutorial ? "Tutorial progress: {tutorial_score}/{max_tutorial_score}" : "{score}{plus_in_header}/{max_score}" )} ;
+   my_score : string "{score}{plus_in_header}/{max_score}" ;
    custom_unknown_verb_error : dynamic_string {( "Nothing special happens. You can use {vm_verbs} for a general overview of standard verbs." )} ;
    exits_err : dynamic_string {(
       is_at "r20" ? "THE DOOR east is the only exit." :
@@ -81,12 +81,12 @@ strings {
    puz_point_chez_pup       : dynamic_string {( opt_color_coding ? "<chez pup<#f80>>" : "chez pup" )}             ; # 37
    puz_point_claw_throbbing : dynamic_string {( opt_color_coding ? "<claw throbbing<#f80>>" : "claw throbbing" )} ; # 25
    puz_point_coy_novations  : dynamic_string {( opt_color_coding ? "<coy novations<#f80>>" : "coy novations" )}   ; # 10
-   puz_point_cue_bland      : dynamic_string {( opt_color_coding ? "<cue bland<#f80>>" : "cue bland" )}           ; # 27
+   puz_point_cube_land      : dynamic_string {( opt_color_coding ? "<cube land<#f80>>" : "cube land" )}           ; # 27
    puz_point_dork_loud      : dynamic_string {( opt_color_coding ? "<dork loud<#f80>>" : "dork loud" )}           ; # 22
    puz_point_drive_enders   : dynamic_string {( opt_color_coding ? "<drive enders<#f80>>" : "drive enders" )}     ; # 07
    puz_point_dull_oozing    : dynamic_string {( opt_color_coding ? "<dull oozing<#f80>>" : "dull oozing" )}       ; # 06
    puz_point_dumb_pliers    : dynamic_string {( opt_color_coding ? "<dumb pliers<#f80>>" : "dumb pliers" )}       ; # 14
-   puz_point_dump_arable    : dynamic_string {( opt_color_coding ? "<dump arable<#f80>>" : "dump arable" )}       ; # 555
+   puz_point_dump_arable    : dynamic_string {( opt_color_coding ? "<dump, arable<#f80>>" : "dump, arable" )}       ; # 555
    puz_point_eh_sink        : dynamic_string {( opt_color_coding ? "<Ace, Inc.<#f80>>" : "Ace, Inc." )}           ; # 26
    puz_point_fail_oops      : dynamic_string {( opt_color_coding ? "<fail_oops<#f80>>" : "fail_oops" )}           ; # 41
    puz_point_field_erring   : dynamic_string {( opt_color_coding ? "<field erring<#f80>>" : "field erring" )}     ; # 15
@@ -242,7 +242,7 @@ strings {
    noguess : string "<(unknown)<#888>>" ;
    noguess_c_1 : dynamic_string {( unneeded_half ? "<(unneeded)<#888>>" : "<(unknown)<#888>>" )} ;
    think_here_also : dynamic_string {( think_text_yet ? "Also, here" : "Here" )} ;
-   number_as_word : dynamic_string {( commands_figured >= collection_count("num_to_word") ? "many" : collection_get { collection -> ("num_to_word") index -> ( commands_figured ) } )} ;
+   number_as_word : dynamic_string {( collection_get { collection -> ("num_to_word") index -> ( commands_figured ) } )} ;
    plus_in_header : dynamic_string {( commands_figured > 0 ? "+{commands_figured}" : "" )} ;
 
    #auxiliary for options
