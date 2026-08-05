@@ -89,6 +89,7 @@ strings {
    puz_point_field_erring   : dynamic_string {( opt_color_coding ? "<field erring<#f80>>" : "field erring" )}     ; # 15
    puz_point_fellas_leap    : dynamic_string {( opt_color_coding ? "<FELLAS, LEAP<#f80>>" : "FELLAS, LEAP" )}     ; # 04
    puz_point_float_rippling : dynamic_string {( opt_color_coding ? "<float_rippling<#f80>>" : "float-rippling" )} ; # 23
+   puz_point_fray_merging   : dynamic_string {( opt_color_coding ? "<fray merging<#f80>>" : "fray merging" )}     ; # 30
    puz_point_freak_rusty    : dynamic_string {( opt_color_coding ? "<freak rusty<#f80>>" : "freak rusty" )}       ; # 16
    puz_point_halt_error     : dynamic_string {( opt_color_coding ? "<halt error<#f80>>" : "halt error" )}         ; # 03
    puz_point_hey_trash      : dynamic_string {( opt_color_coding ? "<hey trash<#f80>>" : "hey trash" )}           ; # 05
@@ -734,6 +735,7 @@ booleans {
    point_feel_daring       : boolean "false" ; # 15
    point_fell_asleep       : boolean "false" ; # 04
    point_flow_tripling     : boolean "false" ; # 23 #?? don't annoy water gods too much
+   point_frame_urging      : boolean "false" ; # 30
    point_free_crusty       : boolean "false" ; # 16
    point_halt_error        : boolean "false" ; # 03
    point_hate_rash         : boolean "false" ; # 05
@@ -1384,6 +1386,35 @@ locations {
    }
    r23 : location "{r23_loc}" header="{r23_header}" {
       on_command {
+         : match "frame urging" {
+            : if (!point_tense_ops) {
+               : print "You might need to navigate something to ramp up before navigating this whole fray!" ;
+               : set_true "think_frame_urging" ;
+               : gosub "note_thinks" ;
+               : done ;
+            }
+            : if (point_frame_urging) {
+               : print "Already done!" ;
+               : done ;
+            }
+            : print "With your experience helping the ten sops, you're able to hammer out some sort of agreement. They hand you an 'I'd Agree, Aye' degree." ;
+            : set_integer var="tempint" "31" ;
+            : set_true "point_frame_urging" ;
+            : gosub "add_point" ;
+            : done ;
+         }
+         : if (!point_frame_urging) {
+            : match "frame _;_ urging" {
+               : set_integer var="tempint" "31" ;
+               : set_boolean var="already_got_command" {( think_frame_urging && !point_frame_urging )} ; # this is optional. Delete if point does not rely on any other variables.
+               : set_false "first_half" ;
+               : match "frame _" {
+                  : set_true "first_half" ;
+               }
+               : gosub "say_half" ;
+               : done ;
+            }
+         }
       }
    }
    r24 : location "{r24_loc}" header="{r24_header}" {
