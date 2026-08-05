@@ -1648,6 +1648,7 @@ locations {
                : done ;
             }
             : print "Narrative text." ;
+            : destroy "only_girl" ;
             : set_integer var="tempint" "40" ;
             : set_false "think_warm_acres" ;
             : set_true "point_warm_acres" ;
@@ -2107,7 +2108,7 @@ locations {
                   : done ;
                }
                : print "Narrative text." ;
-               : get "vie_neater" ;
+               : pocket "vie_neater" ;
                : set_integer var="tempint" "27" ;
                : set_true "point_cue_bland" ;
                : gosub "add_point" ;
@@ -2241,6 +2242,7 @@ locations {
 
 # Defines things in the world (scenery cannot be carried)
 objects {
+   only_girl : object "She is holding {puz_point_her_doll}." conspicuous = "false";
    vie_neater : object "The VIE NEATER voucher you got from the Cue, Bland" ;
    phase_tats : object "{i_fspt}" ;
    major_gent : object "A bit too nice here." at = "r35" conspicuous = "false" ;
@@ -3161,6 +3163,12 @@ on_startup {
 ## Execute this every time a player moves or redescribes a location
 
 on_describe {
+   : if (is_present "only_girl") {
+      : print "The girl from the isle, {puz_point_her_doll} in hand, is here." ;
+   } : else_if (point_girl_only && !point_warm_acres) {
+      : print "The girl from the isle tags along, {puz_point_her_doll} in hand." ;
+      : create "only_girl" ;
+   }
    : if (is_present "thug") {
       : print {( "The {trtg} " + (is_at("r25") ? "stands here, blocking further passages. How to get around it?" : is_at("r24") ? "chases after you." : "continues to chase after you.") )} ;
    }
@@ -3307,6 +3315,9 @@ on_command {
       }
       : if (score > 40) {
          : print "You're carrying nothing, but surely all you need is your keen wit and insight to finish things off." ;
+      }
+      : if (is_carried "vie_neater") {
+         : print "You have a promise to VIE NEATER." ;
       }
       : if (point_tense_ops && !point_frame_urging) {
          : print "You have more confidence in yourself after dealing with the ten sops. Maybe you can tackle bigger things!" ;
