@@ -3041,7 +3041,17 @@ subroutines {
          : redescribe ;
          : done ;
       }
+      : match "testjump 2" {
+         : gosub "testjump_part_1" ;
+         : gosub "testjump_part_2" ;
+         : set_integer var="score" "39" ;
+         : set_true "gamestate_r21_e" ;
+         : goto "r24" ;
+         : redescribe ;
+         : done ;
+      }
       : print "TESTJUMP 1 sends you to outside the cell, hall cleared, 5 points." ;
+      : print "TESTJUMP 2 sends you to before the chase, 39 points." ;
       : done ;
    }
 
@@ -3051,6 +3061,44 @@ subroutines {
       : set_true "point_yell_open" ;
       : set_true "point_halt_error" ;
       : set_true "point_fell_asleep" ;
+   }
+
+   testjump_part_2 : subroutine {
+       : set_true "point_hate_rash" ;
+       : set_true "point_duh_losing" ;
+       : set_true "point_dry_vendors" ;
+       : set_true "point_dumb_parable" ;
+       : set_true "point_no_injuries" ;
+       : set_true "point_coin_ovations" ;
+       : set_true "point_tightened_rousing" ;
+       : set_true "point_pitch_earning" ;
+       : set_true "point_chest_reigning" ;
+       : set_true "point_dump_liars" ;
+       : set_true "point_feel_daring" ;
+       : set_true "point_free_crusty" ;
+       : set_true "point_say_four" ;
+       : set_true "point_say_loaners" ;
+       : set_true "point_pose_teasing" ;
+       : set_true "point_sun_catching" ;
+       : set_true "point_tufty_key" ;
+       : set_true "point_door_cloud" ;
+       : set_true "point_flow_tripling" ;
+       : set_true "point_me_growth" ;
+       : set_true "point_cloth_robbing" ;
+       : set_true "point_eh_sink" ;
+       : set_true "point_cue_bland" ;
+       : set_true "point_ply_towels" ;
+       : set_true "point_tense_ops" ;
+       : set_true "point_frame_urging" ;
+       : set_true "point_seek_rest" ;
+       : set_true "point_girl_only" ;
+       : set_true "point_fly_traps" ;
+       : set_true "point_vine_eater" ;
+       : set_true "point_catch_ill" ;
+       : set_true "point_herd_all" ;
+       : set_true "point_shape_up" ;
+       : set_true "point_heard_all" ;
+       : set_true "point_whee_plucky" ;
    }
 
 }
