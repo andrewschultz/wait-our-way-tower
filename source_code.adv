@@ -3299,6 +3299,10 @@ on_describe {
 ## Test VERB NOUN that the player types and executes conditional actions
 
 on_tick {
+   : if (tats_each_move) {
+      : gosub "set_tats_num" ;
+      : print "Tats num this turn {tats_num}." ;
+   }
    : if (!showed_first_note) {
       : print "{one_time}{vm_about} will give general game information. {vm_verbs} will describe {wowt}'s stripped-down parser." ;
       : set_true "showed_first_note" ;
@@ -3588,6 +3592,10 @@ on_command {
 
    : match "testjump _" {
       : gosub "testjump" ;
+   }
+
+   : match "tatmv _" {
+      : set_true "tats_each_move" ;
    }
 
 }
