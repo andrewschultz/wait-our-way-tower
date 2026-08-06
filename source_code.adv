@@ -257,28 +257,79 @@ integers {
 
    herd_score : dynamic_integer {( (point_herd_all ? 1 : 0) + (point_heard_all ? 1 : 0) )} ;
 
-   tats_number : dynamic_integer {(
+   tats_bottom : dynamic_integer {(
+      is_at "r00" ? r00_hintnum :
       is_at "r01" ? r01_hintnum :
+      is_at "r02" ? r02_hintnum :
+      is_at "r03" ? r03_hintnum :
+      is_at "r04" ? r04_hintnum :
+      is_at "r10" ? r10_hintnum :
+      is_at "r11" ? r11_hintnum :
+      is_at "r12" ? r12_hintnum :
+      is_at "r13" ? r13_hintnum :
+      is_at "r14" ? r14_hintnum :
+      0
+   )} ;
+   tats_middle : dynamic_integer {(
       is_at "r20" ? r20_hintnum :
-      is_at "r20" ? r20_hintnum :
-      is_at "r30" ? r30_hintnum :
       is_at "r21" ? r21_hintnum :
+      is_at "r22" ? r22_hintnum :
+      is_at "r23" ? r23_hintnum :
+      is_at "r24" ? r24_hintnum :
+      0
+   )} ;
+   tats_top : dynamic_integer {(
+      is_at "r30" ? r30_hintnum :
       is_at "r31" ? r31_hintnum :
+      is_at "r32" ? r32_hintnum :
+      is_at "r33" ? r33_hintnum :
+      is_at "r34" ? r34_hintnum :
+      is_at "r40" ? r40_hintnum :
+      is_at "r41" ? r41_hintnum :
+      is_at "r42" ? r42_hintnum :
+      is_at "r43" ? r43_hintnum :
+      is_at "r44" ? r44_hintnum :
+      0
+   )} ;
+   tats_end : dynamic_integer {(
+      is_at "r25" ? r25_hintnum :
+      is_at "r26" ? r26_hintnum :
+      is_at "r27" ? r27_hintnum :
+      is_at "r15" ? r15_hintnum :
+      is_at "r35" ? r35_hintnum :
       0 )} ;
-   r00_hintnum : dynamic_integer {( 0 )} ;
+   r00_hintnum : dynamic_integer {( !point_fly_traps ? 35 :
+      !point_vine_eater ? (point_cue_bland ? 45 : -45 ) :
+      !point_catch_ill ? 35 :
+      !point_girl_only ? -1 :
+      !point_herd_all ? 43 :
+      0 )} ;
    r01_hintnum : dynamic_integer {( !point_dumb_parable ? 47 :
       0 )} ;
-   r02_hintnum : dynamic_integer {( 0 )} ;
-   r03_hintnum : dynamic_integer {( 0 )} ;
-   r04_hintnum : dynamic_integer {( 0 )} ;
+   r02_hintnum : dynamic_integer {( !point_tightened_rousing ? 97 :
+      !point_pitch_earning ?
+      (point_coin_ovations ? 57 : -57) :
+      0 )} ;
+   r03_hintnum : dynamic_integer {( !point_sun_catching ? 38 :
+      !point_tufty_key ? 53 :
+      0 )} ;
+   r04_hintnum : dynamic_integer {( !point_me_growth ? 64 :
+      0 )} ;
    r10_hintnum : dynamic_integer {( !point_dry_vendors ? 36 :
-   0 )} ;
-   # : !point_say_four ? 34 :
+      !point_say_four ?
+	  (point_pitch_earning ? 34 : -34) :
+      0 )} ;
    r11_hintnum : dynamic_integer {( !point_duh_losing ? 36 :
       0 )} ;
-   r12_hintnum : dynamic_integer {( 0 )} ;
-   r13_hintnum : dynamic_integer {( 0 )} ;
-   r14_hintnum : dynamic_integer {( 0 )} ;
+   r12_hintnum : dynamic_integer {( !point_no_injuries ? 28 :
+      !point_coin_ovations ? 48 :
+      0 )} ;
+   r13_hintnum : dynamic_integer {( !point_pose_teasing ? 47 :
+      !point_whee_plucky && gameflag_note_pals_stay_end ? 46 :
+      0 )} ;
+   r14_hintnum : dynamic_integer {( !point_dump_liars ? -57 :
+      !point_cloth_robbing ? 57 :
+      0 )} ;
    r20_hintnum : dynamic_integer {( !point_can_do ? 32 :
       !point_thief_lore ? 54 :
       !point_yell_open ? 44 :
@@ -286,30 +337,59 @@ integers {
    r21_hintnum : dynamic_integer {( !point_halt_error ? 45 :
       !point_thief_lore ? 54 :
       0 )} ;
-   r22_hintnum : dynamic_integer {( 0 )} ;
-   r23_hintnum : dynamic_integer {( 0 )} ;
-   r24_hintnum : dynamic_integer {( 0 )} ;
+   r22_hintnum : dynamic_integer {( !point_feel_daring ? 46 :
+      !point_free_crusty ? 55 :
+      0 )} ;
+   r23_hintnum : dynamic_integer {( !point_tense_ops ? -56 :
+      !point_frame_urging ? 56:
+      0 )} ;
+   r24_hintnum : dynamic_integer {( point_warm_acres ? 0 :
+      (point_heard_all && point_herd_all) ? 45 :
+      -45 )} ;
    r30_hintnum : dynamic_integer {( !point_door_cloud ? 45 :
       0 )} ;
    r31_hintnum : dynamic_integer {( !point_hate_rash ? 44 :
       0 )} ;
-   r32_hintnum : dynamic_integer {( 0 )} ;
-   r33_hintnum : dynamic_integer {( 0 )} ;
-   r34_hintnum : dynamic_integer {( 0 )} ;
-   r40_hintnum : dynamic_integer {( 0 )} ;
-   r41_hintnum : dynamic_integer {( 0 )} ;
-   r42_hintnum : dynamic_integer {( 0 )} ;
-   r43_hintnum : dynamic_integer {( 0 )} ;
-   r44_hintnum : dynamic_integer {( 0 )} ;
+   r32_hintnum : dynamic_integer {( !point_chest_reigning ? 58 :
+      !point_dump_liars ? 45 :
+      0 )} ;
+   r33_hintnum : dynamic_integer {( !point_say_four ? -37 :
+      !point_say_loaners ? 37 :
+      0 )} ;
+   r34_hintnum : dynamic_integer {( !point_cloth_robbing ? -36 :
+      !point_ply_towels ? 36 :
+      0 )} ;
+   r40_hintnum : dynamic_integer {( !point_shape_up ? 52 :
+      !point_girl_only ? -1 :
+	  !point_heard_all ? 53 :
+      0 )} ;
+   r41_hintnum : dynamic_integer {( !point_eh_sink ? 42 :
+      !point_cue_bland ? 35 :
+      0 )} ;
+   r42_hintnum : dynamic_integer {( !point_seek_rest ? 35 :
+      !point_girl_only ? 44 :
+      0 )} ;
+   r43_hintnum : dynamic_integer {( !point_flow_tripling ? 48 :
+      0 )} ;
+   r44_hintnum : dynamic_integer {( !point_me_growth ? -53 :
+      !point_tense_ops ? 53 :
+      0 )} ;
 
    # endgame stuff
-   r25_hintnum : dynamic_integer {( 0 )} ;
-   r26_hintnum : dynamic_integer {( !point_bah_slumping ? 37 : 0 )} ; #?? remember could be negative
+   r25_hintnum : dynamic_integer {( 0 )} ; #there really is nothing here! The thug guards it all.
+   r26_hintnum : dynamic_integer {( !point_broke_lass ? -37 :
+      !point_bah_slumping ? 37 :
+      0 )} ; #?? remember could be negative
    r27_hintnum : dynamic_integer {( !point_blest_able ? 54 :
       !point_troop_leading ? 37 :
       0 )} ;
-   r15_hintnum : dynamic_integer {( 0 )} ;
-   r35_hintnum : dynamic_integer {( 0 )} ;
+   r15_hintnum : dynamic_integer {( !point_mage_urgent ? -56 :
+      !point_right_angles ? 56 :
+      0 )} ;
+   r35_hintnum : dynamic_integer {( !point_mage_urgent ? 46 :
+      !point_right_angles ? -54 :
+      !point_broke_lass ? 54 :
+      0 )} ;
 
 # auxiliary
    tempint : integer "0" ;
@@ -878,6 +958,9 @@ booleans {
    think_warm_acres    : boolean "false" ;
 
    think_any : dynamic_boolean {( commands_figured > 0 )} ;
+
+   # auxiliary
+   tats_blurry : boolean "false" ;
    show_overlay : boolean "true" ;
 }
 
@@ -2586,6 +2669,22 @@ subroutines {
       }
    }
 
+   set_tats_num : subroutine {
+      : if (is_at "end_zone") {
+         : set_integer var="tempint" {( tats_end )} ;
+      } : else_if (is_at "top_zone") {
+         : set_integer var="tempint" {( tats_top )} ;
+      } : else_if (is_at "middle_zone") {
+         : set_integer var="tempint" {( tats_middle )} ;
+      } : else_if (is_at "bottom_zone") {
+         : set_integer var="tempint" {( tats_bottom )} ;
+      } : else {
+         : set_integer var="tempint" "0" ;
+      }
+      : if (gamestate_fail_oops_known && (is_at "r14" || is_at "r04") && !point_fey_loops) {
+         : set_integer var="tempint" "35" ;
+      }
+   }
    ########################## options
 
    colorclue_choice : subroutine {
@@ -2612,7 +2711,8 @@ subroutines {
       }
       : match "hone aye;hone eye" {
          : print {( "Available exits are " + (opt_hone_aye ? "already" : "now") + " honed to ones you still need to use to win." )} ;
-         : if (tats_number == 0 && !opt_hone_aye) {
+         : gosub "set_tats_num" ;
+         : if (tempint == 0 && !opt_hone_aye) {
             : print "Since you're choosing this option, and you're done here, I'll make a note of that. You can exit, but you can't come back." ;
          }
          : set_true "opt_hone_aye" ;
@@ -3458,7 +3558,24 @@ on_command {
    }
    : if (me_x_yet) {
       : match "_ tats;_ fey;_ phase;_ stats" {
-         : print "The tats swirl and form a number: {tats_number}." ;
+         : gosub "set_tats_num" ;
+         : set_false "tats_blurry" ;
+         : if (tempint < 0) {
+            : set_true "tats_blurry" ;
+            : set_integer var="tempint" {( 0 - tempint )} ;
+         }
+         : if (tempint == 0) {
+            : print "You see no number right now." ;
+            : done ;
+         }
+         : if (tempint == -1) {
+            : print "Numbers swirl, but nothing definitive. Maybe later?" ;
+            : done ;
+         }
+         : print "The tats swirl and form a number: {tempint}." ;
+         : if (tats_blurry) {
+            : print "The number's a bit blurry, though. Maybe you can't do anything right now." ;
+         }
          : done ;
       }
    }
