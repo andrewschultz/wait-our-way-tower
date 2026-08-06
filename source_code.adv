@@ -94,7 +94,7 @@ strings {
    puz_point_flight_wraps   : dynamic_string {( opt_color_coding ? "<flight wraps<#f80>>" : "flight wraps" )}     ; # 33
    puz_point_flight_wraps_u : dynamic_string {( opt_color_coding ? "<Flight wraps<#f80>>" : "Flight wraps" )}     ; # 33
    puz_point_float_rippling : dynamic_string {( opt_color_coding ? "<float_rippling<#f80>>" : "float-rippling" )} ; # 23
-   puz_point_fray_merging   : dynamic_string {( opt_color_coding ? "<fray merging<#f80>>" : "fray merging" )}     ; # 30
+   puz_point_fray_measly    : dynamic_string {( opt_color_coding ? "<fray measly<#f80>>" : "fray measly" )}       ; # 30
    puz_point_freak_rusty    : dynamic_string {( opt_color_coding ? "<freak rusty<#f80>>" : "freak rusty" )}       ; # 16
    puz_point_grr_lonely     : dynamic_string {( opt_color_coding ? "<grr lonely<#f80>>" : "grr lonely" )}         ; # 32
    puz_point_hall_terror    : dynamic_string {( opt_color_coding ? "<hall terror<#f80>>" : "hall terror" )}       ; # 03
@@ -341,7 +341,7 @@ integers {
       !point_free_crusty ? 55 :
       0 )} ;
    r23_hintnum : dynamic_integer {( !point_tense_ops ? -56 :
-      !point_frame_urging ? 56:
+      !point_frame_easily ? 56:
       0 )} ;
    r24_hintnum : dynamic_integer {( point_warm_acres ? 0 :
       (point_heard_all && point_herd_all) ? 45 :
@@ -400,7 +400,7 @@ integers {
       ( think_coin_ovations ? 1 : 0) +
       ( think_door_cloud ? 1 : 0) +
       ( think_fey_loops ? 1 : 0) +
-      ( think_frame_urging ? 1 : 0) +
+      ( think_frame_easily ? 1 : 0) +
       ( think_free_crusty ? 1 : 0) +
       ( think_heard_all ? 1 : 0) +
       ( think_herd_all ? 1 : 0) +
@@ -627,7 +627,7 @@ collections {
          "<BLAND<#f80>>",
          "<TOWELS<#f80>>",
          "<OPS<#f80>>",
-         "<URGING<#f80>>",
+         "<EASILY<#f80>>",
          "<REST<#f80>>",
          "<ONLY<#f80>>",
          "<EATER<#f80>>",
@@ -873,7 +873,7 @@ booleans {
    point_fey_loops         : boolean "false" ; # 41
    point_fly_traps         : boolean "false" ; # 33
    point_flow_tripling     : boolean "false" ; # 23 #?? don't annoy water gods too much
-   point_frame_urging      : boolean "false" ; # 30
+   point_frame_easily      : boolean "false" ; # 30
    point_free_crusty       : boolean "false" ; # 16
    point_girl_only         : boolean "false" ; # 32
    point_halt_error        : boolean "false" ; # 03
@@ -944,7 +944,7 @@ booleans {
    think_coin_ovations : boolean "false" ;
    think_door_cloud    : boolean "false" ;
    think_fey_loops     : boolean "false" ;
-   think_frame_urging  : boolean "false" ;
+   think_frame_easily  : boolean "false" ;
    think_free_crusty   : boolean "false" ;
    think_heard_all     : boolean "false" ;
    think_herd_all      : boolean "false" ;
@@ -1685,28 +1685,28 @@ locations {
    }
    r23 : location "{r23_loc}" header="{r23_header}" {
       on_command {
-         : match "frame urging" {
+         : match "frame easily" {
             : if (!point_tense_ops) {
                : print "You might need to navigate something to ramp up before navigating this whole fray!" ;
-               : set_true "think_frame_urging" ;
+               : set_true "think_frame_easily" ;
                : gosub "note_thinks" ;
                : done ;
             }
-            : if (point_frame_urging) {
+            : if (point_frame_easily) {
                : print "Already done!" ;
                : done ;
             }
             : print "With your experience helping the ten sops, you're able to hammer out some sort of agreement. They hand you an 'I'd Agree, Aye' degree." ;
             : set_integer var="tempint" "31" ;
-            : set_false "think_frame_urging" ;
-            : set_true "point_frame_urging" ;
+            : set_false "think_frame_easily" ;
+            : set_true "point_frame_easily" ;
             : gosub "add_point" ;
             : done ;
          }
-         : if (!point_frame_urging) {
-            : match "frame _;_ urging" {
+         : if (!point_frame_easily) {
+            : match "frame _;_ easily" {
                : set_integer var="tempint" "31" ;
-               : set_boolean var="already_got_command" {( think_frame_urging && !point_frame_urging )} ; # this is optional. Delete if point does not rely on any other variables.
+               : set_boolean var="already_got_command" {( think_frame_easily && !point_frame_easily )} ; # this is optional. Delete if point does not rely on any other variables.
                : set_false "first_half" ;
                : match "frame _" {
                   : set_true "first_half" ;
@@ -2496,7 +2496,7 @@ barriers {
 
    block_go_r24 : block {
       location = r24
-      block_when_not = point_frame_urging
+      block_when_not = point_frame_easily
       message = Not with the fray going on.
    }
 
@@ -3198,7 +3198,7 @@ subroutines {
        : set_true "point_cue_bland" ;
        : set_true "point_ply_towels" ;
        : set_true "point_tense_ops" ;
-       : set_true "point_frame_urging" ;
+       : set_true "point_frame_easily" ;
        : set_true "point_seek_rest" ;
        : set_true "point_girl_only" ;
        : set_true "point_fly_traps" ;
@@ -3423,7 +3423,7 @@ on_command {
       : if (is_carried "vie_neater") {
          : print "You have a promise to VIE NEATER." ;
       }
-      : if (point_tense_ops && !point_frame_urging) {
+      : if (point_tense_ops && !point_frame_easily) {
          : print "You have more confidence in yourself after dealing with the ten sops. Maybe you can tackle bigger things!" ;
       }
    }
