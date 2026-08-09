@@ -998,10 +998,10 @@ locations {
       on_command {
          : match "fly traps" {
             : if (point_fly_traps) {
-               : print "Already done!" ;
+               : print "You already unwrapped the fly taps, for better or worse." ;
                : done ;
             }
-            : print "Narrative text." ;
+            : print "The flight wraps uncurl, with loud poppings, which you haven't heard since you got ahold of a ton of bubble wrap as a kid. Whether or not it was protecting the flight of the plants, or animals the plants prey on, you're not sure. But now the fly traps are out there, and they may need to be tamed." ;
             : set_integer var="tempint" "33" ;
             : set_true "point_fly_traps" ;
             : gosub "add_point" ;
@@ -1021,10 +1021,10 @@ locations {
          : if (point_vine_eater) {
             : match "catch ill" {
                : if (point_catch_acing) {
-                  : print "Already done!" ;
+                  : print "The cat's instincts are already back where they should be." ;
                   : done ;
                }
-               : print "Narrative text." ;
+               : print "You try and show the cat a better way of chasing, perhaps something it should know, but you're patient with it, and it's kind of fun. Eventually, it does get better, and it rubs against your feet, being able to trust you now. Maybe its friends will, too, if it has any." ;
                : set_integer var="tempint" "35" ;
                : set_true "point_catch_acing" ;
                : gosub "add_point" ;
@@ -1048,7 +1048,7 @@ locations {
       on_command {
          : match "dumb parable" {
             : if (point_dumb_parable) {
-               : print "Already done!" ;
+               : print "You already discovered one dumb parable. Two might fry your brain for the rest of the adventure!" ;
                : done ;
             }
             : print "Inspired, perhaps ironically, to construct a dumb parable, you built one out of simple honesty and a new simplicity and some back to nature stuff and the sort of details that make rich people feel they really really do connect with poor people, at least, poor people willing to do anything not to be poor any more. It's actually kinda somewhat convincing, if you don't think too hard. It's not something that stands up under serious rigor, but it might be nice to pass off to people who don't know better." ;
@@ -1074,10 +1074,10 @@ locations {
       on_command {
          : match "tightened rousing" {
             : if (point_tightened_rousing) {
-               : print "Already done!" ;
+               : print "The giant is already awake. Any more of that might be fatally irritating. Well, for you." ;
                : done ;
             }
-            : print "Narrative text." ;
+            : print "You're not sure how precisely to wake up a giant, but you realize you don't want to be all all over the place. You also don't want to be too loud, you stand a safe distance away, and you start yelling stuff, like how you have something interesting for them or whatever. Eventually the giant turns over and blinks and stares at you. So, now, what did you wake them for?" ;
             : set_integer var="tempint" "11" ;
             : set_true "point_tightened_rousing" ;
             : gosub "add_point" ;
@@ -1108,10 +1108,10 @@ locations {
                : done ;
             }
             : if (point_pitch_earning) {
-               : print "Already done!" ;
+               : print "There is nobody left to pitch to. Anyway, you got more riches than expected here." ;
                : done ;
             }
-            : print "Narrative text." ;
+            : print "You are quite sure how you're going to explain what's so great about one coin at first, especially since the giant has riches lying around. Then you find an angle. If someone as small as you can make this coin, with your strategies or whatever, think of what the giant could make with their height and strength and so forth. You put more of the dumb parable to use, and surprisingly, the giant buys it. They walk away. You are confronted with riches. There are \"higher itches, hi\" riches and \"power itches, POW\" riches. You decide on the first, though it's a smaller pile.\nAn unheard voice booms YOU HAVE CHOSEN WELL." ;
             : set_integer var="tempint" "12" ;
             : set_false "think_pitch_earning" ;
             : set_true "point_pitch_earning" ;
@@ -1136,10 +1136,10 @@ locations {
       on_command {
          : match "sun catching" {
             : if (point_sun_catching) {
-               : print "Already done!" ;
+               : print "The tiki doesn't have a friend. It might be insulted if you looked for better." ;
                : done ;
             }
-            : print "Narrative text." ;
+            : print "You angle your head various ways, noting that it is still day out, and perhaps if the sun hits things just right, you will see something you didn't. Sure enough, you catch a glean, and you dig into some soil, and you find a {puz_point_tough_tiki} staring back up at you. It's not a very big one, but it's still doesn't look like it gives in to other people's wishes very easily." ;
             : set_integer var="tempint" "20" ;
             : set_true "point_sun_catching" ;
             : gosub "add_point" ;
@@ -1159,10 +1159,10 @@ locations {
          : if (point_sun_catching) {
             : match "tufty key" {
                : if (point_tufty_key) {
-                  : print "Already done!" ;
+                  : print "You already got what you needed from the tough tiki. It might not take kindly to asking for more." ;
                   : done ;
                }
-               : print "Narrative text." ;
+               : print "The tiki nods slightly and then opens its mouth. A key falls out. It looks pretty dry, so you pick it up without washing your hands. You nod to the tiki, which closes its eyes." ;
                : set_integer var="tempint" "21" ;
                : set_true "point_tufty_key" ;
                : gosub "add_point" ;
@@ -1186,10 +1186,10 @@ locations {
       on_command {
          : match "me growth" {
             : if (point_me_growth) {
-               : print "Already done!" ;
+               : print "Too much of this self-improvement will leave you completely unsuited for what really matters in life, like weird text adventures." ;
                : done ;
             }
-            : print "Narrative text." ;
+            : print "Oh good, there was a bit of humble bragging in the meager oath, but you try and take the best bits and apply it to your own experiences. It actually works pretty well. You can say, well, if it helps someone less in perspective than me, it can help me, too, and I don't want to be too good for decent advice I've passed out for awhile. You feel more able to deal with people and groups and so forth." ;
             : set_integer var="tempint" "24" ;
             : set_true "point_me_growth" ;
             : gosub "add_point" ;
@@ -1212,10 +1212,10 @@ locations {
       on_command {
          : match "dry vendors" {
             : if (point_dry_vendors) {
-               : print "Already done!" ;
+               : print "There are quite enough vendors here now." ;
                : done ;
             }
-            : print "Narrative text." ;
+            : print "You look into some nooks, and you find some vendors, indeed. Perhaps what they have for sale isn't for everyone, and they make enough of a profit they don't need to advertise. The main thing that catches your eye is a {puz_point_safe_oar}." ;
             : set_integer var="tempint" "7" ;
             : set_true "point_dry_vendors" ;
             : gosub "add_point" ;
@@ -1240,10 +1240,10 @@ locations {
                   : done ;
                }
                : if (point_say_four) {
-                  : print "Already done!" ;
+                  : print "You probably got more oars than you need." ;
                   : done ;
                }
-               : print "Narrative text." ;
+               : print "Four seems about right for your needs. Too many, and you couldn't carry them all, but too few, and you might lose a spare. Some of the riches are leftover for later. Perhaps you'll have to buy transport." ;
                : set_integer var="tempint" "17" ;
                : set_false "think_say_four" ;
                : set_true "point_say_four" ;
@@ -1295,10 +1295,10 @@ locations {
       on_command {
          : match "no injuries" {
             : if (point_no_injuries) {
-               : print "Already done!" ;
+               : print "Strange. The juries have already forgotten about their little problems. It's as if some people just like to sit around and tell other people what they can't do, and then feel as though they've done something if they succeed." ;
                : done ;
             }
-            : print "Narrative text." ;
+            : print "You assure the juries that you are of perfectly sound body, if not mine, and you also mentioned that if something does happen, you can take liability for it. They say OK we guess.\nWith this done, they begin some {puz_point_coy_novations}." ;
             : set_integer var="tempint" "9" ;
             : set_true "point_no_injuries" ;
             : gosub "add_point" ;
@@ -1318,7 +1318,7 @@ locations {
          : if (point_no_injuries) {
             : match "coin ovations" {
                : if (point_coin_ovations) {
-                  : print "Already done!" ;
+                  : print "You really don't want to repeat the dumb parable inspired story, and you also don't want the juries to potentially see through it the second time through." ;
                   : done ;
                }
                : if (!point_dumb_parable) {
@@ -1327,7 +1327,7 @@ locations {
                   : gosub "note_thinks" ;
                   : done ;
                }
-               : print "Narrative text." ;
+               : print "Surprisingly, the dumb parable works on the juries, who maybe just needed something some sort of new simplicity to who and I at, before they go back to complex reasons why people they don't like shouldn't get to do more than they do. They give you both coin innovations, though unsurprisingly, there's a lot more ovations than coin. You almost have a headache by the time it stops, but at least you're not broke now." ;
                : set_integer var="tempint" "10" ;
                : set_false "think_coin_ovations" ;
                : set_true "point_coin_ovations" ;
@@ -1352,10 +1352,10 @@ locations {
       on_command {
          : match "pose teasing" {
             : if (point_pose_teasing) {
-               : print "Already done!" ;
+               : print "You already exposed things." ;
                : done ;
             }
-            : print "Narrative text." ;
+            : print "You seem to sort of pattern before, when you wanted to like read a book or do something interesting on your own that other people didn't like. They would tell you to take it easy or whatever, then of course when they describe stuff, that they like to do, they would say why aren't you appreciating how much fun I have? The Bros look a bit upset that you've seen through this, but what can they really do? They say, well, you're lost, there's really not all that much beyond, at least not for interesting people." ;
             : set_integer var="tempint" "19" ;
             : set_true "point_pose_teasing" ;
             : gosub "add_point" ;
@@ -1375,10 +1375,10 @@ locations {
          : if (gamestate_bros_second_placed) {
             : match "whee plucky" {
                : if (point_whee_plucky) {
-                  : print "Already done!" ;
+                  : print "You don't need to Show Them any more. Wherever They went. Better to Do Stuff, with them watching or not." ;
                   : done ;
                }
-               : print "Narrative text." ;
+               : print "You flip the script on the Bros. You say, well, maybe I've made my own luck and all that sort of thing, and maybe you haven't, by sitting around and complaining about how other people have all the luck. They start fighting with each other. Who complaints the most? Who complaints the least? There's a big argument. It's almost entertaining, but you don't want to get too caught up in it. It dies down eventually. The Bros go off to sulk somewhere else." ;
                : set_integer var="tempint" "39" ;
                : set_true "point_whee_plucky" ;
                : set_false "gamestate_bros_second_placed" ;
@@ -1415,10 +1415,10 @@ locations {
                : done ;
             }
             : if (point_cloth_robbing) {
-               : print "Already done!" ;
+               : print "You doubt you need any more cloth." ;
                : done ;
             }
-            : print "Narrative text." ;
+            : print "As the cloth throbs around, you use the pliers, which suddenly seem pretty smart, or at least you are smart enough to take them, to pull cloth away. The claw doesn't really seem to notice, or it just goes in its general circuit, oblivious to what has changed. Congratulations! You're now a possessor of several towels!" ;
             : set_integer var="tempint" "25" ;
             : set_false "think_cloth_robbing" ;
             : set_true "point_cloth_robbing" ;
@@ -1449,10 +1449,10 @@ locations {
                : done ;
             }
             : if (point_right_angles) {
-               : print "Already done!" ;
+               : print "You look through the book some more, but really, you've digested about all you can process for the next bit. You're at the point where you're saying, yeah, that's pretty clever, but it will go in one ear and out the other. It did what it needed to, for the person who needed it." ;
                : done ;
             }
-            : print "Narrative text." ;
+            : print "You encourage the mage to look at this new book, refraining from saying, thinking about things right is its own sort of magic. You mentioned that they've probably worked hard to get their beliefs, and maybe the right thing or two could give them a huge jump they just haven't seen before, but they weren't ready for it yet. And they pretty much agree. Their sense of urgency has changed, from desperation down to, well, let's do what we need to and get through with it, and we may actually not have to do anything too crazy. You like to change, even if it's temporary. Perhaps if you go get stuff done, that will encourage it to stay permanent." ;
             : set_integer var="tempint" "42" ;
             : set_false "think_right_angles" ;
             : set_true "point_right_angles" ;
@@ -1570,7 +1570,7 @@ locations {
          }
          : match "halt error" {
             : if (point_halt_error) {
-               : print "Already done!" ;
+               : print "There's no need to prevent things coming back." ;
                : done ;
             }
             : print "What good can such words do against a terror? But they're worth a try. Surprisingly, the terror lets up a bit. It seems to do some calculations then mentioned, you are not the optimal person to be terrorizing at the time, if you said something like that. It goes in search of other prey. You hear voices after this." ;
@@ -1596,7 +1596,7 @@ locations {
                   : print "You don't want to oversell this." ;
                   : done ;
                }
-               : print "Narrative text." ;
+               : print "You try shouting fell asleep first, but you realize that was really a bad idea. Slowly, you make your voice drowsier and drowsier, saying fell asleep, fall asleep, fall asleep. " ;
                : set_integer var="tempint" "4" ;
                : set_true "point_fell_asleep" ;
                : gosub "add_point" ;
@@ -1620,10 +1620,10 @@ locations {
       on_command {
          : match "feel daring" {
             : if (point_feel_daring) {
-               : print "Already done!" ;
+               : print "You don't want to engage in daring for the sake of daring. Sometimes, if you do too much of that, it burns you out for later. And you sense you have a good chunk of adventure to go." ;
                : done ;
             }
-            : print "Narrative text." ;
+            : print "It's not exactly flipping a switch count but it is important to feel as though you can try stuff, and to do so, you remember other times you were unexpectedly brave, and big or small things. It seems to work, for now. A nagging voice tells you you really don't want to waste that daring feeling. You're actually glad to have it around." ;
             : set_integer var="tempint" "15" ;
             : set_true "point_feel_daring" ;
             : gosub "add_point" ;
@@ -1649,10 +1649,10 @@ locations {
                   : done ;
                }
                : if (point_free_crusty) {
-                  : print "Already done!" ;
+                  : print "You already helped the ex-freak see their individuality more productively." ;
                   : done ;
                }
-               : print "Narrative text." ;
+               : print "You tell the freak, nonsense, you don't have to be a freak, and they say other people have said that and they call them even more of a freak for not finding a way. But you say, well, why not frame it as nonconformism? So you're suspicious of it all, and maybe you are, well, a bit free of it, and feeling a bit crusty that more people haven't seen it, the sort of people who swear they have more common sense than you do. Brilliant, they say, I'll give that a try. I'd like to cut off your jib. They walk off, presumably to educate other people, and definitely to not block your way east any more." ;
                : set_integer var="tempint" "16" ;
                : set_false "think_free_crusty" ;
                : set_true "point_free_crusty" ;
@@ -1678,16 +1678,16 @@ locations {
       on_command {
          : match "frame easily" {
             : if (!point_tense_ops) {
-               : print "You might need to navigate something to ramp up before navigating this whole fray!" ;
+               : print "You might need to navigate some smaller conflicts or plans to ramp up before navigating this whole fray!" ;
                : set_true "think_frame_easily" ;
                : gosub "note_thinks" ;
                : done ;
             }
             : if (point_frame_easily) {
-               : print "Already done!" ;
+               : print "But you already dispersed the fray!" ;
                : done ;
             }
-            : print "With your experience helping the ten sops, you're able to hammer out some sort of agreement. They hand you an 'I'd Agree, Aye' degree." ;
+            : print "With your experience helping the ten sops, you're able to hammer out some sort of agreement. They hand you an {iaad}." ;
             : set_integer var="tempint" "31" ;
             : set_false "think_frame_easily" ;
             : set_true "point_frame_easily" ;
@@ -1718,10 +1718,10 @@ locations {
                : done ;
             }
             : if (point_warm_acres) {
-               : print "Already done!" ;
+               : print "It's already warmer and cozier here. We don't need to burn things up." ;
                : done ;
             }
-            : print "Narrative text." ;
+            : print "What good can a bit of warmth do? Even if it is emotional warmth? Well, you try it, and somehow, the dogs and cats animals instinct know you're ready for them. They swarm over the area. Some of the makers absolutely loathe pets, and they flee right away. Other makers, mostly the recently initiative, actually are receptive to the dogs and cats. They seem more interesting than planning war or whatever. Among some of the Them are the girl's old parents, apparently. She points them out to you. They kind of look at her and run by. But then some other I don't say, wait, you're that kid they talked about, we feel bad about this, why don't you come with us at least temporarily. A dog and cat each follow as she goes. She waves goodbye to you, still holding her doll." ;
             : destroy "only_girl" ;
             : set_integer var="tempint" "40" ;
             : set_false "think_warm_acres" ;
@@ -1766,7 +1766,7 @@ locations {
                : print "Don't rub it in. The boss is long gone, anyway." ;
                : done ;
             }
-            : print "Narrative text." ;
+            : print "Even though the boss doesn't seem to let up, you actually pretend that they are, and you have the backup to prove it. The gal and the mage can believably pretend they don't know each other that well, or you, so it doesn't come off as a coordinated effort. You play off this a lot, and the boss, trying to lump in your problems or alleged problems, gives up. You're just not going to listen, are you? They run away. The mage and the lass talk to you for a bit. They have other things to do, too, and they go their separate ways, and the mage realizes he has a lot to learn beyond just spells and stuff." ;
             : set_integer var="tempint" "45" ;
             : set_false "think_bah_slumping" ;
             : set_true "point_bah_slumping" ;
@@ -1791,10 +1791,10 @@ locations {
       on_command {
          : match "blest able" {
             : if (point_blest_able) {
-               : print "Already done!" ;
+               : print "At some point, there are diminishing or even negative returns for counting and re-counting your blessings. What will you do with them, around the true pleading?" ;
                : done ;
             }
-            : print "Narrative text." ;
+            : print "Instead of feeling statement, you feel as though there are possibilities, possibilities that would not have opened up in a more chaotic environment. You sit back and think of your own thoughts and listen to what there is to listen to. There is now a lot of {puz_point_true_pleading}, a lot of thoughts you had and forgot you did, or you dismissed as not really important or worldly enough." ;
             : set_integer var="tempint" "46" ;
             : set_true "point_blest_able" ;
             : gosub "add_point" ;
@@ -1839,16 +1839,16 @@ locations {
       on_command {
          : match "door cloud" {
             : if (!point_tufty_key) {
-               : print "The dork is rather upset. \"If I dont know what sort of door you want, I can't search through the whole dork cloud. Geez!\"" ;
+               : print "The dork is rather upset. \"If I don't know what sort of door you want, I can't search through the whole dork cloud on my own. I'm smart, but not that smart. Or maybe I am, but I'm smart enough to know that's not how best to use my brain. Geez!\"" ;
                : set_true "think_door_cloud" ;
                : gosub "note_thinks" ;
                : done ;
             }
             : if (point_door_cloud) {
-               : print "Already done!" ;
+               : print "The tufty key won't fit any other doors." ;
                : done ;
             }
-            : print "Narrative text." ;
+            : print "The dork yells at you to make sure that you have some way to get through a door, and when you show them the key, they just specifically say, oh, that one. Nobody's ever been through that one before. I don't know where it leads, but I guess if it's the only key you have, you might as well go see it. The earth shakes as the dork turns the key, and when you look around, the cloud is gone, and there is only the door left, leading north." ;
             : set_integer var="tempint" "22" ;
             : set_false "think_door_cloud" ;
             : set_true "point_door_cloud" ;
@@ -1872,10 +1872,10 @@ locations {
       on_command {
          : match "hate rash" {
             : if (point_hate_rash) {
-               : print "Already done!" ;
+               : print "The thing about heat, is once you've labeled it and such, and risen above it, you don't need to look back and maybe get stuck in it again." ;
                : done ;
             }
-            : print "Narrative text." ;
+            : print "You see what's going on here, and while you hear some crying about how people don't want to be called trash, you set them straight saying, that sort of thing is trash, not the people, and you can do better if you'd be bothered. They feel very insulted by this, and they assure you that it's this sort of behavior though will make them spew even more hateful speech to the next person, who's even less able to take it than you, and you should feel very very guilty about it. But thankfully, you'll get to do so on your own time, since the voice dissipates. You can now go all four ways." ;
             : set_integer var="tempint" "5" ;
             : set_true "point_hate_rash" ;
             : gosub "add_point" ;
@@ -1898,10 +1898,10 @@ locations {
       on_command {
          : match "chest reigning" {
             : if (point_chest_reigning) {
-               : print "Already done!" ;
+               : print "One chest is enough. Don't get greedy." ;
                : done ;
             }
-            : print "Narrative text." ;
+            : print "If chess is the sport of kings and Queens, then it makes sense that anything around it must be pretty royal, too. Surprisingly, nobody really stops their analysis, but when you open the chest, you find a pair of {puz_point_dumb_pliers}. The trainers say, come on, {puz_point_dumb_pliers}? That's just dumb. Not as interesting as chess analysis! But hey, it's something. You probably wouldn't be able to carry vast riches anyways. But you still feel a bit embarrassed taking the pliers." ;
             : set_integer var="tempint" "13" ;
             : set_true "point_chest_reigning" ;
             : gosub "add_point" ;
@@ -1921,10 +1921,10 @@ locations {
          : if (point_chest_reigning && !point_dump_liars) {
             : match "dump liars" {
                : if (point_dump_liars) {
-                  : print "Already done!" ;
+                  : print "They're already dumped, and convincingly." ;
                   : done ;
                }
-               : print "Narrative text." ;
+               : print "Of course, you can't call them liars, but in your mind, you dump them and say, well, I can take responsibility for my actions if somehow there is a big electric surge through these players that makes me Dumber, and anyway, it would be less of a loss than if it made you dumber, am I right? They recognize this is the most blow off form of flattery, but what can they do? Instead of blocking you going east, they now seem as though they wish you really would go east as soon as possible. Small victories, yay!" ;
                : set_integer var="tempint" "14" ;
                : set_true "point_dump_liars" ;
                : gosub "add_point" ;
@@ -1958,7 +1958,7 @@ locations {
                : done ;
             }
             : if (point_say_loaners) {
-               : print "Already done!" ;
+               : print "You used up the last ogf your money. You have the transportation you need." ; #//got/had/needed?
                : done ;
             }
             : print "You don't have MUCH. You get, not a great sailboat, but a more modest Mo'-Tried-Moat-Ride. And thus, your riches disappear. But you can go north!" ;
@@ -1986,7 +1986,7 @@ locations {
       on_command {
          : match "ply towels" {
             : if (point_ply_towels) {
-               : print "Already done!" ;
+               : print "The owls are nice and dry now and don't need any more towels." ;
                : done ;
             }
             : if (!point_cloth_robbing) {
@@ -1995,7 +1995,7 @@ locations {
                : gosub "note_thinks" ;
                : done ;
             }
-            : print "Narrative text." ;
+            : print "The owls COO their appreciation. They don't really ask where you got the towels, they appreciate being able to dry off, even if the rain isn't stopping anytime soon. One of them even hopes you didn't get soaked too much. Although the rest complained about how one just can't fly in the rain sometimes, and you wouldn't know that, since you can't fly. Nevertheless, having gained some relief, they spread out and allow passage north." ;
             : set_integer var="tempint" "28" ;
             : set_false "think_ply_towels" ;
             : set_true "point_ply_towels" ;
@@ -2020,10 +2020,10 @@ locations {
       on_command {
          : match "mage urgent" {
             : if (point_mage_urgent) {
-               : print "Already done!" ;
+               : print "The mage/gent already got a sense of urgency. It's a sense you have no wish to turbo-charge." ;
                : done ;
             }
-            : print "Narrative text." ;
+            : print "The major gent slowly starts talking louder and faster, and it gets to the point where you can't interrupt them. They start mentioning times they felt ripped off, and how they need to take things back and show them, whoever they are. They they finally get around to asking you what you're doing, and you mentioned you're on a quest, and they say, well, obviously you haven't finished it yet so maybe you need some help, which you guess is flattering. They really could use a bit of subtlety or thought in their new found activity. Where to find it?" ;
             : set_integer var="tempint" "43" ;
             : set_true "point_mage_urgent" ;
             : destroy "major_gent" ;
@@ -2044,7 +2044,7 @@ locations {
          }
          : match "broke lass" {
             : if (point_broke_lass) {
-               : print "Already done!" ;
+               : print "She's already been summoned. You're done here." ;
                : done ;
             }
             : if (!point_mage_urgent) {
@@ -2059,7 +2059,7 @@ locations {
                : gosub "note_thinks" ;
                : done ;
             }
-            : print "Narrative text." ;
+            : print "The broke glass Piers around, and she looks a bit worried to see the major jet there. He immediately says, you know, I made a bad first impression, but I just want to get things done. There is that boss to the right, and we can't deal with it all on our own, but maybe we can together, and if that's all we do, it'll be pretty big. The broke glass nods, impressed. OK, let's do this." ;
             : set_integer var="tempint" "44" ;
             : set_false "think_broke_lass" ;
             : set_true "point_broke_lass" ;
@@ -2092,10 +2092,10 @@ locations {
       on_command {
          : match "shape up" {
             : if (point_shape_up) {
-               : print "Already done!" ;
+               : print "You already shaped up." ;
                : done ;
             }
-            : print "Narrative text." ;
+            : print "You take some time to get your head on straight. Yes, it's a bit weird here, but you recognize you want to help people, and maybe there are people or entities who want to help you. The dog feels a bit more relaxed around you now. Perhaps it could show you more later." ;
             : set_integer var="tempint" "37" ;
             : set_true "point_shape_up" ;
             : gosub "add_point" ;
@@ -2118,7 +2118,7 @@ locations {
       on_command {
          : match "eh sink" {
             : if (point_eh_sink) {
-               : print "{puz_ace_inc} already sank!" ;
+               : print "{puz_point_ace_inc} already sank!" ;
                : done ;
             }
             : print "Ace, Inc. slowly sinks. You hope the message about no humans being there is true. You hear no screams or confusions, just robots whirring and glitching." ;
@@ -2130,7 +2130,7 @@ locations {
          }
          : if (!point_eh_sink) {
             : match "sink *" {
-               : print "Right idea, but a giant sink might be impassable. Or it might drown you. And {puz_ace_inc} couldn't be changed to a SMALL sink." ;
+               : print "Right idea, but a giant sink might be impassable. Or it might drown you. And {puz_point_ace_inc} couldn't be changed to a SMALL sink." ;
                : done ;
             }
             : match "eh _;_ sink" {
@@ -2146,10 +2146,10 @@ locations {
          : if (point_eh_sink) {
             : match "cue bland" {
                : if (point_cue_bland) {
-                  : print "Already done!" ;
+                  : print "You already worked your way through this place." ;
                   : done ;
                }
-               : print "Narrative text." ;
+               : print "It only makes sense, doesn't it? With all the Jewish stuff, the dull stuff will in its way stand out, often is something that's not trying to impress you but maybe valuable, or that only people who are dazzled by silliness would be able to find and use. At the end, you find a simple coupon saying, {puz_point_vie_neater}. It doesn't specify how to buy, or how to be neater, but perhaps the people you summon with it will know all that. Well, it's something at any rate." ;
                : pocket "vie_neater" ;
                : set_integer var="tempint" "27" ;
                : set_true "point_cue_bland" ;
@@ -2197,10 +2197,10 @@ locations {
          : if (point_seek_rest) {
             : match "girl only" {
                : if (point_girl_only) {
-                  : print "Already done!" ;
+                  : print "It would be belittling to repeat this reasoning in front of her." ;
                   : done ;
                }
-               : print "Narrative text." ;
+               : print "You look for the source of the girl, and it does sound a bit put on, and you wonder if it is somebody just trying to intimidate people. Sure enough, you find a small girl towering off to the side, holding {puz_point_her_doll}. She says, did my parents bring me to pick me up? You say no, you don't know who her parents are. She said, well, my parents had me stay here to avoid the really scary bits, but it was scary enough here, but they wouldn't mislead me, right? You don't know what to say to this, but you can only suggest that you should help her find them. She doesn't sound too enthusiastic about this car but she's sick of the island, and you will be glad for the company of her. And, of course, {puz_point_her_doll}." ;
                : set_integer var="tempint" "32" ;
                : set_true "point_girl_only" ;
                : gosub "add_point" ;
@@ -2224,10 +2224,10 @@ locations {
       on_command {
          : match "flow tripling" {
             : if (point_flow_tripling) {
-               : print "Already done!" ;
+               : print "Tripling the flow again would probably capsize your craft. It's like compound interest, only it gets places quicker. The wrong places." ;
                : done ;
             }
-            : print "Narrative text." ;
+            : print "Finally, the waters are less calm, and fortunately, they're not rough enough to drag you places, but you see where the currents are, and there's one that flows pretty reliably to the West. You can take it now, if you want." ;
             : set_integer var="tempint" "23" ;
             : set_true "point_flow_tripling" ;
             : gosub "add_point" ;
@@ -2256,7 +2256,7 @@ locations {
                : done ;
             }
             : if (point_tense_ops) {
-               : print "Already done!" ;
+               : print "You already acknowledged the tension." ;
                : done ;
             }
             : print "You get their eternal thanks for sorting things out. Which isn't fungible, but it is a confidence booster." ;
