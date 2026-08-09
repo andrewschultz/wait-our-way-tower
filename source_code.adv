@@ -253,6 +253,7 @@ strings {
    gbgr : string "<\"Gah, Bros, Gab\" Rows<#ccc>>" ;
    mtmr : string "<Mo' Tried Moat Ride<#ccc>>" ;
    iaad : string "<\"I'd Agree, Aye\" degree<#ccc>>" ;
+
    # think text and interpretive stuff
    already_got_check : dynamic_string {( already_got_command ? " Though you already got the full command, which you can revisit with {vd_think}." : "" )} ;
    noguess : string "<(unknown)<#888>>" ;
@@ -314,9 +315,10 @@ integers {
       is_at "r15" ? r15_hintnum :
       is_at "r35" ? r35_hintnum :
       0 )} ;
+   my_tats_num : integer "0" ;
    r00_hintnum : dynamic_integer {( !point_fly_traps ? 35 :
       !point_vine_eater ? (point_cue_bland ? 45 : -45 ) :
-      !point_catch_acing ? 35 :
+      !point_catch_acing ? 55 :
       !point_girl_only ? -1 :
       !point_herd_all ? 43 :
       0 )} ;
@@ -329,9 +331,9 @@ integers {
    r03_hintnum : dynamic_integer {( !point_sun_catching ? 38 :
       !point_tufty_key ? 53 :
       0 )} ;
-   r04_hintnum : dynamic_integer {( !point_me_growth ? 64 :
-      0 )} ;
-   r10_hintnum : dynamic_integer {( !point_dry_vendors ? 36 :
+   r04_hintnum : dynamic_integer {( !point_me_growth ? 26 :
+      0 )} ; #?? this is inaccurate but we dont want to spoil things, -1? # fey loops also a problem, can we say -1/swirl not there?
+   r10_hintnum : dynamic_integer {( !point_dry_vendors ? 37 :
       !point_say_four ?
 	  (point_pitch_earning ? 34 : -34) :
       0 )} ;
@@ -350,11 +352,10 @@ integers {
       !point_thief_lore ? 54 :
       !point_yell_open ? 44 :
       0 )} ;
-   r21_hintnum : dynamic_integer {( !point_halt_error ? 45 :
-      !point_thief_lore ? 54 :
+   r21_hintnum : dynamic_integer {( !point_halt_error ? 45 : !point_fell_asleep ? (gamestate_r21_e ? 46 : -1) :
       0 )} ;
    r22_hintnum : dynamic_integer {( !point_feel_daring ? 46 :
-      !point_free_crusty ? 55 :
+      !point_free_crusty ? 46 :
       0 )} ;
    r23_hintnum : dynamic_integer {( !point_tense_ops ? -56 :
       !point_frame_easily ? 56:
@@ -362,7 +363,7 @@ integers {
    r24_hintnum : dynamic_integer {( point_warm_acres ? 0 :
       (point_heard_all && point_herd_all) ? 45 :
       -45 )} ;
-   r30_hintnum : dynamic_integer {( !point_door_cloud ? 45 :
+   r30_hintnum : dynamic_integer {( !point_door_cloud ? (point_tufty_key ? 45 : -45) :
       0 )} ;
    r31_hintnum : dynamic_integer {( !point_hate_rash ? 44 :
       0 )} ;
@@ -379,7 +380,7 @@ integers {
       !point_girl_only ? -1 :
 	  !point_heard_all ? 53 :
       0 )} ;
-   r41_hintnum : dynamic_integer {( !point_eh_sink ? 42 :
+   r41_hintnum : dynamic_integer {( !point_eh_sink ? 24 :
       !point_cue_bland ? 35 :
       0 )} ;
    r42_hintnum : dynamic_integer {( !point_seek_rest ? 35 :
@@ -976,7 +977,7 @@ booleans {
    think_any : dynamic_boolean {( commands_figured > 0 )} ;
 
    # auxiliary
-   tats_blurry : boolean "false" ;
+   tats_blurry  : boolean "false" ;
    show_overlay : boolean "true" ;
 }
 
@@ -2687,18 +2688,18 @@ subroutines {
 
    set_tats_num : subroutine {
       : if (is_at "end_zone") {
-         : set_integer var="tempint" {( tats_end )} ;
+         : set_integer var="my_tats_num" {( tats_end )} ;
       } : else_if (is_at "top_zone") {
-         : set_integer var="tempint" {( tats_top )} ;
+         : set_integer var="my_tats_num" {( tats_top )} ;
       } : else_if (is_at "middle_zone") {
-         : set_integer var="tempint" {( tats_middle )} ;
+         : set_integer var="my_tats_num" {( tats_middle )} ;
       } : else_if (is_at "bottom_zone") {
-         : set_integer var="tempint" {( tats_bottom )} ;
+         : set_integer var="my_tats_num" {( tats_bottom )} ;
       } : else {
-         : set_integer var="tempint" "0" ;
+         : set_integer var="my_tats_num" "0" ;
       }
       : if (gamestate_fail_oops_known && (is_at "r14" || is_at "r04") && !point_fey_loops) {
-         : set_integer var="tempint" "35" ;
+         : set_integer var="my_tats_num" "35" ;
       }
    }
    ########################## options
@@ -2728,7 +2729,7 @@ subroutines {
       : match "hone aye;hone eye" {
          : print {( "Available exits are " + (opt_hone_aye ? "already" : "now") + " honed to ones you still need to use to win." )} ;
          : gosub "set_tats_num" ;
-         : if (tempint == 0 && !opt_hone_aye) {
+         : if (my_tats_num == 0 && !opt_hone_aye) {
             : print "Since you're choosing this option, and you're done here, I'll make a note of that. You can exit, but you can't come back." ;
          }
          : set_true "opt_hone_aye" ;
@@ -3580,19 +3581,19 @@ on_command {
       : match "_ tats;_ fey;_ phase;_ stats" {
          : gosub "set_tats_num" ;
          : set_false "tats_blurry" ;
-         : if (tempint < 0) {
-            : set_true "tats_blurry" ;
-            : set_integer var="tempint" {( 0 - tempint )} ;
-         }
-         : if (tempint == 0) {
-            : print "You see no number right now." ;
-            : done ;
-         }
-         : if (tempint == -1) {
+         : if (my_tats_num == -1) {
             : print "Numbers swirl, but nothing definitive. Maybe later?" ;
             : done ;
          }
-         : print "The tats swirl and form a number: {tempint}." ;
+         : if (my_tats_num < 0) {
+            : set_true "tats_blurry" ;
+            : set_integer var="my_tats_num" {( 0 - my_tats_num )} ;
+         }
+         : if (my_tats_num == 0) {
+            : print "You see no number right now." ;
+            : done ;
+         }
+         : print "The tats swirl and form a number: {my_tats_num}." ;
          : if (tats_blurry) {
             : print "The number's a bit blurry, though. Maybe you can't do anything right now." ;
          }
