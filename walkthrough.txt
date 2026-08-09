@@ -4,15 +4,15 @@ by Andrew Schultz blurglecruncheon@gmail.com
 
 "Canned, ooh," you think to yourself.
 
-> CAN DO
+> CAN DO (1)
 
 Now you can't seem to ignore the floor.
 
-> THIEF LORE
+> THIEF LORE (1)
 
 A yellow pin. What can you do with that?
 
-> YELL OPEN
+> YELL OPEN (1)
 
 Well, you could get a bonus point here, but you probably just want to leave.
 
@@ -20,41 +20,305 @@ Well, you could get a bonus point here, but you probably just want to leave.
 
 A hall terror!
 
-> HALT ERROR
+> HALT ERROR (1)
 
+> E
 
-We're in the endgame now that we've disposed of the Thug 'Round the Ground.
+> FELL ASLEEP (1)
+
+You can go to the east, but it's a bit of a dead end. You can tackle it all at once later.
 
 > S
 
-> RIGHT ANGLES
+Dull oozing.
 
-But it's a book! It already has four of them! Well, yes and no.
+> DUH LOSING (1)
 
+> S
+
+> DUMB PARABLE (1)
+
+It might be dumb, but it could be practical!
+
+> N
+
+> E
+
+The knowin' juries need to be impressed.
+
+> NO INJURIES (1)
+
+They start up coy novations. What do you have? If it's good enough, they'll reward you.
+
+> COIN OVATIONS (1)
+
+Okay, more ovations than coin, but ...
+
+> W
+
+> S
+
+> E
+
+> TIGHTENED ROUSING (1)
+
+> PITCH EARNING (1)
+
+Oh wow! You get "Higher Itches, Hi" Riches! The titan left them behind once you showed them the coin.
+
+> W
+> N
+> W
+
+> DRY VENDORS (1)
+
+A safe oar! But how many do you need?
+
+"Aw, four off oars"
+
+> SAY FOUR (1)
+
+> E
 > N
 > N
 
-Here in Bro Class, there's a lot to do. A book called THE GAMES. You can guess the bonus point.
+> HATE RASH (1)
 
-> MAGE URGENT
+> N
 
-Okay, he's overcompensated for being a bit too polite, now.
+> EH SINK (1)
+> CUE BLAND (1)
+
+A voucher from the Vie-Neater(c) company!
+
+"We can't tell you if and when you'll need it. But if you destroyed Ace, Inc., you deserved something!"
+
+> S
+> E
+
+Chess training
+
+> CHEST REIGNING (1)
+
+They're upset you found this, after all their analysis. Why would you pay attention to neat stuff when you could be analyzing the intricacies of the Carlsbad structure? London System devotees and those who hate it.
+
+> DUMP LIARS (1)
+
+Okay, now we can go back and see a new area which needed a special item.
+
+> W
+> S
+> S
+> E
+> E
+
+> POSE TEASING (1)
+
+> S
+
+> SUN CATCHING (1)
+
+> TUFTY KEY (1)
+
+> E
+
+> ME GROWTH (1)
+
+> N
+
+This is why we waited to go here. You needed the pliers for this.
+
+> CLOTH ROBBING (1)
+
+> W
+> W
+> W
+> N
+> N
+> E
+> E
+
+You still have some riches left. The sail owners have questions.
+
+> SAY LOANERS (1)
+
+Of course not an actual sailboat! But it gets you on the water.
+
+> N
+
+But now you need currents, as you float rippling water below you.
+
+> FLOW TRIPLING (1)
+
+> W
+
+The gray vile grave isle doesn't have anyone you can see. But it has plants.
+
+> SEEK REST (1)
+
+GRR! Lonely!
+
+> GIRL ONLY (1)
+
+Her doll is important.
+
+> E
+> S
+
+> E
+
+The plight owls are wet, huddled together, and a bit spiteful ...
+
+> PLY TOWELS (1)
+
+> N
+
+The ten sops really have no clue what they should be doing.
+
+(You need the ME GROWTH to help them.)
+
+> TENSE OPS (1)
+
+> S
+> W
+> W
+> W
+> W
+
+You have the key, so you can ask for the...
+
+> DOOR CLOUD (1)
+
+> N
+
+D'aww, Gold dog, old!
+
+> SHAPE UP (1)
+
+> HEARD ALL (1)
+
+> S
+> E
+> S
+> S
+> S
+> W
+
+> FLY TRAPS (1)
+> VINE EATER (1)
+> CATCH ACING (1)
+> HERD ALL (1)
+
+> E
+> N
+> N
+> E
+
+> FEEL DARING (1)
+> FREE CRUSTY (1)
+> E
+> FRAME EASILY (1)
+> E
+> WARM ACRES (1)
+
+> E
+
+This is the endgame now, out of the 5x5 map.
+
+===========================================================
+
+Okay, so the thug is now chasing you.
+
+> W
+> Z
+
+"Fail! Oops!"
+
+You need the thug to catch you once to say this, so you know what to look for.
+
+You may try it now, and you may notice you are not close to potential loops. Where can one be?
+
+> E
+> W
+> W
+> W
+> W
+> S
+> E
+> E
+
+The Bros are at it again!
+
+> WHEE PLUCKY (1)
+
+> S
+
+> E
+
+> FEY LOOPS (1)
+
+Why here? This is the only place that could really hold a loop, or loops. None of the four places can be enclosed. The bottom right is the only place to go. You could use trial and error, too.
+
+==================================================================================
+
+We're officially in the endgame now that we've disposed of the Thug 'Round the Ground.
+
+
+> N
+
+Here in Bro Class, there's a lot to do. Let's change the major gent a bit first.
+
+Cheap joke "Males are too emotional to lead."
+
+> MAGE URGENT (1)
+
+Okay, he's overcompensated for being a bit too polite, now. Waiting for the one to come and show him the way.
 
 Perhaps you've been listening to too many lovesongs that ask "How can I make you see," which all deny agency and whatnot.
 
-> BROKE LASS
+> S
+
+> S
+
+One book catches your eye. Perhaps it could help the mage.
+
+There's also a book called THE GAMES. You can guess the bonus point.
+
+> RIGHT ANGLES (1)
+
+"But it's a book! It already has four of them!"
+
+Now the gent/mage is at least capable of seeing his own mistakes and fixing them.
+
+> N
+
+> N
+
+> BROKE LASS (1)
 
 > S
 > E
 
 You can't ENFORCE basic decency, after all.
 
-> BAH SLUMPING
+The boss, lumping all your thoughts together...
+
+> BAH SLUMPING (1)
 
 > E
 
-> BLEST ABLE
+A bleah stable! Shouldn't you just sit in a corner and be grateful you have anything at all? What? You want to do more, even though you're an unexciting person who just plays text adventure games, when you could be ... well, anything?
 
-> TROOP LEADING
+Be grateful for all your possessions. Also, know possessions don't mean much.
+
+Also, don't be self-centered and shallow, but be very grateful to me for throwing out these aphorisms.
+
+> BLEST ABLE (1)
+
+True pleading, beyond the whining ... do you dare?
+
+> TROOP LEADING (1)
+
+TROUP or TROUPE also works.
 
 And you win!
