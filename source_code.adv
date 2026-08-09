@@ -76,7 +76,7 @@ strings {
    puz_point_boss_lumping   : dynamic_string {( opt_color_coding ? "<boss lumping<#f80>>" : "boss lumping" )}     ; # 45
    puz_point_bro_class      : dynamic_string {( opt_color_coding ? "<Bro Class<#f80>>" : "Bro Class" )}           ; # 44
    puz_point_canned_ooh     : dynamic_string {( opt_color_coding ? "<Canned, ooh<#f80>>" : "Canned, ooh" )}       ; # 00
-   puz_point_cat_chill      : dynamic_string {( opt_color_coding ? "<cat chill<#f80>>" : "cat chill" )}           ; # 35
+   puz_point_cat_chasing    : dynamic_string {( opt_color_coding ? "<cat, chasing<#f80>>" : "cat, chasing" )}     ; # 35
    puz_point_chess_training : dynamic_string {( opt_color_coding ? "<chess training<#f80>>" : "chess training" )} ; # 13
    puz_point_chez_pup       : dynamic_string {( opt_color_coding ? "<chez pup<#f80>>" : "chez pup" )}             ; # 37
    puz_point_claw_throbbing : dynamic_string {( opt_color_coding ? "<claw throbbing<#f80>>" : "claw throbbing" )} ; # 25
@@ -128,8 +128,8 @@ strings {
    block_trrg        : string "Not with the {trrg} around you can't explore somewhere new." ;
 
    # room(s)
-   r00_loc : dynamic_string {( point_catch_ill ? "The cat, chill explores here." :
-      point_vine_eater ? "With the fly traps removed, there's a {puz_point_cat_chill} here." :
+   r00_loc : dynamic_string {( point_catch_acing ? "The cat, chill explores here." :
+      point_vine_eater ? "With the fly traps removed, there's a {puz_point_cat_chasing} here." :
       point_fly_traps ? "Fly traps have replaced what was here. Perhaps you could cut through them somehow." :
       "{puz_point_flight_wraps_u} cover the area here. What are {puz_point_flight_wraps}? Well, they just prevent people, or their ideas, from taking flight."
    )} ;
@@ -312,7 +312,7 @@ integers {
       0 )} ;
    r00_hintnum : dynamic_integer {( !point_fly_traps ? 35 :
       !point_vine_eater ? (point_cue_bland ? 45 : -45 ) :
-      !point_catch_ill ? 35 :
+      !point_catch_acing ? 35 :
       !point_girl_only ? -1 :
       !point_herd_all ? 43 :
       0 )} ;
@@ -869,7 +869,7 @@ booleans {
    point_blest_able        : boolean "false" ; # 46
    point_broke_lass        : boolean "false" ; # 44
    point_can_do            : boolean "false" ; # 00
-   point_catch_ill         : boolean "false" ; # 35
+   point_catch_acing         : boolean "false" ; # 35
    point_chest_reigning    : boolean "false" ; # 13
    point_cloth_robbing     : boolean "false" ; # 25
    point_coin_ovations     : boolean "false" ; # 10
@@ -1009,17 +1009,17 @@ locations {
          }
          : if (point_vine_eater) {
             : match "catch ill" {
-               : if (point_catch_ill) {
+               : if (point_catch_acing) {
                   : print "Already done!" ;
                   : done ;
                }
                : print "Narrative text." ;
                : set_integer var="tempint" "35" ;
-               : set_true "point_catch_ill" ;
+               : set_true "point_catch_acing" ;
                : gosub "add_point" ;
                : done ;
             }
-            : if (!point_catch_ill) {
+            : if (!point_catch_acing) {
                : match "catch _;_ ill" {
                   : set_integer var="tempint" "35" ;
                   : set_false "first_half" ;
@@ -1031,7 +1031,7 @@ locations {
                }
             }
          }
-         : if (point_catch_ill) {
+         : if (point_catch_acing) {
             : match "herd all" {
                : if (!point_girl_only) {
                   : print "You need to do something first!" ;
@@ -3215,7 +3215,7 @@ subroutines {
        : set_true "point_girl_only" ;
        : set_true "point_fly_traps" ;
        : set_true "point_vine_eater" ;
-       : set_true "point_catch_ill" ;
+       : set_true "point_catch_acing" ;
        : set_true "point_herd_all" ;
        : set_true "point_shape_up" ;
        : set_true "point_heard_all" ;
