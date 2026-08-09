@@ -72,6 +72,7 @@ strings {
    yn : string "<YES<#f88>>/<Y<#f88>> or <NO<#f88>>/<N<#f88>>" ;
 
    # puzzle strings
+   puz_point_ace_inc        : dynamic_string {( opt_color_coding ? "<Ace, Inc.<#f80>>" : "Ace, Inc." )}           ; # 26
    puz_point_bleah_stable   : dynamic_string {( opt_color_coding ? "<bleah stable<#f80>>" : "bleah stable" )}     ; # 46
    puz_point_boss_lumping   : dynamic_string {( opt_color_coding ? "<boss lumping<#f80>>" : "boss lumping" )}     ; # 45
    puz_point_bro_class      : dynamic_string {( opt_color_coding ? "<Bro Class<#f80>>" : "Bro Class" )}           ; # 44
@@ -87,20 +88,19 @@ strings {
    puz_point_dull_oozing    : dynamic_string {( opt_color_coding ? "<dull oozing<#f80>>" : "dull oozing" )}       ; # 06
    puz_point_dumb_pliers    : dynamic_string {( opt_color_coding ? "<dumb pliers<#f80>>" : "dumb pliers" )}       ; # 14
    puz_point_dump_arable    : dynamic_string {( opt_color_coding ? "<dump, arable<#f80>>" : "dump, arable" )}     ; # 08
-   puz_point_eh_sink        : dynamic_string {( opt_color_coding ? "<Ace, Inc.<#f80>>" : "Ace, Inc." )}           ; # 26
    puz_point_fail_oops      : dynamic_string {( opt_color_coding ? "<\"Fail! Oops!\"<#f80>>" : "fail_oops" )}     ; # 41
    puz_point_field_erring   : dynamic_string {( opt_color_coding ? "<field erring<#f80>>" : "field erring" )}     ; # 15
    puz_point_fellas_leap    : dynamic_string {( opt_color_coding ? "<FELLAS, LEAP<#f80>>" : "FELLAS, LEAP" )}     ; # 04
    puz_point_flight_wraps   : dynamic_string {( opt_color_coding ? "<flight wraps<#f80>>" : "flight wraps" )}     ; # 33
    puz_point_flight_wraps_u : dynamic_string {( opt_color_coding ? "<Flight wraps<#f80>>" : "Flight wraps" )}     ; # 33
-   puz_point_float_rippling : dynamic_string {( opt_color_coding ? "<float_rippling<#f80>>" : "float-rippling" )} ; # 23
+   puz_point_float_rippling : dynamic_string {( opt_color_coding ? "<float, rippling<#f80>>" : "float-rippling" )} ; # 23
    puz_point_fray_measly    : dynamic_string {( opt_color_coding ? "<fray measly<#f80>>" : "fray measly" )}       ; # 30
    puz_point_freak_rusty    : dynamic_string {( opt_color_coding ? "<freak rusty<#f80>>" : "freak rusty" )}       ; # 16
    puz_point_grr_lonely     : dynamic_string {( opt_color_coding ? "<grr lonely<#f80>>" : "grr lonely" )}         ; # 32
    puz_point_hall_terror    : dynamic_string {( opt_color_coding ? "<hall terror<#f80>>" : "hall terror" )}       ; # 03
-   puz_point_her_doll       : dynamic_string {( opt_color_coding ? "<her doll<#f80>>" : "her doll" )}             ; # 38 36
+   puz_point_her_doll       : dynamic_string {( opt_color_coding && (!point_heard_all || !point_herd_all) ? "<her doll<#f80>>" : "her doll" )}             ; # 38 36
    puz_point_hey_trash      : dynamic_string {( opt_color_coding ? "<\"HEY, TRASH\"<#f80>>" : "\"HEY, TRASH\"" )} ; # 05
-   puz_point_knowin_juries  : dynamic_string {( opt_color_coding ? "<knowin juries<#f80>>" : "knowin juries" )}   ; # 09
+   puz_point_knowin_juries  : dynamic_string {( opt_color_coding ? "<knowin juries<#f80>>" : "knowin' juries" )}   ; # 09
    puz_point_major_gent     : dynamic_string {( opt_color_coding ? "<major gent<#f80>>" : "major gent" )}         ; # 43
    puz_point_meager_oath    : dynamic_string {( opt_color_coding ? "<meager oath<#f80>>" : "meager oath" )}       ; # 24
    puz_point_pit_churning   : dynamic_string {( opt_color_coding ? "<pit churning<#f80>>" : "pit churning" )}     ; # 12
@@ -128,8 +128,8 @@ strings {
    block_trrg        : string "Not with the {trrg} around you can't explore somewhere new." ;
 
    # room(s)
-   r00_loc : dynamic_string {( point_catch_acing ? "The cat, chill explores here." :
-      point_vine_eater ? "With the fly traps removed, there's a {puz_point_cat_chasing} here." :
+   r00_loc : dynamic_string {( point_catch_acing ? "There's a cat chasing here, mostly fallen leaves and stuff, but it's more coordinated now you helped it." :
+      point_vine_eater ? "With the fly traps removed, there's a {puz_point_cat_chasing} here. It's not chasing stuff very well, though." :
       point_fly_traps ? "Fly traps have replaced what was here. Perhaps you could cut through them somehow." :
       "{puz_point_flight_wraps_u} cover the area here. What are {puz_point_flight_wraps}? Well, they just prevent people, or their ideas, from taking flight."
    )} ;
@@ -138,16 +138,16 @@ strings {
    r01_loc : dynamic_string {( (point_dumb_parable ? "You've gotten something out of the dump (arable,) and since there isn't much left, it's probably best just to find" : "This is, well, a {puz_point_dump_arable}. Is it really just a connecting passage, or is there more to it? At any rate, not much is here, yet, which is kind of nice, since nothing blocks") + " passage north, east or west." )} ;
    r01_header : string "Dump, Arable" ;
 
-   r02_loc : dynamic_string {( (point_pitch_earning ? "The pit still churns, but the titan is gone. You see nothing else to do here." : point_tightened_rousing ? "The titan is now awake. It's looking for something to do. Maybe you can help it." : "You see a {puz_point_titan_drowsing} here.") + "\nThe pit rises high all directions except back west." )} ;
+   r02_loc : dynamic_string {( (point_pitch_earning ? "The pit still churns, but the titan is gone. You see nothing else to do here." : point_tightened_rousing ? "The titan is now awake. It's looking for something to do. Maybe you can help it." : "You see a {puz_point_titan_drowsing} here.") + "\nThe {puz_point_pit_churning} rises high all directions except back west." )} ;
    r02_header : string "Pit, Churning" ; # the spit-thus pit
 
-   r03_loc : string "The trail runs north to east here." ;
+   r03_loc : dynamic_string {( "The trail runs north to east here." + (point_tufty_key ? "The tough tiki has disappeared." : point_sun_catching ? "The sun caught a {puz_point_tough_tiki}." : "\nYou see a {puz_point_sunk_etching} or two scattered around here. Maybe they're hiding something." ) )} ;
    r03_header : string "Sunk Etching" ;
 
    r04_loc : dynamic_string {( "A {puz_point_meager_oath} reverberates through here in this open ground. Its words are not important. " + (point_me_growth ? "You've gotten its essence." : "Perhaps you can get what you need to from it." ) + "\nPassage leads back west" + (point_fey_loops ? " and, as part of the fey loops, north." : ".") )} ;
    r04_header : string "Meager Oath" ;
 
-   r10_loc : dynamic_string {( (point_dry_vendors ? "Dry vendors have parked themselves here. A {puz_point_safe_oar} rests behind them." : "You haven't seen any cars or bikes or whatever around, so it's weird this small selection of dead ends should be called {puz_point_drive_enders}, but it is.") + "\nPassage leads back east." )} ;
+   r10_loc : dynamic_string {( point_say_four ? "Since you bought oars, nothing here is interesting." : (point_dry_vendors ? "Dry vendors have parked themselves here. A {puz_point_safe_oar} rests behind them." : "You haven't seen any cars or bikes or whatever around, so it's weird this small selection of dead ends should be called {puz_point_drive_enders}, but it is.") + "\nPassage leads back east." )} ;
    r10_header : dynamic_string {( point_dry_vendors ? "Dry Vendors" : "Drive Enders" )} ;
 
    r11_loc : dynamic_string {( point_duh_losing ? "You feel up to going in any four directions now that the dull oozing has died down." : "Here {puz_point_dull_oozing}, physical and audible, surrounds you. There's nothing terribly dangerous any way but back north, but right now, your general feeling is, \"Ehh, why bother?\"" )} ;
@@ -179,7 +179,7 @@ strings {
    r21_loc : dynamic_string {( "The hall leads north and south, with a darker passage east. " + (!point_halt_error ? "A {puz_point_hall_terror}, though, wraps itself around to cover those three exits." : (r22_secondary_block ? "You're worried fellas might leap at you if you go east." : point_fell_asleep ? "No fellas will leap you if you try to go east now." : "" )) + "\nYou could go back west to your cell, too, but that's no fun." )} ;
    r21_header : string "Dredge-Ailing/Dread Jailing" ;
 
-   r22_loc : dynamic_string {( "You " + (point_feel_daring ? "no longer feel uneasy in this field, erring." : "can't shake uneasy emotions in this {puz_point_field_erring}. So many ways to go wrong.") + "\nThe field runs east-west." )} ;
+   r22_loc : dynamic_string {( "You " + (point_feel_daring ? "no longer feel uneasy in this field, erring." : "can't shake uneasy emotions in this {puz_point_field_erring}. So many ways to go wrong.") + (!point_free_crusty ? "\nA {point_freak_rusty} watches you." : "") + "\nThe field runs east-west." )} ;
    r22_header : string "Field, Erring" ;
 
    r23_loc : dynamic_string {( point_frame_easily ? "The fray has died down, and you can just go east-west here." : "A {puz_point_fray_measly} is going on here to the east. It's not very big, yet. But it won't stay that way forever." )} ;
@@ -225,7 +225,7 @@ strings {
    )} ;
    r41_header : dynamic_string {( point_eh_sink ? "Cube Land" : "Ace, Inc." )} ;
 
-   r42_loc : dynamic_string {( (point_girl_only ? "The island seems cheerier now you found the girl behind the sea crest. Maybe that's just because you got some comanionship. There can't be much else to do here." : point_seek_rest ? "Amidst the sea crest, you hear an odd voice saying {puz_point_grr_lonely}" : "There's a lot of {puz_point_sea_crest} covering this otherwise drab and forbidding isle.") + "\nYou can sail back east at any time." )} ;
+   r42_loc : dynamic_string {( (point_girl_only ? "The island seems cheerier now you found the girl behind the sea crest. Maybe that's just because you got some comanionship. There can't be much else to do here." : point_seek_rest ? "Amidst the sea crest, you hear an odd voice saying {puz_point_grr_lonely}." : "There's a lot of {puz_point_seacrest} covering this otherwise drab and forbidding isle.") + "\nYou can sail back east at any time." )} ;
    r42_header : string "Gray Vile Grave Isle" ;
 
    r43_loc : dynamic_string {( "Here on your {mtmr} you see land to the west and north.\n" + (point_flow_tripling ? "The flow's picked up, so passage west is viable." : "Unfortunately, you just sort of {puz_point_float_rippling}, and even your oars can't move you west as-is.") )} ;
@@ -249,6 +249,10 @@ strings {
    # NPC(s)
    trtg : string "<Thug 'Round the Ground<#ccc>>" ;
 
+   # weird strings
+   gbgr : string "<\"Gah, Bros, Gab\" Rows<#ccc>>" ;
+   mtmr : string "<Mo' Tried Moat Ride<#ccc>>" ;
+   iaad : string "<\"I'd Agree, Aye\" degree<#ccc>>" ;
    # think text and interpretive stuff
    already_got_check : dynamic_string {( already_got_command ? " Though you already got the full command, which you can revisit with {vd_think}." : "" )} ;
    noguess : string "<(unknown)<#888>>" ;
