@@ -979,6 +979,9 @@ booleans {
    # auxiliary
    tats_blurry  : boolean "false" ;
    show_overlay : boolean "true" ;
+
+   # testing
+   tats_each_move : boolean "false" ;
 }
 
 vocabulary {
@@ -3318,7 +3321,7 @@ on_describe {
 on_tick {
    : if (tats_each_move) {
       : gosub "set_tats_num" ;
-      : print "Tats num this turn {tats_num}." ;
+      : print "Tats num this turn {my_tats_num}." ;
    }
    : if (!showed_first_note) {
       : print "{one_time}{vm_about} will give general game information. {vm_verbs} will describe {wowt}'s stripped-down parser." ;
@@ -3612,7 +3615,14 @@ on_command {
    }
 
    : match "tatmv _" {
-      : set_true "tats_each_move" ;
+      : if (!tats_each_move) {
+         : set_true "tats_each_move" ;
+         : print "Tats each move switched on, starting this move." ;
+      } : else {
+         : set_false "tats_each_move" ;
+         : print "Tats each move switched off." ;
+         : done ;
+      }
    }
 
 }
