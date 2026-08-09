@@ -2056,13 +2056,13 @@ locations {
                : done ;
             }
             : if (!point_mage_urgent) {
-               : print "Ugh. The major gent would be a bit too awkward right now. He needs change, somehow." ;
+               : print "Ugh. The major gent and his drenching self-pity would be a bit too awkward for her right now. He's almost too much for you. He needs change, somehow." ;
                : set_true "think_broke_lass" ;
                : gosub "note_thinks" ;
                : done ;
             }
             : if (!point_right_angles) {
-               : print "Ugh. The mage, urgent, would try a bit too hard to impress any Broke Lass right now. You'll need to change him, again, before you can gain a new companion." ;
+               : print "Ugh. The mage, urgent, would try a bit too hard to impress any Broke Lass right now. You'll need to change him, again, or perhaps affect his own change from within, before you can gain a new companion." ;
                : set_true "think_broke_lass" ;
                : gosub "note_thinks" ;
                : done ;
@@ -2090,8 +2090,8 @@ locations {
       on_describe {
          : if (is_present "major_gent") {
             : cycle key = "gent_hi" predictable_order = "true" skip_interval = "0" max_loops = "1" {
-                  : print "A major gent stands up and greets you, perhaps a bit too politely. He's not quite who he wants to be." ;
-                  : print "The major gent continues to move around nervously." ;
+                  : print "A {puz_point_major_gent} stands up and greets you, perhaps a bit too politely. He's not quite who he wants to be." ;
+                  : print "The {puz_point_major_gent} continues to move around nervously." ;
             }
          }
       }
@@ -2185,7 +2185,7 @@ locations {
                : print "You already sought and found." ;
                : done ;
             }
-            : print "You hear a {puz_point_grr_lonely} now." ;
+            : print "You find it, but just as you're really starting to rest, you hear a {puz_point_grr_lonely}. You can't sleep with that around!" ;
             : set_integer var="tempint" "30" ;
             : set_true "point_seek_rest" ;
             : gosub "add_point" ;
@@ -2410,7 +2410,7 @@ barriers {
    block_go_r13 : block {
       location = r13
       block_when_not = point_no_injuries
-      message = The knowin' juries scold you. "It might not be safe. You never know. What if you have, like, pre-existing conditions?" They outnumber you. How to convince them you're willing to take that risk, that you'd be safe? Or, at the very least, not worth bugging?"
+      message = The {point_puz_knowin_juries} scold you. "It might not be safe. You never know. What if you have, like, pre-existing conditions?" They outnumber you. How to convince them you're willing to take that risk, that you'd be safe? Or, at the very least, not worth bugging?"
    }
 
    block_go_r14 : block {
@@ -2591,7 +2591,7 @@ subroutines {
       : increment "score" ;
       : update_graphic ;
    }
-   note_thinks : subroutine {
+   note_thinks : subroutine { # special case SCORE vs THINK, note you've cleared all the good ideas you had.
       : if (!think_note_yet) {
          : print "{one_time}{vd_think} will track any command that you need to retry later, after preparation. Also, the status line in the upper left will show +1 or more, for commands you've guessed right but still need prep for." ;
          : set_true "think_note_yet" ;
@@ -3377,8 +3377,8 @@ on_command {
 
    : if (is_carried("vie_neater")) {
       : match "vine eater" {
-         : if (!is_at "r00" && !point_fly_traps) {
-            : print "You see nothing resembling vines that can be eaten. Well, not here and now." ;
+         : if (!is_at "r00" || !point_fly_traps) {
+            : print "You see nothing resembling vines that can be eaten. Well, not here and now. But if you ever do..." ;
             : set_true "think_vine_eater" ;
             : gosub "note_thinks" ;
             : done ;
@@ -3465,7 +3465,7 @@ on_command {
          : print "You're carrying nothing, but surely all you need is your keen wit and insight to finish things off." ;
       }
       : if (is_carried "vie_neater") {
-         : print "You have a promise to VIE NEATER." ;
+         : print "You have a promise to {puz_point_vie_neater}." ;
       }
       : if (point_tense_ops && !point_frame_easily) {
          : print "You have more confidence in yourself after dealing with the ten sops. Maybe you can tackle bigger things!" ;
@@ -3546,7 +3546,7 @@ on_command {
          : print "You tried to say <HERD ALL<#f80>> but there weren't enough entities to herd." ;
       }
       : if (think_pitch_earning) {
-         : print "You tried to <PITCH EARNING<#f80>> to the titan, but it wasn't in a state to hear you yet." ;
+         : print "You tried to <PITCH EARNING<#f80>> to the titan, but it wasn't in a state to hear you yet." ; #?? problem: what if you don't have $? Need different ...
       }
       : if (think_ply_towels) {
          : print "You tried to <PLY TOWELS<#f80>> to the plight owls, but you didn't have any towels yet." ;
