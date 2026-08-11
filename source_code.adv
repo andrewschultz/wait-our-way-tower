@@ -892,6 +892,7 @@ booleans {
    # game state (critical)
    gamestate_bros_second_trigger : boolean "false" ;
    gamestate_bros_second_placed  : boolean "false" ;
+   gamestate_gent_intro          : boolean "false" ;
    gamestate_thug_activated      : boolean "false" ;
    gamestate_thug_chase          : boolean "false" ;
    gamestate_thug_gone           : boolean "false" ;
@@ -2139,9 +2140,11 @@ locations {
       }
       on_describe {
          : if (is_present "major_gent") {
-            : cycle key = "gent_hi" predictable_order = "true" skip_interval = "0" max_loops = "1" {
-                  : print "A {puz_point_major_gent} stands up and greets you, perhaps a bit too politely. He's not quite who he wants to be." ;
-                  : print "The {puz_point_major_gent} continues to move around nervously." ;
+            : if (!gamestate_gent_intro) {
+               : print "A {puz_point_major_gent} stands up and greets you, perhaps a bit too politely. You've dealt with folks like this, not doing any harm but not ready to do any good." ;
+               : set_true "gamestate_gent_intro" ;
+            } : else {
+               : print "The {puz_point_major_gent} continues to move around nervously." ;
             }
          }
       }
