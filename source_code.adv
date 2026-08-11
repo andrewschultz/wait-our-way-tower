@@ -141,7 +141,7 @@ strings {
    r02_loc : dynamic_string {( (point_pitch_earning ? "The pit still churns, but the titan is gone. You see nothing else to do here." : point_tightened_rousing ? "The titan is now awake. It's looking for something to do. Maybe you can help it." : "You see a {puz_point_titan_drowsing} here.") + "\nThe {puz_point_pit_churning} rises high all directions except back west." )} ;
    r02_header : string "Pit, Churning" ; # the spit-thus pit
 
-   r03_loc : dynamic_string {( "The trail runs north to east here." + (point_tufty_key ? "The tough tiki has disappeared." : point_sun_catching ? "The sun caught a {puz_point_tough_tiki}." : "\nYou see a {puz_point_sunk_etching} or two scattered around here. Maybe they're hiding something." ) )} ;
+   r03_loc : dynamic_string {( "The trail runs north to east here. " + (point_tufty_key ? "The tough tiki has disappeared." : point_sun_catching ? "The sun caught a {puz_point_tough_tiki}." : "\nYou see a {puz_point_sunk_etching} or two scattered around here. Maybe they're hiding something." ) )} ;
    r03_header : string "Sunk Etching" ;
 
    r04_loc : dynamic_string {( "A {puz_point_meager_oath} reverberates through here in this open ground. Its words are not important. " + (point_me_growth ? "You've gotten its essence." : "Perhaps you can get what you need to from it." ) + "\nPassage leads back west" + (point_fey_loops ? " and, as part of the fey loops, north." : ".") )} ;
@@ -165,7 +165,7 @@ strings {
    r13_header : string "Post, Easing" ;
 
    r14_loc : dynamic_string {( !point_cloth_robbing && think_cloth_robbing ? "The {puz_point_claw_throbbing} still protects the cloth you'd like to rob." :
-   !point_cloth_robbing ? "A claw, throbbing, guards an expanse north and west. But of what?" :
+   !point_cloth_robbing ? "A {puz_point_claw_throbbing} guards an expanse north and east. But of what?" :
    "The claw, throbbing, continues to pulse, even though you got what you needed from it." ;
    )} ;
    r14_header : string "Claw, Throbbing" ;
@@ -176,7 +176,7 @@ strings {
    r20_loc : dynamic_string {( "Here you have enough space to, well, wheeze and pace in worry about your predicament. " + (!point_can_do ? "And you do, constantly repeating \"{puz_point_canned_ooh}.\"" : !point_thief_lore ? "As you wheeze and pace, you find you're gazing a lot at {puz_point_the_floor}." : !point_yell_open ? "But you'd like to get out. How could your {puz_point_yellow_pin} help?" : "You can get out now." ) )} ;
    r20_header : string "Wheeze/Pace Wee Space" ;
 
-   r21_loc : dynamic_string {( "The hall leads north and south, with a darker passage east. " + (!point_halt_error ? "A {puz_point_hall_terror}, though, wraps itself around to cover those three exits." : (r22_secondary_block ? "You're worried fellas might leap at you if you go east." : point_fell_asleep ? "No fellas will leap you if you try to go east now." : "" )) + "\nYou could go back west to your cell, too, but that's no fun." )} ;
+   r21_loc : dynamic_string {( "The hall leads north and south, with a darker passage east. " + (!point_halt_error ? "A {puz_point_hall_terror}, though, wraps itself around to cover those three exits." : (r22_secondary_block ? "You would go east, but you can't hav {puz_point_fellows_leap} on you, then, can you?" : point_fell_asleep ? "No fellas will leap you if you try to go east now." : "" )) + "\nYou could go back west to your cell, too, but that's no fun." )} ;
    r21_header : string "Dredge-Ailing/Dread Jailing" ;
 
    r22_loc : dynamic_string {( "You " + (point_feel_daring ? "no longer feel uneasy in this field, erring." : "can't shake uneasy emotions in this {puz_point_field_erring}. So many ways to go wrong.") + (!point_free_crusty ? "\nA {point_freak_rusty} watches you." : "") + "\nThe field runs east-west." )} ;
@@ -3577,7 +3577,7 @@ on_command {
          : print "You tried to say <HERD ALL<#f80>> but there weren't enough entities to herd." ;
       }
       : if (think_pitch_earning) {
-         : print "You tried to <PITCH EARNING<#f80>> to the titan, but it wasn't in a state to hear you yet." ; #?? problem: what if you don't have $? Need different ...
+         : print "You tried to <PITCH EARNING<#f80>> to the titan, but it wasn't in a state to listen yet." ;
       }
       : if (think_ply_towels) {
          : print "You tried to <PLY TOWELS<#f80>> to the plight owls, but you didn't have any towels yet." ;
