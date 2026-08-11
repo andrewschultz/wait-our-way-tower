@@ -1664,7 +1664,7 @@ locations {
          }
       }
       on_describe {
-         : if (point_pose_teasing && !gamestate_bros_second_trigger) {
+         : if (point_pose_teasing && !gamestate_bros_second_placed) {
             : set_true "gamestate_bros_second_trigger" ;
          }
       }
@@ -3500,7 +3500,8 @@ on_command {
             : gosub "note_thinks" ;
             : done ;
          }
-         : print "Surprisingly, you find some fey loops to the north, which create the first (and only) loop in the game map." ;
+         : print {( "You don't believe you will find any fey loops, but you figure why not, this place is as good as any others." )} ;
+         : print "And what do you know? You find some to the " + (is_at "r04" ? "north" : "south") + ", which create the first (and only) loop in the game map." ;
          : set_integer var="tempint" "41" ;
          : set_false "think_fey_loops" ;
          : set_true "point_fey_loops" ;
