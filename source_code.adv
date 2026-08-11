@@ -1569,7 +1569,10 @@ locations {
             : match "e _" {
                : cycle key = "r21_e_block" predictable_order = "true" skip_interval = "0" max_loops = "1" {
                   : print "The way seems a bit dark, but before you get too far, you hear a loud voice shout \"{puz_point_fellas_leap}!\" Nope, bad idea to go there as-is." ;
-                  : print "Still the voice yelling \"{puz_point_fellas_leap}!\"" ;
+                  : print "Again, the voice yelling \"{puz_point_fellas_leap}!\"" ;
+                  on_exhausted {
+                     : print "Still, that voice yelling \"{puz_point_fellas_leap}!\"" ;
+                  }
                }
                : set_true "gamestate_r21_e" ;
             }
