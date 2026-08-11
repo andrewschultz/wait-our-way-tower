@@ -896,6 +896,7 @@ booleans {
    gamestate_thug_activated      : boolean "false" ;
    gamestate_thug_chase          : boolean "false" ;
    gamestate_thug_gone           : boolean "false" ;
+   gamestate_thug_pass           : boolean "false" ;
    gamestate_r21_e               : boolean "false" ;
    gamestate_fail_oops_known     : boolean "false" ;
    gameflag_note_pals_stay_end   : boolean "false" ;
@@ -1801,8 +1802,9 @@ locations {
       }
       on_describe {
          : if (!gamestate_thug_gone) {
-            : print "The {trtg} starts running after you!" ;
+            : print "The {trtg} has its eye on you!" ;
             : set_true "gamestate_thug_chase" ;
+            : set_false "gamestate_thug_pass" ;
          }
       }
    }
@@ -3356,6 +3358,9 @@ on_tick {
       : set_true "showed_first_note" ;
    }
    : if (is_present("thug") && previous_location() == current_location() && !is_at "r25") {
+      : if (!gamestate_thug_pass) {
+         : set_false "gamestate_thug_pass" ;
+      }
       : cycle key = "thug_fail" predictable_order = "true" skip_interval = "0" {
          : print "Thud. The thug got you. It snickers {puz_point_fail_oops} before lumbering away back to its ground." ;
          : print "Thud. The thug got you again. It again snickers {puz_point_fail_oops} before lumbering away back to its ground." ;
@@ -3494,6 +3499,7 @@ on_command {
    }
    : if (gamestate_fail_oops_known && !point_fey_loops) {
       : match "fey loops" {
+         : set_true "gamestate_thug_pass" ;
          : if (!is_at "r04" && !is_at "r14") {
             : print "You look for fey loops that might catch the enemy, but not here. Perhaps there is not potential enough for looping here." ;
             : set_true "think_fey_loops" ;
@@ -3509,6 +3515,7 @@ on_command {
          : done ;
       }
       : match "fey _;_ loops" {
+         : set_true "gamestate_thug_pass" ;
          : set_integer var="tempint" "41" ;
          : set_boolean var="already_got_command" {( think_fey_loops && !point_fey_loops )} ; # this is optional. Delete if point does not rely on any other variables.
          : set_false "first_half" ;
@@ -3592,19 +3599,24 @@ on_command {
       : print "Fill in later." ;
    }
    : match "history _;version _;versions _" {
+      : set_true "gamestate_thug_pass" ;
       : print "The first release of {wowt} was September 1, 2026, for {ifcomp} Petite Mort." ;
    }
    : match "score _" {
+      : set_true "gamestate_thug_pass" ;
       : print {( "You've currently scored {score} of {max_score} total core points." + (think_any ? "You have also figured {number_as_word} point-scoring command" + ( commands_figured > 1 ? "s" : "" ) + " before you had the necessary support. Type {vd_think} for details." : "" ) )};
       : gosub "note_score_upper_right" ;
    }
    : match "listen _" {
+      : set_true "gamestate_thug_pass" ;
       : gosub "listen_stub" ;
    }
    : match "map _" {
+      : set_true "gamestate_thug_pass" ;
       : gosub "map_stub" ;
    }
    : match "think _" {
+      : set_true "gamestate_thug_pass" ;
       : set_false "think_text_yet" ;
       : if (think_any) {
          : print {( "Here " + (commands_figured > 1 ? "are {number_as_word} things that seemed like they" : "is something that seemed like it") + " should work, but you didn't have the resources yet:" )} ;
@@ -3674,15 +3686,18 @@ on_command {
       }
    }
    : match "verbs _;verb _" {
+      : set_true "gamestate_thug_pass" ;
       : print "To complete {wowt}, you only need the four compass directions (well, the exit from the first room is up) and the twelve special commands clued by descriptions." ;
       : print "There are also metaverbs: {vm_about} gives general information, {vm_credits} gives credits, and {vm_versions} shows version history and release dates." ;
       : print "Finally, there is an option: {vo_hone_aye} blocks off exits to done rooms and what is behind them, while {vo_ho_nigh} lets you traverse freely." ;
    }
    : match "take _;drop _" {
+      : set_true "gamestate_thug_pass" ;
       : print "You don't need to <TAKE<#f80>> or <DROP<#f80>> anything here. It's all done for you." ;
       : done ;
    }
    : match "x me;x myself" {
+      : set_true "gamestate_thug_pass" ;
       : if (!me_x_yet) {
          : print "Weird. You see some numbers on your arm that seem to morph a bit. Perhaps they can help in some way. Let's call them fey stats/phase-tats." ;
          : pocket "phase_tats" ;
@@ -3693,6 +3708,7 @@ on_command {
       : done ;
    }
    : if (me_x_yet) {
+      : set_true "gamestate_thug_pass" ;
       : match "_ tats;_ fey;_ phase;_ stats" {
          : gosub "set_tats_num" ;
          : set_false "tats_blurry" ;
