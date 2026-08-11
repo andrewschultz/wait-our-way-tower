@@ -3703,7 +3703,13 @@ on_command {
       : set_true "gamestate_thug_pass" ;
       : print "To complete {wowt}, you only need the four compass directions (well, the exit from the first room is up) and the twelve special commands clued by descriptions." ;
       : print "There are also metaverbs: {vm_about} gives general information, {vm_credits} gives credits, and {vm_versions} shows version history and release dates." ;
+      : print "Diagnostic verbs may help, too. {vm_diag} gives information about them." ;
       : print "Finally, there is an option: {vo_hone_aye} blocks off exits to done rooms and what is behind them, while {vo_ho_nigh} lets you traverse freely." ;
+   }
+   : match "diag _" {
+      : set_true "gamestate_thug_pass" ;
+      : print "Diagnostic verbs include {vd_i} to take inventory, {vd_think} to show where you've been on the right track, and {vd_score} to see your game score." ;
+      : done ;
    }
    : match "take _;drop _" {
       : set_true "gamestate_thug_pass" ;
