@@ -3579,7 +3579,7 @@ on_command {
          : print "With your yellow pin gone, you have nothing on you. But you will find more." ;
       }
       : if (score > 40) {
-         : print "You're carrying nothing, but surely all you need is your keen wit and insight to finish things off." ;
+         : print "You're carrying nothing, but surely all you need is your keen wit and insight to finish things off. You hope." ;
       }
       : if (is_carried "vie_neater") {
          : print "You have a promise to {puz_point_vie_neater}." ;
@@ -3712,14 +3712,18 @@ on_command {
    }
    : match "verbs _;verb _" {
       : set_true "gamestate_thug_pass" ;
-      : print "To complete {wowt}, you only need the four compass directions (well, the exit from the first room is up) and the twelve special commands clued by descriptions." ;
-      : print "There are also metaverbs: {vm_about} gives general information, {vm_credits} gives credits, and {vm_versions} shows version history and release dates." ;
-      : print "Diagnostic verbs may help, too. {vm_diag} gives information about them." ;
+      : print "To complete {wowt}, you only need the four compass directions (well, the exit from the first room is up) and special commands clued by descriptions and such." ;
+      : print "If you're not in an action sequence, you can also use a number to move to a square you've visited before. You start at 20, and east is 21, north from there is 31, south is 11, and so forth." ;
+      : print "There are also metaverbs that gives general information: {vm_about} about the game's origin general flow, {vm_credits} about who helped bring this about, and {vm_versions} shows version history and release dates." ;
+      : print "Diagnostic verbs may help, too. They give information about your game status. {vm_diag} gives information about them." ;
       : print "Finally, there is an option: {vo_hone_aye} blocks off exits to done rooms and what is behind them, while {vo_ho_nigh} lets you traverse freely." ;
    }
    : match "diag _" {
       : set_true "gamestate_thug_pass" ;
       : print "Diagnostic verbs include {vd_i} to take inventory, {vd_think} to show where you've been on the right track, and {vd_score} to see your game score." ;
+      : if (bonus_point_ho_maps) {
+         : print "You've also unlocked the in-game {vd_map} of where you've been." ;
+      }
       : done ;
    }
    : match "take _;drop _" {
