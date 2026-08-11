@@ -83,7 +83,7 @@ strings {
    puz_point_claw_throbbing : dynamic_string {( opt_color_coding ? "<claw throbbing<#f80>>" : "claw throbbing" )} ; # 25
    puz_point_coy_novations  : dynamic_string {( opt_color_coding ? "<coy novations<#f80>>" : "coy novations" )}   ; # 10
    puz_point_cube_land      : dynamic_string {( opt_color_coding ? "<cube land<#f80>>" : "cube land" )}           ; # 27
-   puz_point_dork_loud      : dynamic_string {( opt_color_coding ? "<dork loud<#f80>>" : "dork loud" )}           ; # 22
+   puz_point_dork_loud      : dynamic_string {( opt_color_coding ? "<dork, loud<#f80>>" : "dork loud" )}          ; # 22
    puz_point_drive_enders   : dynamic_string {( opt_color_coding ? "<drive enders<#f80>>" : "drive enders" )}     ; # 07
    puz_point_dull_oozing    : dynamic_string {( opt_color_coding ? "<dull oozing<#f80>>" : "dull oozing" )}       ; # 06
    puz_point_dumb_pliers    : dynamic_string {( opt_color_coding ? "<dumb pliers<#f80>>" : "dumb pliers" )}       ; # 14
@@ -963,7 +963,7 @@ booleans {
    in_bonus_half : boolean "false" ;
    unneeded_half : dynamic_boolean {( tempint == 0 && !in_bonus_half )} ;
 
-   # think variables
+   # think specific puzzles variables
    think_bah_slumping  : boolean "false" ;
    think_broke_lass    : boolean "false" ;
    think_cloth_robbing : boolean "false" ;
@@ -2132,7 +2132,7 @@ locations {
          }
       }
    }
-   r41: location "{r41_loc}" header="{r41_header}" {
+   r41 : location "{r41_loc}" header="{r41_header}" {
       on_command {
          : match "eh sink" {
             : if (point_eh_sink) {
@@ -3346,47 +3346,50 @@ on_command {
          : if (!point_catch_acing) {
             : print "Perhaps you could herd a bunch of cats if the one nearby were more friendly." ;
             : set_true "think_herd_all" ;
+            : set_true "think_herd_all_right_place" ;
             : gosub "note_thinks" ;
             : done ;
          }
-         : print "Your cat friend perks his ears up. It runs off, meowing, looking back for you to follow. Between you and the girl, you find a lot of cats, who all let you and the girl pet them. While you don't see any reason to have a herd of cats right now, perhaps they could be handy later. They will come when you need them and be very inconvenient for someone." ;
+         : print "Your cat friend perks its ears up. It runs off, meowing, looking back for you to follow. Between you and the girl, you find a lot of cats, who all let you and the girl pet them. While you don't see any reason to have a herd of cats right now, perhaps they could be handy later. They will come when you need them and be very inconvenient for someone." ;
          : set_integer var="tempint" "36" ;
          : set_false "think_herd_all" ;
          : set_true "point_herd_all" ;
          : gosub "add_point" ;
          : done ;
       }
-      # HEARD ALL for the cats
+      # HEARD ALL for the dogs
       : match "heard all" {
          : if (point_heard_all) {
             : print "You already listened around for all the possible dogs." ;
             : done ;
          }
          : if (!is_at "r40") {
-            : print "Nothing to herd here." ;
-            : set_true "think_herd_all" ;
+            : print "Nothing to hear here." ;
+            : set_true "think_heard_all" ;
             : gosub "note_thinks" ;
             : done ;
          }
          : if (!point_shape_up) {
             : print "You're not in the mood to listen that much yet." ;
-            : set_true "think_herd_all" ;
+            : set_true "think_heard_all" ;
+            : set_true "think_heard_all_right_place" ;
             : gosub "note_thinks" ;
             : done ;
          }
          : print "You are ready to listen around for any other dogs that might be hidden, and some turn up to be fearful and hiding, but you and the girl find them all. Your original friend is quite happy with all this and wags its tail a bit extra. This whole bunch of dogs may be useful, but not here. It's good to know you they will have your back somewhere else, later." ;
-         : set_integer var="tempint" "36" ;
+         : set_integer var="tempint" "38" ;
          : set_false "think_heard_all" ;
          : set_true "point_heard_all" ;
          : gosub "add_point" ;
          : done ;
       }
+      # these half-thinks have to come after.
       : if (!point_heard_all) {
-         : match "heard _;_ all" {
-            : set_integer var="tempint" "36" ;
-            : set_boolean var="already_got_command" {( think_herd_all && !point_herd_all )} ; # this is optional. Delete if point does not rely on any other variables.
+         : match "heard _;_ all" { #?? this is potentially wretched if we get ALL in R40 / R00 backwards. We should note the doll has some weird power. Maybe this will give you an idea what else to do.
+            : set_integer var="tempint" "38" ;
+            : set_boolean var="already_got_command" {( think_herd_all && !point_herd_all )} ;
             : set_false "first_half" ;
-            : match "herd _" {
+            : match "heard _" {
                : set_true "first_half" ;
             }
             : gosub "say_half" ;
@@ -3569,7 +3572,7 @@ on_command {
          : print "You tried to get <COIN OVATIONS<#f80>> from the Knowin' Juries but didn't have the storytelling ability yet." ;
       }
       : if (think_door_cloud) {
-         : print "You tried to ask the dork, loud to show you a <DOOR CLOUD<#f80>> but couldn't point them to the right one." ;
+         : print "You tried to ask the dork, loud to show you a <DOOR CLOUD<#f80>> but couldn't point them to any you could open." ;
       }
       : if (think_fey_loops) {
          : print "You tried to find <FEY LOOPS<#f80>> but weren't in an area that might support them." ;
@@ -3587,7 +3590,7 @@ on_command {
          : print "You tried to <PLY TOWELS<#f80>> to the plight owls, but you didn't have any towels yet." ;
       }
       : if (think_right_angles) {
-         : print "You discovered <RIGHT ANGLED<#f80>> in Wry Tangles, but maybe they'd help someone else grow more." ;
+         : print "You discovered <RIGHT ANGLES<#f80>> in Wry Tangles, but maybe they'd help someone else grow more." ;
       }
       : if (think_say_four) {
          : print "You tried to <SAY FOUR<#f80>> to buy safe oars, but you didn't have the money yet." ;
