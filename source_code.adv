@@ -962,6 +962,7 @@ booleans {
 
    # bonus point(s)
    bonus_point_ho_maps : boolean "true" ;
+   bonus_point_thug_aims : boolean "true" ;
 
    # silly random
    r20_jail : boolean "false" ;
@@ -1487,6 +1488,15 @@ locations {
    }
    r15 : location "{r15_loc}" header="{r15_header}" {
       on_command {
+         : match "thug aims" {
+            : if (bonus_point_thug_aims) {
+               : print "You already deconstructed that book." ;
+               : done ;
+            }
+            : print "You convince yourself the book is total rubbish." ;
+            : set_true "bonus_point_thug_aims" ;
+            : done ;
+         }
          : match "right angles" {
             : if (!point_mage_urgent) {
                : print "It's amusing and insightful and all, but you get no really big leaps from it. Perhaps it's more appropriate for someone who needs to make those big leaps and doesn't want to feel forced to." ;
