@@ -2628,7 +2628,8 @@ subroutines {
 # second auxiliary
 # third options
 # fourth game specific GOTO
-# fifth TESTJUMP
+# fifth noun keywords
+# sixth TESTJUMP
 
    listen_stub : subroutine {
       : if (is_at "r20") {
@@ -3186,6 +3187,18 @@ subroutines {
       }
    }
 
+##################################noun keywords
+
+   noun_keywords : subroutine {
+      : if (is_present "thug") {
+         : match "_ thug;_ round;_ ground" {
+            : print "The thug is bigger than you but looks out of shape. Their endurance for running can't be that good." ;
+            : set_true "gamestate_thug_pass" ;
+            : done ;
+	     }
+	  }
+   }
+
 ##################################testjumps
 
    testjump : subroutine {
@@ -3384,6 +3397,7 @@ on_tick {
 }
 
 on_command {
+   : gosub "noun_keywords" ;
    : if (girl_present) {
       # HERD ALL for the cats
       : match "herd all" {
