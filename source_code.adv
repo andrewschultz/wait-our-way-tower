@@ -884,6 +884,7 @@ booleans {
    noted_upper_right : boolean "false" ;
    think_note_yet : boolean "false" ;
    map_note : boolean "false" ;
+   note_thug_pass : boolean "false" ;
 
    # option(s)
    opt_hone_aye : boolean "false" ;
@@ -1489,6 +1490,14 @@ locations {
    }
    r15 : location "{r15_loc}" header="{r15_header}" {
       on_command {
+         : match "_ tangles" {
+            : print "Interesting and clever, but not really directed at you." ;
+            : done ;
+         }
+         : match "_ games" {
+            : print "Wowzers, this book is uncool. It's full of \"clever\" manipulation tactics you don't want to know more of. But you feel engrossed through twenty pages before feeling disgusted. You remember people using them on you. You remember people trying to give you this sort of \"wisdom\" back in high school. They called you weird for looking confused." ;
+            : done ;
+         }
          : match "thug aims" {
             : if (bonus_point_thug_aims) {
                : print "You already deconstructed that book." ;
@@ -1821,6 +1830,12 @@ locations {
    }
    r26 : location "{r26_loc}" header="{r26_header}" {
       on_command {
+         : if (!point_bah_slumping) {
+            : match "_ boss;_ lumping" {
+               : print "They don't show any signs of letting up, but they don't show any signs of saying something new or original after their firs barrage." ;
+               : done ;
+            }
+         }
          : match "bah slumping" {
             : if (!point_broke_lass) {
                : print {( "You lack conviction and support. " + (point_mage_urgent ? "Well, the mage gives some support, but not enough." : "Once you have it, you could send the boss slumping, though.") )} ;
@@ -2090,6 +2105,12 @@ locations {
    }
    r35 : location "{r35_loc}" header="{r35_header}" {
       on_command {
+         : if (is_present "major_gent" ) {
+            : match "_ major;_ gent" {
+               : print "A bit of a nonentity. You cringe at his politeness, and you cringe wondering if he notices you cringed." ;
+               : done ;
+            }
+         }
          : match "mage urgent" {
             : if (point_mage_urgent) {
                : print "The mage/gent already got a sense of urgency. It's a sense you have no wish to turbo-charge." ;
@@ -3205,6 +3226,18 @@ subroutines {
          : match "_ thug;_ round;_ ground" {
             : print "{trtg_status}" ;
             : set_true "gamestate_thug_pass" ;
+            : done ;
+         }
+      }
+      : if (is_present "broke_lass") {
+         : match "_ lass;_ broke" {
+            : print "She doesn't look or feel broke." ;
+            : done ;
+         }
+      }
+      : if (is_present "mage_urgent") {
+         : match "_ mage;_ urgent" {
+            : print {( point_right_angles ? "His urgency seems a bit more focused." : "A bit of an energetic mess. How to calm him down?" )} ;
             : done ;
          }
       }
