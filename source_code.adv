@@ -3634,7 +3634,7 @@ on_command {
    }
 
    : gosub "gotos" ;
-   : match "can _;cue _;door _;eh _;fell _;halt _;hate _;sink _;thief _;yell _" { #obfuscation of non solutions, regular points
+   : match "bah _;blest _;broke _;can _;catch _;chest _;cloth _;coin _;cue _;door _;dry _;duh _;dumb _;dump _;eh _;feel _;fell _;fey _;flow _;fly _;frame _;free _;girl _;halt _;hate _;heard _;herd _;mage _;me _;no _;pitch _;ply _;pose _;right _;say _;seek _;shape _;sun _;tense _;thief _;tightened _;troop _;tufty _;vine _;warm _;whee _;yell _" { #obfuscation of non solutions, regular points
       : print "{custom_unknown_verb_error}" ;
       : done ;
    }
