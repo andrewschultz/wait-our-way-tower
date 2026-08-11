@@ -122,10 +122,15 @@ strings {
    puz_point_yellow_pin     : dynamic_string {( opt_color_coding ? "<yellow pin<#f80>>" : "yellow pin" )}         ; # 02
 
    # blocking strings
-   block_03_04       : string "Weird! It feels like there could almost be something there. But it's disorienting even to plan out a route. For now." ;
-   block_dull_oozing : string "Ehh ... the {puz_point_dull_oozing} slows you down. It's probably wrong, and trekking further is probably harmless, but what if it isn't?" ;
-   block_hey_trash   : string "The call of {puz_point_hey_trash} freezes you. You half want to show them, whomever they are, and whatever you want to show. You'll decide that later. Also, you worry if you go farther, there'll be more people like that, which could put you in danger. So, for now, no." ;
-   block_trrg        : string "Not with the {trrg} around you can't explore somewhere new." ;
+   block_04_14 : string "Weird! It almost feels like there should be passage that way. You can't say why, but it's disorienting even to plan out a route. For now." ;
+   block_dull_oozing  : string "Ehh ... the {puz_point_dull_oozing} slows you down. It's probably wrong, and trekking further is probably harmless, but what if it isn't?" ;
+   block_hey_trash    : string "The call of {puz_point_hey_trash} freezes you. You half want to show them, whomever they are, and whatever you want to show. You'll decide that later. Also, you worry if you go farther, there'll be more people like that, which could put you in danger. So, for now, no." ;
+   block_pose_teasing : string "The Bros wonder why you need to be running around like this. You need to chillax! Life will be easier that way. And no offense, but if you do have an exciting life, it's a bit unfair. They deserve it a bit more than you do. So you shouldn't rub it in by just walking past them like that." ;
+   block_trrg         : string "You can't explore somewhere new yet, with the {trtg} around." ;
+   block_weep_lucky   : string "The bros weep about how YOU get all the adventure here. You've been through this before, but since you last visited, you do sort of have to admit you've had a lot of adventures. You feel bad for them. They feel like they're the lovablde underdogs here, that they should get a chance, but noooooo." ;
+
+   # THINK string(s)
+   for_bonus : dynamic_string {( half_bonus ? " for a bonus point" : "" )} ;
 
    # conditional location strings
    here_r00 : dynamic_string {( is_at "r00" ? "here" : "in the southwest corner" )} ;
@@ -210,7 +215,7 @@ strings {
    r20_loc : dynamic_string {( "Here you have enough space to, well, wheeze and pace in worry about your predicament. " + (!point_can_do ? "And you do, constantly repeating \"{puz_point_canned_ooh}.\"" : !point_thief_lore ? "As you wheeze and pace, you find you're gazing a lot at {puz_point_the_floor}." : !point_yell_open ? "But you'd like to get out. How could your {puz_point_yellow_pin} help?" : "You can get out now." ) )} ;
    r20_header : string "Wheeze/Pace Wee Space" ;
 
-   r21_loc : dynamic_string {( "The hall leads north and south, with a darker passage east. " + (!point_halt_error ? "A {puz_point_hall_terror}, though, wraps itself around to cover those three exits." : (r22_secondary_block ? "You would go east, but you can't hav {puz_point_fellows_leap} on you, then, can you?" : point_fell_asleep ? "No fellas will leap you if you try to go east now." : "" )) + "\nYou could go back west to your cell, too, but that's no fun." )} ;
+   r21_loc : dynamic_string {( "The hall leads north and south, with a darker passage east. " + (!point_halt_error ? "A {puz_point_hall_terror}, though, wraps itself around to cover those three exits." : (r22_secondary_block ? "You would go east, but you can't hav {puz_point_fellas_leap} on you, then, can you?" : point_fell_asleep ? "No fellas will leap you if you try to go east now." : "" )) + "\nYou could go back west to your cell, too, but that's no fun." )} ;
    r21_header : string "Dredge-Ailing/Dread Jailing" ;
 
    r22_loc : dynamic_string {( "You " + (point_feel_daring ? "no longer feel uneasy in this field, erring." : "can't shake uneasy emotions in this {puz_point_field_erring}. So many ways to go wrong.") + (!point_free_crusty ? "\nA {point_freak_rusty} watches you." : "") + "\nThe field runs east-west." )} ;
@@ -271,11 +276,6 @@ strings {
    # flavor text
    endgame_friends : dynamic_string {( point_broke_lass ? "Your two friends" : "The mage, urgent" )} ;
    endgame_plural : dynamic_string {( point_broke_lass ? "" : "s" )} ;
-
-   # block strings
-   block_pose_teasing : string "The Bros wonder why you need to be running around like this. You need to chillax! Life will be easier that way. And no offense, but if you do have an exciting life, it's a bit unfair. They deserve it a bit more than you do. So you shouldn't rub it in by just walking past them like that." ;
-   block_weep_lucky : string "The bros weep about how YOU get all the adventure here. You've been through this before, but since you last visited, you do sort of have to admit you've had a lot of adventures. You feel bad for them. They feel like they're the lovablde underdogs here, that they should get a chance, but noooooo." ;
-   block_04_14 : string "Weird! It almost feels like there should be passage that way. You can't say why, but there should. There isn't, now." ;
 
    # item(s)
    i_fspt : string "<Fey Stats Phase Tats<#ccc>>" ;
