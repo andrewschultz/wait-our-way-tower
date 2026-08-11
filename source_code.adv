@@ -1406,6 +1406,7 @@ locations {
       }
       on_describe {
          : if (gamestate_bros_second_trigger) {
+            : set_false "gamestate_bros_second_trigger" ;
             : set_true "gamestate_bros_second_placed" ;
             : print "The Bros are back at it again. They ask how you've been. You mention you've been doing stuff since last you chatted. They all {puz_point_weep_lucky} ... what a stupid guilt trip. But for whatever reason, it works, and you're going to have to change your mindset to get out of this one." ;
          }
