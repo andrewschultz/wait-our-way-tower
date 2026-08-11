@@ -848,6 +848,7 @@ booleans {
    in_number_choice : boolean "false" ;
    noted_upper_right : boolean "false" ;
    think_note_yet : boolean "false" ;
+   map_note : boolean "false" ;
 
    # option(s)
    opt_hone_aye : boolean "false" ;
@@ -923,11 +924,15 @@ booleans {
    point_whee_plucky       : boolean "false" ; # 39
    point_yell_open         : boolean "false" ; # 02
 
+   # bonus point(s)
+   bonus_point_ho_maps : boolean "true" ;
+
    # silly random
    r20_jail : boolean "false" ;
 
    # auxiliary variables
-   opt_on_off : boolean "false" ;
+   opt_on_off  : boolean "false" ;
+   drawing_map : boolean "false" ;
 
    # general go-blocking
    goblock_21 : dynamic_boolean {( !point_yell_open)} ;
@@ -2579,6 +2584,24 @@ subroutines {
          : print "Nothing." ;
       }
    }
+   map_stub : subroutine {
+      : if (!bonus_point_ho_maps) {
+         : print "You haven't gained access to the internal game map command yet. It's not critical to win, though." ;
+         : done ;
+      }
+      : set_true "drawing_map" ;
+      : clear_screen ;
+      : update_graphic "m_0_blank" ;
+      : set_false "drawing_map" ;
+      : if (!map_note) {
+         : print "{one_time}there are no one-way paths. Dotted paths mean ways that are blocked until you've solved a puzzle." ;
+         #: print "{one_time}there are no one-way paths. If you have activated the option to block completed rooms, they will be in <GREY<#888>>." ;
+         : set_true "map_note" ;
+      }
+      : press_any_key ;
+      : redescribe ;
+      : done ;
+   }
    note_score_upper_right : subroutine {
       : if (!noted_upper_right) {
          : print "{one_time}you can toggle score notifications with {optt_notify} {yn}. The score is always tracked in the upper right." ;
@@ -3521,6 +3544,9 @@ on_command {
    : match "listen _" {
       : gosub "listen_stub" ;
    }
+   : match "map _" {
+      : gosub "map_stub" ;
+   }
    : match "think _" {
       : set_false "think_text_yet" ;
       : if (think_any) {
@@ -3660,17 +3686,80 @@ on_render {
    : if (!show_overlay) {
       : done ;
    }
-   : if (is_at "r20") {
-      : if (r20_jail) {
-         : overlay "r20_rand_1" x="0" y="0" ;
-      } : else {
-         : overlay "r20_rand_2" x="0" y="0" ;
+   : if (drawing_map) {
+      : if (is_at "r40") {
+         : overlay "m_you_are_here" x="0" y="0" ;
+      } : else_if (is_at "r41") {
+         : overlay "m_you_are_here" x="45" y="0" ;
+      } : else_if (is_at "r42") {
+         : overlay "m_you_are_here" x="90" y="0" ;
+      } : else_if (is_at "r43") {
+         : overlay "m_you_are_here" x="135" y="0" ;
+      } : else_if (is_at "r44") {
+         : overlay "m_you_are_here" x="180" y="0" ;
+      } : else_if (is_at "r30") {
+         : overlay "m_you_are_here" x="0" y="26" ;
+      } : else_if (is_at "r31") {
+         : overlay "m_you_are_here" x="45" y="26" ;
+      } : else_if (is_at "r32") {
+         : overlay "m_you_are_here" x="90" y="26" ;
+      } : else_if (is_at "r33") {
+         : overlay "m_you_are_here" x="135" y="26" ;
+      } : else_if (is_at "r34") {
+         : overlay "m_you_are_here" x="180" y="26" ;
+      } : else_if (is_at "r35") {
+         : overlay "m_you_are_here" x="225" y="26" ;
+      } : else_if (is_at "r20") {
+         : overlay "m_you_are_here" x="0" y="52" ;
+      } : else_if (is_at "r21") {
+         : overlay "m_you_are_here" x="45" y="52" ;
+      } : else_if (is_at "r22") {
+         : overlay "m_you_are_here" x="90" y="52" ;
+      } : else_if (is_at "r23") {
+         : overlay "m_you_are_here" x="135" y="52" ;
+      } : else_if (is_at "r24") {
+         : overlay "m_you_are_here" x="180" y="52" ;
+      } : else_if (is_at "r25") {
+         : overlay "m_you_are_here" x="225" y="52" ;
+      } : else_if (is_at "r26") {
+         : overlay "m_you_are_here" x="270" y="52" ;
+      } : else_if (is_at "r27") {
+         : overlay "m_you_are_here" x="310" y="52" ;
+      } : else_if (is_at "r10") {
+         : overlay "m_you_are_here" x="0" y="78" ;
+      } : else_if (is_at "r11") {
+         : overlay "m_you_are_here" x="45" y="78" ;
+      } : else_if (is_at "r12") {
+         : overlay "m_you_are_here" x="90" y="78" ;
+      } : else_if (is_at "r13") {
+         : overlay "m_you_are_here" x="135" y="78" ;
+      } : else_if (is_at "r14") {
+         : overlay "m_you_are_here" x="180" y="78" ;
+      } : else_if (is_at "r15") {
+         : overlay "m_you_are_here" x="225" y="78" ;
+      } : else_if (is_at "r00") {
+         : overlay "m_you_are_here" x="0" y="104" ;
+      } : else_if (is_at "r01") {
+         : overlay "m_you_are_here" x="45" y="104" ;
+      } : else_if (is_at "r02") {
+         : overlay "m_you_are_here" x="90" y="104" ;
+      } : else_if (is_at "r03") {
+         : overlay "m_you_are_here" x="135" y="104" ;
+      } : else_if (is_at "r04") {
+         : overlay "m_you_are_here" x="180" y="104" ;
+      }
+      : if (has_visited "r20") {
+         : overlay "m_r20" x="0" y="52" ;
       }
    }
 }
 
 assets {
    graphics {
+      m_0_blank : base64_png "iVBORw0KGgoAAAANSUhEUgAAAVsAAAB1AQMAAADa0NBcAAAAA1BMVEXStIxN0HgzAAAAG0lEQVR4Xu3AMQEAAADCIPuntsUuWAUAAAAA4BSRAAHnpKmVAAAAAElFTkSuQmCC" ;
+      m_r20 : base64_png "iVBORw0KGgoAAAANSUhEUgAAACAAAAAPCAYAAACFgM0XAAAAkUlEQVR4nN1VWwrAIAxLhve/cvbVoaVa94DCAqLdtI80IgEIhWgAIIkVwUnqmP2YzTYi+wna3QOerbfshQys4Cv+LwO+//33LxkgAFXegtYbtpZEs/vkSF7Jzvb7MxkGDUT9taB+nu3fDWwYNBD11zOwcvZED1cCkphVlFUY+cgQamAXXieRblIfKL4FRPFreAKarn8537LUDwAAAABJRU5ErkJggg==" ;
+      m_you_are_here : base64_png "iVBORw0KGgoAAAANSUhEUgAAACAAAAAPAQMAAAC/Tl9UAAAABlBMVEUAAAD/gAAgfBVpAAAAEklEQVR4XmMAg/r///9RRIAAAJezLUDrDe6/AAAAAElFTkSuQmCC" ;
+
       r_blank : base64_png "iVBORw0KGgoAAAANSUhEUgAAAQAAAAAYAQMAAAAvTrFnAAAAA1BMVEX//wCKxvRFAAAAD0lEQVR4XmPAAKNgFIwCAAMYAAFrMpCEAAAAAElFTkSuQmCC" ;
       r20_1 : base64_png "iVBORw0KGgoAAAANSUhEUgAAAQAAAAAoAQMAAAArNLbKAAAAA1BMVEUAAACnej3aAAAAE0lEQVR4XmPAC0bBKBgFo2AUAAAFKAABhzzafQAAAABJRU5ErkJggg==" ;
       r20_rand_1 : base64_png "iVBORw0KGgoAAAANSUhEUgAAABUAAAAPAQMAAAAxlBYoAAAABlBMVEUAAAD///+l2Z/dAAAALUlEQVR4XmMAgfr/Hxhc3AUYQvMDgBhChwAxWDw8gCEXiHPA9AcG30CIOBAAAP4GEalNIq2XAAAAAElFTkSuQmCC" ;
