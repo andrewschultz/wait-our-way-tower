@@ -839,6 +839,7 @@ collections {
 
 booleans {
    # game state (noncritical)
+   note_half_think : boolean "false" ;
    showed_first_note : boolean "false" ;
    warn_score_header : boolean "false" ;
    wait_yet : boolean "false" ;
@@ -2616,6 +2617,10 @@ subroutines {
          on_exhausted {
             : print "One word right, one word wrong{for_bonus}.{already_got_check}" ;
          }
+      }
+      : if (!note_half_think) {
+         : print "{one_time}{vd_think} will show half-right guesses until you've gotten both words right." ;
+         : set_true "note_half_think" ;
       }
       : if (first_half) {
          : if (half_bonus) {
