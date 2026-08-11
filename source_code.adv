@@ -218,7 +218,7 @@ strings {
    r21_loc : dynamic_string {( "The hall leads north and south, with a darker passage east. " + (!point_halt_error ? "A {puz_point_hall_terror}, though, wraps itself around to cover those three exits." : (r22_secondary_block ? "You would go east, but you can't hav {puz_point_fellas_leap} on you, then, can you?" : point_fell_asleep ? "No fellas will leap you if you try to go east now." : "" )) + "\nYou could go back west to your cell, too, but that's no fun." )} ;
    r21_header : string "Dredge-Ailing/Dread Jailing" ;
 
-   r22_loc : dynamic_string {( "You " + (point_feel_daring ? "no longer feel uneasy in this field, erring." : "can't shake uneasy emotions in this {puz_point_field_erring}. So many ways to go wrong.") + (!point_free_crusty ? "\nA {point_freak_rusty} watches you." : "") + "\nThe field runs east-west." )} ;
+   r22_loc : dynamic_string {( "You " + (point_feel_daring ? "no longer feel uneasy in this field, erring." : "can't shake uneasy emotions in this {puz_point_field_erring}. So many ways to go wrong.") + (!point_free_crusty ? "\nA {puz_point_freak_rusty} watches you." : "") + "\nThe field runs east-west." )} ;
    r22_header : string "Field, Erring" ;
 
    r23_loc : dynamic_string {( point_frame_easily ? "The fray has died down, and you can just go east-west here." : "A {puz_point_fray_measly} is going on here to the east. It's not very big, yet. But it won't stay that way forever." )} ;
@@ -282,6 +282,7 @@ strings {
 
    # NPC(s)
    trtg : string "<Thug 'Round the Ground<#ccc>>" ;
+   trtg_status : string "The thug is bigger than you but looks out of shape. Their endurance for running can't be that good." ;
 
    # weird strings
    gbgr : string "<\"Gah, Bros, Gab\" Rows<#ccc>>" ;
@@ -1456,7 +1457,7 @@ locations {
       on_command {
          : match "cloth robbing" {
             : if (!point_dump_liars) {
-               : print "But you don't have any sort of tool that could push the {puz_claw_throbbing} out of the way!" ;
+               : print "But you don't have any sort of tool that could push the {puz_point_claw_throbbing} out of the way!" ;
                : set_true "think_cloth_robbing" ;
                : gosub "note_thinks" ;
                : done ;
@@ -2481,7 +2482,7 @@ barriers {
    block_go_r13 : block {
       location = r13
       block_when_not = point_no_injuries
-      message = The {point_puz_knowin_juries} scold you. "It might not be safe. You never know. What if you have, like, pre-existing conditions?" They outnumber you. How to convince them you're willing to take that risk, that you'd be safe? Or, at the very least, not worth bugging?"
+      message = The {puz_point_knowin_juries} scold you. "It might not be safe. You never know. What if you have, like, pre-existing conditions?" They outnumber you. How to convince them you're willing to take that risk, that you'd be safe? Or, at the very least, not worth bugging?"
    }
 
    block_go_r14 : block {
@@ -3202,11 +3203,11 @@ subroutines {
    noun_keywords : subroutine {
       : if (is_present "thug") {
          : match "_ thug;_ round;_ ground" {
-            : print "The thug is bigger than you but looks out of shape. Their endurance for running can't be that good." ;
+            : print "{trtg_status}" ;
             : set_true "gamestate_thug_pass" ;
             : done ;
-	     }
-	  }
+         }
+      }
    }
 
 ##################################testjumps
@@ -3612,7 +3613,7 @@ on_command {
          : print "There are no specific hints now you've gotten past the first puzzle, but {xme} will give you a hint item which may be intuitive, but if not, come back here for an explanation." ;
       } : else {
          : cycle key = "help_general" predictable_order = "true" skip_interval = "0" {
-            : print "Ahead is an explanation of {xtats}, which gives a number that clues what you need to do in the current room. Note that it doesn't track whether or not you're ready to, though you can still guess, and {vm_think} will hold it for later." ;
+            : print "Ahead is an explanation of {xtats}, which gives a number that clues what you need to do in the current room. Note that it doesn't track whether or not you're ready to, though you can still guess, and {vd_think} will hold it for later." ;
             : print "The number 0 means there is nothing else left to do." ;
             : print "A two-digit number tells you something about the two words you need. I didn't make it too out-there, I hope." ;
             : print "The tens digit is the length of the first word, and the ones digit is the length of the second." ;
