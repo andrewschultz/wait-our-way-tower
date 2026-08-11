@@ -2001,6 +2001,9 @@ locations {
    }
    r33 : location "{r33_loc}" header="{r33_header}" {
       on_command {
+         : match "_ loners; loners _" {
+            : print "On the contrary, the owners seem quite social. But that sounds right..." ;
+         }
          : match "say loaners" {
             : if (!point_pitch_earning) {
                : print "But you can't afford a loan of a craft!" ;
@@ -2171,6 +2174,12 @@ locations {
    }
    r41 : location "{r41_loc}" header="{r41_header}" {
       on_command {
+         : if (!point_eh_sink) {
+            : match "* sync;sync *" {
+               : print "You might want to get {puz_point_ace_inc} out of sync. Sounds right, though." ;
+               : done ;
+            }
+         }
          : match "eh sink" {
             : if (point_eh_sink) {
                : print "{puz_point_ace_inc} already sank!" ;
@@ -2184,7 +2193,7 @@ locations {
             : done ;
          }
          : if (!point_eh_sink) {
-            : match "sink *" {
+            : match "sink _" {
                : print "Right idea, but a giant sink might be impassable. Or it might drown you. And {puz_point_ace_inc} couldn't be changed to a SMALL sink." ;
                : done ;
             }
