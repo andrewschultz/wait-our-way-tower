@@ -127,6 +127,40 @@ strings {
    block_hey_trash   : string "The call of {puz_point_hey_trash} freezes you. You half want to show them, whomever they are, and whatever you want to show. You'll decide that later. Also, you worry if you go farther, there'll be more people like that, which could put you in danger. So, for now, no." ;
    block_trrg        : string "Not with the {trrg} around you can't explore somewhere new." ;
 
+   # conditional location strings
+   here_r00 : dynamic_string {( is_at "r00" ? "here" : "in the southwest corner" )} ;
+   here_r01 : dynamic_string {( is_at "r01" ? "here" : "by the dump, arable" )} ;
+   here_r02 : dynamic_string {( is_at "r02" ? "here" : "in the Pit, Churning" )} ;
+   here_r03 : dynamic_string {( is_at "r03" ? "here" : "by the sunk etching" )} ;
+   here_r04 : dynamic_string {( is_at "r04" ? "here" : "by the meager oath" )} ;
+   here_r10 : dynamic_string {( is_at "r10" ? "here" : point_dry_vendors ? "by the Dry Vendors" : "in Drive Enders" )} ;
+   here_r11 : dynamic_string {( is_at "r11" ? "here" : "by the meager oath" )} ;
+   here_r12 : dynamic_string {( is_at "r12" ? "here" : "by the Knowin' Juries" )} ;
+   here_r13 : dynamic_string {( is_at "r13" ? "here" : "by Post, Easing" )} ;
+   here_r14 : dynamic_string {( is_at "r14" ? "here" : "by the claw, throbbing" )} ;
+   here_r15 : dynamic_string {( is_at "r15" ? "here" : "by {r15_header}" )} ;
+   here_r20 : dynamic_string {( is_at "r20" ? "here" : "where you started" )} ;
+   here_r21 : dynamic_string {( is_at "r21" ? "here" : "by the Dread Jailing" )} ;
+   here_r22 : dynamic_string {( is_at "r22" ? "here" : "in the Field, Erring" )} ;
+   here_r23 : dynamic_string {( is_at "r23" ? "here" : "by the Fray, Merging" )} ;
+   here_r24 : dynamic_string {( is_at "r24" ? "here" : "by the War Makers" )} ;
+   here_r25 : dynamic_string {( is_at "r25" ? "here" : "by The Groom-Thug Room" )} ;
+   here_r26 : dynamic_string {( is_at "r26" ? "here" : "by {r26_header}" )} ;
+   here_r27 : dynamic_string {( is_at "r27" ? "here" : "by {r27_header}" )} ;
+   here_r30 : dynamic_string {( is_at "r30" ? "here" : "where you started" )} ;
+   here_r31 : dynamic_string {( is_at "r31" ? "here" : "in the Way-Bland Wabe Land" )} ;
+   here_r32 : dynamic_string {( is_at "r32" ? "here" : "in Chess Training" )} ;
+   here_r33 : dynamic_string {( is_at "r33" ? "here" : "by the sail owners" )} ;
+   here_r34 : dynamic_string {( is_at "r34" ? "here" : "by The Soak-Thus Oak" )} ;
+   here_r35 : dynamic_string {( is_at "r35" ? "here" : "by the Bro Class" )} ;
+   here_r40 : dynamic_string {( is_at "r40" ? "here" : "by Chez Pup" )} ;
+   here_r41 : dynamic_string {( is_at "r41" ? "here" : "by {r41_header}" )} ;
+   here_r42 : dynamic_string {( is_at "r42" ? "here" : "in Gray Vile Grave Isle" )} ;
+   here_r43 : dynamic_string {( is_at "r43" ? "here" : "in the Float, Rippling" )} ;
+   here_r44 : dynamic_string {( is_at "r44" ? "here" : "by the ten sops" )} ;
+   maybe_r00 : dynamic_string {( !think_herd_all_right_place ? "somewhere with lots to track" : here_r00 )} ; # ?? ugh! I'd like to say HERD if we know the half-text but this is fiddly
+   maybe_r40 : dynamic_string {( !think_heard_all_right_place ? "somewhere with lots to track" : here_r40 )} ;
+
    # room(s)
    r00_loc : dynamic_string {( point_catch_acing ? "There's a cat chasing here, mostly fallen leaves and stuff, but it's more coordinated now you helped it." :
       point_vine_eater ? "With the fly traps removed, there's a {puz_point_cat_chasing} here. It's not chasing stuff very well, though." :
@@ -544,7 +578,7 @@ collections {
          "{here_r00}",
          "somewhere with vines",
          "{here_r00}",
-         "{here_r00}",
+         "{maybe_r00}",
          "{here_r40}",
          "{maybe_r40}",
          "{here_r13}",
@@ -982,6 +1016,9 @@ booleans {
    think_tense_ops     : boolean "false" ;
    think_vine_eater    : boolean "false" ;
    think_warm_acres    : boolean "false" ;
+
+   think_herd_all_right_place  : boolean "false" ;
+   think_heard_all_right_place : boolean "false" ;
 
    think_any : dynamic_boolean {( commands_figured > 0 )} ;
 
