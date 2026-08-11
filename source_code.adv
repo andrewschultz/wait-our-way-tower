@@ -55,7 +55,7 @@ strings {
    # meta-verbs
    vm_about : string "<ABOUT<#f80>>" ;
    vm_credits : string "<CREDITS<#f80>>" ;
-   vm_think : string "<THINK<#f80>>" ;
+   vm_diag : string "<DIAG<#f80>>" ;
    vm_verbs : string "<VERBS<#f80>>" ;
    vm_versions : string "<VERSIONS<#f80>>" ;
 
@@ -369,7 +369,7 @@ integers {
       0 )} ; #?? this is inaccurate but we dont want to spoil things, -1? # fey loops also a problem, can we say -1/swirl not there?
    r10_hintnum : dynamic_integer {( !point_dry_vendors ? 37 :
       !point_say_four ?
-	  (point_pitch_earning ? 34 : -34) :
+      (point_pitch_earning ? 34 : -34) :
       0 )} ;
    r11_hintnum : dynamic_integer {( !point_duh_losing ? 36 :
       0 )} ;
@@ -412,7 +412,7 @@ integers {
       0 )} ;
    r40_hintnum : dynamic_integer {( !point_shape_up ? 52 :
       !point_girl_only ? -1 :
-	  !point_heard_all ? 53 :
+      !point_heard_all ? 53 :
       0 )} ;
    r41_hintnum : dynamic_integer {( !point_eh_sink ? 24 :
       !point_cue_bland ? 35 :
