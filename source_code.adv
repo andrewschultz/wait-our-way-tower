@@ -198,7 +198,7 @@ strings {
 
    r13_loc : dynamic_string {( (!point_pose_teasing ? "Here, {gbgr} chatter about any old thing. Why bother?" :
       !gamestate_bros_second_placed ? "The {gbgr} are gone, for now." :
-      !point_whee_plucky ? "The {gbgr} are at it again, asking if you really need to show off the opportunities you've been given, right in front of their faces." :
+      !point_whee_plucky ? "The {gbgr} are at it again, asking if you really need to show off the opportunities you've been given, right in front of their faces. They {puz_point_weep_lucky} a lot." :
       "The {gbgr} are gone for good.") + "\nThe way back is west, but paths branch east and south, too."
    )} ;
    r13_header : string "Post, Easing" ;
@@ -1238,7 +1238,7 @@ locations {
       on_command {
          : match "me growth" {
             : if (point_me_growth) {
-               : print "Too much of this self-improvement will leave you completely unsuited for what really matters in life, like weird text adventures." ;
+               : print "Too much of this self-improvement will leave you completely unsuited for what really matters in life, like weird text adventures. So watch it, sport!" ;
                : done ;
             }
             : print "Oh good, there was a bit of humble bragging in the meager oath, but you try and take the best bits and apply it to your own experiences. It actually works pretty well. You can say, well, if it helps someone less in perspective than me, it can help me, too, and I don't want to be too good for decent advice I've passed out for awhile. You feel more able to deal with people and groups and so forth." ;
@@ -1451,7 +1451,7 @@ locations {
          }
       }
       on_describe {
-         : if (gamestate_bros_second_trigger) {
+         : if (gamestate_bros_second_trigger && !gamestate_bros_second_placed) {
             : set_false "gamestate_bros_second_trigger" ;
             : set_true "gamestate_bros_second_placed" ;
             : print "The Bros are back at it again. They ask how you've been. You mention you've been doing stuff since last you chatted. They all {puz_point_weep_lucky} ... what a stupid guilt trip. But for whatever reason, it works, and you're going to have to change your mindset to get out of this one." ;
@@ -2094,7 +2094,7 @@ locations {
                : gosub "note_thinks" ;
                : done ;
             }
-            : print "The owls COO their appreciation. They don't really ask where you got the towels, they appreciate being able to dry off, even if the rain isn't stopping anytime soon. One of them even hopes you didn't get soaked too much. Although the rest complained about how one just can't fly in the rain sometimes, and you wouldn't know that, since you can't fly. Nevertheless, having gained some relief, they spread out and allow passage north." ;
+            : print "The owls hoot their appreciation. They don't really ask where you got the towels, they appreciate being able to dry off, even if the rain isn't stopping anytime soon. One of them even hopes you didn't get soaked too much. Although the rest complained about how one just can't fly in the rain sometimes, and you wouldn't know that, since you can't fly. Nevertheless, having gained some relief, they spread out and allow passage north." ;
             : set_integer var="tempint" "28" ;
             : set_false "think_ply_towels" ;
             : set_true "point_ply_towels" ;
@@ -3430,7 +3430,7 @@ on_tick {
       : set_true "showed_first_note" ;
    }
    : if (is_present("thug") && lastroom != "null") {
-      : if (!gamestate_thug_pass) {
+      : if (gamestate_thug_pass) {
          : set_false "gamestate_thug_pass" ;
          : done ;
       }
