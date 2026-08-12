@@ -3272,8 +3272,8 @@ subroutines {
       : match "testjump 2" {
          : gosub "testjump_part_1" ;
          : gosub "testjump_part_2" ;
+         : set_true "gamestate_fail_oops_known" ;
          : set_integer var="score" "39" ;
-         : set_true "gamestate_r21_e" ;
          : goto "r24" ;
          : redescribe ;
          : done ;
@@ -3289,6 +3289,7 @@ subroutines {
       : set_true "point_yell_open" ;
       : set_true "point_halt_error" ;
       : set_true "point_fell_asleep" ;
+      : set_true "gamestate_r21_e" ;
    }
 
    testjump_part_2 : subroutine {
