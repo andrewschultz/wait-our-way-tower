@@ -301,6 +301,8 @@ strings {
    tempopt : string "" ;
    txt_on_off : dynamic_string {( opt_on_off ? "<ON<#f0f>>" : "<OFF<#f0f>>" )} ;
 
+   lastroom : string "" ;
+
 }
 
 integers {
@@ -468,6 +470,7 @@ integers {
    # for half THINK
    part_core_score : dynamic_integer {( ((collection_get{ collection -> ("got_first_core") index -> ( counter ) } == "true") ? 1 : 0) + ((collection_get{ collection -> ("got_second_core") index -> ( counter ) } == "true") ? 2 : 0) )} ; # this is a really bad hack, but I couldn't find a concise way to code things. Maybe I could use a dynamic boolean.
    part_bonus_score : dynamic_integer {( ((collection_get{ collection -> ("got_first_bonus") index -> ( counter ) } == "true") ? 1 : 0) + ((collection_get{ collection -> ("got_second_bonus") index -> ( counter ) } == "true") ? 2 : 0) )} ; # this is a really bad hack, but I couldn't find a concise way to code things. Maybe I could use a dynamic boolean.
+
 }
 
 collections {
@@ -1821,9 +1824,10 @@ locations {
       on_command {
       }
       on_describe {
-         : if (!gamestate_thug_gone) {
+         : if (!gamestate_thug_gone && !gamestate_thug_chase) {
             : print "The {trtg} has its eye on you!" ;
             : set_true "gamestate_thug_chase" ;
+            : set_string var="lastroom" text="null" ;
             : set_false "gamestate_thug_pass" ;
          }
       }
@@ -3414,9 +3418,10 @@ on_tick {
       : print "{one_time}{vm_about} will give general game information. {vm_verbs} will describe {wowt}'s stripped-down parser." ;
       : set_true "showed_first_note" ;
    }
-   : if (is_present("thug") && previous_location() == current_location() && !is_at "r25") {
+   : if (is_present("thug") && lastroom != "null") {
       : if (!gamestate_thug_pass) {
          : set_false "gamestate_thug_pass" ;
+         : done ;
       }
       : cycle key = "thug_fail" predictable_order = "true" skip_interval = "0" {
          : print "Thud. The thug got you. It snickers {puz_point_fail_oops} before lumbering away back to its ground." ;
@@ -3434,10 +3439,25 @@ on_tick {
       : press_any_key ;
       : done ;
    }
-   : if (gamestate_thug_chase) {
+   : if (gamestate_thug_chase && !is_present("thug")) {
       : print "The thug follows you." ;
       : create "thug" ;
+      : if (!note_thug_pass && is_at "r24") {
+         : print "{one_time}Some diagnostic actions, and a potential point-scoring action or two, will daze the thug a bit. So you have some leeway." ;
+         : set_true "note_thug_pass" ;
+      }
+      : if (is_just_entered()) {
+         : if (lastroom == current_location()) {
+            : print {( "The thug catches you doubling back. It roughs you up a bit, nothing serious (perhaps it's lonely and has no-one else to groom its thugginess on. Small victories!) before giving a {puz_point_fail_oops} then " + (is_at "r25" ? "doing a dumb little dance in place." : "trudging back to The Groom-Thug Room, where perhaps it anticipates, rightly or wrongly, another round of this." ) )} ;
+            : create "thug" target="r25" ;
+            : set_false "gamestate_thug_chase" ;
+            : done ;
+         }
+         : set_string var="lastroom" {( previous_location() )} ;
+         : done ;
+      }
    }
+
 }
 
 on_command {
