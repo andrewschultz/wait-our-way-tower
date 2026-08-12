@@ -73,8 +73,8 @@ strings {
 
    # puzzle strings
    puz_point_ace_inc        : dynamic_string {( opt_color_coding ? "<Ace, Inc.<#f80>>" : "Ace, Inc." )}           ; # 26
-   puz_point_bleah_stable   : dynamic_string {( opt_color_coding ? "<bleah stable<#f80>>" : "bleah stable" )}     ; # 46
-   puz_point_boss_lumping   : dynamic_string {( opt_color_coding ? "<boss lumping<#f80>>" : "boss lumping" )}     ; # 45
+   puz_point_bleah_stable   : dynamic_string {( opt_color_coding ? "<Bleah, stable<#f80>>" : "Bleah, stable" )}   ; # 46
+   puz_point_boss_lumping   : dynamic_string {( opt_color_coding ? "<boss, lumping<#f80>>" : "boss, lumping" )}   ; # 45
    puz_point_bro_class      : dynamic_string {( opt_color_coding ? "<Bro Class<#f80>>" : "Bro Class" )}           ; # 44
    puz_point_canned_ooh     : dynamic_string {( opt_color_coding ? "<Canned, ooh<#f80>>" : "Canned, ooh" )}       ; # 00
    puz_point_cat_chasing    : dynamic_string {( opt_color_coding ? "<cat, chasing<#f80>>" : "cat, chasing" )}     ; # 35
@@ -230,10 +230,10 @@ strings {
    r25_loc : string "You can see passage north, south, and east. Back west--well, you're not sure how much is left there." ;
    r25_header : string "The Groom-Thug Room" ;
 
-   r26_loc : dynamic_string {( !point_bah_slumping ? "Well this is pretty miserable. A boss, lumping abuse on you, blocks the way to the east.\nAnd with such sophistry! Such common sense! Did you come here so far for nothing?\nYou can go back west, if you want." : "Well, you've achieved no great power. But you've achieved relief from the boss. You can go east as well as west now." )} ;
+   r26_loc : dynamic_string {( !point_bah_slumping ? "Well this is pretty miserable. A {puz_point_boss_lumping} abuse on you, blocks the way to the east.\nAnd with such sophistry! Such common sense! Did you come here so far for nothing?\nYou can go back west, if you want." : "Well, you've achieved no great power. But you've achieved relief from the boss. You can go east as well as west now." )} ;
    r26_header : string "\"Know Power? NOPE\" Hour" ;
 
-   r27_loc : dynamic_string {( point_blest_able ? "You feel good here. Yet there's still more. You hear and feel {puz_point_true_pleading}, not i-have-to-have, but interest in seeing and doing and offering more.\nSo you still feel restless. Perhaps you need to get the right phrase to say, one more time, to close the book." : "This stable here is pretty bleah. Is it really what the boss was guarding? At least it's well, stable. Bleah, stable ... do you deserve more in life? You guess you do, but you know you're biased." )} ;
+   r27_loc : dynamic_string {( point_blest_able ? "You feel good here. Yet there's still more. You hear and feel {puz_point_true_pleading}, not i-have-to-have, but interest in seeing and doing and offering more.\nSo you still feel restless. Perhaps you need to get the right phrase to say, one more time, to close the book." : "This stable here is pretty bleah. Is it really what the boss was guarding? At least it's well, stable. {puz_point_bleah_stable} ... do you deserve more in life? You guess you do, but you know you're biased." )} ;
    r27_header : string "Bleah Stable" ;
 
    r30_loc : dynamic_string {( ( point_door_cloud ? "You opened a door in a door-cloud leading north." : "A {puz_point_dork_loud} stands here, going on about how they'd LIKE to let people see great stuff to the north, but peope just AREN'T organized." ) + "\nYou can go back east, too." )} ;
@@ -1163,7 +1163,7 @@ locations {
                : print "There is nobody left to pitch to. Anyway, you got more riches than expected here." ;
                : done ;
             }
-            : print "You are quite sure how you're going to explain what's so great about one coin at first, especially since the giant has riches lying around. Then you find an angle. If someone as small as you can make this coin, with your strategies or whatever, think of what the giant could make with their height and strength and so forth. You put more of the dumb parable to use, and surprisingly, the giant buys it. They walk away. You are confronted with riches. There are \"higher itches, hi\" riches and \"power itches, POW\" riches. You decide on the first, though it's a smaller pile.\nAn unheard voice booms YOU HAVE CHOSEN WELL." ;
+            : print "You aren't quite sure how you're going to explain what's so great about one coin at first, especially since the giant has riches lying around. Then you find an angle. If someone as small as you can make this coin, with your strategies or whatever, think of what the giant could make with their height and strength and so forth. You put more of the dumb parable to use, and surprisingly, the giant buys it. They walk away. You are confronted with riches. There are \"higher itches, hi\" riches and \"power itches, POW\" riches. You decide on the first, though it's a smaller pile.\nAn unheard voice booms YOU HAVE CHOSEN WELL. PERHAPS IT WASN'T TOO HARD TO IN THIS CASE, BUT GOOD JOB, ANYWAY." ;
             : set_integer var="tempint" "12" ;
             : set_false "think_pitch_earning" ;
             : set_true "point_pitch_earning" ;
