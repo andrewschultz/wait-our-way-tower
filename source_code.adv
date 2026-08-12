@@ -88,7 +88,7 @@ strings {
    puz_point_dull_oozing    : dynamic_string {( opt_color_coding ? "<dull oozing<#f80>>" : "dull oozing" )}       ; # 06
    puz_point_dumb_pliers    : dynamic_string {( opt_color_coding ? "<dumb pliers<#f80>>" : "dumb pliers" )}       ; # 14
    puz_point_dump_arable    : dynamic_string {( opt_color_coding ? "<dump, arable<#f80>>" : "dump, arable" )}     ; # 08
-   puz_point_fail_oops      : dynamic_string {( opt_color_coding ? "<\"Fail! Oops!\"<#f80>>" : "fail_oops" )}     ; # 41
+   puz_point_fail_oops      : dynamic_string {( opt_color_coding ? "<\"Fail! Oops!\"<#f80>>" : "\"Fail! Oops!\"" )}     ; # 41
    puz_point_field_erring   : dynamic_string {( opt_color_coding ? "<field erring<#f80>>" : "field erring" )}     ; # 15
    puz_point_fellas_leap    : dynamic_string {( opt_color_coding ? "<FELLAS, LEAP<#f80>>" : "FELLAS, LEAP" )}     ; # 04
    puz_point_flight_wraps   : dynamic_string {( opt_color_coding ? "<flight wraps<#f80>>" : "flight wraps" )}     ; # 33
@@ -1788,6 +1788,12 @@ locations {
    }
    r24 : location "{r24_loc}" header="{r24_header}" {
       on_command {
+         : if (!point_warm_acres) {
+            : match "_ achers" {
+               : print "They are already aching for war." ;
+               : done ;
+            }
+         }
          : match "warm acres" {
             : if (herd_score != 2) {
                : print {( "You don't have " + (herd_score == 1 ? "enough" : "anything") + " to try to warm the hearts of the war makers!" )} ;
@@ -2391,14 +2397,14 @@ locations {
 
 # Defines things in the world (scenery cannot be carried)
 objects {
-   only_girl : object "She is holding {puz_point_her_doll}." conspicuous = "false";
+   only_girl : object "She is holding {puz_point_her_doll}." conspicuous = "false" ;
    vie_neater : object "The VIE NEATER voucher you got from the Cue, Bland" ;
    phase_tats : object "{i_fspt}" ;
    major_gent : object "A bit too nice here." at = "r35" conspicuous = "false" ;
    mage_urgent : object "The former major gent has now swung a bit too much the other way." conspicuous = "false" ;
    broke_lass : object "The broke lass doesn't seem that broke, or broken." conspicuous = "false" ;
-   wry_tangles : object "Very interesting, but not quite for you." at = "r15" conspicuous="false";
-   thug : object "{trtg_status}." at = "r25" conspicuous = "false";
+   wry_tangles : object "Very interesting, but not quite for you." at = "r15" conspicuous="false" ;
+   thug : object "{trtg_status}." at = "r25" conspicuous = "false" ;
 }
 
 zones {
@@ -3589,7 +3595,7 @@ on_command {
             : done ;
          }
          : print {( "You don't believe you will find any fey loops, but you figure why not, this place is as good as any others." )} ;
-         : print "And what do you know? You find some to the " + (is_at "r04" ? "north" : "south") + ", which create the first (and only) loop in the game map." ;
+         : print {( "And what do you know? You find some to the " + (is_at "r04" ? "north" : "south") + ", which create the first (and only) loop in the game map." )} ;
          : set_integer var="tempint" "41" ;
          : set_false "think_fey_loops" ;
          : set_true "point_fey_loops" ;
