@@ -3878,228 +3878,228 @@ on_render {
       } : else_if (is_at "r44") {
          : overlay "m_you_are_here" x="180" y="0" ;
       } : else_if (is_at "r30") {
-         : overlay "m_you_are_here" x="0" y="26" ;
+         : overlay "m_you_are_here" x="0" y="28" ;
       } : else_if (is_at "r31") {
-         : overlay "m_you_are_here" x="45" y="26" ;
+         : overlay "m_you_are_here" x="45" y="28" ;
       } : else_if (is_at "r32") {
-         : overlay "m_you_are_here" x="90" y="26" ;
+         : overlay "m_you_are_here" x="90" y="28" ;
       } : else_if (is_at "r33") {
-         : overlay "m_you_are_here" x="135" y="26" ;
+         : overlay "m_you_are_here" x="135" y="28" ;
       } : else_if (is_at "r34") {
-         : overlay "m_you_are_here" x="180" y="26" ;
+         : overlay "m_you_are_here" x="180" y="28" ;
       } : else_if (is_at "r35") {
-         : overlay "m_you_are_here" x="225" y="26" ;
+         : overlay "m_you_are_here" x="225" y="28" ;
       } : else_if (is_at "r20") {
-         : overlay "m_you_are_here" x="0" y="52" ;
+         : overlay "m_you_are_here" x="0" y="56" ;
       } : else_if (is_at "r21") {
-         : overlay "m_you_are_here" x="45" y="52" ;
+         : overlay "m_you_are_here" x="45" y="56" ;
       } : else_if (is_at "r22") {
-         : overlay "m_you_are_here" x="90" y="52" ;
+         : overlay "m_you_are_here" x="90" y="56" ;
       } : else_if (is_at "r23") {
-         : overlay "m_you_are_here" x="135" y="52" ;
+         : overlay "m_you_are_here" x="135" y="56" ;
       } : else_if (is_at "r24") {
-         : overlay "m_you_are_here" x="180" y="52" ;
+         : overlay "m_you_are_here" x="180" y="56" ;
       } : else_if (is_at "r25") {
-         : overlay "m_you_are_here" x="225" y="52" ;
+         : overlay "m_you_are_here" x="225" y="56" ;
       } : else_if (is_at "r26") {
-         : overlay "m_you_are_here" x="270" y="52" ;
+         : overlay "m_you_are_here" x="270" y="56" ;
       } : else_if (is_at "r27") {
-         : overlay "m_you_are_here" x="315" y="52" ;
+         : overlay "m_you_are_here" x="315" y="56" ;
       } : else_if (is_at "r10") {
-         : overlay "m_you_are_here" x="0" y="78" ;
+         : overlay "m_you_are_here" x="0" y="84" ;
       } : else_if (is_at "r11") {
-         : overlay "m_you_are_here" x="45" y="78" ;
+         : overlay "m_you_are_here" x="45" y="84" ;
       } : else_if (is_at "r12") {
-         : overlay "m_you_are_here" x="90" y="78" ;
+         : overlay "m_you_are_here" x="90" y="84" ;
       } : else_if (is_at "r13") {
-         : overlay "m_you_are_here" x="135" y="78" ;
+         : overlay "m_you_are_here" x="135" y="84" ;
       } : else_if (is_at "r14") {
-         : overlay "m_you_are_here" x="180" y="78" ;
+         : overlay "m_you_are_here" x="180" y="84" ;
       } : else_if (is_at "r15") {
-         : overlay "m_you_are_here" x="225" y="78" ;
+         : overlay "m_you_are_here" x="225" y="84" ;
       } : else_if (is_at "r00") {
-         : overlay "m_you_are_here" x="0" y="104" ;
+         : overlay "m_you_are_here" x="0" y="112" ;
       } : else_if (is_at "r01") {
-         : overlay "m_you_are_here" x="45" y="104" ;
+         : overlay "m_you_are_here" x="45" y="112" ;
       } : else_if (is_at "r02") {
-         : overlay "m_you_are_here" x="90" y="104" ;
+         : overlay "m_you_are_here" x="90" y="112" ;
       } : else_if (is_at "r03") {
-         : overlay "m_you_are_here" x="135" y="104" ;
+         : overlay "m_you_are_here" x="135" y="112" ;
       } : else_if (is_at "r04") {
-         : overlay "m_you_are_here" x="180" y="104" ;
+         : overlay "m_you_are_here" x="180" y="112" ;
       }
       : if (has_visited "r00") {
-         : overlay "m_r00" x="0" y="104" ;
+         : overlay "m_r00" x="0" y="112" ;
       }
       : if (has_visited "r01") {
-         : overlay "m_r01" x="45" y="104" ;
-         : overlay "m_c_h_1" x="32" y="109" ;
-         : overlay "m_c_h_1" x="77" y="109" ;
+         : overlay "m_r01" x="45" y="112" ;
+         : overlay "m_c_h_1" x="32" y="118" ;
+         : overlay "m_c_h_1" x="77" y="118" ;
       }
       : if (has_visited "r02") {
-         : overlay "m_r02" x="90" y="104" ;
+         : overlay "m_r02" x="90" y="112" ;
       }
       : if (has_visited "r03") {
-         : overlay "m_r03" x="135" y="104" ;
-         : overlay "m_c_h_1" x="167" y="109" ;
+         : overlay "m_r03" x="135" y="112" ;
+         : overlay "m_c_h_1" x="167" y="118" ;
       }
       : if (has_visited "r04") {
-         : overlay "m_r04" x="180" y="104" ;
+         : overlay "m_r04" x="180" y="112" ;
       }
       : if (has_visited "r10") {
-         : overlay "m_r10" x="0" y="78" ;
+         : overlay "m_r10" x="0" y="84" ;
       }
       : if (has_visited "r11") {
-         : overlay "m_r11" x="45" y="78" ;
+         : overlay "m_r11" x="45" y="84" ;
          : if (point_duh_losing) {
-            : overlay "m_c_h_1" x="32" y="83" ;
-            : overlay "m_c_h_1" x="77" y="83" ;
-            : overlay "m_c_v_1" x="60" y="91" ;
+            : overlay "m_c_h_1" x="32" y="90" ;
+            : overlay "m_c_h_1" x="77" y="90" ;
+            : overlay "m_c_v_1" x="60" y="99" ;
          } : else {
-            : overlay "m_c_h_0" x="32" y="83" ;
-            : overlay "m_c_h_0" x="77" y="83" ;
-            : overlay "m_c_v_0" x="60" y="91" ;
+            : overlay "m_c_h_0" x="32" y="90" ;
+            : overlay "m_c_h_0" x="77" y="90" ;
+            : overlay "m_c_v_0" x="60" y="99" ;
          }
       }
       : if (has_visited "r12") {
-         : overlay "m_r12" x="90" y="78" ;
+         : overlay "m_r12" x="90" y="84" ;
          : if (point_no_injuries) {
-            : overlay "m_c_h_1" x="122" y="83" ;
+            : overlay "m_c_h_1" x="122" y="90" ;
          } : else {
-            : overlay "m_c_h_0" x="122" y="83" ;
+            : overlay "m_c_h_0" x="122" y="90" ;
          }
       }
       : if (has_visited "r13") {
-         : overlay "m_r13" x="135" y="78" ;
+         : overlay "m_r13" x="135" y="84" ;
          : if (point_pose_teasing) { # super edge case when bros come back
-            : overlay "m_c_h_1" x="167" y="83" ;
-            : overlay "m_c_v_1" x="150" y="91" ;
+            : overlay "m_c_h_1" x="167" y="90" ;
+            : overlay "m_c_v_1" x="150" y="99" ;
          } : else {
-            : overlay "m_c_h_0" x="167" y="83" ;
-            : overlay "m_c_v_0" x="150" y="91" ;
+            : overlay "m_c_h_0" x="167" y="89" ;
+            : overlay "m_c_v_0" x="150" y="99" ;
          }
       }
       : if (has_visited "r14") {
-         : overlay "m_r14" x="180" y="78" ;
+         : overlay "m_r14" x="180" y="84" ;
       }
       : if (has_visited "r15") {
-         : overlay "m_r15" x="225" y="78" ;
+         : overlay "m_r15" x="225" y="84" ;
       }
       : if (has_visited "r20") {
-         : overlay "m_r20" x="0" y="52" ;
+         : overlay "m_r20" x="0" y="56" ;
          : if (point_yell_open) {
-            : overlay "m_c_h_1" x="32" y="57" ;
+            : overlay "m_c_h_1" x="32" y="62" ;
          }
       }
       : if (has_visited "r21") {
-         : overlay "m_r21" x="45" y="52" ;
+         : overlay "m_r21" x="45" y="56" ;
          : if (point_fell_asleep) {
-            : overlay "m_c_h_1" x="77" y="57" ;
+            : overlay "m_c_h_1" x="77" y="62" ;
          } : else {
-            : overlay "m_c_h_0" x="77" y="57" ;
+            : overlay "m_c_h_0" x="77" y="62" ;
          }
          : if (point_halt_error) {
-            : overlay "m_c_v_1" x="60" y="39" ;
-            : overlay "m_c_v_1" x="60" y="65" ;
+            : overlay "m_c_v_1" x="60" y="43" ;
+            : overlay "m_c_v_1" x="60" y="71" ;
          } : else {
-            : overlay "m_c_v_0" x="60" y="39" ;
-            : overlay "m_c_v_0" x="60" y="65" ;
+            : overlay "m_c_v_0" x="60" y="43" ;
+            : overlay "m_c_v_0" x="60" y="71" ;
          }
       }
       : if (has_visited "r22") {
-         : overlay "m_r22" x="90" y="52" ;
+         : overlay "m_r22" x="90" y="56" ;
          : if (point_free_crusty) {
-            : overlay "m_c_h_1" x="122" y="57" ;
+            : overlay "m_c_h_1" x="122" y="62" ;
          } : else {
-            : overlay "m_c_h_0" x="122" y="57" ;
+            : overlay "m_c_h_0" x="122" y="62" ;
          }
       }
       : if (has_visited "r23") {
-         : overlay "m_r23" x="135" y="52" ;
+         : overlay "m_r23" x="135" y="56" ;
          : if (point_frame_easily) {
-            : overlay "m_c_h_1" x="167" y="57" ;
+            : overlay "m_c_h_1" x="167" y="62" ;
          } : else {
-            : overlay "m_c_h_0" x="167" y="57" ;
+            : overlay "m_c_h_0" x="167" y="62" ;
          }
       }
       : if (has_visited "r24") {
-         : overlay "m_r24" x="180" y="52" ;
+         : overlay "m_r24" x="180" y="56" ;
          : if (point_warm_acres) {
-            : overlay "m_c_h_1" x="212" y="57" ;
+            : overlay "m_c_h_1" x="212" y="62" ;
          } : else {
-            : overlay "m_c_h_0" x="212" y="57" ;
+            : overlay "m_c_h_0" x="212" y="62" ;
          }
       }
       : if (has_visited "r25") {
-         : overlay "m_r25" x="225" y="52" ;
+         : overlay "m_r25" x="225" y="56" ;
          : if (point_warm_acres) {
-            : overlay "m_c_h_1" x="257" y="57" ;
-            : overlay "m_c_v_1" x="240" y="44" ;
-            : overlay "m_c_v_1" x="240" y="65" ;
+            : overlay "m_c_h_1" x="257" y="62" ;
+            : overlay "m_c_v_1" x="240" y="48" ;
+            : overlay "m_c_v_1" x="240" y="70" ;
          } : else {
-            : overlay "m_c_h_0" x="257" y="57" ;
-            : overlay "m_c_v_0" x="240" y="44" ;
-            : overlay "m_c_v_0" x="240" y="65" ;
+            : overlay "m_c_h_0" x="257" y="62" ;
+            : overlay "m_c_v_0" x="240" y="48" ;
+            : overlay "m_c_v_0" x="240" y="70" ;
          }
       }
       : if (has_visited "r26") {
-         : overlay "m_r26" x="270" y="52" ;
+         : overlay "m_r26" x="270" y="56" ;
          : if (point_bah_slumping) {
-            : overlay "m_c_h_1" x="302" y="57" ;
+            : overlay "m_c_h_1" x="302" y="62" ;
          } : else {
-            : overlay "m_c_h_0" x="302" y="57" ;
+            : overlay "m_c_h_0" x="302" y="62" ;
          }
       }
       : if (has_visited "r27") {
-         : overlay "m_r27" x="315" y="52" ;
+         : overlay "m_r27" x="315" y="56" ;
       }
       : if (has_visited "r30") {
-         : overlay "m_r30" x="0" y="26" ;
+         : overlay "m_r30" x="0" y="28" ;
          : if (point_door_cloud) {
-            : overlay "m_c_v_1" x="15" y="13" ;
+            : overlay "m_c_v_1" x="15" y="15" ;
          } : else {
-            : overlay "m_c_v_0" x="15" y="13" ;
+            : overlay "m_c_v_0" x="15" y="15" ;
          }
       }
       : if (has_visited "r31") {
-         : overlay "m_r31" x="45" y="26" ;
+         : overlay "m_r31" x="45" y="28" ;
          : if (point_hate_rash) {
-            : overlay "m_c_h_1" x="32" y="31" ;
-            : overlay "m_c_h_1" x="77" y="31" ;
-            : overlay "m_c_v_1" x="60" y="13" ;
+            : overlay "m_c_h_1" x="32" y="34" ;
+            : overlay "m_c_h_1" x="77" y="34" ;
+            : overlay "m_c_v_1" x="60" y="15" ;
          } : else {
-            : overlay "m_c_h_0" x="32" y="31" ;
-            : overlay "m_c_h_0" x="77" y="31" ;
-            : overlay "m_c_v_0" x="60" y="13" ;
+            : overlay "m_c_h_0" x="32" y="34" ;
+            : overlay "m_c_h_0" x="77" y="34" ;
+            : overlay "m_c_v_0" x="60" y="15" ;
          }
       }
       : if (has_visited "r32") {
-         : overlay "m_r32" x="90" y="26" ;
+         : overlay "m_r32" x="90" y="28" ;
          : if (point_dump_liars) {
-            : overlay "m_c_h_1" x="122" y="31" ;
+            : overlay "m_c_h_1" x="122" y="34" ;
          } : else {
-            : overlay "m_c_h_0" x="122" y="31" ;
+            : overlay "m_c_h_0" x="122" y="34" ;
          }
       }
       : if (has_visited "r33") {
-         : overlay "m_r33" x="135" y="26" ;
-         : overlay "m_c_h_1" x="167" y="31" ;
+         : overlay "m_r33" x="135" y="28" ;
+         : overlay "m_c_h_1" x="167" y="34" ;
          : if (point_say_loaners) {
-            : overlay "m_c_v_1" x="150" y="13" ;
+            : overlay "m_c_v_1" x="150" y="15" ;
          } : else {
-            : overlay "m_c_v_0" x="150" y="13" ;
+            : overlay "m_c_v_0" x="150" y="15" ;
          }
       }
       : if (has_visited "r34") {
-         : overlay "m_r34" x="180" y="26" ;
+         : overlay "m_r34" x="180" y="28" ;
          : if (point_ply_towels) {
-            : overlay "m_c_v_1" x="195" y="13" ;
+            : overlay "m_c_v_1" x="195" y="15" ;
          } : else {
-            : overlay "m_c_v_0" x="195" y="13" ;
+            : overlay "m_c_v_0" x="195" y="15" ;
          }
       }
       : if (has_visited "r35") {
-         : overlay "m_r35" x="225" y="26" ;
+         : overlay "m_r35" x="225" y="28" ;
       }
       : if (has_visited "r40") {
          : overlay "m_r40" x="0" y="0" ;
@@ -4110,9 +4110,9 @@ on_render {
       : if (has_visited "r42") {
          : overlay "m_r42" x="90" y="0" ;
          : if (point_flow_tripling) {
-            : overlay "m_c_h_1" x="122" y="5" ;
+            : overlay "m_c_h_1" x="122" y="6" ;
          } : else {
-            : overlay "m_c_h_0" x="122" y="5" ;
+            : overlay "m_c_h_0" x="122" y="6" ;
          }
       }
       : if (has_visited "r43") {
@@ -4126,7 +4126,7 @@ on_render {
 
 assets {
    graphics {
-      m_0_blank : base64_png "iVBORw0KGgoAAAANSUhEUgAAAVsAAAB1AQMAAADa0NBcAAAAA1BMVEXStIxN0HgzAAAAG0lEQVR4Xu3AMQEAAADCIPuntsUuWAUAAAAA4BSRAAHnpKmVAAAAAElFTkSuQmCC" ;
+      m_0_blank : base64_png "iVBORw0KGgoAAAANSUhEUgAAAVsAAAB/AQMAAAB7S/M6AAAAA1BMVEXStIxN0HgzAAAAHElEQVR4Xu3AgQAAAADDoPtTX2EAtQYAAAAAAA4WUwABTJjU7AAAAABJRU5ErkJggg==" ;
 
       m_c_h_0 : base64_png "iVBORw0KGgoAAAANSUhEUgAAAA0AAAACCAYAAACDvVapAAAAIElEQVR4nJ3IoQEAMAyAMNj/P1NTPdHICMSqBFC/9zgY4tYJAxxU6PoAAAAASUVORK5CYII=" ;
       m_c_h_1 : base64_png "iVBORw0KGgoAAAANSUhEUgAAAA0AAAACCAYAAACDvVapAAAAF0lEQVR4nGNkYGD4z0AiYCJVAwMDAwMAZtgBAwMnQ8IAAAAASUVORK5CYII=" ;
