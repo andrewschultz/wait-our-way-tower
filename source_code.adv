@@ -1041,6 +1041,7 @@ booleans {
 vocabulary {
 
    : verb / aliases = [tj, testjump] ;
+   : verb / aliases = [gt, goto] ;
 
 }
 
@@ -1819,6 +1820,7 @@ locations {
             }
          }
       }
+
    }
    r25 : location "{r25_loc}" header="{r25_header}" {
       on_command {
@@ -3284,41 +3286,43 @@ subroutines {
    }
 
    testjump_part_2 : subroutine {
-       : set_true "point_hate_rash" ;
-       : set_true "point_duh_losing" ;
-       : set_true "point_dry_vendors" ;
-       : set_true "point_dumb_parable" ;
-       : set_true "point_no_injuries" ;
-       : set_true "point_coin_ovations" ;
-       : set_true "point_tightened_rousing" ;
-       : set_true "point_pitch_earning" ;
-       : set_true "point_chest_reigning" ;
-       : set_true "point_dump_liars" ;
-       : set_true "point_feel_daring" ;
-       : set_true "point_free_crusty" ;
-       : set_true "point_say_four" ;
-       : set_true "point_say_loaners" ;
-       : set_true "point_pose_teasing" ;
-       : set_true "point_sun_catching" ;
-       : set_true "point_tufty_key" ;
-       : set_true "point_door_cloud" ;
-       : set_true "point_flow_tripling" ;
-       : set_true "point_me_growth" ;
-       : set_true "point_cloth_robbing" ;
-       : set_true "point_eh_sink" ;
-       : set_true "point_cue_bland" ;
-       : set_true "point_ply_towels" ;
-       : set_true "point_tense_ops" ;
-       : set_true "point_frame_easily" ;
-       : set_true "point_seek_rest" ;
-       : set_true "point_girl_only" ;
-       : set_true "point_fly_traps" ;
-       : set_true "point_vine_eater" ;
-       : set_true "point_catch_acing" ;
-       : set_true "point_herd_all" ;
-       : set_true "point_shape_up" ;
-       : set_true "point_heard_all" ;
-       : set_true "point_whee_plucky" ;
+      : set_true "point_hate_rash" ;
+      : set_true "point_duh_losing" ;
+      : set_true "point_dry_vendors" ;
+      : set_true "point_dumb_parable" ;
+      : set_true "point_no_injuries" ;
+      : set_true "point_coin_ovations" ;
+      : set_true "point_tightened_rousing" ;
+      : set_true "point_pitch_earning" ;
+      : set_true "point_chest_reigning" ;
+      : set_true "point_dump_liars" ;
+      : set_true "point_feel_daring" ;
+      : set_true "point_free_crusty" ;
+      : set_true "point_say_four" ;
+      : set_true "point_say_loaners" ;
+      : set_true "point_pose_teasing" ;
+      : set_true "point_sun_catching" ;
+      : set_true "point_tufty_key" ;
+      : set_true "point_door_cloud" ;
+      : set_true "point_flow_tripling" ;
+      : set_true "point_me_growth" ;
+      : set_true "point_cloth_robbing" ;
+      : set_true "point_eh_sink" ;
+      : set_true "point_cue_bland" ;
+      : set_true "point_ply_towels" ;
+      : set_true "point_tense_ops" ;
+      : set_true "point_frame_easily" ;
+      : set_true "point_seek_rest" ;
+      : set_true "point_girl_only" ;
+      : set_true "point_fly_traps" ;
+      : set_true "point_vine_eater" ;
+      : set_true "point_catch_acing" ;
+      : set_true "point_herd_all" ;
+      : set_true "point_shape_up" ;
+      : set_true "point_heard_all" ;
+      : set_true "point_whee_plucky" ;
+      : set_true "gamestate_bros_second_trigger" ;
+      : set_true "gamestate_bros_second_placed" ;
    }
 
 }
