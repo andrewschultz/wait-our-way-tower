@@ -3481,7 +3481,7 @@ on_command {
             : done ;
          }
          : if (!is_at "r00" || !point_fly_traps) {
-            : print "Nothing to herd here." ;
+            : print "Nothing to herd en masse here." ;
             : set_true "think_herd_all" ;
             : gosub "note_thinks" ;
             : done ;
@@ -3507,7 +3507,7 @@ on_command {
             : done ;
          }
          : if (!is_at "r40") {
-            : print "Nothing to hear here." ;
+            : print "Nothing to potentially hear en masse here." ;
             : set_true "think_heard_all" ;
             : gosub "note_thinks" ;
             : done ;
@@ -3727,6 +3727,12 @@ on_command {
       }
       : if (think_fey_loops) {
          : print "You tried to find <FEY LOOPS<#f80>> but weren't in an area that might support them." ;
+      }
+      : if (think_frame_easily) {
+         : print "You had ideas how to stop the fray (measly) from fighting, but they weren't ones you had confidence to <FRAME EASILY<#f80>> yet." ;
+      }
+      : if (think_free_crusty) {
+         : print "You tried to get the freak, rusty to see themselves as <FREE CRUSTY<#f80>> but you were worried you'd say the wrong thing." ;
       }
       : if (think_heard_all) {
          : print "You tried to say <HEARD ALL<#f80>> but there weren't enough entities to hear." ;
