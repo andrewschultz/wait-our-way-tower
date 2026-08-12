@@ -3722,49 +3722,49 @@ on_command {
          : print "You tried to go <CLOTH ROBBING<#f80>> {here_r14} but didn't have the proper tool(s)." ;
       }
       : if (think_coin_ovations) {
-         : print "You tried to get <COIN OVATIONS<#f80>> from the Knowin' Juries but didn't have the storytelling ability yet." ;
+         : print "You tried to get <COIN OVATIONS<#f80>> from the Knowin' Juries {here_r12} but didn't have the storytelling ability yet." ;
       }
       : if (think_door_cloud) {
-         : print "You tried to ask the dork, loud to show you a <DOOR CLOUD<#f80>> but couldn't point them to any you could open." ;
+         : print "You tried to ask the dork, loud {here_r30} to show you a <DOOR CLOUD<#f80>> but couldn't point them to any you could open." ;
       }
       : if (think_fey_loops) {
          : print "You tried to find <FEY LOOPS<#f80>> but weren't in an area that might support them." ;
       }
       : if (think_frame_easily) {
-         : print "You had ideas how to stop the fray (measly) from fighting, but they weren't ones you had confidence to <FRAME EASILY<#f80>> yet." ;
+         : print "You had ideas how to stop the fray (measly) {here_r23} from fighting, but they weren't ones you had confidence to <FRAME EASILY<#f80>> yet." ;
       }
       : if (think_free_crusty) {
-         : print "You tried to get the freak, rusty to see themselves as <FREE CRUSTY<#f80>> but you were worried you'd say the wrong thing." ;
+         : print "You tried to get the freak, rusty {here_r22} to see themselves as <FREE CRUSTY<#f80>> but you were worried you'd say the wrong thing." ;
       }
       : if (think_heard_all) {
-         : print "You tried to say <HEARD ALL<#f80>> but there weren't enough entities to hear." ;
+         : print "Your efforts to have <HEARD ALL<#f80>> fell short without enough entities to hear." ;
       }
       : if (think_herd_all) {
-         : print "You tried to say <HERD ALL<#f80>> but there weren't enough entities to herd." ;
+         : print "Your efforts to <HERD ALL<#f80>> fell short witout enough entities to herd." ;
       }
       : if (think_pitch_earning) {
-         : print "You tried to <PITCH EARNING<#f80>> to the titan, but it wasn't in a state to listen yet." ;
+         : print "You tried to <PITCH EARNING<#f80>> to the titan {here_r02}, but it wasn't in a state to listen yet." ;
       }
       : if (think_ply_towels) {
-         : print "You tried to <PLY TOWELS<#f80>> to the plight owls, but you didn't have any towels yet." ;
+         : print "You tried to <PLY TOWELS<#f80>> to the plight owls {here_r34}, but you didn't have any towels yet." ;
       }
       : if (think_right_angles) {
          : print "You discovered <RIGHT ANGLES<#f80>> in Wry Tangles, but maybe they'd help someone else grow more." ;
       }
       : if (think_say_four) {
-         : print "You tried to <SAY FOUR<#f80>> to buy safe oars, but you didn't have the money yet." ;
+         : print "You tried to <SAY FOUR<#f80>> {here_r10} to buy safe oars, but you didn't have the money yet." ;
       }
       : if (think_say_loaners) {
-         : print "You tried to <SAY LOANERS<#f80>> to the sail owners, but you needed both money and equipment." ;
+         : print "You tried to <SAY LOANERS<#f80>> {here_r33} to the sail owners, but you needed both money and equipment." ;
       }
       : if (think_tense_ops) {
-         : print "You tried to sort out <TENSE OPS<#f80>> with the ten sops, but you didn't have the self-confidence yet." ;
+         : print "You tried to sort out <TENSE OPS<#f80>> {here_r44} with the ten sops, but you didn't have the self-confidence yet." ;
       }
       : if (think_vine_eater) {
          : print "You tried to activate the <VINE EATER<#f80>>, but there was no vegetation that needed culling." ;
       }
       : if (think_warm_acres) {
-         : print "You tried to make <WARM ACRES<#f80>>, but you didn't have the support, so the war makers stood their cold ground." ;
+         : print "You tried to make <WARM ACRES<#f80>> {here_r24}, but you didn't have the support, so the war makers stood their cold ground." ;
       }
       : gosub "diagnostic_think_core_half" ;
       : if (print_core_nag_after) {
@@ -3792,7 +3792,7 @@ on_command {
    }
    : match "diag _" {
       : set_true "gamestate_thug_pass" ;
-      : print "Diagnostic verbs include {vd_i} to take inventory, {vd_think} to show where you've been on the right track, and {vd_score} to see your game score." ;
+      : print "Diagnostic verbs include {vd_i_three} to take inventory, {vd_think} to show where you've been on the right track, and {vd_score} to see your game score." ;
       : if (bonus_point_ho_maps) {
          : print "You've also unlocked the in-game {vd_map} of where you've been." ;
       }
