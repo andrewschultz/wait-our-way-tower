@@ -74,6 +74,7 @@ strings {
    # links for credits
    cred_aj : string "<Andrew Apted<#0f0>>[https://andrewj.itch.io]" ;
    cred_ca : string "<Chris Ainsley<#0f0>>[https://adventuron.itch.io/]" ;
+
    # puzzle strings
    puz_point_ace_inc        : dynamic_string {( opt_color_coding ? "<Ace, Inc.<#f80>>" : "Ace, Inc." )}             ; # 26
    puz_point_bleah_stable   : dynamic_string {( opt_color_coding ? "<Bleah, stable<#f80>>" : "Bleah, stable" )}     ; # 46
@@ -216,7 +217,7 @@ strings {
    r15_loc : string "This is a library with only one exit north. There's a book called WRY TANGLES and another called THE GAMES." ;
    r15_header : string "Lie-Bury Libe, Airy" ;
 
-   r20_loc : dynamic_string {( "Here you have enough space to, well, wheeze and pace in worry about your predicament. " + (!point_can_do ? "And you do, constantly repeating \"{puz_point_canned_ooh}.\"" : !point_thief_lore ? "As you wheeze and pace, you find you're gazing a lot at {puz_point_the_floor}." : !point_yell_open ? "But you'd like to get out. How could your {puz_point_yellow_pin} help?" : "You can get out now." ) )} ;
+   r20_loc : dynamic_string {( point_yell_open ? "The door to the east is open now, so you don't need to spend much longer in her." : ( "Here you have enough space to, well, wheeze and pace in worry about your predicament. " + (!point_can_do ? "And you do, constantly repeating \"{puz_point_canned_ooh}.\"" : !point_thief_lore ? "As you wheeze and pace, you find you're gazing a lot at {puz_point_the_floor}." : "But you'd like to get out. The door to the east blocks you. How could your {puz_point_yellow_pin} help?" ) ) )} ;
    r20_header : string "Wheeze/Pace Wee Space" ;
 
    r21_loc : dynamic_string {( "The hall leads north and south, with a darker passage east. " + (!point_halt_error ? "A {puz_point_hall_terror}, though, wraps itself around to cover those three exits." : (r22_secondary_block ? "You would go east, but you can't hav {puz_point_fellas_leap} on you, then, can you?" : point_fell_asleep ? "No fellas will leap you if you try to go east now." : "" )) + "\nYou could go back west to your cell, too, but that's no fun." )} ;
@@ -1558,6 +1559,15 @@ locations {
    }
    r20 : location "{r20_loc}" header="{r20_header}" {
       on_command {
+         : match "_ door" {
+            : print {( point_yell_open ? "It's open now." : "It's sturdy. It has a small hole where a big keyhole would normally be." )} ;
+            : done ;
+         }
+         : if (!point_yell_open) {
+            : match "_ hole;_ keyhole" {
+               : print {( point_thief_lore ? "Just sticking the yellow pin in didn't quite do the trick. Perhaps you need to do something as well." : "Very small and round. Maybe you could find a key or key substitute to put in there. Or maybe you need to do something." )} ;
+            }
+         }
          : match "can do" {
             : if (point_can_do) {
                : print "You already showed you could, and you did. Time to move on." ;
