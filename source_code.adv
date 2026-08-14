@@ -75,54 +75,55 @@ strings {
    cred_aj : string "<Andrew Apted<#0f0>>[https://andrewj.itch.io]" ;
    cred_ca : string "<Chris Ainsley<#0f0>>[https://adventuron.itch.io/]" ;
    # puzzle strings
-   puz_point_ace_inc        : dynamic_string {( opt_color_coding ? "<Ace, Inc.<#f80>>" : "Ace, Inc." )}           ; # 26
-   puz_point_bleah_stable   : dynamic_string {( opt_color_coding ? "<Bleah, stable<#f80>>" : "Bleah, stable" )}   ; # 46
-   puz_point_boss_lumping   : dynamic_string {( opt_color_coding ? "<boss, lumping<#f80>>" : "boss, lumping" )}   ; # 45
-   puz_point_bro_class      : dynamic_string {( opt_color_coding ? "<Bro Class<#f80>>" : "Bro Class" )}           ; # 44
-   puz_point_canned_ooh     : dynamic_string {( opt_color_coding ? "<Canned, ooh<#f80>>" : "Canned, ooh" )}       ; # 00
-   puz_point_cat_chasing    : dynamic_string {( opt_color_coding ? "<cat, chasing<#f80>>" : "cat, chasing" )}     ; # 35
-   puz_point_chess_training : dynamic_string {( opt_color_coding ? "<chess training<#f80>>" : "chess training" )} ; # 13
-   puz_point_chez_pup       : dynamic_string {( opt_color_coding ? "<chez pup<#f80>>" : "chez pup" )}             ; # 37
-   puz_point_claw_throbbing : dynamic_string {( opt_color_coding ? "<claw throbbing<#f80>>" : "claw throbbing" )} ; # 25
-   puz_point_coy_novations  : dynamic_string {( opt_color_coding ? "<coy novations<#f80>>" : "coy novations" )}   ; # 10
-   puz_point_cube_land      : dynamic_string {( opt_color_coding ? "<cube land<#f80>>" : "cube land" )}           ; # 27
-   puz_point_dork_loud      : dynamic_string {( opt_color_coding ? "<dork, loud<#f80>>" : "dork loud" )}          ; # 22
-   puz_point_drive_enders   : dynamic_string {( opt_color_coding ? "<drive enders<#f80>>" : "drive enders" )}     ; # 07
-   puz_point_dull_oozing    : dynamic_string {( opt_color_coding ? "<dull oozing<#f80>>" : "dull oozing" )}       ; # 06
-   puz_point_dumb_pliers    : dynamic_string {( opt_color_coding ? "<dumb pliers<#f80>>" : "dumb pliers" )}       ; # 14
-   puz_point_dump_arable    : dynamic_string {( opt_color_coding ? "<dump, arable<#f80>>" : "dump, arable" )}     ; # 08
-   puz_point_fail_oops      : dynamic_string {( opt_color_coding ? "<\"Fail! Oops!\"<#f80>>" : "\"Fail! Oops!\"" )}     ; # 41
-   puz_point_field_erring   : dynamic_string {( opt_color_coding ? "<field erring<#f80>>" : "field erring" )}     ; # 15
-   puz_point_fellas_leap    : dynamic_string {( opt_color_coding ? "<FELLAS, LEAP<#f80>>" : "FELLAS, LEAP" )}     ; # 04
-   puz_point_flight_wraps   : dynamic_string {( opt_color_coding ? "<flight wraps<#f80>>" : "flight wraps" )}     ; # 33
-   puz_point_flight_wraps_u : dynamic_string {( opt_color_coding ? "<Flight wraps<#f80>>" : "Flight wraps" )}     ; # 33
-   puz_point_float_rippling : dynamic_string {( opt_color_coding ? "<float, rippling<#f80>>" : "float-rippling" )} ; # 23
-   puz_point_fray_measly    : dynamic_string {( opt_color_coding ? "<fray measly<#f80>>" : "fray measly" )}       ; # 30
-   puz_point_freak_rusty    : dynamic_string {( opt_color_coding ? "<freak rusty<#f80>>" : "freak rusty" )}       ; # 16
-   puz_point_grr_lonely     : dynamic_string {( opt_color_coding ? "<grr lonely<#f80>>" : "grr lonely" )}         ; # 32
-   puz_point_hall_terror    : dynamic_string {( opt_color_coding ? "<hall terror<#f80>>" : "hall terror" )}       ; # 03
-   puz_point_her_doll       : dynamic_string {( opt_color_coding && (!point_heard_all || !point_herd_all) ? "<her doll<#f80>>" : "her doll" )}             ; # 38 36
-   puz_point_hey_trash      : dynamic_string {( opt_color_coding ? "<\"HEY, TRASH\"<#f80>>" : "\"HEY, TRASH\"" )} ; # 05
-   puz_point_knowin_juries  : dynamic_string {( opt_color_coding ? "<knowin juries<#f80>>" : "knowin' juries" )}   ; # 09
-   puz_point_major_gent     : dynamic_string {( opt_color_coding ? "<major gent<#f80>>" : "major gent" )}         ; # 43
-   puz_point_meager_oath    : dynamic_string {( opt_color_coding ? "<meager oath<#f80>>" : "meager oath" )}       ; # 24
-   puz_point_pit_churning   : dynamic_string {( opt_color_coding ? "<pit churning<#f80>>" : "pit churning" )}     ; # 12
-   puz_point_plight_owls    : dynamic_string {( opt_color_coding ? "<plight owls<#f80>>" : "plight owls" )}       ; # 28
-   puz_point_post_easing    : dynamic_string {( opt_color_coding ? "<post easing<#f80>>" : "post easing" )}       ; # 19
-   puz_point_safe_oar       : dynamic_string {( opt_color_coding ? "<safe oar<#f80>>" : "safe oar" )}             ; # 17
-   puz_point_sail_owners    : dynamic_string {( opt_color_coding ? "<sail owners<#f80>>" : "sail owners" )}       ; # 18
-   puz_point_seacrest       : dynamic_string {( opt_color_coding ? "<seacrest<#f80>>" : "seacrest" )}             ; # 31
-   puz_point_sunk_etching   : dynamic_string {( opt_color_coding ? "<sunk etching<#f80>>" : "sunk etching" )}     ; # 20
-   puz_point_ten_sops       : dynamic_string {( opt_color_coding ? "<ten sops<#f80>>" : "ten sops" )}             ; # 29
-   puz_point_titan_drowsing : dynamic_string {( opt_color_coding ? "<titan drowsing<#f80>>" : "titan drowsing" )} ; # 11
-   puz_point_true_pleading  : dynamic_string {( opt_color_coding ? "<true pleading<#f80>>" : "true pleading" )}   ; # 47
-   puz_point_the_floor      : dynamic_string {( opt_color_coding ? "<the floor<#f80>>" : "the floor" )}           ; # 01
-   puz_point_tough_tiki     : dynamic_string {( opt_color_coding ? "<tough tiki<#f80>>" : "tough tiki" )}         ; # 21
-   puz_point_vie_neater     : dynamic_string {( opt_color_coding ? "<vie neater<#f80>>" : "vie neater" )}         ; # 34
-   puz_point_war_makers     : dynamic_string {( opt_color_coding ? "<war makers<#f80>>" : "war makers" )}         ; # 40
-   puz_point_weep_lucky     : dynamic_string {( opt_color_coding ? "<weep \"lucky\"<#f80>>" : "weep \"lucky\"" )} ; # 39
-   puz_point_wry_tangles    : dynamic_string {( opt_color_coding ? "<Wry Tangles<#f80>>" : "Wry Tangles" )}       ; # 42
-   puz_point_yellow_pin     : dynamic_string {( opt_color_coding ? "<yellow pin<#f80>>" : "yellow pin" )}         ; # 02
+   puz_point_ace_inc        : dynamic_string {( opt_color_coding ? "<Ace, Inc.<#f80>>" : "Ace, Inc." )}             ; # 26
+   puz_point_bleah_stable   : dynamic_string {( opt_color_coding ? "<Bleah, stable<#f80>>" : "Bleah, stable" )}     ; # 46
+   puz_point_boss_lumping   : dynamic_string {( opt_color_coding ? "<boss, lumping<#f80>>" : "boss, lumping" )}     ; # 45
+   puz_point_bro_class      : dynamic_string {( opt_color_coding ? "<Bro Class<#f80>>" : "Bro Class" )}             ; # 44
+   puz_point_canned_ooh     : dynamic_string {( opt_color_coding ? "<Canned, ooh<#f80>>" : "Canned, ooh" )}         ; # 00
+   puz_point_cat_chasing    : dynamic_string {( opt_color_coding ? "<cat, chasing<#f80>>" : "cat, chasing" )}       ; # 35
+   puz_point_chess_training : dynamic_string {( opt_color_coding ? "<chess training<#f80>>" : "chess training" )}   ; # 13
+   puz_point_chez_pup       : dynamic_string {( opt_color_coding ? "<chez pup<#f80>>" : "chez pup" )}               ; # 37
+   puz_point_claw_throbbing : dynamic_string {( opt_color_coding ? "<claw throbbing<#f80>>" : "claw throbbing" )}   ; # 25
+   puz_point_coy_novations  : dynamic_string {( opt_color_coding ? "<coy novations<#f80>>" : "coy novations" )}     ; # 10
+   puz_point_cube_land      : dynamic_string {( opt_color_coding ? "<cube land<#f80>>" : "cube land" )}             ; # 27
+   puz_point_dork_loud      : dynamic_string {( opt_color_coding ? "<dork, loud<#f80>>" : "dork loud" )}            ; # 22
+   puz_point_drive_enders   : dynamic_string {( opt_color_coding ? "<drive enders<#f80>>" : "drive enders" )}       ; # 07
+   puz_point_dull_oozing    : dynamic_string {( opt_color_coding ? "<dull oozing<#f80>>" : "dull oozing" )}         ; # 06
+   puz_point_dumb_pliers    : dynamic_string {( opt_color_coding ? "<dumb pliers<#f80>>" : "dumb pliers" )}         ; # 14
+   puz_point_dump_arable    : dynamic_string {( opt_color_coding ? "<dump, arable<#f80>>" : "dump, arable" )}       ; # 08
+   puz_point_fail_oops      : dynamic_string {( opt_color_coding ? "<\"Fail! Oops!\"<#f80>>" : "\"Fail! Oops!\"" )} ; # 41
+   puz_point_field_erring   : dynamic_string {( opt_color_coding ? "<field erring<#f80>>" : "field erring" )}       ; # 15
+   puz_point_fellas_leap    : dynamic_string {( opt_color_coding ? "<FELLAS, LEAP<#f80>>" : "FELLAS, LEAP" )}       ; # 04
+   puz_point_flight_wraps   : dynamic_string {( opt_color_coding ? "<flight wraps<#f80>>" : "flight wraps" )}       ; # 33
+   puz_point_flight_wraps_u : dynamic_string {( opt_color_coding ? "<Flight wraps<#f80>>" : "Flight wraps" )}       ; # 33
+   puz_point_float_rippling : dynamic_string {( opt_color_coding ? "<float, rippling<#f80>>" : "float, rippling" )} ; # 23
+   puz_point_fray_measly    : dynamic_string {( opt_color_coding ? "<fray measly<#f80>>" : "fray measly" )}         ; # 30
+   puz_point_freak_rusty    : dynamic_string {( opt_color_coding ? "<freak, rusty<#f80>>" : "freak rusty" )}        ; # 16
+   puz_point_grr_lonely     : dynamic_string {( opt_color_coding ? "<grr lonely<#f80>>" : "grr lonely" )}           ; # 32
+   puz_point_hall_terror    : dynamic_string {( opt_color_coding ? "<hall terror<#f80>>" : "hall terror" )}         ; # 03
+   puz_point_her_doll       : dynamic_string
+                  {( opt_color_coding && (!point_heard_all || !point_herd_all) ? "<her doll<#f80>>" : "her doll" )} ; # 38 36
+   puz_point_hey_trash      : dynamic_string {( opt_color_coding ? "<\"HEY, TRASH\"<#f80>>" : "\"HEY, TRASH\"" )}   ; # 05
+   puz_point_knowin_juries  : dynamic_string {( opt_color_coding ? "<knowin juries<#f80>>" : "knowin' juries" )}    ; # 09
+   puz_point_major_gent     : dynamic_string {( opt_color_coding ? "<major gent<#f80>>" : "major gent" )}           ; # 43
+   puz_point_meager_oath    : dynamic_string {( opt_color_coding ? "<meager oath<#f80>>" : "meager oath" )}         ; # 24
+   puz_point_pit_churning   : dynamic_string {( opt_color_coding ? "<pit churning<#f80>>" : "pit churning" )}       ; # 12
+   puz_point_plight_owls    : dynamic_string {( opt_color_coding ? "<plight owls<#f80>>" : "plight owls" )}         ; # 28
+   puz_point_post_easing    : dynamic_string {( opt_color_coding ? "<post easing<#f80>>" : "post easing" )}         ; # 19
+   puz_point_safe_oar       : dynamic_string {( opt_color_coding ? "<safe oar<#f80>>" : "safe oar" )}               ; # 17
+   puz_point_sail_owners    : dynamic_string {( opt_color_coding ? "<sail owners<#f80>>" : "sail owners" )}         ; # 18
+   puz_point_seacrest       : dynamic_string {( opt_color_coding ? "<seacrest<#f80>>" : "seacrest" )}               ; # 31
+   puz_point_sunk_etching   : dynamic_string {( opt_color_coding ? "<sunk etching<#f80>>" : "sunk etching" )}       ; # 20
+   puz_point_ten_sops       : dynamic_string {( opt_color_coding ? "<ten sops<#f80>>" : "ten sops" )}               ; # 29
+   puz_point_titan_drowsing : dynamic_string {( opt_color_coding ? "<titan drowsing<#f80>>" : "titan drowsing" )}   ; # 11
+   puz_point_true_pleading  : dynamic_string {( opt_color_coding ? "<true pleading<#f80>>" : "true pleading" )}     ; # 47
+   puz_point_the_floor      : dynamic_string {( opt_color_coding ? "<the floor<#f80>>" : "the floor" )}             ; # 01
+   puz_point_tough_tiki     : dynamic_string {( opt_color_coding ? "<tough tiki<#f80>>" : "tough tiki" )}           ; # 21
+   puz_point_vie_neater     : dynamic_string {( opt_color_coding ? "<vie neater<#f80>>" : "vie neater" )}           ; # 34
+   puz_point_war_makers     : dynamic_string {( opt_color_coding ? "<war makers<#f80>>" : "war makers" )}           ; # 40
+   puz_point_weep_lucky     : dynamic_string {( opt_color_coding ? "<weep \"lucky\"<#f80>>" : "weep \"lucky\"" )}   ; # 39
+   puz_point_wry_tangles    : dynamic_string {( opt_color_coding ? "<Wry Tangles<#f80>>" : "Wry Tangles" )}         ; # 42
+   puz_point_yellow_pin     : dynamic_string {( opt_color_coding ? "<yellow pin<#f80>>" : "yellow pin" )}           ; # 02
 
    # blocking strings
    block_04_14 : string "Weird! It almost feels like there should be passage that way. You can't say why, but it's disorienting even to plan out a route. For now." ;
