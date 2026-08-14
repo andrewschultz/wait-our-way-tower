@@ -893,6 +893,7 @@ booleans {
    think_note_yet : boolean "false" ;
    map_note : boolean "false" ;
    note_thug_pass : boolean "false" ;
+   shorten_inventory : boolean "false" ;
 
    # option(s)
    opt_hone_aye : boolean "false" ;
@@ -980,6 +981,7 @@ booleans {
    # auxiliary variables
    opt_on_off  : boolean "false" ;
    drawing_map : boolean "false" ;
+   inventory_intangibles : boolean "false" ;
 
    # general go-blocking
    goblock_21 : dynamic_boolean {( !point_yell_open)} ;
@@ -1113,6 +1115,7 @@ locations {
             : set_integer var="tempint" "8" ;
             : set_true "point_dumb_parable" ;
             : gosub "add_point" ;
+            : pocket "dumb_parable" ;
             : done ;
          }
          : if (!point_dumb_parable) {
@@ -1173,6 +1176,7 @@ locations {
             : set_integer var="tempint" "12" ;
             : set_false "think_pitch_earning" ;
             : set_true "point_pitch_earning" ;
+            : pocket "riches" ;
             : gosub "add_point" ;
             : done ;
          }
@@ -1223,6 +1227,7 @@ locations {
                : print "The tiki nods slightly and then opens its mouth. A key falls out. It looks pretty dry, so you pick it up without washing your hands. You nod to the tiki, which closes its eyes." ;
                : set_integer var="tempint" "21" ;
                : set_true "point_tufty_key" ;
+               : pocket "tufty_key" ;
                : gosub "add_point" ;
                : done ;
             }
@@ -1302,9 +1307,11 @@ locations {
                   : done ;
                }
                : print "Four seems about right for your needs. Too many, and you couldn't carry them all, but too few, and you might lose a spare. Some of the riches are leftover for later. Perhaps you'll have to buy transport." ;
+               : print "Now you're the owner of the oars, you realize it'd be awkward to carry them. But the vendors assure you they'll hold them until you find a craft. Thoughtful!" ;
                : set_integer var="tempint" "17" ;
                : set_false "think_say_four" ;
                : set_true "point_say_four" ;
+               : destroy "riches" ;
                : gosub "add_point" ;
                : done ;
             }
@@ -1389,6 +1396,7 @@ locations {
                : set_integer var="tempint" "10" ;
                : set_false "think_coin_ovations" ;
                : set_true "point_coin_ovations" ;
+               : destroy "dumb_parable" ;
                : gosub "add_point" ;
                : done ;
             }
@@ -1947,7 +1955,8 @@ locations {
                : print "The tufty key won't fit any other doors." ;
                : done ;
             }
-            : print "The dork yells at you to make sure that you have some way to get through a door, and when you show them the key, they just specifically say, oh, that one. Nobody's ever been through that one before. I don't know where it leads, but I guess if it's the only key you have, you might as well go see it. The earth shakes as the dork turns the key, and when you look around, the cloud is gone, and there is only the door left, leading north." ;
+            : print "The dork yells at you to make sure that you have some way to get through a door, and when you show them the key, they just specifically say, oh, that one. Nobody's ever been through that one before. I don't know where it leads, but I guess if it's the only key you have, you might as well go see it. The earth shakes as the dork turns the key, and when you look around, the cloud is gone, having consumed the key, and there is only the door left, leading north." ;
+            : pocket "tufty_key" ;
             : set_integer var="tempint" "22" ;
             : set_false "think_door_cloud" ;
             : set_true "point_door_cloud" ;
@@ -2403,13 +2412,27 @@ locations {
 
 # Defines things in the world (scenery cannot be carried)
 objects {
-   only_girl : object "She is holding {puz_point_her_doll}." conspicuous = "false" ;
-   vie_neater : object "The VIE NEATER voucher you got from the Cue, Bland" ;
+   # on you at all times
    phase_tats : object "{i_fspt}" ;
+
+   # objects that come and go
+   coin : object "Not much, but it's something." conspicuous = "false" ;
+   dumb_pliers : object "Sturdy. Pliers don't have to be smart." conspicuous = "false" ;
+   dumb_parable : object "Man. It's pretty dumb." conspicuous = "false" ;
+   four_oars : object "You got those four oars from {here_r10}." conspicuous = "false" ;
+   only_girl : object "She is holding {puz_point_her_doll}." conspicuous = "false" ;
+   riches : object "The lesser of the titan's riches." conspicuous = "false" ;
+   towels : object "The towels from under the claw." conspicuous = "false" ;
+   tufty_key : object "The tufty key from the tough tiki" conspicuous = "false" ;
+   vie_neater : object "The VIE NEATER voucher you got from the Cue, Bland" ;
+
+   # fixed items
+   wry_tangles : object "Very interesting, but not quite for you." at = "r15" conspicuous="false" ;
+
+   # npc who follow you, friendly or unfriendly
    major_gent : object "A bit too nice here." at = "r35" conspicuous = "false" ;
    mage_urgent : object "The former major gent has now swung a bit too much the other way." conspicuous = "false" ;
-   broke_lass : object "The broke lass doesn't seem that broke, or broken." conspicuous = "false" ;
-   wry_tangles : object "Very interesting, but not quite for you." at = "r15" conspicuous="false" ;
+   broke_lass : object "The broke lass doesn't seem that broke, or broken, now." conspicuous = "false" ;
    thug : object "{trtg_status}." at = "r25" conspicuous = "false" ;
 }
 
@@ -2681,6 +2704,65 @@ subroutines {
 # fifth noun keywords
 # sixth TESTJUMP
 
+   take_inventory : subroutine {
+      : if (score < 2) {
+         : print "Nothing." ;
+         : return ;
+      }
+      : if (score == 2) {
+         : print "Well, you now have a yellow pin, which is something." ;
+         : return ;
+      }
+      : if (score > 40) {
+         : if (!point_bah_slumping && point_mage_urgent) {
+            : print {( "You have " + (point_broke_lass ? "two allies in the mage, urgent and the (formerly) broke lass." : "an ally in the mage, urgent." ) )} ;
+         }
+         : print "You're carrying nothing, but surely all you need is your keen wit and insight to finish things off. You hope." ;
+         : return ;
+      }
+      : set_false "inventory_intangibles" ;
+      : if (is_carried "dumb_parable") {
+         : print "You have a dumb parable stuck in your head. Perhaps it would help to fob it off on someone else." ;
+      }
+      : if (is_carried "dumb_pliers") {
+         : print "Your dumb pliers could be useful to grab something later." ;
+      }
+      : if (is_carried "coin") {
+         : print "You have that coin from the juries. Where to spend or increase it?" ;
+      }
+      : if (is_carried "towels") {
+         : print "You have a few towels from under the claw." ;
+      }
+      : if (is_carried "vie_neater") {
+         : print "You have that promise to {puz_point_vie_neater} you got from the cube land." ;
+      }
+      : if (point_say_four && !point_say_loaners) {
+         : print "The four oars you bought are waiting {here_r10} until you buy a suitable craft." ;
+         : set_true "inventory_intangibles" ;
+      }
+      : if (point_me_growth && !point_tense_ops) {
+         : print "You felt some growth from the meager oath but didn't find anywhere to share or use it meaningfully yet." ;
+         : set_true "inventory_intangibles" ;
+      }
+      : if (!point_warm_acres && herd_score > 0) {
+         : print {( "Less tangibly, you've gained support from " + ((herd_score == 2) ? "cats and dogs in the western corners of the map" : point_herd_all ? "cats {here_r00}" : "dogs {here_r40}") )} ;
+         : set_true "inventory_intangibles" ;
+      }
+      : if (point_say_loaners && !point_girl_only) {
+      }
+      : if (point_tense_ops && !point_frame_easily) {
+         : set_true "inventory_intangibles" ;
+         : print "You have more confidence in yourself after dealing with the ten sops. Maybe you can tackle bigger things!" ;
+      }
+      : if (!point_warm_acres && point_girl_only) {
+         : print {( "You have a loyal follower in the girl from the island." + (carried() == 0 && !inventory_intangibles ? " And companionship's more important than silly old possessions!" : "" ) )} ;
+         : set_true "inventory_intangibles" ;
+      }
+      : if (carried() == 0 && !inventory_intangibles) {
+         : print "You're not carrying anything at the moment, tangible or intangible." ;
+         : return ;
+      }
+   }
    listen_stub : subroutine {
       : if (is_at "r20") {
          : print "You hear nothing but occasionally mutter to yourself <rue my room, aye<#888>>." ;
@@ -3642,26 +3724,17 @@ on_command {
       }
    }
    : match "i _" {
-      : if (score < 2) {
-         : print "Nothing." ;
-         : done ;
+      : gosub "take_inventory" ;
+      : if (!shorten_inventory) {
+         : if (original "verb" == "inventory") {
+            : print "{one_time}{vd_i_long} can be shortened to {vd_inv} or {vd_i} for convenience." ;
+         }
+         : if (original "verb" == "inv") {
+            : print "{one_time}{vd_inv} can be shortened further to {vd_i} for convenience." ;
+         }
+         : set_true "shorten_inventory" ;
       }
-      : if (score == 2) {
-         : print "Well, you now have a yellow pin, which is something." ;
-         : done ;
-      }
-      : if (carried() == 0) {
-         : print "With your yellow pin gone, you have nothing on you. But you will find more." ;
-      }
-      : if (score > 40) {
-         : print "You're carrying nothing, but surely all you need is your keen wit and insight to finish things off. You hope." ;
-      }
-      : if (is_carried "vie_neater") {
-         : print "You have a promise to {puz_point_vie_neater}." ;
-      }
-      : if (point_tense_ops && !point_frame_easily) {
-         : print "You have more confidence in yourself after dealing with the ten sops. Maybe you can tackle bigger things!" ;
-      }
+      : done ;
    }
    : gosub "check_options" ;
    : gosub "odd_dir_note" ;
