@@ -128,7 +128,7 @@ strings {
 
    # blocking strings
    block_04_14 : string "Weird! It almost feels like there should be passage that way. You can't say why, but it's disorienting even to plan out a route. For now." ;
-   block_dull_oozing  : string "Ehh ... the {puz_point_dull_oozing} slows you down. It's probably wrong, and trekking further is probably harmless, but what if it isn't?" ;
+   block_dull_oozing  : string "Ehh ... the {puz_point_dull_oozing} slows you down. Trekking further is probably harmless, but what if it isn't? You'd feel dumb getting poisoned by the physical ooze." ;
    block_hey_trash    : string "The call of {puz_point_hey_trash} freezes you. You half want to show them, whomever they are, and whatever you want to show. You'll decide that later. Also, you worry if you go farther, there'll be more people like that, which could put you in danger. So, for now, no." ;
    block_pose_teasing : string "The Bros wonder why you need to be running around like this. You need to chillax! Life will be easier that way. And no offense, but if you do have an exciting life, it's a bit unfair. They deserve it a bit more than you do. So you shouldn't rub it in by just walking past them like that." ;
    block_trrg         : string "You can't explore somewhere new yet, with the {trtg} around." ;
@@ -194,7 +194,7 @@ strings {
    r10_loc : dynamic_string {( point_say_four ? "Since you bought oars, nothing here is interesting." : (point_dry_vendors ? "Dry vendors have parked themselves here. A {puz_point_safe_oar} rests behind them." : "You haven't seen any cars or bikes or whatever around, so it's weird this small selection of dead ends should be called {puz_point_drive_enders}, but it is.") + "\nPassage leads back east." )} ;
    r10_header : dynamic_string {( point_dry_vendors ? "Dry Vendors" : "Drive Enders" )} ;
 
-   r11_loc : dynamic_string {( point_duh_losing ? "You feel up to going in any four directions now that the dull oozing has died down." : "Here {puz_point_dull_oozing}, physical and audible, surrounds you. There's nothing terribly dangerous any way but back north, but right now, your general feeling is, \"Ehh, why bother?\"" )} ;
+   r11_loc : dynamic_string {( point_duh_losing ? "Now the dull oozing has died down, you can explore south, east and west. Or go back north through the tower." : "Here {puz_point_dull_oozing}, physical and audible, surrounds you. \"Ehh, why bother?\" you think. It's dangerous out there! Maybe as dangerous as sitting around in the tower back north until someone sees you tried to escape!" )} ;
    r11_header : string "Note 'Eres No Tears" ;
 
    r12_loc : dynamic_string {( point_coin_ovations ? "The juries are done with you. They care not how many times you amble back west or east, nor for the purpose." :
@@ -1331,8 +1331,13 @@ locations {
          }
       }
    }
-   r11 : location "{r11_loc}" header="{r11_header}" {
+   r11 : location "{r11_loc}" header="{r11_header}" graphic="r11_0" {
       on_command {
+         : if (!point_duh_losing) {
+            : match "_ dull;_ oozing" {
+               : print "You stare at, and listen to, the dull oozing for a while. You get the feeling you really should be grateful for your freedom, yet at the same time, exercising it would be unfair to other prisoners. If they exist, of course. Can't be too considerate these days! Besides, you admit you have no interesting plans...\n...wait, no, you can do better than that." ;
+            }
+         }
          : match "duh losing" {
             : if (point_duh_losing) {
                : print "No need to reiterate things." ;
@@ -2784,7 +2789,9 @@ subroutines {
       }
    }
    listen_stub : subroutine {
-      : if (is_at "r20") {
+      : if (is_at "r11") {
+         : print {( point_duh_losing ? "You enjoy the silence and lack of dull oozing words. You can't resist refuting what you remember of them, though." : "The {puz_point_dull_oozing} makes you wonder why bother. The world beyond the tower must be even riskier than the tower! And so forth." )} ;
+      } : else_if (is_at "r20") {
          : print "You hear nothing but occasionally mutter to yourself <rue my room, aye<#888>>." ;
       } : else_if (is_at "r21") {
          : print {( point_fell_asleep ? "It's quiet now." : point_halt_error ? (r22_secondary_block ? "The \"{puz_point_fellas_leap}\" order echoes in your head." : "Quiet, for the moment.") : "The hall terror is making all kinds of noise." )} ;
@@ -4239,6 +4246,11 @@ on_render {
       }
       : done ;
    }
+   : if (is_at "r11") {
+      : if (!point_duh_losing) {
+         : overlay "s11_o" x="0" y="0" ;
+      }
+   }
    : if (is_at "r21") {
       : if (!point_halt_error) {
          : overlay "s21_m" x="0" y="0" ;
@@ -4294,6 +4306,9 @@ assets {
       r_blank : base64_png "iVBORw0KGgoAAAANSUhEUgAAAQAAAAAYAQMAAAAvTrFnAAAAA1BMVEX//wCKxvRFAAAAD0lEQVR4XmPAAKNgFIwCAAMYAAFrMpCEAAAAAElFTkSuQmCC" ;
 
       r21_0 : base64_png "iVBORw0KGgoAAAANSUhEUgAAAQAAAAAoBAMAAADj1Dm6AAAAD1BMVEUAAACAAACAgIDAwMAA//+iJ+2cAAABGklEQVR4XuzOgQkDIRBE0Tm5AjKwBSypJIL91xTgEFD3DgkOAfA38B/ef+4XwAZswAbgtmUAT+sBnuYBfioAnzQL8LMoACUUIPxrAKEA0V8ECAUI/ipAKMD4lwFCAYa/DhAK0P6PogaUV7oH+EFTAzJbAdo/qQaQrQDdn6YFZHYCdH9SCyA7Afo/TQnIrIIRwJoSwNoTwHSAPAWgDsA5gKkAeRLAC+BYVroAfAR8a52DE4BBIAqiRhvIggVYgmAFgv3XFDzNyaiwfxqYZ5QnoKTmVo0T0I8BNiJ/L0EZdg7Ikb+XoPQLgIXUnKvBLgBvau7VZwOQ/RHsAfw1gh2Av0rwD+CvE/wB+CsFawB/rWAJ4C8WLAH89QIAH2b1lO5XunHNAAAAAElFTkSuQmCC" ;
+
+      r11_0 : base64_png "iVBORw0KGgoAAAANSUhEUgAAAQAAAAAoAgMAAABslMwaAAAADFBMVEUAAACAAACAgID///8RDQO6AAABHElEQVR4Xu3QMY6DMBQE0I8lN2mouAQt7ZdAmwPEUjz3YW+yJcotUqTjME5PsWIt2BX2h19uwTRIRnoeD2HNlbl9KDIxP7HmD3Bv2xQgSoFpemUBV5blFuiJzBYIIdgs4JumSQukFcZxrPIAM2+AYQbqDcDMeQBxgxRIN0AeuJWlBgjhLQD3ptEA4/gSAK/doJIA7QYSgJtugzck4Krb4CkCTreBFQHongAZ6DRAsQN4cwz01Q4AdwxY7AG4ROCLLr9APFj+YB/4WN7pImBdBOyyz+cB4OJ9FUBmBoAZ6AnwsZM9AGDmmsWPRUR2/QDdLPRIgbRCgWy6TAEQ0gpDlQd8HQscAK7uIcQMVgGArAQ4ggCo83+BEziBE/gGljv/U/2/mNAAAAAASUVORK5CYII=" ;
+      s11_o : base64_png "iVBORw0KGgoAAAANSUhEUgAAAQAAAAAoAQMAAAArNLbKAAAABlBMVEX///8AgABuQUs1AAAAAXRSTlMAQObYZgAAAQpJREFUeF6t0zFOxDAQheF/shYYZK0ciSIFQlkqSpeUZkHUHAE4wZaUs7BCKTnSQkvJBTgKEiKSi4nT8LV+xTxrhn/QzT1GKjzzeqocmaoG3qg4ApQKmQ/UEwL49Z5Ji3WE24THFAmPQAaHqYdmLGvKjASTAnCNfGPjUPngiqpnAJlqofwKMkQMvtUEeHz36THEry4SwcV0HDCku+B7wPGKw9Dz8PdXL84O9O+QCaKEHYZVQjTRoVxiOkXGo7CHnF/+OOYqAm195QZAZYtpqwIIVUoLZc2Ti7ImDLRECilQ8AwIm3Kq3aqceYnSUJAzeFIKmYZSWm6CsdmF8xsqRBb3B3tVpgg0GZTCD9vqIt4XElXGAAAAAElFTkSuQmCC" ;
 
       r20 : dynamic_graphic {( point_yell_open ? "r20_1" : "r20_0" )} ;
       r20_0 : base64_png "iVBORw0KGgoAAAANSUhEUgAAAIAAAAAoBAMAAADEX+97AAAAElBMVEUAAACAgIDAwMD//wAAAP////+1uPNjAAABqUlEQVR4Xo2TQY6DMAxFHSzvyQ2qniBSLjBHyGJ8/6vM2DSY8CnBZYGoeDz9H1PeZ1Vpabvrj0R1u1KOP8bbA0BU5ASgPgjI6QxYRUmnBqAQABGVOQAU6JjAc0DQ6JjAQ0AojAB62kIojIDnLfQnaQC0oQWcAKz1f8h4AyBamAHYAGVTCIAlMAfsArwpQAszQAh0hVMLeQ5wgVq6wthCegBgB3BXGFvIc8BqH69lT2FoIT0AcGV/u3gRpxbyFGAC/qsWJR0BkYB5fRsTMP9anJMGQGz28v425Op+Dpi50gAIgffXeZkBF3IHVwhAQ4FrBapsRbCxjoC5gCv0Dl3gCJglEAqVPxfXIwAE7lIohayEAQACd0UwF+MA4FKAaDkrUD+LCEABUm3LdQqXgBXfNwKmYAQEoICozYIpFD/QOdO9wEuVtEmDFHqLmWYC7VfkBxRsmdgEMt1XIJtBACIF4poAsCBAtUEIpuACBgABBAgAXt5jAsByBeg1QBElByAEsAVtpO1qKRMAXAAVxAVQIbb4bg1Jm59EVEgBQAHcBSTnAKAAbiMqfAB/jZMGmMoGFRwAAAAASUVORK5CYII=" ;
