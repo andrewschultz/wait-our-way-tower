@@ -1041,6 +1041,7 @@ booleans {
 
    # testing
    tats_each_move : boolean "false" ;
+   inventory_each_move : boolean "false" ;
 }
 
 vocabulary {
@@ -3430,6 +3431,9 @@ on_tick {
       : gosub "set_tats_num" ;
       : print "Tats num this turn {my_tats_num}." ;
    }
+   : if (inventory_each_move) {
+      : gosub "take_inventory" ;
+   }
    : if (!showed_first_note) {
       : print "{one_time}{vm_about} will give general game information. {vm_verbs} will describe {wowt}'s stripped-down parser." ;
       : set_true "showed_first_note" ;
@@ -3864,6 +3868,17 @@ on_command {
       } : else {
          : set_false "tats_each_move" ;
          : print "Tats each move switched off." ;
+         : done ;
+      }
+   }
+
+   : match "imv _" {
+      : if (!inventory_each_move) {
+         : set_true "inventory_each_move" ;
+         : print "Inventory each move switched on, starting this move." ;
+      } : else {
+         : set_false "inventory_each_move" ;
+         : print "Inventory each move switched off." ;
          : done ;
       }
    }
