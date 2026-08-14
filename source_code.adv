@@ -182,7 +182,7 @@ strings {
    r01_loc : dynamic_string {( (point_dumb_parable ? "You've gotten something out of the dump (arable,) and since there isn't much left, it's probably best just to find" : "This is, well, a {puz_point_dump_arable}. Is it really just a connecting passage, or is there more to it? At any rate, not much is here, yet, which is kind of nice, since nothing blocks") + " passage north, east or west." )} ;
    r01_header : string "Dump, Arable" ;
 
-   r02_loc : dynamic_string {( (point_pitch_earning ? "The pit still churns, but the titan is gone. You see nothing else to do here." : point_tightened_rousing ? "The titan is now awake. It's looking for something to do. Maybe you can help it." : "You see a {puz_point_titan_drowsing} here.") + "\nThe {puz_point_pit_churning} rises high all directions except back west." )} ;
+   r02_loc : dynamic_string {( point_pitch_earning ? "The pit still churns, but the titan is gone. You see nothing else to do here but go back west." : ((point_tightened_rousing ? "The titan is now awake. It's looking for something to do. Maybe you can help it." : "You see a {puz_point_titan_drowsing} here, in the less-churning part of the pit.") + "\nThe {puz_point_pit_churning} rises high all directions except back west." ) )} ;
    r02_header : string "Pit, Churning" ; # the spit-thus pit
 
    r03_loc : dynamic_string {( "The trail runs north to east here. " + (point_tufty_key ? "The tough tiki has disappeared." : point_sun_catching ? "The sun caught a {puz_point_tough_tiki}." : "\nYou see a {puz_point_sunk_etching} or two scattered around here. Maybe they're hiding something." ) )} ;
@@ -1132,8 +1132,18 @@ locations {
          }
       }
    }
-   r02 : location "{r02_loc}" header="{r02_header}" {
+   r02 : location "{r02_loc}" header="{r02_header}" graphic="r02_0" {
       on_command {
+         : match "_ pit;_ churning" {
+            : print {( "Exploring the pit seems foolhardy. Too many ways to fall.\n" + (point_pitch_earning ? "There are other places to look. You got some riches from the titan, anyway." : "The titan, though, well ... perhaps they could help you?" ) )} ;
+            : done ;
+         }
+         : if (!point_pitch_earning) {
+            : match "_ titan;_ drowsing" {
+               : print {( point_tightened_rousing ? "The titan looks at you expectantly, but not angrily." : "The titan is asleep. Do you dare to wake it? And if so, how?" )}
+               : done ;
+            }
+         }
          : match "tightened rousing" {
             : if (point_tightened_rousing) {
                : print "The giant is already awake. Any more of that might be fatally irritating. Well, for you." ;
@@ -1173,7 +1183,7 @@ locations {
                : print "There is nobody left to pitch to. Anyway, you got more riches than expected here." ;
                : done ;
             }
-            : print "You aren't quite sure how you're going to explain what's so great about one coin at first, especially since the giant has riches lying around. Then you find an angle. If someone as small as you can make this coin, with your strategies or whatever, think of what the giant could make with their height and strength and so forth. You put more of the dumb parable to use, and surprisingly, the giant buys it. They walk away. You are confronted with riches. There are \"higher itches, hi\" riches and \"power itches, POW\" riches. You decide on the first, though it's a smaller pile.\nAn unheard voice booms YOU HAVE CHOSEN WELL. PERHAPS IT WASN'T TOO HARD TO IN THIS CASE, BUT GOOD JOB, ANYWAY." ;
+            : print "You aren't quite sure how you're going to explain what's so great about one coin at first, especially since the giant has riches lying around. Then you find an angle. If someone as small as you can make this coin, with your strategies or whatever, think of what the giant could make with their height and strength and so forth. You put more of the dumb parable to use, and surprisingly, the giant buys it. They walk away. You are confronted with riches. There are \"higher itches, hi\" riches and \"power itches, POW\" riches. You decide on the first, though it's a smaller pile.\nAn unheard voice booms YOU HAVE CHOSEN WELL. PERHAPS IT WASN'T TOO HARD TO IN CASES LIKE THIS, BUT GOOD JOB, ANYWAY. SURPRISINGLY MANY DON'T." ;
             : set_integer var="tempint" "12" ;
             : set_false "think_pitch_earning" ;
             : set_true "point_pitch_earning" ;
@@ -4246,6 +4256,17 @@ on_render {
       }
       : done ;
    }
+   : if (is_at "r02") {
+      : if (!point_tightened_rousing) {
+         : overlay "s02_u" x="76" y="1" ;
+         : overlay "s02_g" x="68" y="0" ;
+      } : else_if (!point_pitch_earning) {
+         : overlay "s02_u" x="84" y="27" ;
+         : overlay "s02_w" x="105" y="0" ;
+      } : else {
+         : overlay "s02_u" x="120" y="17" ;
+      }
+   }
    : if (is_at "r11") {
       : if (!point_duh_losing) {
          : overlay "s11_o" x="0" y="0" ;
@@ -4305,7 +4326,10 @@ assets {
 
       r_blank : base64_png "iVBORw0KGgoAAAANSUhEUgAAAQAAAAAYAQMAAAAvTrFnAAAAA1BMVEX//wCKxvRFAAAAD0lEQVR4XmPAAKNgFIwCAAMYAAFrMpCEAAAAAElFTkSuQmCC" ;
 
-      r21_0 : base64_png "iVBORw0KGgoAAAANSUhEUgAAAQAAAAAoBAMAAADj1Dm6AAAAD1BMVEUAAACAAACAgIDAwMAA//+iJ+2cAAABGklEQVR4XuzOgQkDIRBE0Tm5AjKwBSypJIL91xTgEFD3DgkOAfA38B/ef+4XwAZswAbgtmUAT+sBnuYBfioAnzQL8LMoACUUIPxrAKEA0V8ECAUI/ipAKMD4lwFCAYa/DhAK0P6PogaUV7oH+EFTAzJbAdo/qQaQrQDdn6YFZHYCdH9SCyA7Afo/TQnIrIIRwJoSwNoTwHSAPAWgDsA5gKkAeRLAC+BYVroAfAR8a52DE4BBIAqiRhvIggVYgmAFgv3XFDzNyaiwfxqYZ5QnoKTmVo0T0I8BNiJ/L0EZdg7Ikb+XoPQLgIXUnKvBLgBvau7VZwOQ/RHsAfw1gh2Av0rwD+CvE/wB+CsFawB/rWAJ4C8WLAH89QIAH2b1lO5XunHNAAAAAElFTkSuQmCC" ;
+      r02_0 : base64_png "iVBORw0KGgoAAAANSUhEUgAAAQAAAAAoBAMAAADj1Dm6AAAAElBMVEUAAACAAACAgACAQAAAAP////8o+VEnAAACRUlEQVR4Xr3X4a3qMAwF4FRZoGEE1AEidQKk4w3s/Vd5aozlpIK+Ul8wrcTV/eFPPi6BtD6rrn1N5Vm3+4cFyHZZEQOPstU8NMj25jWgFqtP+y8Ag9gAaimt8n8A/f/T5QEsIAYBL0ZgrcZuaTAZZro6gDtALQGSVmh/q2DuO6zHAB/AFYCHQBuFLYTTgDoFEoCAuCVvAvERnAQkX8FrOwgCXOAjSIeA2g0gsAJgMAQueDmCfAgooRXg7QUvAYmN4BxgigEsAYgI63NIBpiPAfEEFoAgEJB2bwIB2DM4AShBAMM+ilRADHkCyhlAiiSwB0DaTfwEpBOAKQ4gBxADBLAtwQEgWQJRgPQAcLsNUPKbto6aogB9MUBtD6kBxACz5/2aUjvA/ToAYhexogyQ306gegJxQLtYj4IBUPLBEvoA4gBYa9AImPNLgKlqCQJ8Ayx+YgU8uhHUdQS4ZYoBFgXAVrC92wHmfVfPIIcAfhb0p6EoQAZAzSPAMbXEAeO3UlIAO6DkXdN+BGHAYo/gMAEZATXvAC4YAbcLAhBvlwmEdQYDwPo7wDlhwALRtuwnAY2AtL4H1BLPgHgTNIQIGgBjBF8F3O0EhojGID8H6EEEK7bj+EeABRB0AvoMMP0FgGz/FNIAnsB8BFiDAM/AGAIFeALz+nUAbPvarYDHSUCNAxYAOgIhkxB7rvkDwO0qgKACfw4OAN/IAAwvAaRP4BeA/jgUBvjXAPtRtlXjlAPAV5ZAm3sIwwocA1IcgF1Rl0DaA/4BlGVNSEbVYroAAAAASUVORK5CYII=" ;
+      s02_g : base64_png "iVBORw0KGgoAAAANSUhEUgAAAFEAAAAoAgMAAAD7zP6sAAAACVBMVEX///8AAADAwMC/YCrjAAAAAXRSTlMAQObYZgAAAQ5JREFUeF6N0rGOwyAMBmBbgpsZyNKnMVIewANZ+gg8TacOnXsnhac8x4aStJHuMiDxyfwRNvD3h3zK4VTTWTGeFiP/v5iQ6QORAAGWd92Sp5qP6ral1PWoUdDXWvmgLPolejsoiV5Enx9aRNd9U9D03jWbguqPqcdZ1QuinK+VRGNyqlH1UU15MQ2q96YUvSqrfpsiRVQl1bU+VGEZCkV01V+noVOp5bqpw5SoK4sWU6CuHi6iz6bclKVn13prGkw9vfobEbhpHrMICMFUL9PmxghRNS0kajNGcuBUJ+DduB14tyGLd/WiOAvqJbo6UZjBMj3tNfdtz4gQZcnjqbUJhNfJkcyqRiPi7cGi4i9M4U2iXe73eQAAAABJRU5ErkJggg==" ;
+      s02_u : base64_png "iVBORw0KGgoAAAANSUhEUgAAAAkAAAAMAQMAAACKkgXgAAAABlBMVEX///8AAABVwtN+AAAAAXRSTlMAQObYZgAAABlJREFUCFtjkGFggCAOBoZsGAOCRMDIjAEAGgEBWu9x7pgAAAAASUVORK5CYII=" ;
+      s02_w : base64_png "iVBORw0KGgoAAAANSUhEUgAAACYAAAAoAgMAAADvWWBNAAAACVBMVEX///8AAADAwMC/YCrjAAAAAXRSTlMAQObYZgAAAKJJREFUeF5tzzEKAkEMQNEf2PRTxMbTZEH7FLMeQXBPY+ERtJlTSthhVtFUjxA+BODY2h34Jre1PTuvbXBdd/btT+HRqZd26pTLSzs5hDDmk77bKf8oMdhzuixeNxoy74llaE/xryp1UJXYVE3wBHIO8U4JOicpxEbTiRIpcRNKIUkRtyRGEJMBHnieJ11AJRlJmU/AIUlUQKekGekZ0Pr11hsGuyLgBq0hxwAAAABJRU5ErkJggg==" ;
 
       r11_0 : base64_png "iVBORw0KGgoAAAANSUhEUgAAAQAAAAAoAgMAAABslMwaAAAADFBMVEUAAACAAACAgID///8RDQO6AAABHElEQVR4Xu3QMY6DMBQE0I8lN2mouAQt7ZdAmwPEUjz3YW+yJcotUqTjME5PsWIt2BX2h19uwTRIRnoeD2HNlbl9KDIxP7HmD3Bv2xQgSoFpemUBV5blFuiJzBYIIdgs4JumSQukFcZxrPIAM2+AYQbqDcDMeQBxgxRIN0AeuJWlBgjhLQD3ptEA4/gSAK/doJIA7QYSgJtugzck4Krb4CkCTreBFQHongAZ6DRAsQN4cwz01Q4AdwxY7AG4ROCLLr9APFj+YB/4WN7pImBdBOyyz+cB4OJ9FUBmBoAZ6AnwsZM9AGDmmsWPRUR2/QDdLPRIgbRCgWy6TAEQ0gpDlQd8HQscAK7uIcQMVgGArAQ4ggCo83+BEziBE/gGljv/U/2/mNAAAAAASUVORK5CYII=" ;
       s11_o : base64_png "iVBORw0KGgoAAAANSUhEUgAAAQAAAAAoAQMAAAArNLbKAAAABlBMVEX///8AgABuQUs1AAAAAXRSTlMAQObYZgAAAQpJREFUeF6t0zFOxDAQheF/shYYZK0ciSIFQlkqSpeUZkHUHAE4wZaUs7BCKTnSQkvJBTgKEiKSi4nT8LV+xTxrhn/QzT1GKjzzeqocmaoG3qg4ApQKmQ/UEwL49Z5Ji3WE24THFAmPQAaHqYdmLGvKjASTAnCNfGPjUPngiqpnAJlqofwKMkQMvtUEeHz36THEry4SwcV0HDCku+B7wPGKw9Dz8PdXL84O9O+QCaKEHYZVQjTRoVxiOkXGo7CHnF/+OOYqAm195QZAZYtpqwIIVUoLZc2Ti7ImDLRECilQ8AwIm3Kq3aqceYnSUJAzeFIKmYZSWm6CsdmF8xsqRBb3B3tVpgg0GZTCD9vqIt4XElXGAAAAAElFTkSuQmCC" ;
@@ -4314,6 +4338,7 @@ assets {
       r20_0 : base64_png "iVBORw0KGgoAAAANSUhEUgAAAIAAAAAoBAMAAADEX+97AAAAElBMVEUAAACAgIDAwMD//wAAAP////+1uPNjAAABqUlEQVR4Xo2TQY6DMAxFHSzvyQ2qniBSLjBHyGJ8/6vM2DSY8CnBZYGoeDz9H1PeZ1Vpabvrj0R1u1KOP8bbA0BU5ASgPgjI6QxYRUmnBqAQABGVOQAU6JjAc0DQ6JjAQ0AojAB62kIojIDnLfQnaQC0oQWcAKz1f8h4AyBamAHYAGVTCIAlMAfsArwpQAszQAh0hVMLeQ5wgVq6wthCegBgB3BXGFvIc8BqH69lT2FoIT0AcGV/u3gRpxbyFGAC/qsWJR0BkYB5fRsTMP9anJMGQGz28v425Op+Dpi50gAIgffXeZkBF3IHVwhAQ4FrBapsRbCxjoC5gCv0Dl3gCJglEAqVPxfXIwAE7lIohayEAQACd0UwF+MA4FKAaDkrUD+LCEABUm3LdQqXgBXfNwKmYAQEoICozYIpFD/QOdO9wEuVtEmDFHqLmWYC7VfkBxRsmdgEMt1XIJtBACIF4poAsCBAtUEIpuACBgABBAgAXt5jAsByBeg1QBElByAEsAVtpO1qKRMAXAAVxAVQIbb4bg1Jm59EVEgBQAHcBSTnAKAAbiMqfAB/jZMGmMoGFRwAAAAASUVORK5CYII=" ;
       r20_1 : base64_png "iVBORw0KGgoAAAANSUhEUgAAAIAAAAAoBAMAAADEX+97AAAAElBMVEUAAACAgIDAwMD//wAAAP////+1uPNjAAABfUlEQVR4Xo3V0anDMAyF4eMavccblE5g8CICrvZf5RaU9DRSY0cECCn8/bAaivaZzUSL3x2PxMwvf84PeAsGxERCAMfkQCsxsInBloJEAAFisg4kAr5P4H6ANVArci9AQgjg5hZICIH7WzielFNAwxbiMLCNOjr2HgPcwipQex9dncAATHQdOAC1mxPiFtYBB4xuTohbaMuAA0Y3J4QtlBuBOt6AIbYTzltoywABO+G0hXIjUPsOcMJ5C20d2AYwHOAECkzKJ4CrIcAJpwDf7MfraoDRHeCEU4CA1+U8BdUBB4EBnQA4MK3dPvMdmANIMJWfASwAJPikwApAwkVgAeBgGsiAJxAJ88Aji0MB08D26+uQCQwsAP57uSJoa5ifgChMYY9AIKBhAZA/eV+RQEDDfAXmAg8kQmGAgHQEykMIBG0MEJAD4oFMKAwQkAJcQyRoY4CAMOJ/rrksDmCAgHSKIIADBzBAwPyXSEJhIAHyu5DnoGMK4NuYy3vgH0pnJmkISSbkAAAAAElFTkSuQmCC" ;
 
+      r21_0 : base64_png "iVBORw0KGgoAAAANSUhEUgAAAQAAAAAoBAMAAADj1Dm6AAAAD1BMVEUAAACAAACAgIDAwMAA//+iJ+2cAAABGklEQVR4XuzOgQkDIRBE0Tm5AjKwBSypJIL91xTgEFD3DgkOAfA38B/ef+4XwAZswAbgtmUAT+sBnuYBfioAnzQL8LMoACUUIPxrAKEA0V8ECAUI/ipAKMD4lwFCAYa/DhAK0P6PogaUV7oH+EFTAzJbAdo/qQaQrQDdn6YFZHYCdH9SCyA7Afo/TQnIrIIRwJoSwNoTwHSAPAWgDsA5gKkAeRLAC+BYVroAfAR8a52DE4BBIAqiRhvIggVYgmAFgv3XFDzNyaiwfxqYZ5QnoKTmVo0T0I8BNiJ/L0EZdg7Ikb+XoPQLgIXUnKvBLgBvau7VZwOQ/RHsAfw1gh2Av0rwD+CvE/wB+CsFawB/rWAJ4C8WLAH89QIAH2b1lO5XunHNAAAAAElFTkSuQmCC" ;
       s21_e : base64_png "iVBORw0KGgoAAAANSUhEUgAAADQAAAAUAQMAAAD4GoyeAAAABlBMVEUAAACAAABEUqJPAAAAN0lEQVQIW2Ng+A8EHxgYYDQjiP6BSTOD6D8Imh1E/8Ok+UH0f0xaHkw3wGl7MH0Ag64H0w9gNAC4BWqlainEtwAAAABJRU5ErkJggg==" ;
       s21_m : base64_png "iVBORw0KGgoAAAANSUhEUgAAAQAAAAAoBAMAAADj1Dm6AAAAFVBMVEX//wAAAAAAgAAA/wAA////AAD///9Vib6ZAAAAAXRSTlMAQObYZgAAA9NJREFUeF6tV0tu4zAMtaAeQE+L7CWgXWvgC2TRExTI7FNgfP8jTPgDFU9l1ei8tk5Em49PJCW5y3eB9JXRLnsELD8E0FOM4rCoMFBmWJXuHFArppMKya/jdDVlO4eAWpMNXq5dICi7z93HgApzrxbbEmolp3MIubiA967iuRYAUIPbAb7l9ncSEFvsuE51XC7YCQisqzIKEGxWAQkwO9lSJ2CJJLqc60vUQhcmUy4TgGowfZoWA1mTq26Pn5DJShdviyE4t5lii1uPkPpInb7QW+FdyQloC5SuGH9sk8rnWovKeKpCoPgOeMY6FCTOmU41cmjhVP64HrQehQ4kIBEtNJnCGFCfUMwrP9uRzCW2pZEXjDPT2opHvS+heQ0GmSQz8aLy+Npz1oTalX6bniYR6xIbqpJBZCTqgKEICK0IyFbnK6WBOASlXDZWAHcq2O45V0VSl7aszCICRCq4A0ZVyNVCJxmgF6cAtm2DtKG1IJuw647YJAHFUhtoEMfrwGIGliGP9/cUl+2BOywQfxHbrjvWZdUpKSWMMR4JKFaI4HV+p5EL+HO7bXfJrVTqst1uv11ATexCLVidC0Iv0o4EWO5DdgFXScDtg4geAkiBPAWWdCMB9PX1ximgFoyLCChJ+8QFtLmAoqOk2wCpUfqybSyAdTLzhQ1bFokc8/1Ka0DKuCcmaXMBSUci4EUr8MECLJ6iN7xqDa5XmqZRhI74oAJ9pirUO+13W6t4L8C6QiBusVlg5jViHG/F7AuNDO9C1A7YCBzPFBGen/E9CqoD0lSjBLiDRoa6ewI8oMQfGyxz+JcvaQKmO1Et+pGMyFEAPJlo3MU34UYgH5JfS8BkL87iaNFyPQl3s9PNduKjBKhmmBAa/BwlSeC2gGd1GF/PbVEATLm3y32bqgRk4sIdJwKCCggYRrWKvD2i8++n2wdAosrrYXwMfxEasVnDvUl0un5aY44089oPWRIwQfY1PJg/wb+ZHv+2h6192FG4rpMa2Dk/iD8QMFLAfGtjvjQNb2uFgP8lwOn4jXSCkNUF0IgDAdV7oA4E6BDQ+CVNWsBPRHS+AHYCLIwI2N0xQHxrR1eoFaZAdcCzogCjOkZ3SvqCbpqA3Q4Az8rgGBgeCH7ud3SJDHMEo0FyASfgAqj5l18w6bYLzYGsDt6Yp+AlWNe1BaWLS5Rd4Bt5AMGHYceNvOs7NzrSI3rr6GQHiI3/zsDLCIsvBpMIGUne/DHY2ycLUZCG8/D3AvkUSSXtz3BbucjeBNIIlnaf+3kBgEaCmoo5+ACqC92/QBRfS/9V9f8CbaZjd6iaAC0AAAAASUVORK5CYII=" ;
 
