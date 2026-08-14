@@ -2851,12 +2851,12 @@ subroutines {
 
    options_score_notify : subroutine {
       : set_boolean var="opt_on_off" {( opt_score_notify )} ;
-      : match "notify yes" {
+      : match "notify yes;notify y" {
          : print "Score notify is now on.";
          : set_true "opt_score_notify";
          : done ;
       }
-      : match "notify no" {
+      : match "notify no;notify n" {
          : print "Score notify is now off.";
          : set_false "opt_score_notify";
          : done ;
