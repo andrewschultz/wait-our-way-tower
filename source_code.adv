@@ -74,6 +74,7 @@ strings {
    # links for credits
    cred_aj : string "<Andrew Apted<#0f0>>[https://andrewj.itch.io]" ;
    cred_ca : string "<Chris Ainsley<#0f0>>[https://adventuron.itch.io/]" ;
+   cred_lp : string "<Lamp Post Projects<#0f0>>[https://lamppostprojects.itch.io/]" ;
 
    # puzzle strings
    puz_point_ace_inc        : dynamic_string {( opt_color_coding ? "<Ace, Inc.<#f80>>" : "Ace, Inc." )}             ; # 26
@@ -3803,8 +3804,8 @@ on_command {
       : print "Some text is color-coded. <Green<#0f0>> is a clickable link, and <Orange<#f80>> or purple indicates a verb you can use. <Lavender<#88f>> text clues what to focus on." ;
    }
    : match "credits _;credit _" {
-      : print "Thanks to {cred_aj} for testing." ;
-      : print "Thanks to IFComp administrators past and present and to reviewers and judges past and present. Without then, I would not have dived into this enjoyable (hey, at least for me) nonsense." ;
+      : print "Thanks to {cred_aj} and {cred_lp} for testing." ;
+      : print "Thanks to IFComp administrators past and present and to reviewers and judges past and present. Without them, I would not have dived into this enjoyable (hey, at least for me) nonsense." ;
       : print "Thanks to {cred_ca} for creating Adventuron." ;
       : if (!credits_yet) {
          : print "{one_time}Green text here links to a person's itch.io acount. Also, <*CREDITS<#f80>> gives general ADVENTURON credits." ;
