@@ -138,6 +138,22 @@ strings {
    # THINK string(s)
    for_bonus : dynamic_string {( half_bonus ? " for a bonus point" : "" )} ;
 
+   # direction strings
+   dir_n_v : string "<NORTH<#0f0>>" ;
+   dir_s_v : string "<SOUTH<#0f0>>" ;
+   dir_e_v : string "<EAST<#0f0>>" ;
+   dir_w_v : string "<WEST<#0f0>>" ;
+
+   dir_n_y : string "<NORTH<#ff0>>" ;
+   dir_s_y : string "<SOUTH<#ff0>>" ;
+   dir_e_y : string "<EAST<#ff0>>" ;
+   dir_w_y : string "<WEST<#ff0>>" ;
+
+   dir_n_n : string "<NORTH<#f00>>" ;
+   dir_s_n : string "<SOUTH<#f00>>" ;
+   dir_e_n : string "<EAST<#f00>>" ;
+   dir_w_n : string "<WEST<#f00>>" ;
+
    # conditional location strings
    here_r00 : dynamic_string {( is_at "r00" ? "here" : "in the southwest corner" )} ;
    here_r01 : dynamic_string {( is_at "r01" ? "here" : "by the dump, arable" )} ;
@@ -3801,7 +3817,8 @@ on_command {
       : print "{wowt} was written for {ifcomp} 2026." ;
       : print "{wowt} has the same mechanic as two games I wrote in Inform 7: {l_wp} and {l_ut}. It's about their size. I have other three games in a similar vein." ;
       : print "Every point scoring command is an unusual verb, which it is indicated by the location, or something in the location." ;
-      : print "Some text is color-coded. <Green<#0f0>> is a clickable link, and <Orange<#f80>> or purple indicates a verb you can use. <Lavender<#88f>> text clues what to focus on." ;
+      : print "Some text is color-coded in meta-commands. <Green<#0f0>> is a clickable link, and <Orange<#f80>> or purple indicates a verb you can use. <Lavender<#88f>> text clues what to focus on." ;
+      : print "Directional text is color-coded, too. <RED<#f00>> means you need to solve a puzzle to go a certain way. <GREEN<#0f0>> means you've been that way. <YELLOW<#ff0>> means you can go that way but haven't, yet." ;
    }
    : match "credits _;credit _" {
       : print "Thanks to {cred_aj} and {cred_lp} for testing." ;
