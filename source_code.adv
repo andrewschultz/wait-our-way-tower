@@ -3399,6 +3399,33 @@ subroutines {
 
 ##################################testjumps
 
+   testing_stuff : subroutine {
+      : match "testjump _" {
+         : gosub "testjump" ;
+         : done ;
+      }
+      : match "tatmv _" {
+         : if (!tats_each_move) {
+            : set_true "tats_each_move" ;
+            : print "Tats each move switched on, starting this move." ;
+         } : else {
+            : set_false "tats_each_move" ;
+            : print "Tats each move switched off." ;
+            : done ;
+         }
+      }
+      : match "imv _" {
+         : if (!inventory_each_move) {
+            : set_true "inventory_each_move" ;
+            : print "Inventory each move switched on, starting this move." ;
+         } : else {
+            : set_false "inventory_each_move" ;
+            : print "Inventory each move switched off." ;
+            : done ;
+         }
+      }
+   }
+
    testjump : subroutine {
       : if (score > 0) {
          : print "Too late to TESTJUMP. Start and try again with 0 points." ;
@@ -3999,32 +4026,7 @@ on_command {
       : done ;
    }
 
-   : match "testjump _" {
-      : gosub "testjump" ;
-   }
-
-   : match "tatmv _" {
-      : if (!tats_each_move) {
-         : set_true "tats_each_move" ;
-         : print "Tats each move switched on, starting this move." ;
-      } : else {
-         : set_false "tats_each_move" ;
-         : print "Tats each move switched off." ;
-         : done ;
-      }
-   }
-
-   : match "imv _" {
-      : if (!inventory_each_move) {
-         : set_true "inventory_each_move" ;
-         : print "Inventory each move switched on, starting this move." ;
-      } : else {
-         : set_false "inventory_each_move" ;
-         : print "Inventory each move switched off." ;
-         : done ;
-      }
-   }
-
+   : gosub "testing_stuff" ;
 }
 
 on_render {
