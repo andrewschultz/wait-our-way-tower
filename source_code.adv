@@ -1127,7 +1127,17 @@ locations {
                : done ;
             }
          }
+         : if (point_herd_all) {
+            : match "_ herd" {
+               : print "The herd is out of sight. But they trusted you. They'll be along when you need them." ;
+               : done ;
+            }
+         }
          : if (point_vine_eater) {
+            : match "_ cat;_ chasing" {
+               : print {( point_herd_all ? "The cat romps around here happily. You can assume your friends you herded are doing so as well, out of sight." : point_catch_acing ? "Thanks to you, the cat is chasing stuff successfully. What, you can't tell. But the cat can. Cats!" : "The cat is trying to do cat romping around stuff but failing. Maybe you can help it." )} ;
+               : done ;
+            }
             : match "catch acing" {
                : if (point_catch_acing) {
                   : print "The cat's instincts are already back where they should be." ;
@@ -1155,6 +1165,10 @@ locations {
    }
    r01 : location "{r01_loc}" header="{r01_header}" {
       on_command {
+         : match "dump _;arable _" {
+            : print {( "Could be better, could be worse.\n" + (point_dumb_parable ? "You've already reflected on the matter, and you don't have to do more." : "Perhaps it has a lesson or story, however shallow it may be. Worst case, you could fob said story off on someone to pretend to be wise.") )} ;
+            : done ;
+         }
          : match "dumb parable" {
             : if (point_dumb_parable) {
                : print "You already discovered one dumb parable. Two might fry your brain for the rest of the adventure!" ;
@@ -1794,6 +1808,14 @@ locations {
    }
    r22 : location "{r22_loc}" header="{r22_header}" {
       on_command {
+         : match "_ freak;_rusty" {
+            : print {( point_free_crusty ? "They seem happier now you've helped them reframe their life." : "They don't need to be reminded of their weaknesses. They maybe need to restate how things are. It's not their fault. (Small voice: it's mine, actually. But I hope I--and you--make things turn out okay for them in the end.)" )} ;
+            : done ;
+         }
+         : match "_ field;_ erring" {
+            : print {( point_feel_daring ? "You feel more confident navigating the field and other personal relationships." : "It's not a very big field but you are worried about putting your feet wrong." )} ;
+            : done ;
+         }
          : match "feel daring" {
             : if (point_feel_daring) {
                : print "You don't want to engage in daring for the sake of daring. Sometimes, if you do too much of that, it burns you out for later. And you sense you have a good chunk of adventure to go." ;
@@ -2062,6 +2084,16 @@ locations {
    }
    r31 : location "{r31_loc}" header="{r31_header}" {
       on_command {
+         : match "_ way;_ still;_ waste;_ ill" {
+            : print {( point_hate_rash ? "You look around for anything, anything at all, but not much is here. This location feels liminal." : "The area is nondescript, but you keep hearing {puz_point_hey_trash}." )} ;
+            : done ;
+         }
+         : if (!point_hate_rash) {
+            : match "_ hey;_ trash" {
+               : print "You aren't going to win a war of words so directly." ;
+               : done ;
+            }
+         }
          : match "hate rash" {
             : if (point_hate_rash) {
                : print "The thing about heat, is once you've labeled it and such, and risen above it, you don't need to look back and maybe get stuck in it again." ;
@@ -2324,6 +2356,17 @@ locations {
    }
    r41 : location "{r41_loc}" header="{r41_header}" {
       on_command {
+         : if (!point_eh_sink) {
+            : match "ace _;inc _" {
+               : print "Ugh! It's so dreary to look at. It's a monolith of automation. You doubt any technology can stop it. What could?" ;
+               : done ;
+            }
+         } : else_if (!point_cue_bland) {
+            : match "cube _;land _" {
+               : print "The cubes are all so garish. You wonder why they need to be, what is inside or behind them, where and how to look for it." ;
+               : done ;
+            }
+         }
          : if (!point_eh_sink) {
             : match "* sync;sync *" {
                : print "You might want to get {puz_point_ace_inc} out of sync. Sounds right, though." ;
