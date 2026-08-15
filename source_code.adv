@@ -96,6 +96,7 @@ strings {
    puz_point_fail_oops      : dynamic_string {( opt_color_coding ? "<\"Fail! Oops!\"<#f80>>" : "\"Fail! Oops!\"" )} ; # 41
    puz_point_field_erring   : dynamic_string {( opt_color_coding ? "<field erring<#f80>>" : "field erring" )}       ; # 15
    puz_point_fellas_leap    : dynamic_string {( opt_color_coding ? "<FELLAS, LEAP<#f80>>" : "FELLAS, LEAP" )}       ; # 04
+   puz_point_fellas_leap_l  : dynamic_string {( opt_color_coding ? "<fellas leap<#f80>>" : "fellas leap" )}         ; # 04
    puz_point_flight_wraps   : dynamic_string {( opt_color_coding ? "<flight wraps<#f80>>" : "flight wraps" )}       ; # 33
    puz_point_flight_wraps_u : dynamic_string {( opt_color_coding ? "<Flight wraps<#f80>>" : "Flight wraps" )}       ; # 33
    puz_point_float_rippling : dynamic_string {( opt_color_coding ? "<float, rippling<#f80>>" : "float, rippling" )} ; # 23
@@ -172,7 +173,7 @@ strings {
    here_r23 : dynamic_string {( is_at "r23" ? "here" : "by the Fray, Merging" )} ;
    here_r24 : dynamic_string {( is_at "r24" ? "here" : "by the War Makers" )} ;
    here_r25 : dynamic_string {( is_at "r25" ? "here" : "by The Groom-Thug Room" )} ;
-   here_r26 : dynamic_string {( is_at "r26" ? "here" : "by {r26_header}" )} ;
+   here_r26 : dynamic_string {( is_at "r26" ? "here" : "in {r26_header}" )} ;
    here_r27 : dynamic_string {( is_at "r27" ? "here" : "by {r27_header}" )} ;
    here_r30 : dynamic_string {( is_at "r30" ? "here" : "where you started" )} ;
    here_r31 : dynamic_string {( is_at "r31" ? "here" : "in the Way-Bland Wabe Land" )} ;
@@ -251,7 +252,7 @@ strings {
    r21_n : dynamic_string {( has_visited "r31" ? "<NORTH<#0f0>>" : point_halt_error ? "<NORTH<#ff0>>" : "<NORTH<#f00>>" )} ;
    r21_s : dynamic_string {( has_visited "r11" ? "<SOUTH<#0f0>>" : point_halt_error ? "<SOUTH<#ff0>>" : "<SOUTH<#f00>>" )} ;
    r21_e : dynamic_string {( has_visited "r22" ? "<EAST<#0f0>>" : point_fell_asleep ? "<EAST<#ff0>>" : gamestate_r21_e ? "<EAST<#f00>>" : "<EAST<#f80>>" )} ;
-   r21_loc : dynamic_string {( "The hall leads {r21_n} and {r21_s}, with a darker passage {r21_e}. " + (!point_halt_error ? "A {puz_point_hall_terror}, though, wraps itself around to cover those three exits." : (r22_secondary_block ? "You would go east, except you'd feel those {puz_point_fellas_leap} on you." : point_fell_asleep ? "No fellas will leap you if you try to go east now." : "" )) + "\nYou could go back {dir_w_v} to your cell, too, but that's no fun." )} ;
+   r21_loc : dynamic_string {( "The hall leads {r21_n} and {r21_s}, with a darker passage {r21_e}. " + (!point_halt_error ? "A {puz_point_hall_terror}, though, wraps itself around to cover those three exits." : (r22_secondary_block ? "You would go east, except you can't let those {puz_point_fellas_leap_l} on you." : point_fell_asleep ? "No fellas will leap you if you try to go east now." : "" )) + "\nYou could go back {dir_w_v} to your cell, too, but that's no fun." )} ;
    r21_header : string "Dredge-Ailing/Dread Jailing" ;
 
    r22_dir_e : dynamic_string {( !point_free_crusty ? dir_e_n : has_visited "r23" ? dir_e_v : dir_e_y )} ;
@@ -2058,7 +2059,7 @@ locations {
          }
       }
    }
-   r31: location "{r31_loc}" header="{r31_header}" {
+   r31 : location "{r31_loc}" header="{r31_header}" {
       on_command {
          : match "hate rash" {
             : if (point_hate_rash) {
@@ -3555,6 +3556,7 @@ themes {
       }
       theme_settings {
          parser_delay  = 0
+         layout = SB G D LOCK
       }
       colors {
          status_bar_pen   = 15
