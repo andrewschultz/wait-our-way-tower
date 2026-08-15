@@ -1359,6 +1359,7 @@ locations {
                : if (!point_pitch_earning) {
                   : print "Four oars? But you can't afford one!" ;
                   : set_true "think_say_four" ;
+                  : gosub "note_thinks" ;
                   : done ;
                }
                : if (point_say_four) {
@@ -1684,7 +1685,7 @@ locations {
                   : print "No need to yell open again!" ;
                   : done ;
                }
-               : print "The yellow pin glows and burns in your hand. You throw it at the door, reflexively. The pin sticks in the door! With a loud SSS, you watch the door melt away. You can go east now!" ;
+               : print "The yellow pin glows and burns in your hand. You throw it at the door, reflexively. The pin sticks in the door! With a loud SSS, you watch the door melt away. You can go {dir_e_y} now!" ;
                : set_integer var="tempint" "2" ;
                : set_true "point_yell_open" ;
                : gosub "add_point" ;
@@ -1729,8 +1730,8 @@ locations {
          : if (point_halt_error && !point_fell_asleep) {
             : match "e _" {
                : cycle key = "r21_e_block" predictable_order = "true" skip_interval = "0" max_loops = "1" {
-                  : print "The way seems a bit dark, but before you get too far, you hear a loud voice shout \"{puz_point_fellas_leap}!\" Nope, bad idea to go there as-is." ;
-                  : print "Again, the voice yelling \"{puz_point_fellas_leap}!\"" ;
+                  : print "The way seems a bit dark, but before you get too far {dir_e_n}, you hear a loud voice shout \"{puz_point_fellas_leap}!\" Nope, bad idea to go there as-is." ;
+                  : print "Again, the voice {dir_e_n} yelling \"{puz_point_fellas_leap}!\"" ;
                   on_exhausted {
                      : print "Still, that voice yelling \"{puz_point_fellas_leap}!\"" ;
                   }
@@ -2147,11 +2148,13 @@ locations {
             : if (!point_pitch_earning) {
                : print "But you can't afford a loan of a craft!" ;
                : set_true "think_say_loaners" ;
+               : gosub "note_thinks" ;
                : done ;
             }
             : if (!point_say_four) {
                : print "But you have nothing to steer a craft!" ;
                : set_true "think_say_loaners" ;
+               : gosub "note_thinks" ;
                : done ;
             }
             : if (point_say_loaners) {
