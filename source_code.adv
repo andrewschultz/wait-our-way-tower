@@ -190,7 +190,7 @@ strings {
    maybe_r40 : dynamic_string {( !think_heard_all_right_place ? "somewhere with lots to track" : here_r40 )} ;
 
    # room(s)
-   r00_loc : dynamic_string {( (point_herd_all ? "The cat is no longer here. Maybe they found a forever home in the Warm Acres chaos." :
+   r00_loc : dynamic_string {( (point_warm_acres ? "The cat is no longer here. Maybe they found a forever home in the Warm Acres chaos." :
       point_catch_acing ? "There's a cat chasing here, mostly fallen leaves and stuff, but it's more coordinated now you helped it." :
       point_vine_eater ? "With the fly traps removed, there's a {puz_point_cat_chasing} here. It's not chasing stuff very well, though." :
       point_fly_traps ? "Fly traps have replaced what was here. Perhaps you could cut through them somehow." :
@@ -291,7 +291,7 @@ strings {
    r31_header : string "Way-Still Waste, Ill" ;
 
    r32_e_w : dynamic_string {( (has_visited "r33" ? dir_e_v : point_dump_liars ? dir_e_y : dir_e_n) + "-{dir_w_v}" )} ;
-   r32_loc : dynamic_string {( (point_chest_reigning ? "A big majestic chest lies here in this {r32_e_w} thoroughfare." + (point_dump_liars ? " The chest is empty now." : " Also, some dumb pliers are in the chest. You were discouraged from taking them.") : "Here in this {r32_e_w} thoroughfare all sorts of weird entities train at chess. What could possibly be more important or rewarding than chess? It's the game of royalty, you know!")  )} ;
+   r32_loc : dynamic_string {( (point_chest_reigning ? "A big majestic chest lies here in this {r32_e_w} thoroughfare." + (point_dump_liars ? " The chest is empty now." : " Also, some {puz_point_dumb_pliers} are in the chest. You were discouraged from taking them.") : "Here in this {r32_e_w} thoroughfare all sorts of weird entities train at chess. What could possibly be more important or rewarding than chess? It's the game of royalty, you know!")  )} ;
    r32_header : string "Chess Training" ; # ?? the spit thus pit
 
    r33_dir_n : dynamic_string {( has_visited "r43" ? dir_n_v : dir_n_n )} ;
@@ -1781,7 +1781,7 @@ locations {
                   : print "You don't want to oversell this." ;
                   : done ;
                }
-               : print "You try shouting fell asleep first, but you realize that was really a bad idea. Slowly, you make your voice drowsier and drowsier, saying fell asleep, fall asleep, fall asleep. " ;
+               : print "You try shouting fell asleep first, but you realize that was really a bad idea. Slowly, you make your voice drowsier and drowsier, saying fell asleep, fall asleep, fall asleep. You can go {dir_e_y} now!" ;
                : set_integer var="tempint" "4" ;
                : set_true "point_fell_asleep" ;
                : gosub "add_point" ;
@@ -2484,7 +2484,7 @@ locations {
                : print "Tripling the flow again would probably capsize your craft. It's like compound interest, only it gets places quicker. The wrong places." ;
                : done ;
             }
-            : print "Finally, the waters are less calm, and fortunately, they're not rough enough to drag you places, but you see where the currents are, and there's one that flows pretty reliably to the West. You can take it now, if you want." ;
+            : print "Finally, the waters are less calm, and fortunately, they're not rough enough to drag you places, but you see where the currents are, and there's one that flows pretty reliably to the {dir_w_y}. You can take it now, if you want." ;
             : set_integer var="tempint" "23" ;
             : set_true "point_flow_tripling" ;
             : gosub "add_point" ;
@@ -2924,8 +2924,10 @@ subroutines {
 
    inventory_nouns : subroutine {
       : if (is_carried("dumb_parable")) {
-         : print "You toss the parable around in your head. It is what it is. People will see what they want in it. You're not trying to scam anyone." ;
-         : done ;
+         : match "_ dumb;_ parable" {
+            : print "You toss the parable around in your head. It is what it is. People will see what they want in it. You're not trying to scam anyone." ;
+            : done ;
+         }
       }
    }
 
