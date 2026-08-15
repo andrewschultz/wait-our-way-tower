@@ -3403,8 +3403,22 @@ subroutines {
          : redescribe ;
          : done ;
       }
+      : match "testjump 3" {
+         : gosub "testjump_part_1" ;
+         : gosub "testjump_part_2" ;
+         : set_true "gamestate_fail_oops_known" ;
+         : set_true "point_fey_loops" ;
+         : set_true "point_warm_acres" ;
+         : set_integer var="score" "41" ;
+         : destroy "thug" ;
+         : set_true "gamestate_thug_gone" ;
+         : goto "r25" ;
+         : redescribe ;
+         : done ;
+      }
       : print "TESTJUMP 1 sends you to outside the cell, hall cleared, 5 points." ;
-      : print "TESTJUMP 2 sends you to before the chase, 39 points." ;
+      : print "TESTJUMP 2 sends you to 1 room before the chase, 39 points." ;
+      : print "TESTJUMP 3 sends you to the chase room after you won, 41 points." ;
       : done ;
    }
 
