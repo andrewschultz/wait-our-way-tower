@@ -1170,7 +1170,7 @@ locations {
    }
    r01 : location "{r01_loc}" header="{r01_header}" {
       on_command {
-         : match "dump _;arable _" {
+         : match "_ dump;_ arable" {
             : print {( "Could be better, could be worse.\n" + (point_dumb_parable ? "You've already reflected on the matter, and you don't have to do more." : "Perhaps it has a lesson or story, however shallow it may be. Worst case, you could fob said story off on someone to pretend to be wise.") )} ;
             : done ;
          }
@@ -2364,19 +2364,17 @@ locations {
    r41 : location "{r41_loc}" header="{r41_header}" {
       on_command {
          : if (!point_eh_sink) {
-            : match "ace _;inc _" {
+            : match "_ ace;_ inc" {
                : print "Ugh! It's so dreary to look at. It's a monolith of automation. You doubt any technology can stop it. What could?" ;
                : done ;
             }
-         } : else_if (!point_cue_bland) {
-            : match "cube _;land _" {
-               : print "The cubes are all so garish. You wonder why they need to be, what is inside or behind them, where and how to look for it." ;
-               : done ;
-            }
-         }
-         : if (!point_eh_sink) {
             : match "* sync;sync *" {
                : print "You might want to get {puz_point_ace_inc} out of sync. Sounds right, though." ;
+               : done ;
+            }
+         } : else_if (!point_cue_bland) {
+            : match "_ cube;_ land" {
+               : print "The cubes are all so garish. You wonder why they need to be, what is inside or behind them, where and how to look for it." ;
                : done ;
             }
          }
