@@ -326,6 +326,8 @@ strings {
    r44_loc : dynamic_string {( "In this small building, " + (point_tense_ops ? "the {puz_point_ten_sops} ignore you now you've helped them, but hey, you're glad they can focus." : "{puz_point_ten_sops} mill around here, discussing plans that don't have much chance of coming off as-is.") + "\nThe only way out of this small building is {dir_s_v}." )} ;
    r44_header : string "Ten Sops" ;
 
+   hall_terror_blocks : string "Not with the {puz_point_hall_terror} in the way." ;
+
    # flavor text
    endgame_friends : dynamic_string {( point_broke_lass ? "Your two friends" : "The mage, urgent" )} ;
    endgame_plural : dynamic_string {( point_broke_lass ? "" : "s" )} ;
@@ -1736,10 +1738,6 @@ locations {
                : print "You don't see any physical weakness. Maybe you can get inside the hall terror's mind. Or its controllers'." ;
                : done ;
             }
-            : match "n _;s _;e _" {
-               : print "Not with the {puz_point_hall_terror} blocking the way." ;
-               : done ;
-            }
          }
          : if (point_halt_error && !point_fell_asleep) {
             : match "e _" {
@@ -2661,7 +2659,7 @@ barriers {
    block_go_r11 : block {
       location = r11
       block_when_not = point_halt_error
-      message = Not with the hall terror in the way.
+      message = {hall_terror_blocks}
    }
 
    block_go_r12 : block {
@@ -2709,7 +2707,7 @@ barriers {
    block_go_r22 : block {
       location = r22
       block_when_not = point_halt_error
-      message = Not with the hall terror in the way.
+      message = {hall_terror_blocks}
    }
 
    block_go_r22_fellas : block {
@@ -2757,7 +2755,7 @@ barriers {
    block_go_r31 : block {
       location = r31
       block_when_not = point_halt_error
-      message = Not with the hall terror in the way.
+      message = {hall_terror_blocks}
    }
 
    block_go_r32 : block {
