@@ -1111,6 +1111,24 @@ vocabulary {
 locations {
    r00 : location "{r00_loc}" header="{r00_header}" {
       on_command {
+         : if (point_fly_traps) {
+            : match "_ flight;_ wraps" {
+               : print "The flight wraps are pretty nondescript, like bubble wrap but impossible to pop. They prevent flying, walking and even seeing what's behind them, or how much is behind them. How to get rid of them?" ;
+               : done ;
+            }
+         }
+         : if (point_fly_traps && !point_vine_eater) {
+            : match "_ fly;_ traps" {
+               : print "The fly traps won't mess with someone as big as you, but they're dense enough to hide stuff. How to get by them?" ;
+               : done ;
+            }
+         }
+         : if (point_vine_eater && !point_warm_acres) {
+            : match "_ cat;_ chasing" {
+               : print {( "You watch the cat a bit. It's having fun chasing, " + ( point_catch_acing ? "even more now you've helped it get better." : "though it might have more fun if it were better." ) )} ;
+               : done ;
+            }
+         }
          : match "fly traps" {
             : if (point_fly_traps) {
                : print "You already unwrapped the fly traps, for better or worse." ;
@@ -1202,6 +1220,12 @@ locations {
    }
    r02 : location "{r02_loc}" header="{r02_header}" graphic="r02_0" {
       on_command {
+         : if (!point_pitch_earning) {
+            : match "_ titan;_ drowsing" {
+               : print {( point_tightened_rousing ? "(here)" : "(there)" )} ;
+               : done ;
+            }
+         }
          : match "_ pit;_ churning" {
             : print {( "Exploring the pit seems foolhardy. Too many ways to fall.\n" + (point_pitch_earning ? "There are other places to look. You got some riches from the titan, anyway." : "The titan, though, well ... perhaps they could help you?" ) )} ;
             : done ;
@@ -1275,6 +1299,20 @@ locations {
    }
    r03 : location "{r03_loc}" header="{r03_header}" {
       on_command {
+         : match "_ sunk;_ etching" {
+            : print {( point_sun_catching ? "(here)" : "(there)" )} ;
+            : done ;
+         }
+         : match "_ tough;_ tiki" {
+            : print {( point_tufty_key ? "You'd feel bad about asking it for anything else. But you doubt it has anything else you need." : "It looks tough but not impossible to please. You can't go asking it for any old thing." )} ;
+            : done ;
+         }
+         : if (point_sun_catching) {
+            : match "_ tough;_ tiki" {
+               : print {( point_tufty_key ? "(here)" : "(there)" )} ;
+               : done ;
+            }
+         }
          : match "sun catching" {
             : if (point_sun_catching) {
                : print {( "The tiki doesn't have a hidden friend or relative or whatever. In fact, it might be insulted if you looked for better. Guess you " + (point_tufty_key ? "did well with what you had." : "should deal with what you've got." ) )} ;
@@ -1327,6 +1365,10 @@ locations {
    r04 : location "{r04_loc}" header="{r04_header}" {
       on_command {
          : gosub "fey_loops_check" ;
+         : match "_ meager;_ oath" {
+            : print {( point_me_growth ? "You've already grokked the oath. It's not much, but it's a small boost." : "You wonder how the meager oath applies to you. You hope it could be applied positively." )} ;
+            : done ;
+         }
          : match "me growth" {
             : if (point_me_growth) {
                : print "Too much of this self-improvement will leave you completely unsuited for what really matters in life, like weird text adventures. So watch it, sport!" ;
@@ -1353,6 +1395,21 @@ locations {
    }
    r10 : location "{r10_loc}" header="{r10_header}" {
       on_command {
+         : if (!point_dry_vendors) {
+            : match "_ drive;_ enders" {
+               : print "They're just dead ends, which isn't very exciting or useful. How to make them more so?" ;
+               : done ;
+            }
+         } : else {
+            : match "_ dry;_ vendors" {
+               : print {( "Being dry and all, they pay little or no attention to you, not trying to make small talk. " + (point_say_four ? "But you can't imagine you need to buy anything else." : "But if you had something to buy and money to buy it with, they probably would." ) )} ;
+               : done ;
+            }
+            : match "_ safe;_ oar" {
+               : print {( point_say_four ? "Well, you have oars now, so you don't need another." : "It's a pretty flimsy oar. You doubt just one would do for water travel." )} ;
+               : done ;
+            }
+         }
          : match "dry vendors" {
             : if (point_dry_vendors) {
                : print "There are quite enough vendors here now." ;
@@ -1442,6 +1499,16 @@ locations {
    }
    r12 : location "{r12_loc}" header="{r12_header}" {
       on_command {
+         : match "_ knowin;_ juries" {
+            : print {( "You look at the juries, about to speak, but they cut you off with a sharp glare." + ( point_no_injuries ? "Surely you're not foolish enough to risk going east? You have no clue..." : point_coin_ovations ? "With your little story complete, they've found other people to judge. Their work is never done!" : "They seem almost interested in you back, for the moment." ) )} ;
+            : done ;
+         }
+         : if (point_no_injuries && !point_coin_ovations) {
+            : match "_ coy;_ novations" {
+               : print "The coy novations are beyond you, full of legalese, with occasional demands to keep it simpler and others to use one's brain a bit to try and actually deal with a semi-complex thought some of the time." ;
+               : done ;
+            }
+         }
          : match "no injuries" {
             : if (point_no_injuries) {
                : print "Strange. The juries have already forgotten about their little problems. It's as if some people just like to sit around and tell other people what they can't do, and then feel as though they've done something if they succeed." ;
@@ -1565,6 +1632,10 @@ locations {
    r14 : location "{r14_loc}" header="{r14_header}" {
       on_command {
          : gosub "fey_loops_check" ;
+         : match "_ claw;_ throbbing" {
+            : print {( point_cloth_robbing ? "The claw continues to throb around in an attempt to at least somewhat guard the cloth you got." : "The claw throbs around, predictably but thoroughly. You'll need purpose and means to get what you want and need." )} ;
+            : done ;
+         }
          : match "cloth robbing" {
             : if (!point_dump_liars) {
                : print "But you don't have any sort of tool that could push the {puz_point_claw_throbbing} out of the way!" ;
@@ -1599,6 +1670,14 @@ locations {
    }
    r15 : location "{r15_loc}" header="{r15_header}" {
       on_command {
+         : match "_ libe;_ airy" {
+            : print "It's a big library. You could get lost here. But there are two books that seem to stand out. Well, one in particular." ;
+            : done ;
+         }
+         : match "_ lie;_ bury" {
+            : print "Perhaps there are books full of lies here, but, well, they'd be buried." ;
+            : done ;
+         }
          : match "_ tangles" {
             : print "Interesting and clever, but not really directed at you." ;
             : done ;
@@ -1649,6 +1728,27 @@ locations {
    }
    r20 : location "{r20_loc}" header="{r20_header}" {
       on_command {
+         : match "_ wheeze;_ pace;_ wee;_ space" {
+            : print {( point_yell_open ? "You're glad there's a way out." : "You may want to focus on specific parts of the space, or your reactions to it, to find a way out." )} ;
+            : done ;
+         }
+         : if (point_can_do) {
+            : match "_ floor" {
+               : print {( point_thief_lore ? "Nothing else is hidden there." : "Do you dare to dream something hidden in {puz_point_the_floor} might help you get out the door? What sort of reasoning could you use to find it without driving yourself more quickly?" )} ;
+               : done ;
+            }
+         } : else {
+            : match "_ canned;_ ooh" {
+               : print "It's weird. You shouldn't be reciting that since you got canned, but you are. Perhaps the answer to what it really means is simpler than you might thing." ;
+               : done ;
+            }
+         }
+         : if (point_thief_lore && !point_yell_open) {
+            : match "_ yellow;_ pin" {
+               : print "The yellow pin isn't much, but it's something. Perhaps you need a corresponding action to help it open the door." ;
+               : done ;
+            }
+         }
          : match "_ door" {
             : print {( point_yell_open ? "It's open now." : "It's sturdy. It has a small hole where a big keyhole would normally be." )} ;
             : done ;
@@ -1882,6 +1982,10 @@ locations {
    }
    r23 : location "{r23_loc}" header="{r23_header}" {
       on_command {
+         : match "_ fray;_ measly" {
+            : print {( point_frame_easily ? "You reflect on how you managed to stop the fray from growing." : "The fray is measly for now. That may give you some time to figure how to defuse it and, maybe, what outside boosts you might need." )} ;
+            : done ;
+         }
          : match "frame easily" {
             : if (!point_tense_ops) {
                : print "You might need to navigate some smaller conflicts or plans to ramp up before navigating this whole fray!" ;
@@ -1916,6 +2020,10 @@ locations {
    }
    r24 : location "{r24_loc}" header="{r24_header}" {
       on_command {
+         : match "_ war;_ makers" {
+            : print {( point_warm_acres ? "No sign of them now." : "The war makers are intimidating. You doubt reasoning or charisma will work with them. They look tougher to defuse than the fray, measly, from just back west. You might need serious help." )} ;
+            : done ;
+         }
          : if (!point_warm_acres) {
             : match "_ achers" {
                : print "They are already aching for war. More pain would just make them even more hostile." ;
@@ -1958,6 +2066,10 @@ locations {
    }
    r25 : location "{r25_loc}" header="{r25_header}" {
       on_command {
+         : match "_ groom;_ thug;_ room" {
+            : print {( gamestate_thug_gone ? "A lot less oppressive with the thug gone." : "The thug really takes up the room. So you can't see what's beyond. But this can't be the end, here." )} ;
+            : done ;
+         }
       }
       on_describe {
          : if (!gamestate_thug_gone && !gamestate_thug_chase) {
@@ -1970,6 +2082,10 @@ locations {
    }
    r26 : location "{r26_loc}" header="{r26_header}" {
       on_command {
+         : match "_ know;_ power;_ nope;_ hour" {
+            : print {( "You think about power and its accumulation. You remember people accusing you of wanting it when you just wanted to feel less helpless around them.\n" + ( point_bah_slumping ? "They fooled you, but the boss did not." : "The {puz_point_boss_lumping} is another of them. Perhaps you can deflect them creatively? It doesn't have to be PERFECTLY logical." ) )} ;
+            : done ;
+         }
          : if (!point_bah_slumping) {
             : match "_ boss;_ lumping" {
                : print "They don't show any signs of letting up, but they don't show any signs of saying something new or original after their firs barrage." ;
@@ -2010,6 +2126,16 @@ locations {
    }
    r27 : location "{r27_loc}" header="{r27_header}" {
       on_command {
+         : if (point_blest_able) {
+            : match "listen _;_ true;_ pleading" {
+               : print "The {puz_point_true_pleading} sounds like concerns you have, or had. Even the ones different, you can relate to, or you don't find them stupid. Perhaps you could share things with other seekers. But to do that you might have to show confidence in doing things beyond, well, just shuffling word sounds around. What could it be? Could you dare to take the jump?" ;
+               : done ;
+            }
+         }
+         : match "_ bleah;_ stable" {
+            : print "Things aren't going to come crashing down here, but you hope for better than that bare minimum, and you wonder if others do, too." ;
+            : done ;
+         }
          : match "blest able" {
             : if (point_blest_able) {
                : print "At some point, there are diminishing or even negative returns for counting and re-counting your blessings. What will you do with them, around the true pleading?" ;
@@ -2058,6 +2184,16 @@ locations {
    }
    r30 : location "{r30_loc}" header="{r30_header}" {
       on_command {
+         : match "_ way;_ bland;_ wabe;_ land" {
+            : print {( point_door_cloud ? "You found the door to unlock in the door cloud. There's not much else." : "The land itself is pretty tedious. Maybe focus on the {puz_point_dork_loud} to see if they can help you, however unwillingly or belligerently." )} ;
+            : done ;
+         }
+         : if (point_door_cloud) {
+            : match "_ dork;_ loud" {
+               : print "Just trying to get the {puz_point_dork_loud}'s attention won't work. You might have to ask them for what you want and make sure you can use or get to it." ;
+               : done ;
+            }
+         }
          : match "door cloud" {
             : if (!point_tufty_key) {
                : print "The dork is rather upset. \"If I don't know what sort of door you want, I can't search through the whole dork cloud on my own. I'm smart, but not that smart. Or maybe I am, but I'm smart enough to know that's not how best to use my brain. Geez!\"" ;
@@ -2128,6 +2264,10 @@ locations {
    }
    r32 : location "{r32_loc}" header="{r32_header}" {
       on_command {
+         : match "listen _;_ chess;_ training" {
+            : print {( point_dump_liars ? "It's silent now with the chess training over." : "It's tough to know whether or not the training is effective, but it sure is loud. Everybody is yelling about stuff like the Carlsbad pond structure, or opening theory 15 lines down, or other things that just sort of make your head spin. Of course, there's always a person who yells you just have to sit there and make good moves, and they're shushed." )} ;
+            : done ;
+         }
          : match "chest reigning" {
             : if (point_chest_reigning) {
                : print "One chest is enough. Don't get greedy." ;
@@ -2185,6 +2325,10 @@ locations {
             : print {( "On the contrary, the owners seem quite social. But " + (point_say_loaners ? "you don't need each other for anything, cold as it sounds." : "that sounds right...") )} ;
             : done ;
          }
+         : match "_ sail;_ owners;sail _" {
+            : print {( (point_say_loaners ? "You already have transport." : "It would be nice to buy transport, but how?") )} ;
+            : done ;
+         }
          : match "say loaners" {
             : if (!point_pitch_earning) {
                : print "But you can't afford a loan of a craft!" ;
@@ -2225,6 +2369,16 @@ locations {
    }
    r34 : location "{r34_loc}" header="{r34_header}" {
       on_command {
+         : if (!point_ply_towels) {
+            : match "_ plight;_ owls" {
+               : print "They look cold and wet. How could you dry them?" ;
+               : done ;
+            }
+         }
+         : match "_ soak;_ thus;_ oak" {
+            : print {( point_ply_towels ? "You showed the oak what's what, and you really don't want to attract any negative attention." : "You're not sure what the owls did to make the oak soak them, but the oak looks really upset at them. Anything you say or do will leave it unmoved. And not just physically!" )} ;
+            : done ;
+         }
          : match "ply towels" {
             : if (point_ply_towels) {
                : print "The owls are nice and dry now and don't need any more towels." ;
@@ -2448,6 +2602,20 @@ locations {
    }
    r42 : location "{r42_loc}" header="{r42_header}" {
       on_command {
+         : match "_ seacrest;_ sea;_ crest" {
+            : print {( point_seek_rest ? "It's kind of relaxing to look at. Perhaps it leads to bigger things, if observed correctly." : "You're glad it helped you find a less gloomy part of the island." )} ;
+            : done ;
+         }
+         : if (point_seek_rest && !point_girl_only) {
+            : match "_ grr;_lonely;listen _" {
+               : print "The GRR seems artificial. You can't put your finger on it." ;
+               : done ;
+            }
+         }
+         : match "_ gray;_ vile;_ grave;_ isle" {
+            : print {( "It's quite expansive. You'd probably be in danger exploring too much. " + ( point_girl_only ? "You've gotten a companion. You both should probably leave." : "There should be something worthwhile here -- find it and get out, you reckon." ) )} ;
+            : done ;
+         }
          : match "seek rest" {
             : if (point_seek_rest) {
                : print "You already sought and found." ;
@@ -2498,6 +2666,16 @@ locations {
    }
    r43 : location "{r43_loc}" header="{r43_header}" {
       on_command {
+         : match "_ float;_ rippling" {
+            : print {( point_flow_tripling ? "Fast enough to use as transport." : "It barely makes your craft move at all. You need it to pick up a bit." )} ;
+            : done ;
+         }
+         : if (point_flow_tripling) {
+            : match "_ flow;_ tripling" {
+               : print "It kind of circles around without making a big vortex in the center, so you can go where you need to, {r43_dir_w} or back {dir_s_v}." ;
+               : done ;
+            }
+         }
          : match "flow tripling" {
             : if (point_flow_tripling) {
                : print "Tripling the flow again would probably capsize your craft. It's like compound interest, only it gets places quicker. The wrong places." ;
@@ -2524,6 +2702,10 @@ locations {
    }
    r44 : location "{r44_loc}" header="{r44_header}" {
       on_command {
+         : match "_ ten;_ sops" {
+            : print {( point_tense_ops ? "They look very unsure of themselves but also suspicious of outside help." : "They seem happy now, not really pressing for whatever their plan is. They don't need any more outside help." )} ;
+            : done ;
+         }
          : match "tense ops" {
             : if (!point_me_growth) {
                : print "You just don't have the wherewithal to deal with tension yet! Still, good idea for later." ;
