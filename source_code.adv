@@ -306,7 +306,7 @@ strings {
    r35_loc : string "Here, people are apparently supposed to learn. What, you're not sure. You can only go back {dir_s_v} here." ;
    r35_header : string "Bro Class" ;
 
-   r40_loc : string "This is a small hut that smells (pleasantly) of canines. The exit is back {dir_s_v}." ;
+   r40_loc : dynamic_string {( "This is a small hut that smells (pleasantly) of canines." + (point_warm_acres ? "But since you transformed the warm acres, a lot of them found homes." : point_shape_up ? "One particular old loyal dog pads around here, making you say {dgda}." : "But you don't see any. Perhaps you're giving off bad vibes. How to fix that?") + "\nThe exit is back {dir_s_v}." )} ;
    r40_header : string "Chez Pup" ;
 
    r41_loc : dynamic_string {( (!point_eh_sink ? "{puz_point_ace_inc} rises above you on all sides except to the {dir_s_v}. You've heard of it. It's one of those soulless corporations that may or may not have already hired all machines." :
@@ -1110,7 +1110,7 @@ locations {
       on_command {
          : match "fly traps" {
             : if (point_fly_traps) {
-               : print "You already unwrapped the fly taps, for better or worse." ;
+               : print "You already unwrapped the fly traps, for better or worse." ;
                : done ;
             }
             : print "The flight wraps uncurl, with loud poppings, which you haven't heard since you got ahold of a ton of bubble wrap as a kid. Whether or not it was protecting the flight of the plants, or animals the plants prey on, you're not sure. But now the fly traps are out there, and they may need to be tamed." ;
@@ -1274,7 +1274,7 @@ locations {
       on_command {
          : match "sun catching" {
             : if (point_sun_catching) {
-               : print "The tiki doesn't have a friend. It might be insulted if you looked for better." ;
+               : print {( "The tiki doesn't have a hidden friend or relative or whatever. In fact, it might be insulted if you looked for better. Guess you " + (point_tufty_key ? "did well with what you had." : "should deal with what you've got." ) )} ;
                : done ;
             }
             : print "You angle your head various ways, noting that it is still day out, and perhaps if the sun hits things just right, you will see something you didn't. Sure enough, you catch a glean, and you dig into some soil, and you find a {puz_point_tough_tiki} staring back up at you. It's not a very big one, but it's still doesn't look like it gives in to other people's wishes very easily." ;
@@ -1409,10 +1409,8 @@ locations {
    }
    r11 : location "{r11_loc}" header="{r11_header}" graphic="r11_0" {
       on_command {
-         : if (!point_duh_losing) {
-            : match "_ dull;_ oozing" {
-               : print "You stare at, and listen to, the dull oozing for a while. You get the feeling you really should be grateful for your freedom, yet at the same time, exercising it would be unfair to other prisoners. If they exist, of course. Can't be too considerate these days! Besides, you admit you have no interesting plans...\n...wait, no, you can do better than that." ;
-            }
+         : match "_ dull;_ oozing" {
+            : print {( point_duh_losing ? "You don't want to focus on the oozing. It took effort not to." : "You stare at, and listen to, the dull oozing for a while. You get the feeling you really should be grateful for your freedom, yet at the same time, exercising it would be unfair to other prisoners. If they exist, of course. Can't be too considerate these days! Besides, you admit you have no interesting plans...\n...wait, no, you can do better than that." )} ;
          }
          : match "duh losing" {
             : if (point_duh_losing) {
@@ -1474,7 +1472,7 @@ locations {
                   : gosub "note_thinks" ;
                   : done ;
                }
-               : print "Surprisingly, the dumb parable works on the juries, who maybe just needed something some sort of new simplicity to who and I at, before they go back to complex reasons why people they don't like shouldn't get to do more than they do. They give you both coin innovations, though unsurprisingly, there's a lot more ovations than coin. You almost have a headache by the time it stops, but at least you're not broke now." ;
+               : print "Surprisingly, the dumb parable works on the juries, who maybe just needed something some sort of new simplicity to ooh and ahh at.\nEach discusses with their argue-ee why the simple parable backs THEIR point up, and there are a few minor scuffles, before they go back to complex reasons why people they're smarter than and don't like shouldn't get to do more than they do.\nThey give you both coin AND innovations, though unsurprisingly, there's a lot more ovations than coin. You almost have a headache by the time the applause stops, but at least you're not broke now.\nThe juries appear to have resolved their differences for the moment, and they just ignore you now. You've, uh, passed, I guess." ;
                : set_integer var="tempint" "10" ;
                : set_false "think_coin_ovations" ;
                : set_true "point_coin_ovations" ;
@@ -1609,7 +1607,7 @@ locations {
                : print "You already deconstructed that book." ;
                : done ;
             }
-            : print "You convince yourself the book is total rubbish." ;
+            : print "You convince yourself the book is total rubbish, seeing old experiences in a new light. You can't exactly lecture this to the masses, but it feels good to, uh, bury some lies people foisted on you when they were Just Being Honest or Telling You What Your Problem Is or Showing Common Sense. You will be able to reject that sort of thing a bit more quickly going forward." ;
             : set_true "bonus_point_thug_aims" ;
             : done ;
          }
@@ -1736,7 +1734,7 @@ locations {
       on_command {
          : if (!point_fell_asleep && gamestate_r21_e) {
             : match "_ fellas;_ leap" {
-               : print "Too dark to the east. You're not going to find anything about them." ;
+               : print "You're not going to find anything about the fellas. It's too dark to the east. But maybe you can out-think them, or their leader, somehow." ;
                : done ;
             }
          }
@@ -1818,7 +1816,7 @@ locations {
             : done ;
          }
          : match "_ field;_ erring" {
-            : print {( point_feel_daring ? "You feel more confident navigating the field and other personal relationships." : "It's not a very big field but you are worried about putting your feet wrong." )} ;
+            : print {( point_feel_daring ? "You feel more confident navigating the field and other personal relationships." : "It's not a very big field, but you are worried about putting your feet wrong." )} ;
             : done ;
          }
          : match "feel daring" {
@@ -1915,7 +1913,7 @@ locations {
       on_command {
          : if (!point_warm_acres) {
             : match "_ achers" {
-               : print "They are already aching for war." ;
+               : print "They are already aching for war. More pain would just make them even more hostile." ;
                : done ;
             }
          }
@@ -2156,7 +2154,7 @@ locations {
                   : print "They're already dumped, and convincingly." ;
                   : done ;
                }
-               : print "Of course, you can't call them liars, but in your mind, you dump them and say, well, I can take responsibility for my actions if somehow there is a big electric surge through these players that makes me Dumber, and anyway, it would be less of a loss than if it made you dumber, am I right? They recognize this is the most blow off form of flattery, but what can they do? Instead of blocking you going east, they now seem as though they wish you really would go east as soon as possible. Small victories, yay!" ;
+               : print "Of course, you can't call them liars, but in your mind, you dump them and say, well, I can take responsibility for my actions if somehow there is a big electric surge through these players that makes me dumber, and anyway, it would be less of a loss than if it made you dumber, am I right? They recognize this is the most blow off form of flattery, but what can they do? Instead of blocking you going east, they now seem as though they wish you really would go east as soon as possible. Small victories, yay!" ;
                : set_integer var="tempint" "14" ;
                : set_true "point_dump_liars" ;
                : gosub "add_point" ;
@@ -2178,8 +2176,9 @@ locations {
    }
    r33 : location "{r33_loc}" header="{r33_header}" {
       on_command {
-         : match "_ loners; loners _" {
-            : print "On the contrary, the owners seem quite social. But that sounds right..." ;
+         : match "_ loners;loners _" {
+            : print {( "On the contrary, the owners seem quite social. But " + (point_say_loaners ? "you don't need each other for anything, cold as it sounds." : "that sounds right...") )} ;
+            : done ;
          }
          : match "say loaners" {
             : if (!point_pitch_earning) {
@@ -2232,7 +2231,8 @@ locations {
                : gosub "note_thinks" ;
                : done ;
             }
-            : print "The owls hoot their appreciation. They don't really ask where you got the towels, they appreciate being able to dry off, even if the rain isn't stopping anytime soon. One of them even hopes you didn't get soaked too much. Although the rest complained about how one just can't fly in the rain sometimes, and you wouldn't know that, since you can't fly. Nevertheless, having gained some relief, they spread out and allow passage north." ;
+            : print "You don't have enough towels to dry off all the owls at once. But you keep going back to the claw, to get a few more. Eventually the drier owls can fly, and the oak realized the game is up. It -- well, trees can't skulk off, but it sure looks hurt." ;
+            : print "The owls hoot their appreciation. Since they don't have to huddle flightless to the north, they start flapping in the air. You call them over to hand them the pliers in case this happens again. The pliers are surprisingly lightweight, which strikes you as not dumb at all." ;
             : set_integer var="tempint" "28" ;
             : set_false "think_ply_towels" ;
             : set_true "point_ply_towels" ;
