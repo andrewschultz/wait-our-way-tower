@@ -1326,6 +1326,7 @@ locations {
    }
    r04 : location "{r04_loc}" header="{r04_header}" {
       on_command {
+         : gosub "fey_loops_check" ;
          : match "me growth" {
             : if (point_me_growth) {
                : print "Too much of this self-improvement will leave you completely unsuited for what really matters in life, like weird text adventures. So watch it, sport!" ;
@@ -1563,6 +1564,7 @@ locations {
    }
    r14 : location "{r14_loc}" header="{r14_header}" {
       on_command {
+         : gosub "fey_loops_check" ;
          : match "cloth robbing" {
             : if (!point_dump_liars) {
                : print "But you don't have any sort of tool that could push the {puz_point_claw_throbbing} out of the way!" ;
@@ -3499,6 +3501,21 @@ subroutines {
             : print {( point_right_angles ? "His urgency seems a bit more focused." : "A bit of an energetic mess. How to calm him down?" )} ;
             : done ;
          }
+      }
+   }
+
+##################################multi-room functions
+
+   fey_loops_check : subroutine {
+      : if (!point_fey_loops) {
+         : return ;
+      }
+      : if (!is_at "r04" && !is_at "r14") {
+         : return ;
+      }
+      : match "_ fey;_ loops" {
+         : print {( "There's nothing wild about the fey loops or the passage through them now you've found them. You would probably get exhausted or bored wandering through them too many times." + (gamestate_thug_gone ? " You got use out of them with the thug." : "But they could be useful, somehow.") )} ;
+         : done ;
       }
    }
 
