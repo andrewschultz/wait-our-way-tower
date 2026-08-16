@@ -338,6 +338,7 @@ strings {
    # NPC(s)
    trtg : string "<Thug 'Round the Ground<#ccc>>" ;
    trtg_status : string "The thug is bigger than you but looks out of shape. Their endurance for running can't be that good." ;
+   dgda : string "<D'aww! Gold Dog, Aww<#ccc>>" ;
 
    # weird strings
    gbgr : string "<\"Gah, Bros, Gab\" Rows<#ccc>>" ;
@@ -2337,6 +2338,17 @@ locations {
    }
    r40 : location "{r40_loc}" header="{r40_header}" {
       on_command {
+         : if (!point_shape_up) {
+            : match "_ pup" {
+               : print "There should be dogs here, but apparently you aren't in a condition for them to be friendly. What can you do? Probably nothing too off the wall or complex." ;
+               : done ;
+            }
+         } : else {
+            : match "_ daww;_ daw;_ gold;_ dog;_ old" {
+               : print {( point_warm_acres ? "You reflect on the brief happy times with your dog friend." : point_heard_all ? "The dog lopes around happily. Its friends must be doing so too out of sight, waiting for when you need them." : "The dog lopes around, unconcerned." )} ;
+               : done ;
+            }
+         }
          : match "shape up" {
             : if (point_shape_up) {
                : print "You already shaped up." ;
