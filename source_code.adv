@@ -945,6 +945,7 @@ booleans {
    map_note : boolean "false" ;
    note_thug_pass : boolean "false" ;
    shorten_inventory : boolean "false" ;
+   tats_explanation_yet : boolean "false" ;
 
    # option(s)
    opt_hone_aye : boolean "false" ;
@@ -3988,7 +3989,7 @@ on_command {
    }
    : match "history _;version _;versions _" {
       : set_true "gamestate_thug_pass" ;
-      : print "The first release of {wowt} was September 1, 2026, for {ifcomp} Petite Mort." ;
+      : print "The first release of {wowt} was September 1, 2026, for {ifcomp}." ;
    }
    : match "score _" {
       : set_true "gamestate_thug_pass" ;
@@ -4131,6 +4132,10 @@ on_command {
          : print "The tats swirl and form a number: {my_tats_num}." ;
          : if (tats_blurry) {
             : print "The number's a bit blurry, though. Maybe you can't do anything right now." ;
+         }
+         : if (!tats_explanation_yet) {
+            : print "{one_time}If you wonder what the numbers mean, you can <HINT TATS<#f80>>. They require no drastic formulas. The tats are there for guidance." ;
+            : set_true "tats_explanation_yet" ;
          }
          : done ;
       }
