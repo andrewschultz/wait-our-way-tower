@@ -227,8 +227,8 @@ strings {
       point_no_injuries ? "The juries continue their {puz_point_coy_novations}, no longer concerned if you might try to go {r12_dir_e}, or just go back {dir_w_v}." : "Here, {puz_point_knowin_juries} gaze intently at you, mumbling ... well, whatever it is, it seems impressive. It's an {dir_e_n}-{dir_w_v} passage here, but they seem to cock their heads to indicate you'd best go back {dir_w_v}, as-is." )}  ;
    r12_header : string "Knowin' Juries" ;
 
-   r13_dir_e : dynamic_string {( r13_secondary_block || !point_pose_teasing ? dir_e_n : has_visited "r14" ? dir_e_v : dir_e_y )} ;
-   r13_dir_s : dynamic_string {( r13_secondary_block || !point_pose_teasing ? dir_s_n : has_visited "r03" ? dir_s_v : dir_s_y )} ;
+   r13_dir_e : dynamic_string {( gamestate_bros_blocking ? dir_e_n : has_visited "r14" ? dir_e_v : dir_e_y )} ;
+   r13_dir_s : dynamic_string {( gamestate_bros_blocking ? dir_s_n : has_visited "r03" ? dir_s_v : dir_s_y )} ;
    r13_loc : dynamic_string {( (!point_pose_teasing ? "Here, {gbgr} chatter about any old thing. Why bother?" :
       !gamestate_bros_second_placed ? "The {gbgr} are gone, for now." :
       !point_whee_plucky ? "The {gbgr} are at it again, asking if you really need to show off the opportunities you've been given, right in front of their faces. They {puz_point_weep_lucky} a lot." :
@@ -971,6 +971,7 @@ booleans {
    #blocker(s) derived from gamestate
    r13_secondary_block : dynamic_boolean {( gamestate_bros_second_placed && !point_whee_plucky )} ;
    r22_secondary_block : dynamic_boolean {( gamestate_r21_e && !point_fell_asleep )} ;
+   gamestate_bros_blocking : dynamic_boolean {( r13_secondary_block || !point_pose_teasing )} ;
 
    # points (sorted, beginning or end)
    point_bah_slumping      : boolean "false" ; # 45
@@ -1497,6 +1498,12 @@ locations {
    }
    r13 : location "{r13_loc}" header="{r13_header}" {
       on_command {
+         : if (gamestate_bros_blocking) {
+            : match "_ gah;_ bros;_ bag;_ rows" {
+               : print "You probably can't deal with the bros by logic. But there are too many of them blocking the way. It's weird, that shouldn't matter, because they probably won't turn violent, but boy do they make you feel dumb that you have some purpose, however unclear, and they don't." ;
+               : done ;
+            }
+         }
          : match "pose teasing" {
             : if (point_pose_teasing) {
                : print "You already exposed things." ;
