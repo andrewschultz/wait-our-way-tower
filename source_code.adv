@@ -1096,6 +1096,7 @@ booleans {
    # testing
    tats_each_move : boolean "false" ;
    inventory_each_move : boolean "false" ;
+   listen_each_move : boolean "false" ;
 }
 
 vocabulary {
@@ -3514,6 +3515,16 @@ subroutines {
          } : else {
             : set_false "inventory_each_move" ;
             : print "Inventory each move switched off." ;
+            : done ;
+         }
+      }
+      : match "lmv _" {
+         : if (!listen_each_move) {
+            : set_true "listen_each_move" ;
+            : print "Listen each move switched on, starting this move." ;
+         } : else {
+            : set_false "listen_each_move" ;
+            : print "Listen each move switched off." ;
             : done ;
          }
       }
