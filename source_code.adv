@@ -3951,18 +3951,29 @@ on_command {
    }
    : match "help _;hint _;hints _" {
       : if (!me_x_yet) {
-         : print "There are no specific hints now you've gotten past the first puzzle, but {xme} will give you a hint item which may be intuitive, but if not, come back here for an explanation." ;
+         : if (score == 0) {
+            : print "Before potentially spoiling the first puzzle, I'd like to note you can {xme} for a hint device that gives clues for all puzzles." ;
+         } : else {
+            : print "There are no specific hints now you've gotten past the first puzzle, but {xme} will give you a hint item which was meant to be intuitive. If it is not, come back here for an explanation." ;
+         }
+         : done ;
       } : else {
          : cycle key = "help_general" predictable_order = "true" skip_interval = "0" {
-            : print "Ahead is an explanation of {xtats}, which gives a number that clues what you need to do in the current room. Note that it doesn't track whether or not you're ready to, though you can still guess, and {vd_think} will hold it for later." ;
-            : print "The number 0 means there is nothing else left to do." ;
-            : print "A two-digit number tells you something about the two words you need. I didn't make it too out-there, I hope." ;
-            : print "The tens digit is the length of the first word, and the ones digit is the length of the second." ;
-            : print "So, for instance, using the tats for the first puzzle would give 44, as each of the first puzzle has four letters." ;
-            : print "First words range from 1 to 6 letters. Second words range from 2 to 7. This is the final clue. The clues will now cycle." ;
+            : print "There are no in-game hints for specific puzzles, so ahead is an explanation of {xtats}, It gives a number that clues what you need to do in the current room. Before spoiling it, I'll mention that each point-scoring command the tats hint is a two-word command." ;
+            : print "So it's meant to be information that doesn't require much or any additional calculation. Also note that it doesn't track whether or not you're ready to, though you can still guess, and {vd_think} will hold it for later." ;
+            : print "If there is no number, there is nothing left to do. (All rooms have something to do at some point.)" ;
+            : print "Swirling numbers mean come back later." ;
+            : print "Each of the number's two digits matches with one word." ;
+            : print {( "The tens digit is the length of the first word you need, and the ones digit is the length of the second." + (score == 0 ? " Note: game mechanic spoilers are ahead." : "") )} ;
+            : print "Let's say you are at an ICE CREAM stand and you get the number 16." ;
+            : print "To get the ICE CREAM, you need to type a command with a one-letter word, then a six-letter word." ;
+            : print "What's more, the command needs to sound like ICE CREAM." ;
+            : print "There aren't many one-letter words, so you can guess the first is I, then CREAM has a sound tacked on the start." ;
+            : print "I SCREAM is thus the answer." ;
+            : print "Most words should be in the three to six letter range, though there is one with nine letters and a few with eight. (The clues will now cycle.)" ;
          }
       }
-      : print "Fill in later." ;
+      : done ;
    }
    : match "history _;version _;versions _" {
       : set_true "gamestate_thug_pass" ;
