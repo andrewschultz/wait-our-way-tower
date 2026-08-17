@@ -3224,10 +3224,30 @@ subroutines {
    }
 
    inventory_nouns : subroutine {
+      : if (point_girl_only && !point_warm_acres) {
+         : match "_ doll" {
+            : print "It's a weird looking doll, but it probably helped the girl feel less lonely. Looking at it, you think \"find-all-fine doll.\"" ;
+            : done ;
+         }
+         : match "_ girl" {
+            : print "She doesn't have much to say, but she follows you closely now, and she just won't let go of {puz_point_her_doll}." ;
+            : done ;
+         }
+      }
+      : if (point_say_loaners && (is_at "r42" || is_at "r43" || is_at "r33")) {
+         : match "_ mo;_ tried;_ moat;_ ride" {
+            : print {( "Sturdy enough. You couldn't afford anything too expensive. " + ( !has_visited "r43" ? "You may wish to take the moat ride {dir_n_y}, now you own it." : is_at "r33" ? "Sitting on the shore, waiting to take you back." : is_at "r42" ? (point_flow_tripling ? "You can row it to the west or south safely." : "The water is too dead to really move the ride west, but you can easily go back south." ) : (point_girl_only ? "It got you a companion. You're not sure if it can do any more." : "You haven't done everything with it you could, you sense." )) )} ;
+         }
+      }
       : if (is_carried("dumb_parable")) {
          : match "_ dumb;_ parable" {
-            : print "You toss the parable around in your head. It is what it is. People will see what they want in it. You're not trying to scam anyone." ;
+            : print "You toss the parable around in your head. It is what it is. (Did you just think that? Ugh!)\nPeople will see what they want in it. You're not trying to scam anyone." ;
             : done ;
+         }
+      }
+      : if (point_say_four) {
+         : match "_ oar" {
+            : print {( has_visited "r42" ? "The oars you bought got you across the water." : point_say_loaners ? "You should try the oars out going north from {here_r33}." : "You think about what the oars would go with. It'd be nice to get them off the vendors' hands, eventually." )} ;
          }
       }
    }
