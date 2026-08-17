@@ -3149,14 +3149,17 @@ subroutines {
       : if (is_carried "dumb_parable") {
          : print "You have a dumb parable stuck in your head. Perhaps it would help to fob it off on someone else." ;
       }
-      : if (is_carried "dumb_pliers") {
-         : print "Your dumb pliers could be useful to grab something later." ;
-      }
       : if (is_carried "coin") {
          : print "You have that coin from the juries. Where to spend or increase it?" ;
       }
-      : if (is_carried "towels") {
-         : print "You have a few towels from under the claw." ;
+      : if (is_carried "riches") {
+         : print {( "You've acquired riches from the pit. " + (point_say_four ? "You bought four oars with it, but you have a good chunk left over." : "They might buy a couple things you need.") )} ;
+      }
+      : if (is_carried "dumb_pliers") {
+         : print {( "The dumb pliers you got from the chest " + (point_cloth_robbing ? "got some fluffy square cloths you're also carrying." : "could be useful to grab something later.") )} ;
+      }
+      : if (is_carried "tufty_key") {
+         : print "The tough tiki left you a tufty key." ;
       }
       : if (is_carried "vie_neater") {
          : print "You have that promise to {puz_point_vie_neater} you got from the cube land." ;
@@ -3169,18 +3172,20 @@ subroutines {
          : print "You felt some growth from the meager oath but didn't find anywhere to share or use it meaningfully yet." ;
          : set_true "inventory_intangibles" ;
       }
-      : if (!point_warm_acres && herd_score > 0) {
-         : print {( "Less tangibly, you've gained support from " + ((herd_score == 2) ? "cats and dogs in the western corners of the map" : point_herd_all ? "cats {here_r00}" : "dogs {here_r40}") )} ;
-         : set_true "inventory_intangibles" ;
-      }
       : if (point_say_loaners && !point_girl_only) {
+         : print "You bought a {mtmr} which can dock {here_r33}." ;
+         : set_true "inventory_intangibles" ;
       }
       : if (point_tense_ops && !point_frame_easily) {
          : set_true "inventory_intangibles" ;
          : print "You have more confidence in yourself after dealing with the ten sops. Maybe you can tackle bigger things!" ;
       }
       : if (!point_warm_acres && point_girl_only) {
-         : print {( "You have a loyal follower in the girl from the island." + (carried() == 0 && !inventory_intangibles ? " And companionship's more important than silly old possessions!" : "" ) )} ;
+         : print {( "You have a loyal follower in the girl from the island. She's carrying {puz_point_her_doll} around." + (carried() == 0 && !inventory_intangibles ? " And companionship's more important than silly old possessions!" : "" ) )} ;
+         : set_true "inventory_intangibles" ;
+      }
+      : if (!point_warm_acres && herd_score > 0) {
+         : print {( "You've gained support from " + ((herd_score == 2) ? "cats and dogs in the western corners of the map" : point_herd_all ? "cats {here_r00}" : "dogs {here_r40}") )} ;
          : set_true "inventory_intangibles" ;
       }
       : if (carried() == 0 && !inventory_intangibles) {
