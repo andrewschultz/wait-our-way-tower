@@ -249,7 +249,7 @@ strings {
    r15_header : string "Lie-Bury Libe, Airy" ;
 
    r20_dir_e : dynamic_string {( has_visited "r21" ? dir_e_v : dir_e_y )} ;
-   r20_loc : dynamic_string {( point_yell_open ? "The door to the {r20_dir_e} is open now, so you don't need to spend much longer in here." : ( "Here you have enough space to, well, wheeze and pace in worry about your predicament, and how the door to the {dir_e_n} blocks you. " + (!point_can_do ? "Currently, as you wheeze and pace, you find yourself repeating \"{puz_point_canned_ooh}.\"" : !point_thief_lore ? "As you wheeze and pace, you find you're gazing a lot at {puz_point_the_floor}." : "Now that you have your {puz_point_yellow_pin}, you feel like you have something to use on the door. But how?" ) ) )} ;
+   r20_loc : dynamic_string {( point_yell_open ? "The door to the {r20_dir_e} is open now, so you don't need to spend much longer in here." : ( "Here you have enough space to, well, wheeze and pace in worry about your predicament, and how the door to the {dir_e_n} blocks you. " + (!point_can_do ? "Currently, as you wheeze and pace, you find yourself repeating \"{puz_point_canned_ooh}.\" Kind of odd, since you haven't been fired, but you have lost your freedom." : !point_thief_lore ? "As you wheeze and pace, you find you're gazing a lot at {puz_point_the_floor}." : "Now that you have your {puz_point_yellow_pin}, you feel like you have something to use on the door. But how?" ) ) )} ;
    r20_header : string "Wheeze/Pace Wee Space" ;
 
    r21_n : dynamic_string {( has_visited "r31" ? "<NORTH<#0f0>>" : point_halt_error ? "<NORTH<#ff0>>" : "<NORTH<#f00>>" )} ;
@@ -1761,7 +1761,7 @@ locations {
                : print {( point_thief_lore ? "Nothing else is hidden there." : "Do you dare to dream something hidden in {puz_point_the_floor} might help you get out the door? What sort of reasoning could you use to find it without driving yourself more quickly?" )} ;
                : done ;
             }
-         } : else {
+         } : else_if (!won_yet) {
             : match "_ canned;_ ooh" {
                : print "It's weird. You shouldn't be reciting that since you got canned, but you are. Perhaps the answer to what it really means is simpler than you might thing." ;
                : done ;
@@ -3969,9 +3969,26 @@ on_startup {
    } : else {
       : set_false "r20_jail" ;
    }
-   : print "It's not a jail! It's a tower! Where you wait! In fact, you need to ... wait our way." ;
+   : print "You didn't want to do anything crazy on your three-day weekend. Goal, technically, achieved! You decided to start doomscrolling in order to stop daydreaming, because daydreaming is impractical, and then after 20 minutes of doomscrolling you started daydreaming again, and you felt bad about that, so you went and doomscrolled to another site, before you went back to daydreaming again. You finally managed to focus on a game you'd beaten several times before, one that felt really smart the first time winning but didn't afterwards. Then you followed several pro baseball box scores between teams you didn't care about. One game went to extra innings. You wanted to just go to bed but felt like a quitter doing so." ;
+   : print "You entertain some vague notion of having adventures, wild or not, where you don't have to win the lottery but maybe even just gain perspective you hadn't had before, in big or small matters." ;
+   : print "But there are other websites to visit that you haven't for a while. Sigh, trite site, right? you comment to yourself. Then you hear a whirling behind you and several ghostly shapes. You look behind you. \"But it's not EctoComp yet,\" you say. \"Who the heck are you?\"" ;
+   : print "You're not sure if one or all three of them say it. \"Come to Wait Our Way Tower. You will get what you want. Not enough of it of course.\" They point bony fingers at you. It is your choice." ;
    : press_any_key ;
-   : clear_screen;
+   : clear_screen ;
+   : print "You might as well. As you follow them, you remember you forgot to put the laundry in the dryer four hours earlier. Tough luck. You ask them what it's about ..." ;
+   : print "WORD RIFTING, they respond, drifting." ;
+   : print "\"I know you are. Or gliding or whatever.\"" ;
+   : print "\"NO. DRIFTING.\"" ;
+   : print "You realize you haven't talked to a person since you checked in at the athletic club. You let out a torrent of words." ;
+   : print "\"WE'RE DRAINING,\" one says, and again you quiet down. Until you approach a large tower. Who are you, you ask?" ;
+   : print "\"WE'RE DRIVEN,\" they say, and all your responses seem fragmented." ;
+   : print "You feel mesmerized as they guard you to the top of a tower. It's not a very big or tall tower, but it has more than one floor." ;
+   : press_any_key ;
+   : clear_screen ;
+   : print "You find yourself in a small room in the corner of the tower. The door you entered slams shut. How do I get out, you wonder. The y shrug. What is going on here?" ;
+   : print "Well, that's it. You are stuck in WAIT-OUR-WAY TOWER. But how long will you have to wait? And why?" ;
+   : press_any_key ;
+   : clear_screen ;
 }
 
 ## Execute this every time a player moves or redescribes a location
@@ -4026,7 +4043,7 @@ on_tick {
    }
    : if (won_yet && !showed_read_ooh_note) {
       : print "{one_time}remember, there is nothing to REDO, but there's something else... ask right and I'll discuss my thoughts on writing the game, briefly." ;
-      : set_true "showed_first_note" ;
+      : set_true "showed_read_ooh_note" ;
    }
    : if (is_present("thug") && lastroom != "null") {
       : if (gamestate_thug_pass) {
