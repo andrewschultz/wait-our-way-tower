@@ -1,3 +1,4 @@
+game_type = verb_noun
 start_at = "r20"
 start_theme = my_theme
 
@@ -119,9 +120,10 @@ strings {
    puz_point_sunk_etching   : dynamic_string {( opt_color_coding ? "<sunk etching<#f80>>" : "sunk etching" )}       ; # 20
    puz_point_ten_sops       : dynamic_string {( opt_color_coding ? "<ten sops<#f80>>" : "ten sops" )}               ; # 29
    puz_point_titan_drowsing : dynamic_string {( opt_color_coding ? "<titan drowsing<#f80>>" : "titan drowsing" )}   ; # 11
-   puz_point_true_pleading  : dynamic_string {( opt_color_coding ? "<true pleading<#f80>>" : "true pleading" )}     ; # 47
+   puz_point_true_pleading  : dynamic_string {( opt_color_coding ? "<true pleading<#f80>>" : "true pleading" )}     ; # 48
    puz_point_the_floor      : dynamic_string {( opt_color_coding ? "<the floor<#f80>>" : "the floor" )}             ; # 01
    puz_point_tough_tiki     : dynamic_string {( opt_color_coding ? "<tough tiki<#f80>>" : "tough tiki" )}           ; # 21
+   puz_point_to_nowt : dynamic_string {( opt_color_coding ? "<TO NOWT<#f80>>" : "TO NOWT" )} ; # 42
    puz_point_vie_neater     : dynamic_string {( opt_color_coding ? "<vie neater<#f80>>" : "vie neater" )}           ; # 34
    puz_point_war_makers     : dynamic_string {( opt_color_coding ? "<war makers<#f80>>" : "war makers" )}           ; # 40
    puz_point_weep_lucky     : dynamic_string {( opt_color_coding ? "<weep \"lucky\"<#f80>>" : "weep \"lucky\"" )}   ; # 39
@@ -486,7 +488,7 @@ integers {
       0 )} ;
 
    # endgame stuff
-   r25_hintnum : dynamic_integer {( 0 )} ; #there really is nothing here! The thug guards it all.
+   r25_hintnum : dynamic_integer {( !gamestate_tried_beyond_r25 ? -1 : (!point_tune_out ? 43 : 0) )} ;
    r26_hintnum : dynamic_integer {( !point_broke_lass ? -37 :
       !point_bah_slumping ? 37 :
       0 )} ; #?? remember could be negative
@@ -596,6 +598,7 @@ collections {
          "false",
          "false",
          "false",
+         "false",
          "false"
       ]
    }
@@ -644,6 +647,7 @@ collections {
          "{here_r13}",
          "{here_r24}",
          "somewhere, you're not sure where",
+         "{here_r25}",
          "{here_r15}",
          "{here_r35}",
          "{here_r15}",
@@ -697,6 +701,7 @@ collections {
          "<WHEE<#f80>>",
          "<WARM<#f80>>",
          "<FEY<#f80>>",
+         "<TUNE<#f80>>",
          "<MAGE<#f80>>",
          "<BROKE<#f80>>",
          "<RIGHT<#f80>>",
@@ -750,6 +755,7 @@ collections {
          "<PLUCKY<#f80>>",
          "<ACRES<#f80>>",
          "<LOOPS<#f80>>",
+         "<OUT<#f80>>",
          "<URGENT<#f80>>",
          "<LASS<#f80>>",
          "<ANGLES<#f80>>",
@@ -808,12 +814,14 @@ collections {
          "false",
          "false",
          "false",
+         "false",
          "false"
       ]
    }
 
    got_second_core : list {
       items = [
+         "false",
          "false",
          "false",
          "false",
@@ -966,6 +974,7 @@ booleans {
    gameflag_note_pals_stay_end   : boolean "false" ;
    gamestate_no_oops_yet         : dynamic_boolean {( (is_at "r14" || is_at "r04") && !point_fey_loops )} ;
    gamestate_end_companions      : dynamic_boolean {( point_mage_urgent && !point_bah_slumping )} ;
+   gamestate_tried_beyond_r25    : boolean "false" ;
 
    # gamestate combo
    girl_present : dynamic_boolean {( point_girl_only && !point_warm_acres )} ;
@@ -976,11 +985,11 @@ booleans {
    gamestate_bros_blocking : dynamic_boolean {( r13_secondary_block || !point_pose_teasing )} ;
 
    # points (sorted, beginning or end)
-   point_bah_slumping      : boolean "false" ; # 45
-   point_blest_able        : boolean "false" ; # 46
-   point_broke_lass        : boolean "false" ; # 44
+   point_bah_slumping      : boolean "false" ; # 46
+   point_blest_able        : boolean "false" ; # 47
+   point_broke_lass        : boolean "false" ; # 45
    point_can_do            : boolean "false" ; # 00
-   point_catch_acing         : boolean "false" ; # 35
+   point_catch_acing       : boolean "false" ; # 35
    point_chest_reigning    : boolean "false" ; # 13
    point_cloth_robbing     : boolean "false" ; # 25
    point_coin_ovations     : boolean "false" ; # 10
@@ -1003,13 +1012,13 @@ booleans {
    point_hate_rash         : boolean "false" ; # 05
    point_heard_all         : boolean "false" ; # 38
    point_herd_all          : boolean "false" ; # 36
-   point_mage_urgent       : boolean "false" ; # 43
+   point_mage_urgent       : boolean "false" ; # 44
    point_me_growth         : boolean "false" ; # 24
    point_no_injuries       : boolean "false" ; # 09
    point_pitch_earning     : boolean "false" ; # 12
    point_ply_towels        : boolean "false" ; # 28
    point_pose_teasing      : boolean "false" ; # 19
-   point_right_angles      : boolean "false" ; # 42
+   point_right_angles      : boolean "false" ; # 43
    point_say_four          : boolean "false" ; # 17
    point_say_loaners       : boolean "false" ; # 18
    point_seek_rest         : boolean "false" ; # 31
@@ -1018,8 +1027,9 @@ booleans {
    point_tense_ops         : boolean "false" ; # 29
    point_thief_lore        : boolean "false" ; # 01
    point_tightened_rousing : boolean "false" ; # 11
-   point_troop_leading     : boolean "false" ; # 47
+   point_troop_leading     : boolean "false" ; # 48
    point_tufty_key         : boolean "false" ; # 21
+   point_tune_out          : boolean "false" ; # 42
    point_vine_eater        : boolean "false" ; # 34
    point_warm_acres        : boolean "false" ; # 40
    point_whee_plucky       : boolean "false" ; # 39
@@ -1707,7 +1717,7 @@ locations {
                : done ;
             }
             : print "You encourage the mage to look at this new book, refraining from saying, thinking about things right is its own sort of magic. You mentioned that they've probably worked hard to get their beliefs, and maybe the right thing or two could give them a huge jump they just haven't seen before, but they weren't ready for it yet. And they pretty much agree. Their sense of urgency has changed, from desperation down to, well, let's do what we need to and get through with it, and we may actually not have to do anything too crazy. You like to change, even if it's temporary. Perhaps if you go get stuff done, that will encourage it to stay permanent." ;
-            : set_integer var="tempint" "42" ;
+            : set_integer var="tempint" "43" ;
             : set_false "think_right_angles" ;
             : set_true "point_right_angles" ;
             : gosub "add_point" ;
@@ -1715,7 +1725,7 @@ locations {
          }
          : if (!point_right_angles) {
             : match "right _;_ angles" {
-               : set_integer var="tempint" "42" ;
+               : set_integer var="tempint" "43" ;
                : set_false "first_half" ;
                : match "right _" {
                   : set_true "first_half" ;
@@ -2066,9 +2076,45 @@ locations {
    }
    r25 : location "{r25_loc}" header="{r25_header}" {
       on_command {
+         : if (gamestate_tried_beyond_r25) {
+            : match "tune out" {
+               : if (point_tune_out) {
+                  : print "Your doubts are well and truly tuned out. Time to move on!" ;
+                  : done ;
+               }
+               : print "You tune out your doubts yet again." ;
+               : set_integer var="tempint" "42" ;
+               : set_true "point_tune_out" ;
+               : gosub "add_point" ;
+               : done ;
+            }
+            : if (!point_tune_out) {
+               : match "tune _;_ out" {
+                  : set_integer var="tempint" "42" ;
+                  : set_false "first_half" ;
+                  : match "tune _" {
+                     : set_true "first_half" ;
+                  }
+                  : gosub "say_half" ;
+                  : done ;
+               }
+            }
+         }
          : match "_ groom;_ thug;_ room" {
             : print {( gamestate_thug_gone ? "A lot less oppressive with the thug gone." : "The thug really takes up the room. So you can't see what's beyond. But this can't be the end, here." )} ;
             : done ;
+         }
+         : if (gamestate_tried_beyond_r25 && !point_tune_out) {
+            : match "listen _" {
+               : print "A voice from nowhere: {puz_point_to_nowt}." ;
+               : done ;
+            }
+         }
+         : if (gamestate_thug_gone && !point_tune_out) {
+            : match "n _;s _;e _" {
+               : print {( !gamestate_tried_beyond_r25 ? "As you approach that passage, the words {puz_point_to_nowt} light up beneath your feet. You don't see them down the other two passages. Ugh! Then you hear a voice kick in." : "The words {puz_point_to_nowt} again light up under your passage only. The voice continues." )} ;
+               : set_true "gamestate_tried_beyond_r25" ;
+            }
          }
       }
       on_describe {
@@ -2104,7 +2150,7 @@ locations {
                : done ;
             }
             : print "Even though the boss doesn't seem to let up, you actually pretend that they are, and you have the backup to prove it. The gal and the mage can believably pretend they don't know each other that well, or you, so it doesn't come off as a coordinated effort. You play off this a lot, and the boss, trying to lump in your problems or alleged problems, gives up. You're just not going to listen, are you? They run away. The mage and the lass talk to you for a bit. They have other things to do, too, and they go their separate ways, and the mage realizes he has a lot to learn beyond just spells and stuff." ;
-            : set_integer var="tempint" "45" ;
+            : set_integer var="tempint" "46" ;
             : set_false "think_bah_slumping" ;
             : set_true "point_bah_slumping" ;
             : gosub "add_point" ;
@@ -2112,7 +2158,7 @@ locations {
          }
          : if (!point_bah_slumping) {
             : match "bah _;_ slumping" {
-               : set_integer var="tempint" "45" ;
+               : set_integer var="tempint" "46" ;
                : set_boolean var="already_got_command" {( think_bah_slumping && !point_bah_slumping )} ;
                : set_false "first_half" ;
                : match "bah _" {
@@ -2142,14 +2188,14 @@ locations {
                : done ;
             }
             : print "Instead of feeling statement, you feel as though there are possibilities, possibilities that would not have opened up in a more chaotic environment. You sit back and think of your own thoughts and listen to what there is to listen to. There is now a lot of {puz_point_true_pleading}, a lot of thoughts you had and forgot you did, or you dismissed as not really important or worldly enough." ;
-            : set_integer var="tempint" "46" ;
+            : set_integer var="tempint" "47" ;
             : set_true "point_blest_able" ;
             : gosub "add_point" ;
             : done ;
          }
          : if (!point_blest_able) {
             : match "blest _;_ able" {
-               : set_integer var="tempint" "46" ;
+               : set_integer var="tempint" "47" ;
                : set_false "first_half" ;
                : match "blest _" {
                   : set_true "first_half" ;
@@ -2162,7 +2208,7 @@ locations {
             : match "troop leading" {
                : print "You win! But you don't want to just sit and do nothing. You make a whole row for mending ... whatever. Surprisingly, it's popular." ;
                : set_true "won_yet" ;
-               : set_integer var="tempint" "47" ;
+               : set_integer var="tempint" "48" ;
                : set_true "point_troop_leading" ;
                : gosub "add_point" ;
                : win_game ;
@@ -2170,9 +2216,9 @@ locations {
             }
             : if (!point_troop_leading) {
                : match "troop _;_ leading" {
-                  : set_integer var="tempint" "47" ;
+                  : set_integer var="tempint" "48" ;
                   : set_false "first_half" ;
-                  : match "row _" {
+                  : match "troop _" {
                      : set_true "first_half" ;
                   }
                   : gosub "say_half" ;
@@ -2426,7 +2472,7 @@ locations {
                : done ;
             }
             : print "The major gent slowly starts talking louder and faster, and it gets to the point where you can't interrupt them. They start mentioning times they felt ripped off, and how they need to take things back and show them, whoever they are. They they finally get around to asking you what you're doing, and you mentioned you're on a quest, and they say, well, obviously you haven't finished it yet so maybe you need some help, which you guess is flattering. They really could use a bit of subtlety or thought in their new found activity. Where to find it?" ;
-            : set_integer var="tempint" "43" ;
+            : set_integer var="tempint" "44" ;
             : set_true "point_mage_urgent" ;
             : destroy "major_gent" ;
             : create "mage_urgent" ;
@@ -2435,7 +2481,7 @@ locations {
          }
          : if (!point_mage_urgent) {
             : match "mage _;_ urgent" {
-               : set_integer var="tempint" "43" ;
+               : set_integer var="tempint" "44" ;
                : set_false "first_half" ;
                : match "mage _" {
                   : set_true "first_half" ;
@@ -2461,8 +2507,8 @@ locations {
                : gosub "note_thinks" ;
                : done ;
             }
-            : print "The broke glass Piers around, and she looks a bit worried to see the major jet there. He immediately says, you know, I made a bad first impression, but I just want to get things done. There is that boss to the right, and we can't deal with it all on our own, but maybe we can together, and if that's all we do, it'll be pretty big. The broke glass nods, impressed. OK, let's do this." ;
-            : set_integer var="tempint" "44" ;
+            : print "The broke lass peers around, and she looks a bit worried to see the major jet there. He immediately says, you know, I made a bad first impression, but I just want to get things done. There is that boss to the right, and we can't deal with it all on our own, but maybe we can together, and if that's all we do, it'll be pretty big. The broke glass nods, impressed. OK, let's do this." ;
+            : set_integer var="tempint" "45" ;
             : set_false "think_broke_lass" ;
             : set_true "point_broke_lass" ;
             : gosub "add_point" ;
@@ -2470,7 +2516,7 @@ locations {
          }
          : if (!point_broke_lass) {
             : match "broke _;_ lass" {
-               : set_integer var="tempint" "44" ;
+               : set_integer var="tempint" "45" ;
                : set_boolean var="already_got_command" {( think_broke_lass && !point_broke_lass )} ;
                : set_false "first_half" ;
                : match "broke _" {
@@ -4352,7 +4398,7 @@ on_command {
 
    : gosub "inventory_nouns" ;
    : gosub "gotos" ;
-   : match "bah _;blest _;broke _;can _;catch _;chest _;cloth _;coin _;cue _;door _;dry _;duh _;dumb _;dump _;eh _;feel _;fell _;fey _;flow _;fly _;frame _;free _;girl _;halt _;hate _;heard _;herd _;mage _;me _;no _;pitch _;ply _;pose _;right _;say _;seek _;shape _;sun _;tense _;thief _;tightened _;troop _;tufty _;vine _;warm _;whee _;yell _" { #obfuscation of non solutions, regular points
+   : match "bah _;blest _;broke _;can _;catch _;chest _;cloth _;coin _;cue _;door _;dry _;duh _;dumb _;dump _;eh _;feel _;fell _;fey _;flow _;fly _;frame _;free _;girl _;halt _;hate _;heard _;herd _;mage _;me _;no _;pitch _;ply _;pose _;right _;say _;seek _;shape _;sun _;tense _;thief _;tightened _;troop _;tufty _;tune _;vine _;warm _;whee _;yell _" { #obfuscation of non solutions, regular points
       : print "{custom_unknown_verb_error}" ;
       : done ;
    }
