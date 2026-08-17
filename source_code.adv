@@ -1428,7 +1428,7 @@ locations {
                : done ;
             }
             : match "_ safe;_ oar" {
-               : print {( point_say_four ? "Well, you have oars now, so you don't need another." : "It's a pretty flimsy oar. You doubt just one would do for water travel." )} ;
+               : print {( point_say_loaners ? "No better oars are on sale than what you have." : point_say_four ? "Well, you have oars now, so you don't need another." : "It's a pretty flimsy oar. You doubt just one would do for water travel." )} ;
                : done ;
             }
          }
@@ -1627,7 +1627,6 @@ locations {
                : print "You flip the script on the Bros. You say, well, maybe I've made my own luck and all that sort of thing, and maybe you haven't, by sitting around and complaining about how other people have all the luck. They start fighting with each other. Who complaints the most? Who complaints the least? There's a big argument. It's almost entertaining, but you don't want to get too caught up in it. It dies down eventually. The Bros go off to sulk somewhere else." ;
                : set_integer var="tempint" "39" ;
                : set_true "point_whee_plucky" ;
-               : set_false "gamestate_bros_second_placed" ;
                : gosub "add_point" ;
                : done ;
             }
@@ -3959,7 +3958,7 @@ themes {
       }
       theme_settings {
          parser_delay  = 0
-         layout = SB G D LOCK
+         layout = SB G D X LOCK
       }
       colors {
          status_bar_pen   = 15
