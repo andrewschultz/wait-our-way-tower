@@ -1049,9 +1049,6 @@ booleans {
    bonus_point_ho_maps : boolean "true" ;
    bonus_point_thug_aims : boolean "true" ;
 
-   # silly random
-   r20_jail : boolean "false" ;
-
    # auxiliary variables
    opt_on_off  : boolean "false" ;
    drawing_map : boolean "false" ;
@@ -3968,11 +3965,6 @@ on_startup {
       : press_any_key ;
    }
    : gosub "colorclue_choice" ;
-   : if (random(1) == 1) {
-      : set_true "r20_jail" ;
-   } : else {
-      : set_false "r20_jail" ;
-   }
    : print "You didn't want to do anything crazy on your three-day weekend. Goal, technically, achieved! You decided to start doomscrolling in order to stop daydreaming, because daydreaming is impractical, and then after 20 minutes of doomscrolling you started daydreaming again, and you felt bad about that, so you went and doomscrolled to another site, before you went back to daydreaming again. You finally managed to focus on a game you'd beaten several times before, one that felt really smart the first time winning but didn't afterwards. Then you followed several pro baseball box scores between teams you didn't care about. One game went to extra innings. You wanted to just go to bed but felt like a quitter doing so." ;
    : print "You entertain some vague notion of having adventures, wild or not, where you don't have to win the lottery but maybe even just gain perspective you hadn't had before, in big or small matters." ;
    : print "But there are other websites to visit that you haven't for a while. Sigh, trite site, right? you comment to yourself. Then you hear a whirling behind you and several ghostly shapes. You look behind you. \"But it's not EctoComp yet,\" you say. \"Who the heck are you?\"" ;
