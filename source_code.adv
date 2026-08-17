@@ -1303,6 +1303,7 @@ locations {
             : set_integer var="tempint" "12" ;
             : set_false "think_pitch_earning" ;
             : set_true "point_pitch_earning" ;
+            : destroy "coin" ;
             : pocket "riches" ;
             : gosub "add_point" ;
             : done ;
@@ -1572,6 +1573,7 @@ locations {
                : set_false "think_coin_ovations" ;
                : set_true "point_coin_ovations" ;
                : destroy "dumb_parable" ;
+               : pocket "coin" ;
                : gosub "add_point" ;
                : done ;
             }
@@ -2300,7 +2302,7 @@ locations {
                : done ;
             }
             : print "The dork yells at you to make sure that you have some way to get through a door, and when you show them the key, they just specifically say, oh, that one. Nobody's ever been through that one before. I don't know where it leads, but I guess if it's the only key you have, you might as well go see it. The earth shakes as the dork turns the key, and when you look around, the cloud is gone, having consumed the key, and there is only the door left, leading north." ;
-            : pocket "tufty_key" ;
+            : destroy "tufty_key" ;
             : set_integer var="tempint" "22" ;
             : set_false "think_door_cloud" ;
             : set_true "point_door_cloud" ;
@@ -2397,6 +2399,7 @@ locations {
                : set_integer var="tempint" "14" ;
                : set_true "point_dump_liars" ;
                : gosub "add_point" ;
+               : pocket "dumb_pliers" ;
                : done ;
             }
             : if (!point_dump_liars) {
@@ -2489,6 +2492,7 @@ locations {
             : set_integer var="tempint" "28" ;
             : set_false "think_ply_towels" ;
             : set_true "point_ply_towels" ;
+            : destroy "dumb_pliers" ;
             : gosub "add_point" ;
             : done ;
          }
