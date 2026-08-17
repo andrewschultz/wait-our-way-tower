@@ -2,6 +2,9 @@ Wait-Our-Way Tower author's walkthrough
 
 by Andrew Schultz blurglecruncheon@gmail.com
 
+** the towels can be given to the owls in parts
+You tell the oak what's what.
+
 "Canned, ooh," you think to yourself.
 
 > CAN DO (1)
@@ -36,6 +39,8 @@ Dull oozing.
 
 > S
 
+In the dump, arable, we feel as though the place may have a story behind it. A silly one, perhaps...
+
 > DUMB PARABLE (1)
 
 It might be dumb, but it could be practical!
@@ -60,7 +65,11 @@ Okay, more ovations than coin, but ...
 
 > E
 
+There is a titan drowsing here. Random methods to wake it won't work, but ...
+
 > TIGHTENED ROUSING (1)
+
+So now it wonders why you woke it. What could move it from the pit, churning?
 
 > PITCH EARNING (1)
 
@@ -82,11 +91,18 @@ A safe oar! But how many do you need?
 > N
 > N
 
+A voice yells HEY TRASH which brings you down more than you intended.
+
 > HATE RASH (1)
 
 > N
 
+Ace, Inc., is a soulless conglomerate that brings people down, is almost fully automated, etc., and so forth.
+
 > EH SINK (1)
+
+It's gone but now you're in a weird cube land. What to do about that?
+
 > CUE BLAND (1)
 
 A voucher from the Vie-Neater(c) company!
@@ -96,7 +112,9 @@ A voucher from the Vie-Neater(c) company!
 > S
 > E
 
-Chess training
+Chess training is here! Surely there won't be a puzzle? No, you just need to see something nobody else did.
+
+(In-game: riff on KBN vs K mate)
 
 > CHEST REIGNING (1)
 
@@ -112,11 +130,17 @@ Okay, now we can go back and see a new area which needed a special item.
 > E
 > E
 
+The Bros want you to take it easy, man, like they are, I mean they're not whining THAT loudly.
+
 > POSE TEASING (1)
 
 > S
 
+The sunk etching may be hiding something if you look at it right.
+
 > SUN CATCHING (1)
+
+The tough tiki isn't just going to give you what you want.
 
 > TUFTY KEY (1)
 
