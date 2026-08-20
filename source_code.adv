@@ -1394,7 +1394,7 @@ locations {
          }
       }
    }
-   r04 : location "{r04_loc}" header="{r04_header}" {
+   r04 : location "{r04_loc}" header="{r04_header}" graphic="r04_0" {
       on_command {
          : gosub "fey_loops_check" ;
          : match "_ meager;_ oath" {
@@ -1437,7 +1437,7 @@ locations {
                : print {( "Being dry and all, they pay little or no attention to you, not trying to make small talk. " + (point_say_four ? "But you can't imagine you need to buy anything else." : "But if you had something to buy and money to buy it with, they probably would." ) )} ;
                : done ;
             }
-            : match "_ safe;_ oar" {
+            : match "_ safe;_ oars" {
                : print {( point_say_loaners ? "No better oars are on sale than what you have." : point_say_four ? "Well, you have oars now, so you don't need another." : "It's a pretty flimsy oar. You doubt just one would do for water travel." )} ;
                : done ;
             }
