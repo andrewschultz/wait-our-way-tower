@@ -513,7 +513,8 @@ integers {
 # auxiliary
    tempint : integer "0" ;
    counter : integer "0" ;
-   commands_figured : dynamic_integer {( (think_bah_slumping ? 1 : 0) +
+   commands_figured : dynamic_integer {(
+      ( think_bah_slumping ? 1 : 0) +
       ( think_broke_lass ? 1 : 0) +
       ( think_cloth_robbing ? 1 : 0) +
       ( think_coin_ovations ? 1 : 0) +
@@ -4791,7 +4792,7 @@ on_command {
          : print "Your efforts to have <HEARD ALL<#f80>> fell short without enough entities to hear." ;
       }
       : if (think_herd_all) {
-         : print "Your efforts to <HERD ALL<#f80>> fell short witout enough entities to herd." ;
+         : print "Your efforts to <HERD ALL<#f80>> fell short without enough entities to herd." ;
       }
       : if (think_pitch_earning) {
          : print "You tried to <PITCH EARNING<#f80>> to the titan {here_r02}, but it wasn't in a state to listen yet." ;
@@ -4800,7 +4801,7 @@ on_command {
          : print "You tried to <PLY TOWELS<#f80>> to the plight owls {here_r34}, but you didn't have any towels yet." ;
       }
       : if (think_right_angles) {
-         : print "You discovered <RIGHT ANGLES<#f80>> in Wry Tangles, but maybe they'd help someone else grow more." ;
+         : print "You discovered <RIGHT ANGLES<#f80>>, but it wasn't quite for you. Perhaps someone else could visit {here_r15} and learn more from it." ;
       }
       : if (think_say_four) {
          : print "You tried to <SAY FOUR<#f80>> {here_r10} to buy safe oars, but you didn't have the money yet." ;
