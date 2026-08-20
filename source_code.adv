@@ -3616,6 +3616,19 @@ subroutines {
          : goto "r14" ;
          : redescribe ;
       }
+      : match "15 _;* 15" {
+         : gosub "goto_basic_check" ;
+         : if (!has_visited("r15")) {
+            : print "You haven't visited there yet." ;
+            : done ;
+         }
+         : if (is_at("r15")) {
+            : print "You are already there/here!" ;
+            : done ;
+         }
+         : goto "r15" ;
+         : redescribe ;
+      }
       : match "20 _;* 20" {
          : gosub "goto_basic_check" ;
          : if (!has_visited("r20")) {
@@ -3681,6 +3694,45 @@ subroutines {
          : goto "r24" ;
          : redescribe ;
       }
+      : match "25 _;* 25" {
+         : gosub "goto_basic_check" ;
+         : if (!has_visited("r25")) {
+            : print "You haven't visited there yet." ;
+            : done ;
+         }
+         : if (is_at("r25")) {
+            : print "You are already there/here!" ;
+            : done ;
+         }
+         : goto "r25" ;
+         : redescribe ;
+      }
+      : match "26 _;* 26" {
+         : gosub "goto_basic_check" ;
+         : if (!has_visited("r26")) {
+            : print "You haven't visited there yet." ;
+            : done ;
+         }
+         : if (is_at("r26")) {
+            : print "You are already there/here!" ;
+            : done ;
+         }
+         : goto "r26" ;
+         : redescribe ;
+      }
+      : match "27 _;* 27" {
+         : gosub "goto_basic_check" ;
+         : if (!has_visited("r27")) {
+            : print "You haven't visited there yet." ;
+            : done ;
+         }
+         : if (is_at("r27")) {
+            : print "You are already there/here!" ;
+            : done ;
+         }
+         : goto "r27" ;
+         : redescribe ;
+      }
       : match "30 _;* 30" {
          : gosub "goto_basic_check" ;
          : if (!has_visited("r30")) {
@@ -3744,6 +3796,19 @@ subroutines {
             : done ;
          }
          : goto "r34" ;
+         : redescribe ;
+      }
+      : match "35 _;* 35" {
+         : gosub "goto_basic_check" ;
+         : if (!has_visited("r35")) {
+            : print "You haven't visited there yet." ;
+            : done ;
+         }
+         : if (is_at("r35")) {
+            : print "You are already there/here!" ;
+            : done ;
+         }
+         : goto "r35" ;
          : redescribe ;
       }
       : match "40 _;* 40" {
