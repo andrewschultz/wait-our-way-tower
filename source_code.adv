@@ -1253,7 +1253,7 @@ locations {
       on_command {
          : if (!point_pitch_earning) {
             : match "_ titan;_ drowsing" {
-               : print {( point_tightened_rousing ? "(here)" : "(there)" )} ;
+               : print {( point_tightened_rousing ? "It's alert and listening to what you have to say." : "It will take quite an effort to wake the titan up." )} ;
                : done ;
             }
          }
@@ -1332,7 +1332,7 @@ locations {
    r03 : location "{r03_loc}" header="{r03_header}" graphic="r03_0" {
       on_command {
          : match "_ sunk;_ etching" {
-            : print {( point_sun_catching ? "(here)" : "(there)" )} ;
+            : print {( point_sun_catching ? "You are able to see more of it now." : "It feels like you should be able to see more of it, but you're not looking at it right, or with the right resources." )} ;
             : done ;
          }
          : match "_ tough;_ tiki" {
@@ -1341,7 +1341,7 @@ locations {
          }
          : if (point_sun_catching) {
             : match "_ tough;_ tiki" {
-               : print {( point_tufty_key ? "(here)" : "(there)" )} ;
+               : print {( point_tufty_key ? "It still looks forbidding, even though it coughed up the key for you. Probably don't want to double-dip." : "Not VERY friendly. Almost expectant, though. It's probably not just there for decoration." )} ;
                : done ;
             }
          }
