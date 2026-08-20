@@ -1689,7 +1689,9 @@ locations {
                   : gosub "note_thinks" ;
                   : done ;
                }
-               : print "Surprisingly, the dumb parable works on the juries, who maybe just needed something some sort of new simplicity to ooh and ahh at.\nEach discusses with their argue-ee why the simple parable backs THEIR point up, and there are a few minor scuffles, before they go back to complex reasons why people they're smarter than and don't like shouldn't get to do more than they do.\nThey give you both coin AND innovations, though unsurprisingly, there's a lot more ovations than coin. You almost have a headache by the time the applause stops, but at least you're not broke now.\nThe juries appear to have resolved their differences for the moment, and they just ignore you now. You've, uh, passed, I guess." ;
+               : print "Surprisingly, the dumb parable works on the juries, who maybe just needed something some sort of new simplicity to ooh and ahh at.\nEach discusses with their argue-ee why the simple parable backs THEIR point up, and there are a few minor scuffles, before they go back to complex reasons why people they're smarter than and don't like shouldn't get to do more than they do.\nThey give you both coin AND innovations, though unsurprisingly, there's a lot more ovations than coin." ;
+               : print "{cnco}, you remark, maybe overdoing it. They applaud your originality in politeness further." ;
+               : print "You almost have a headache by the time the applause stops, but at least you're not broke now.\nThe juries appear to have resolved their differences for the moment, and they just ignore you now. You've, uh, passed, I guess." ;
                : set_integer var="tempint" "10" ;
                : set_false "think_coin_ovations" ;
                : set_true "point_coin_ovations" ;
@@ -3432,7 +3434,7 @@ subroutines {
          : print "You have a dumb parable stuck in your head. Perhaps it would help to fob it off on someone else." ;
       }
       : if (is_carried "coin") {
-         : print "You have that coin from the juries. Where to spend or increase it?" ;
+         : print "You have that {cnco} from the juries. Where to spend or increase it?" ;
       }
       : if (is_carried "riches") {
          : print {( "You've acquired riches from the pit. " + (point_say_four ? "You bought four oars with it, but you have a good chunk left over." : "They might buy a couple things you need.") )} ;
@@ -3516,6 +3518,12 @@ subroutines {
          }
          : match "_ girl" {
             : print "She doesn't have much to say, but she follows you closely now, and she just won't let go of {puz_point_her_doll}." ;
+            : done ;
+         }
+      }
+      : if (is_carried "coin") {
+         : match "_ coin;_ ooh;_ new;_ coy" {
+            : print "It's nothing to be thrilled about on its own. But maybe you can trade up, somehow." ;
             : done ;
          }
       }
