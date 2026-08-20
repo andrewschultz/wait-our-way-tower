@@ -57,6 +57,7 @@ strings {
    vm_about : string "<ABOUT<#f80>>" ;
    vm_credits : string "<CREDITS<#f80>>" ;
    vm_diag : string "<DIAG<#f80>>" ;
+   vm_meta : string "<META<#f80>>" ;
    vm_verbs : string "<VERBS<#f80>>" ;
    vm_versions : string "<VERSIONS<#f80>>" ;
 
@@ -4437,10 +4438,17 @@ on_command {
    : match "verbs _;verb _" {
       : set_true "gamestate_thug_pass" ;
       : print "To complete {wowt}, you only need the four compass directions (well, the exit from the first room is up) and special commands clued by descriptions and such." ;
-      : print "If you're not in an action sequence, you can also use a number to move to a square you've visited before. You start at 20, and east is 21, north from there is 31, south is 11, and so forth." ;
-      : print "There are also metaverbs that gives general information: {vm_about} about the game's origin general flow, {vm_credits} about who helped bring this about, and {vm_versions} shows version history and release dates." ;
+      : print "If you're not in an action sequence, you can also use a number to move to a square you've visited before. You start at 20, one east of it is 21, north from there is 31. The pre-endgame map is a 5x5 grid, so its northeast corner is 44." ;
+      : print "{vm_meta} gives a list of metaverbs, or in-game actions that don't affect the world. They provide information on game play." ;
       : print "Diagnostic verbs may help, too. They give information about your game status. {vm_diag} gives information about them." ;
       : print "Finally, there is an option: {vo_hone_aye} blocks off exits to done rooms and what is behind them, while {vo_ho_nigh} lets you traverse freely." ;
+   }
+   : match "meta _" {
+      : print "{vm_about} discusses the game's origin and general flow." ;
+      : print "{vm_credits} gives credit to people who helped create this game or make it better." ;
+      : print "{vm_versions} shows version history and release dates." ;
+      : print "Meta-verbs besides {vm_meta}:" ;
+      : done ;
    }
    : match "diag _" {
       : set_true "gamestate_thug_pass" ;
