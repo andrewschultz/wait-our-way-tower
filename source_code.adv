@@ -197,7 +197,7 @@ strings {
    r00_loc : dynamic_string {( (point_warm_acres ? "The cat is no longer here. Maybe they found a forever home in the Warm Acres chaos." :
       point_catch_acing ? "There's a cat chasing here, mostly fallen leaves and stuff, but it's more coordinated now you helped it." :
       point_vine_eater ? "With the fly traps removed, there's a {puz_point_cat_chasing} here. It's not chasing stuff very well, though." :
-      point_fly_traps ? "Fly traps have replaced what was here. Perhaps you could cut through them somehow." :
+      point_fly_traps ? "Long winding fly traps, densely packed together, twist around here. They probably won't swallow you up, but they might be blocking something, too. Perhaps you could cut through them somehow." :
       "{puz_point_flight_wraps_u} cover the area here. What are {puz_point_flight_wraps}? Well, they just prevent people, or their ideas, from taking flight.") + "\nYou can go back {dir_e_v}."
    )} ;
    r00_header : dynamic_string {( point_fly_traps ? "Fly Traps" : "Flight Wraps" )} ;
@@ -207,11 +207,11 @@ strings {
    r01_loc : dynamic_string {( (point_dumb_parable ? "You've gotten something out of the dump (arable,) and since there isn't much left, it's probably best just to find" : "This is, well, a {puz_point_dump_arable}. Is it really just a connecting passage, or is there more to it? At any rate, not much is here, yet, which is kind of nice, since nothing blocks") + " passage {dir_n_v}, {r01_dir_e}, or {r01_dir_w}." )} ;
    r01_header : string "Dump, Arable" ;
 
-   r02_loc : dynamic_string {( point_pitch_earning ? "The pit still churns, but the titan is gone. You see nothing else to do here but go back west." : ((point_tightened_rousing ? "The titan is now awake. It's looking for something to do. Maybe you can help it." : "You see a {puz_point_titan_drowsing} here, in the less-churning part of the pit.") + "\nThe {puz_point_pit_churning} rises high all directions except back {dir_w_v}." ) )} ;
+   r02_loc : dynamic_string {( point_pitch_earning ? "The pit still churns, but the titan is gone. You see nothing else to do here but go back west." : ((point_tightened_rousing ? "The titan is now awake. It's looking for something to do. Maybe you can help it." : "You see a {puz_point_titan_drowsing} here, in the less-churning part of the pit.") + "\nThe {puz_point_pit_churning} rises high in all directions except back {dir_w_v}." ) )} ;
    r02_header : string "Pit, Churning" ; # the spit-thus pit
 
    r03_dir_e : dynamic_string {( has_visited "r04" ? dir_e_v : dir_e_y )} ;
-   r03_loc : dynamic_string {( "The trail runs {dir_n_v} to {r03_dir_e} here. " + (point_tufty_key ? "The tough tiki has disappeared." : point_sun_catching ? "The sun caught a {puz_point_tough_tiki}." : "\nYou see a {puz_point_sunk_etching} or two scattered around here. Maybe they're hiding something." ) )} ;
+   r03_loc : dynamic_string {( "The trail runs {dir_n_v} to {r03_dir_e} here. " + (point_tufty_key ? "The tough tiki has disappeared." : point_sun_catching ? "\nThe sun caught a {puz_point_tough_tiki}." : "\nYou see a {puz_point_sunk_etching} or two scattered around here. Maybe they're hiding something." ) )} ;
    r03_header : string "Sunk Etching" ;
 
    r04_loc : dynamic_string {( "A {puz_point_meager_oath} reverberates through here in this open ground. Its words are not important. " + (point_me_growth ? "You've gotten its essence." : "Perhaps you can get what you need to from it." ) + "\nPassage leads back {dir_w_v}" + (point_fey_loops ? " and, as part of the fey loops, {dir_n_v}." : ".") )} ;
@@ -233,16 +233,16 @@ strings {
 
    r13_dir_e : dynamic_string {( gamestate_bros_blocking ? dir_e_n : has_visited "r14" ? dir_e_v : dir_e_y )} ;
    r13_dir_s : dynamic_string {( gamestate_bros_blocking ? dir_s_n : has_visited "r03" ? dir_s_v : dir_s_y )} ;
-   r13_loc : dynamic_string {( (!point_pose_teasing ? "Here, {gbgr} chatter about any old thing. Why bother?" :
+   r13_loc : dynamic_string {( (!point_pose_teasing ? "Here, {gbgr} chatter about any old thing, blocking the way forward." :
       !gamestate_bros_second_placed ? "The {gbgr} are gone, for now." :
       !point_whee_plucky ? "The {gbgr} are at it again, asking if you really need to show off the opportunities you've been given, right in front of their faces. They {puz_point_weep_lucky} a lot." :
       "The {gbgr} are gone for good.") + "\nThe way back is {dir_w_v}, but paths branch {r13_dir_e} and {r13_dir_s}, too."
    )} ;
-   r13_header : string "Post, Easing" ;
+   r13_header : string "{puz_point_post_easing}" ;
 
    r14_loc : dynamic_string {( (!point_cloth_robbing && think_cloth_robbing ? "The {puz_point_claw_throbbing} still protects the cloth you'd like to rob." :
-   !point_cloth_robbing ? "A {puz_point_claw_throbbing} guards an expanse north and east. But of what?" :
-   "The claw, throbbing, continues to pulse, even though you got what you needed from it.") + "\nYou can go back {dir_w_v}, too." + (point_fey_loops ? " And there's a shortcut {dir_s_v} via the fey loops as well." : "")
+   !point_cloth_robbing ? "A {puz_point_claw_throbbing} guards -- well, something under it. It moves back and forth quickly. How to be quick enough to grab whatever is under?" :
+   "The claw, throbbing, continues to pulse, even though you got what you needed from it.") + "\nYou can go back {dir_w_v}." + (point_fey_loops ? " And there's a shortcut {dir_s_v} via the fey loops as well." : "")
    )} ;
    r14_header : string "Claw, Throbbing" ;
 
@@ -278,7 +278,7 @@ strings {
    r25_header : string "The Groom-Thug Room" ;
 
    r26_dir_e : dynamic_string {( has_visited "r27" ? dir_e_v : dir_e_y )} ;
-   r26_loc : dynamic_string {( !point_bah_slumping ? "Well this is pretty miserable. A {puz_point_boss_lumping} abuse on you, blocks the way to the {dir_e_n}.\nAnd with such sophistry! Such common sense! Did you come here so far for nothing?\nYou can go back {dir_w_v}, if you want." : "Well, you've achieved no great power. But you've achieved relief from the boss. You can go {r26_dir_e} as well as {dir_w_v} now." )} ;
+   r26_loc : dynamic_string {( !point_bah_slumping ? "Well this is pretty miserable. A {puz_point_boss_lumping} abuse on you, blocks the way to the {dir_e_n}.\nAnd with such sophistry! Such common sense! Did you come here so far for nothing?\nYou can go back {dir_w_v}, if you want." : !point_say_mentoring ? "A door labeled {puz_point_same_entering} is to the {dir_e_n}. There's always one more thing!" : "Well, you've achieved no great power. But you've figured the mystery of the Same-Entering door, so you can go {r26_dir_e} as well as {dir_w_v} now." )} ;
    r26_header : string "\"Know Power? NOPE\" Hour" ;
 
    r27_loc : dynamic_string {( (point_blest_able ? "You feel good here. Yet there's still more. You hear and feel {puz_point_true_pleading}, not i-have-to-have, but interest in seeing and doing and offering more.\nSo you still feel restless. Perhaps you need to get the right phrase to say, one more time, to close the book." : "This stable here is pretty bleah. Is it really what the boss was guarding? At least it's well, stable. {puz_point_bleah_stable} ... do you deserve more in life? You guess you do, but you know you're biased.") + "\nWhile this feels like your journey's end, nothing's stopping you going back {dir_w_v}." )} ;
@@ -299,15 +299,15 @@ strings {
    r32_header : string "Chess Training" ; # ?? the spit thus pit
 
    r33_dir_n : dynamic_string {( has_visited "r43" ? dir_n_v : dir_n_n )} ;
-   r33_dir_e : dynamic_string {( has_visited "r34" ? dir_e_v : dir_e_n )} ;
-   r33_loc : dynamic_string {( (point_say_loaners ? "Your Mo'-Tried Moat Ride can take you {r33_dir_n}." : "Water bars foot passage {dir_n_n}.") + " However, you can definitely go {r33_dir_e} or back {dir_w_v}." )} ;
+   r33_dir_e : dynamic_string {( has_visited "r34" ? dir_e_v : dir_e_y )} ;
+   r33_loc : dynamic_string {( (point_say_loaners ? "Your Mo'-Tried Moat Ride can take you {r33_dir_n}." : "You'll need a craft to traverse the water {dir_n_n}.") + " However, you can definitely go {r33_dir_e} or back {dir_w_v}." )} ;
    r33_header : string "Sail Owners" ;
 
    r34_dir_n : dynamic_string {( has_visited "r44" ? dir_n_v : dir_n_y )} ;
    r34_loc : dynamic_string {( ( point_ply_towels ? "THE SOAK-THUS OAK sits and pouts, its fun ruined. The owls have left, leaving passage {r34_dir_n}." : "Somehow, a tree is summoning rain down on owls hiding at the entry to a building to the {dir_n_n}. One look at it and you know it is THE SOAK-THUS OAK, and given how wet and unhappy the owls look, they must be {puz_point_plight_owls}." ) + "\nThere is also passage back {dir_w_v}." )} ;
    r34_header : string "The Soak-Thus Oak" ;
 
-   r35_loc : string "Here, people are apparently supposed to learn. What, you're not sure. You can only go back {dir_s_v} here." ;
+   r35_loc : string "Here, people are apparently learn stuff. What stuff, you're not sure. You can only go back {dir_s_v} here." ;
    r35_header : string "Bro Class" ;
 
    r40_loc : dynamic_string {( "This is a small hut that smells (pleasantly) of canines." + (point_warm_acres ? "But since you transformed the warm acres, a lot of them found homes." : point_shape_up ? "One particular old loyal dog pads around here, making you say {dgda}." : "But you don't see any. Perhaps you're giving off bad vibes. How to fix that?") + "\nThe exit is back {dir_s_v}." )} ;
@@ -315,12 +315,12 @@ strings {
 
    r41_loc : dynamic_string {( (!point_eh_sink ? "{puz_point_ace_inc} rises above you on all sides except to the {dir_s_v}. You've heard of it. It's one of those soulless corporations that may or may not have already hired all machines." :
       !point_cue_bland ? "This {puz_point_cube_land} gives off unnecessarily dazzling colors. Perhaps there's something among them, but where?" :
-      "You've found your way through the cube land. Not much can be here.") +
+      "You've found your way through the cube land. Not much else can be here.") +
       "\nThe only way out is back {dir_s_v}."
    )} ;
    r41_header : dynamic_string {( point_eh_sink ? "Cube Land" : "Ace, Inc." )} ;
 
-   r42_loc : dynamic_string {( (point_girl_only ? "The island seems cheerier now you found the girl behind the sea crest. Maybe that's just because you got some comanionship. There can't be much else to do here." : point_seek_rest ? "Amidst the sea crest, you hear an odd voice saying {puz_point_grr_lonely}." : "There's a lot of {puz_point_seacrest} covering this otherwise drab and forbidding isle.") + "\nYou can sail back {dir_e_v} at any time." )} ;
+   r42_loc : dynamic_string {( (point_girl_only ? "The island seems cheerier now you found the girl behind the sea crest. Maybe that's just because you got some companionship. There can't be much else to do here." : point_seek_rest ? "Amidst the sea crest, you hear an odd voice saying {puz_point_grr_lonely}." : "There's a lot of {puz_point_seacrest} covering this otherwise drab and forbidding isle.") + "\nYou can sail back {dir_e_v} at any time." )} ;
    r42_header : string "Gray Vile Grave Isle" ;
 
    r43_dir_w : dynamic_string {( has_visited "r42" ? dir_w_v : point_flow_tripling ? dir_w_y : dir_w_n )} ;
