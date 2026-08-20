@@ -3968,6 +3968,18 @@ subroutines {
          : redescribe ;
          : done ;
       }
+      : match "testjump 1n" {
+         : gosub "testjump_part_1a" ;
+         : goto "r31" ;
+         : redescribe ;
+         : done ;
+      }
+      : match "testjump 1s" {
+         : gosub "testjump_part_1a" ;
+         : goto "r11" ;
+         : redescribe ;
+         : done ;
+      }
       : match "testjump 2" {
          : gosub "testjump_part_1" ;
          : gosub "testjump_part_2" ;
@@ -3991,6 +4003,7 @@ subroutines {
          : done ;
       }
       : print "TESTJUMP 1 sends you to outside the cell, hall cleared, 5 points." ;
+      : print "TESTJUMP 1N/1S also clears north and south of the hall, placing you north or south." ;
       : print "TESTJUMP 2 sends you to 1 room before the chase, 39 points." ;
       : print "TESTJUMP 3 sends you to the chase room after you won, 41 points." ;
       : done ;
@@ -4003,6 +4016,13 @@ subroutines {
       : set_true "point_halt_error" ;
       : set_true "point_fell_asleep" ;
       : set_true "gamestate_r21_e" ;
+   }
+
+   testjump_part_1a : subroutine {
+      : gosub "testjump_part_1" ;
+      : set_true "point_duh_losing" ;
+      : set_true "point_hate_rash" ;
+      : set_integer var="score" "7" ;
    }
 
    testjump_part_2 : subroutine {
