@@ -1774,7 +1774,7 @@ locations {
          }
       }
    }
-   r14 : location "{r14_loc}" header="{r14_header}" {
+   r14 : location "{r14_loc}" header="{r14_header}" graphic="r14_0" {
       on_command {
          : gosub "fey_loops_check" ;
          : match "_ claw;_ throbbing" {
@@ -2916,7 +2916,7 @@ locations {
          }
       }
    }
-   r44 : location "{r44_loc}" header="{r44_header}" {
+   r44 : location "{r44_loc}" header="{r44_header}" graphic="r44_0" {
       on_command {
          : match "_ ten;_ sops" {
             : print {( point_tense_ops ? "They look very unsure of themselves but also suspicious of outside help." : "They seem happy now, not really pressing for whatever their plan is. They don't need any more outside help." )} ;
@@ -5179,6 +5179,13 @@ on_render {
          : overlay "s21_e" x="102" y="7" ;
       }
    }
+   : if (is_at "r44") {
+      : if (!point_tense_ops) {
+         : overlay "s44_0" x="0" y="0" ;
+      } : else {
+         : overlay "s44_1" x="0" y="0" ;
+      }
+   }
    # general NPC stuff here
    : if (gamestate_thug_chase) {
       : if (is_at "r20") {
@@ -5261,5 +5268,11 @@ assets {
       s21_e : base64_png "iVBORw0KGgoAAAANSUhEUgAAADQAAAAUAQMAAAD4GoyeAAAABlBMVEUAAACAAABEUqJPAAAAN0lEQVQIW2Ng+A8EHxgYYDQjiP6BSTOD6D8Imh1E/8Ok+UH0f0xaHkw3wGl7MH0Ag64H0w9gNAC4BWqlainEtwAAAABJRU5ErkJggg==" ;
       s21_m : base64_png "iVBORw0KGgoAAAANSUhEUgAAAQAAAAAoBAMAAADj1Dm6AAAAFVBMVEX//wAAAAAAgAAA/wAA////AAD///9Vib6ZAAAAAXRSTlMAQObYZgAAA9NJREFUeF6tV0tu4zAMtaAeQE+L7CWgXWvgC2TRExTI7FNgfP8jTPgDFU9l1ei8tk5Em49PJCW5y3eB9JXRLnsELD8E0FOM4rCoMFBmWJXuHFArppMKya/jdDVlO4eAWpMNXq5dICi7z93HgApzrxbbEmolp3MIubiA967iuRYAUIPbAb7l9ncSEFvsuE51XC7YCQisqzIKEGxWAQkwO9lSJ2CJJLqc60vUQhcmUy4TgGowfZoWA1mTq26Pn5DJShdviyE4t5lii1uPkPpInb7QW+FdyQloC5SuGH9sk8rnWovKeKpCoPgOeMY6FCTOmU41cmjhVP64HrQehQ4kIBEtNJnCGFCfUMwrP9uRzCW2pZEXjDPT2opHvS+heQ0GmSQz8aLy+Npz1oTalX6bniYR6xIbqpJBZCTqgKEICK0IyFbnK6WBOASlXDZWAHcq2O45V0VSl7aszCICRCq4A0ZVyNVCJxmgF6cAtm2DtKG1IJuw647YJAHFUhtoEMfrwGIGliGP9/cUl+2BOywQfxHbrjvWZdUpKSWMMR4JKFaI4HV+p5EL+HO7bXfJrVTqst1uv11ATexCLVidC0Iv0o4EWO5DdgFXScDtg4geAkiBPAWWdCMB9PX1ximgFoyLCChJ+8QFtLmAoqOk2wCpUfqybSyAdTLzhQ1bFokc8/1Ka0DKuCcmaXMBSUci4EUr8MECLJ6iN7xqDa5XmqZRhI74oAJ9pirUO+13W6t4L8C6QiBusVlg5jViHG/F7AuNDO9C1A7YCBzPFBGen/E9CqoD0lSjBLiDRoa6ewI8oMQfGyxz+JcvaQKmO1Et+pGMyFEAPJlo3MU34UYgH5JfS8BkL87iaNFyPQl3s9PNduKjBKhmmBAa/BwlSeC2gGd1GF/PbVEATLm3y32bqgRk4sIdJwKCCggYRrWKvD2i8++n2wdAosrrYXwMfxEasVnDvUl0un5aY44089oPWRIwQfY1PJg/wb+ZHv+2h6192FG4rpMa2Dk/iD8QMFLAfGtjvjQNb2uFgP8lwOn4jXSCkNUF0IgDAdV7oA4E6BDQ+CVNWsBPRHS+AHYCLIwI2N0xQHxrR1eoFaZAdcCzogCjOkZ3SvqCbpqA3Q4Az8rgGBgeCH7ud3SJDHMEo0FyASfgAqj5l18w6bYLzYGsDt6Yp+AlWNe1BaWLS5Rd4Bt5AMGHYceNvOs7NzrSI3rr6GQHiI3/zsDLCIsvBpMIGUne/DHY2ycLUZCG8/D3AvkUSSXtz3BbucjeBNIIlnaf+3kBgEaCmoo5+ACqC92/QBRfS/9V9f8CbaZjd6iaAC0AAAAASUVORK5CYII=" ;
 
+      r44_0 : base64_png "iVBORw0KGgoAAAANSUhEUgAAAQAAAAAoAgMAAABslMwaAAAACVBMVEUAAACAAADggEB5bvRjAAAAVklEQVR4XmJYtWIVBUBrFbUNGDVg1IBRA0YNGDVg1ABAK3NQAwAIA0AME5hACs9lJ2lC+CGToOFWAR3CDw7C7ggKITqCiZANwUVZPjgo2weFEj6YKPkAd1hfvx5n7eAAAAAASUVORK5CYII=" ;
+      s44_0 : base64_png "iVBORw0KGgoAAAANSUhEUgAAAQAAAAAoBAMAAADj1Dm6AAAAD1BMVEX///8AAAAAAP+AQAD/AAA71li8AAAAAXRSTlMAQObYZgAAAY5JREFUeF7N0oHJ6zAMBGCJeIC7blBPEMgCfpD9Z/ojkTNAG8BAxTta2eXD5TC2L9m2mPWg7Mex70XwYNJaUC4KrYeJMba9HpRdsxbmk9jMzdy2GlC27Tg2oZYikEn9EsRSBYlHRhjiZTDfo010CisgUTMCzQJQ9tjjWgwwOMkLgQpQAS2eH60VkIEeZlbiBbktgQxShEbGBEpABXijq50bSiDjc7qHhbrXQP52Iwm/KK2dqV+gPYElLPzVOEeAXgDmCnNYi7P4hPYItnpijBFw30C+SObWCW9n1P0tjPEvQAXMSW3Nm/l3sPYAbRWywB03qB0So/YHqMDTiVUY5yxgQFgokHh5CShpLTWRJDHhHD+Fuw2tmeMu9eq9Y4KNBxjrJwQChTQ0gxNhHsgJ51gFWzihZAHV6eTrDYGN38JngVdHfAXnWAVbA6F9YAUoTpL3Nq6GnXWQ2Ht/a8s8WgMKA3FvY42KNaAroW6EhGYNJPZ3fmeq4L8pwM58meWg5AF21MN8gzE7y0FIatbDH1AgiHlnlPFvAAAAAElFTkSuQmCC" ;
+      s44_1 : base64_png "iVBORw0KGgoAAAANSUhEUgAAAQAAAAAoBAMAAADj1Dm6AAAAD1BMVEX///8AAAAAAP+AQAD/AAA71li8AAAAAXRSTlMAQObYZgAAAZhJREFUeF7N0wHKqzAQBOBd9AA7vUFzAsEL5IH3P9M/66ABVECgyxvamPixMhRrN5kmXetBWdZ1WSrhatJ6UEip5TAwl4lYD8qitRoWnSImc+Nn4rYElGla18lMdzNEL4LDpBGeq5EiaiBDy5zowhoY7+OOngAitQRU4FxpoW7UCtB5ySZhi3uiAZFYAZYJYiaHVU71SoBxcp6MRAsDLbipgFHA4kQDCBEVYIxu6Ex0teOuAiwT2mncnUaFlwAjdMCElHlLvoP5CSzhzaP61hMY1TqvDoTNBuAG5kewtxO994Q97uZUcKPzvPnPofd/CQdmKRtT5vdg8wPMb+BawELtYtS+ARV4mngLfRsFLECjRgjpZSA83mMhmDhh678FncACDgg/rbU4wfoD9PcTFxiJ2Y6zJ+KErb8FezVxLYAGfL4xHvdbuBb4tMjvqP0W7C0I7YI1oDgYmedPg4YyELbWvscW+2gVKEgM0zavrFgG+kmABiFCaw0o3r77d6QI/psCaNCbWQ/KPoAW9aDoD+ENxTAQONZ6+ANR7o5zQhEzJQAAAABJRU5ErkJggg==" ;
+
+      # NPCs and so forth
+      s_thug : base64_png "iVBORw0KGgoAAAANSUhEUgAAAB4AAAAbAgMAAAAWk9eCAAAACVBMVEX/AP8AAAD///9YpImpAAAAAXRSTlMAQObYZgAAAI1JREFUeF5FzjEKwzAMBVB7SG7gDj6Nj9ChNsR7DMlpsrTgzJVB/5SVlEL+9BBIX04SkrOEmk2+Ai/FBIAUs4AVD0USVALhqcB+GiIkScEYF8D4gwz3+kw581UxGik8qHwVbgcOQ7yWbvgCtscC50L2BgBtn7a+fspbDnMfZ2OpUhQpi4tg1OS2vsikHT+n8EaxhMWdJQAAAABJRU5ErkJggg==" ;
    }
 }
