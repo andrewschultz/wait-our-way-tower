@@ -1122,6 +1122,14 @@ booleans {
 
 vocabulary {
 
+   # actual game stuff
+
+   # irregular plurals!
+   : noun / aliases = [jury, juries] ;
+   : noun / aliases = [injury, injuries] ;
+
+   # we are not the spelling police!
+   : noun / aliases = [vendors, venders] ;
    : verb / aliases = [troop, troup, troupe] ;
 
    # test stuff
