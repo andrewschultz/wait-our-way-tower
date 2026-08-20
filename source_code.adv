@@ -3456,7 +3456,7 @@ subroutines {
       }
       : if (point_tense_ops && !point_frame_easily) {
          : set_true "inventory_intangibles" ;
-         : print "You have more confidence in yourself after dealing with the ten sops. Maybe you can tackle bigger things!" ;
+         : print "You have an {iaad} the ten sops gave you. It reminds you to have more confidence in yourself after helping them. Maybe you can tackle bigger things!" ;
       }
       : if (!point_warm_acres && point_girl_only) {
          : print {( "You have a loyal follower in the girl from the island. She's carrying {puz_point_her_doll} around." + (carried() == 0 && !inventory_intangibles ? " And companionship's more important than silly old possessions!" : "" ) )} ;
@@ -3509,6 +3509,12 @@ subroutines {
          }
          : match "_ girl" {
             : print "She doesn't have much to say, but she follows you closely now, and she just won't let go of {puz_point_her_doll}." ;
+            : done ;
+         }
+      }
+      : if (point_tense_ops && !point_frame_easily) {
+         : match "_ agree;_ aye;_ degree;_ id" {
+            : print "The {iaad} certifies you as someone who gets along well with others and helps them achieve their goals." ;
             : done ;
          }
       }
