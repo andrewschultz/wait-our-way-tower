@@ -5177,7 +5177,9 @@ on_render {
       }
       : done ;
    }
-   : if (is_at "r02") {
+   : if (is_at "r00") {
+   } : else_if (is_at "r01") {
+   } : else_if (is_at "r02") {
       : if (!point_tightened_rousing) {
          : overlay "s02_u" x="76" y="1" ;
          : overlay "s02_g" x="68" y="0" ;
@@ -5187,24 +5189,25 @@ on_render {
       } : else {
          : overlay "s02_u" x="120" y="17" ;
       }
-   }
-   : if (is_at "r11") {
-      : if (!point_duh_losing) {
-         : overlay "s11_o" x="0" y="0" ;
-      }
-   }
-   : else_if (is_at "r03") {
+   } : else_if (is_at "r03") {
       : if (point_sun_catching) {
          : overlay "s03_etch" x="0" y="0" ;
          : if (!point_tufty_key) {
             : overlay "s03_tiki" x="80" y="0" ;
          }
       }
-   } : else_if (is_at "r04") {
+   } : else_if (is_at "r04") { # background doesn't change. We just tack on passage north.
       : if (point_fey_loops) {
          : overlay "s04_fey" x="135" y="15" ;
       }
-   } : else_if (is_at "r14") {
+   } : else_if (is_at "r10") {
+   } : else_if (is_at "r11") {
+      : if (!point_duh_losing) {
+         : overlay "s11_o" x="0" y="0" ;
+      }
+   } : else_if (is_at "r12") {
+   } : else_if (is_at "r13") {
+   } : else_if (is_at "r14") { # background doesn't change. We just tack on passage north.
       : if (point_fey_loops) {
          : overlay "s14_fey" x="110" y="13" ;
       }
@@ -5225,13 +5228,30 @@ on_render {
       : if (point_fell_asleep) {
          : overlay "s21_e" x="102" y="7" ;
       }
-   }
-   : if (is_at "r44") {
+   } : else_if (is_at "r21") {
+   } : else_if (is_at "r22") {
+   } : else_if (is_at "r23") {
+   } : else_if (is_at "r24") {
+   } : else_if (is_at "r30") {
+   } : else_if (is_at "r31") {
+   } : else_if (is_at "r32") {
+   } : else_if (is_at "r33") {
+   } : else_if (is_at "r34") {
+   } : else_if (is_at "r40") {
+   } : else_if (is_at "r41") {
+   } : else_if (is_at "r42") {
+   } : else_if (is_at "r43") {
+   } : else_if (is_at "r44") {
       : if (!point_tense_ops) {
          : overlay "s44_0" x="0" y="0" ;
       } : else {
          : overlay "s44_1" x="0" y="0" ;
       }
+   } : else_if (is_at "r15") {
+   } : else_if (is_at "r25") {
+   } : else_if (is_at "r26") {
+   } : else_if (is_at "r27") {
+   } : else_if (is_at "r35") {
    }
    # general NPC stuff here
    : if (gamestate_thug_chase) {
