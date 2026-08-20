@@ -182,7 +182,7 @@ strings {
    here_r25 : dynamic_string {( is_at "r25" ? "here" : "by The Groom-Thug Room" )} ;
    here_r26 : dynamic_string {( is_at "r26" ? "here" : "in {r26_header}" )} ;
    here_r27 : dynamic_string {( is_at "r27" ? "here" : "by {r27_header}" )} ;
-   here_r30 : dynamic_string {( is_at "r30" ? "here" : "where you started" )} ;
+   here_r30 : dynamic_string {( is_at "r30" ? "here" : "in the {r30_header}" )} ;
    here_r31 : dynamic_string {( is_at "r31" ? "here" : "in the Way-Bland Wabe Land" )} ;
    here_r32 : dynamic_string {( is_at "r32" ? "here" : "in Chess Training" )} ;
    here_r33 : dynamic_string {( is_at "r33" ? "here" : "by the sail owners" )} ;
@@ -1234,7 +1234,7 @@ vocabulary {
 locations {
    r00 : location "{r00_loc}" header="{r00_header}" {
       on_command {
-         : if (point_fly_traps) {
+         : if (!point_fly_traps) {
             : match "_ flight;_ wraps" {
                : print "The flight wraps are pretty nondescript, like bubble wrap but impossible to pop. They prevent flying, walking and even seeing what's behind them, or how much is behind them. How to get rid of them?" ;
                : done ;
@@ -1877,12 +1877,11 @@ locations {
             : print {( point_yell_open ? "You're glad there's a way out." : "You may want to focus on specific parts of the space, or your reactions to it, to find a way out." )} ;
             : done ;
          }
-         : if (point_can_do) {
-            : match "_ floor" {
-               : print {( point_thief_lore ? "Nothing else is hidden there." : "Do you dare to dream something hidden in {puz_point_the_floor} might help you get out the door? What sort of reasoning could you use to find it without driving yourself more quickly?" )} ;
-               : done ;
-            }
-         } : else_if (!won_yet) {
+         : match "_ floor" {
+            : print {( point_thief_lore ? "Nothing else is hidden there." : point_can_do ? "Do you dare to dream something hidden in {puz_point_the_floor} might help you get out the door? What sort of reasoning could you use to find it without driving yourself more quickly?" : "You find nothing. You didn't think you would, anyway. Perhaps if you were more optimistic, you might." )} ;
+            : done ;
+         }
+         : if (point_can_do && !won_yet) {
             : match "_ canned;_ ooh" {
                : print "It's weird. You shouldn't be reciting that since you got canned, but you are. Perhaps the answer to what it really means is simpler than you might thing." ;
                : done ;
@@ -2403,7 +2402,7 @@ locations {
             : print {( point_door_cloud ? "You found the door to unlock in the door cloud. There's not much else." : "The land itself is pretty tedious. Maybe focus on the {puz_point_dork_loud} to see if they can help you, however unwillingly or belligerently." )} ;
             : done ;
          }
-         : if (point_door_cloud) {
+         : if (!point_door_cloud) {
             : match "_ dork;_ loud" {
                : print "Just trying to get the {puz_point_dork_loud}'s attention won't work. You might have to ask them for what you want and make sure you can use or get to it." ;
                : done ;
@@ -2753,7 +2752,7 @@ locations {
                : print "Ugh! It's so dreary to look at. It's a monolith of automation. You doubt any technology can stop it. What could?" ;
                : done ;
             }
-            : match "* sync;sync *" {
+            : match "* sync;sync _" {
                : print "You might want to get {puz_point_ace_inc} out of sync. Sounds right, though." ;
                : done ;
             }
