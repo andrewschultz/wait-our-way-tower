@@ -2272,8 +2272,10 @@ locations {
    r26 : location "{r26_loc}" header="{r26_header}" {
       on_command {
          : if (point_bah_slumping && !point_say_mentoring) {
-               : match "say mentoring" {
-                  : print "You give up and ask for help. The people who shut you in the tower appear. Good, you made it, they say. They discuss how they overheard you saying you feel unlucky and nothing happens to you. Well, now it did. And perhaps you might feel lucky now some of your actions and thoughts worked as they did. And not the sort of guilty-lucky, but the sort where you know you're relatively fortunate and want to take advantage of that when you can and not be jealous if others do. They apologize for the ... inconvenience. You figure it's okay. It was something to do, and then some." ;
+            : match "say mentoring" {
+               : print "You give up and ask for help. The people who shut you in the tower appear. Good, you made it, they say. They discuss how they overheard you saying you feel unlucky and nothing happens to you. Well, now it did. And perhaps you might feel lucky now some of your actions and thoughts worked as they did. And not the sort of guilty-lucky, but the sort where you know you're relatively fortunate and want to take advantage of that when you can and not be jealous if others do. They apologize for the ... inconvenience. You figure it's okay. It was something to do, and then some." ;
+               : print "You find it odd it's the third time you had to <SAY<#f80>> something, but was it really? You never did quite speak up enough, and you actually had to ask for what you wanted. There's a lesson here, one you probably should've learned years ago." ;
+               : set_integer var="tempint" "47" ;
                : set_integer var="tempint" "47" ;
                : set_true "point_say_mentoring" ;
                : gosub "add_point" ;
