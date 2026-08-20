@@ -4442,7 +4442,7 @@ on_describe {
 ## Test VERB NOUN that the player types and executes conditional actions
 
 on_tick {
-   : if (tats_each_move) {
+  : if (tats_each_move) {
       : gosub "set_tats_num" ;
       : print "Tats num this turn {my_tats_num}." ;
    }
@@ -4469,6 +4469,7 @@ on_tick {
       : set_true "gamestate_fail_oops_known" ;
       : create "thug" target="r25" ;
       : set_false "gamestate_thug_chase" ;
+      : update_graphic ;
       : done ;
    }
    : if (gamestate_thug_chase && ((is_at "r04" && previous_location() == "r14") || (is_at "r14" && previous_location() == "r04"))) {
@@ -4492,6 +4493,7 @@ on_tick {
             : create "thug" target="r25" ;
             : set_false "gamestate_thug_chase" ;
             : set_true "gamestate_fail_oops_known" ;
+            : update_graphic ;
             : done ;
          }
          : set_string var="lastroom" {( previous_location() )} ;
