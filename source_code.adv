@@ -1289,6 +1289,12 @@ locations {
                : done ;
             }
          }
+         : if (!point_tightened_rousing) {
+            : match "_ yearning" {
+               : print "A bit simpler and a bit more productive. But close." ; # no DONE because PITCH YEARNING is possible
+            }
+         }
+
          : match "pitch earning" {
             : if (!point_tightened_rousing) {
                : print "Good idea. Even better idea with the titan not drowsing!" ;
@@ -1331,6 +1337,10 @@ locations {
    }
    r03 : location "{r03_loc}" header="{r03_header}" graphic="r03_0" {
       on_command {
+         : match "_ trail" {
+            : print "It hides no secret passages. It's what's along the trail that's worth looking at." ;
+            : done ;
+         }
          : match "_ sunk;_ etching" {
             : print {( point_sun_catching ? "You are able to see more of it now." : "It feels like you should be able to see more of it, but you're not looking at it right, or with the right resources." )} ;
             : done ;
@@ -1502,6 +1512,12 @@ locations {
    }
    r11 : location "{r11_loc}" header="{r11_header}" graphic="r11_0" {
       on_command {
+         : if (point_duh_losing) {
+            : match "_ ooze" {
+               : print "It's not just ooze, it's oozing! For whatever reason, this nags at you." ;
+               : done ;
+            }
+         }
          : match "_ dull;_ oozing" {
             : print {( point_duh_losing ? "You don't want to focus on the oozing. It took effort not to." : "You stare at, and listen to, the dull oozing for a while. You get the feeling you really should be grateful for your freedom, yet at the same time, exercising it would be unfair to other prisoners. If they exist, of course. Can't be too considerate these days! Besides, you admit you have no interesting plans...\n...wait, no, you can do better than that." )} ;
          }
@@ -1534,6 +1550,11 @@ locations {
          : match "_ knowin;_ juries" {
             : print {( "You look at the juries, about to speak, but they cut you off with a sharp glare." + ( point_no_injuries ? "Surely you're not foolish enough to risk going east? You have no clue..." : point_coin_ovations ? "With your little story complete, they've found other people to judge. Their work is never done!" : "They seem almost interested in you back, for the moment." ) )} ;
             : done ;
+         }
+         : if (!point_coin_ovations) {
+            : match "co _;_ innovations;_inovations" {
+               : print "Right idea, but \"co\" wouldn't quite work. Look for something more concrete." ;
+            }
          }
          : if (point_no_injuries && !point_coin_ovations) {
             : match "_ coy;_ novations" {
