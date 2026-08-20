@@ -4601,7 +4601,7 @@ on_command {
    : if (is_carried("vie_neater")) {
       : match "vine eater" {
          : if (!is_at "r00" || !point_fly_traps) {
-            : print "You see nothing resembling vines that can be eaten. Well, not here and now. But if you ever do..." ;
+            : print {( is_at "r42" ? "The sea crest is too delicate and isn't stopping you going anywhere. That'd be a waste of the {puz_point_vie_neater}." : "You see nothing resembling vines that can be eaten. Well, not here and now. But if you ever do..." )} ;
             : set_true "think_vine_eater" ;
             : gosub "note_thinks" ;
             : done ;
@@ -4689,6 +4689,7 @@ on_command {
          }
          : set_true "shorten_inventory" ;
       }
+      : print {( me_x_yet ? "While you're not carrying them, your tats will help give you clues if/when you need them" : "Perhaps you should inspect or EXAMINE yourself for something hidden on you." )} ;
       : done ;
    }
    : gosub "check_options" ;
