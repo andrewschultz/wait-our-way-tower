@@ -1754,6 +1754,9 @@ locations {
                : done ;
             }
             : if (!point_whee_plucky) {
+               : match "we _;wee _" {
+                  : print "That feels right and doesn't. You could be more cheery. I mean, you always could, but even faking it around the bros might make them give up on you." ;
+               }
                : match "whee _;_ plucky" {
                   : set_integer var="tempint" "39" ;
                   : set_false "first_half" ;
@@ -2482,6 +2485,12 @@ locations {
             : print {( point_dump_liars ? "It's silent now with the chess training over." : "It's tough to know whether or not the training is effective, but it sure is loud. Everybody is yelling about stuff like the Carlsbad pond structure, or opening theory 15 lines down, or other things that just sort of make your head spin. Of course, there's always a person who yells you just have to sit there and make good moves, and they're shushed." )} ;
             : done ;
          }
+         : if (point_chest_reigning && !point_dump_liars) {
+            : match "_ dumb;_ pliers" {
+               : print "The chess players all call out \"TOOL AIM-TOO-LAME!\" as you consider picking it up. You have no snappy comeback. You sense you don't need a detailed one." ;
+               : done ;
+            }
+         }
          : match "chest reigning" {
             : if (point_chest_reigning) {
                : print "One chest is enough. Don't get greedy." ;
@@ -2803,6 +2812,9 @@ locations {
                : done ;
             }
             : if (!point_cue_bland) {
+               : match "queue _" {
+                  : print "Hmm. It's unlikely you'll find people or entities queueing up for where to find something. But there might be a similar indicator. Or similar sounding indicator." ;
+               }
                : match "cue _;_ bland" {
                   : set_integer var="tempint" "27" ;
                   : set_false "first_half" ;
