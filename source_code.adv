@@ -357,6 +357,7 @@ strings {
    think_here_also : dynamic_string {( think_text_yet ? "Also, here" : "Here" )} ;
    number_as_word : dynamic_string {( collection_get { collection -> ("num_to_word") index -> ( commands_figured ) } )} ;
    plus_in_header : dynamic_string {( think_any ? "+{commands_figured}" : "" )} ;
+   first_or_second : dynamic_string {( first_half ? "first" : "second" )} ;
 
    #auxiliary for options
    tempopt : string "" ;
@@ -3316,10 +3317,10 @@ subroutines {
       }
       : gosub "check_100" ;
       : cycle key = "one_right" predictable_order = "true" skip_interval = "0" max_loops = "1" {
-         : print "One of those words felt right, but the other didn't. You must be halfway there{for_bonus}.{already_got_check}" ;
-         : print "Again, you feel like you got halfway there{for_bonus}.{already_got_check}" ;
+         : print {( "The {first_or_second} word felt right, but the other didn't. You must be halfway there{for_bonus}.{already_got_check}" )} ;
+         : print "That halfway-there feeling again. You must have gotten the {first_or_second} word there{for_bonus}.{already_got_check}" ;
          on_exhausted {
-            : print "One word right, one word wrong{for_bonus}.{already_got_check}" ;
+            : print {( (first_half ? "First word right, second word wrong" : "First word wrong, second word right") + "{for_bonus}.{already_got_check}" )} ;
          }
       }
       : if (!note_half_think) {
