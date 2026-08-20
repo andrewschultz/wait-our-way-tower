@@ -134,12 +134,14 @@ strings {
    puz_point_yellow_pin     : dynamic_string {( opt_color_coding ? "<yellow pin<#f8f>>" : "yellow pin" )}           ; # 02
 
    # blocking strings
+   blockstr_go_fwd : string "You're done in the back areas. Time to go forward." ;
+   blockstr_endgame_npcs : dynamic_string {( "You got two companions. They " + (point_bah_slumping ? "helped" : "will help") + " enough." )} ;
    block_04_14 : string "Weird! It almost feels like there should be passage that way. You can't say why, but it's disorienting even to plan out a route. For now." ;
    block_dull_oozing  : string "Ehh ... the {puz_point_dull_oozing} slows you down. Trekking further is probably harmless, but what if it isn't? You'd feel dumb getting poisoned by the physical ooze." ;
    block_hey_trash    : string "The call of {puz_point_hey_trash} freezes you. You half want to show them, whomever they are, and whatever you want to show. You'll decide that later. Also, you worry if you go farther, there'll be more people like that, which could put you in danger. So, for now, no." ;
    block_pose_teasing : string "The Bros wonder why you need to be running around like this. You need to chillax! Life will be easier that way. And no offense, but if you do have an exciting life, it's a bit unfair. They deserve it a bit more than you do. So you shouldn't rub it in by just walking past them like that." ;
    block_trrg         : string "You can't explore somewhere new yet, with the {trtg} around." ;
-   block_weep_lucky   : string "The bros weep about how YOU get all the adventure here. You've been through this before, but since you last visited, you do sort of have to admit you've had a lot of adventures. You feel bad for them. They feel like they're the lovablde underdogs here, that they should get a chance, but noooooo." ;
+   block_weep_lucky   : string "The bros weep about how YOU get all the adventure here. You've been through this before, but since you last visited, you do sort of have to admit you've had a lot of adventures. You feel bad for them. They feel like they're the lovable underdogs here, that they should get a chance, but noooooo." ;
 
    # THINK string(s)
    for_bonus : dynamic_string {( half_bonus ? " for a bonus point" : "" )} ;
@@ -1058,16 +1060,105 @@ booleans {
    inventory_intangibles : boolean "false" ;
 
    # general go-blocking
-   goblock_21 : dynamic_boolean {( !point_yell_open)} ;
+   backblock_00 : dynamic_boolean {( try_block && is_at "r01" && coreblock_00 )} ;
+   backblock_01 : dynamic_boolean {( try_block && is_at "r11" && coreblock_01 )} ;
+   backblock_02 : dynamic_boolean {( try_block && is_at "r01" && coreblock_02 )} ;
+   backblock_03 : dynamic_boolean {( try_block && is_at "r13" && coreblock_03 )} ;
+   backblock_04 : dynamic_boolean {( try_block && coreblock_04 )} ;
+   backblock_10 : dynamic_boolean {( try_block && is_at "r11" && coreblock_10 )} ;
+   backblock_11 : dynamic_boolean {( try_block && is_at "r21" && coreblock_11 )} ;
+   backblock_12 : dynamic_boolean {( try_block && is_at "r11" && coreblock_12 )} ;
+   backblock_13 : dynamic_boolean {( try_block && is_at "r12" && coreblock_13 )} ;
+   backblock_14 : dynamic_boolean {( try_block && is_at "r13" && coreblock_14 )} ;
+   backblock_20 : dynamic_boolean {( try_block && is_at "r21" && coreblock_20 )} ;
+   backblock_21 : dynamic_boolean {( try_block && is_at "r22" && coreblock_21 )} ;
+   backblock_22 : dynamic_boolean {( try_block && is_at "r23" && coreblock_22 )} ;
+   backblock_23 : dynamic_boolean {( try_block && is_at "r24" && coreblock_23 )} ;
+   backblock_24 : dynamic_boolean {( try_block && is_at "r25" && coreblock_24 )} ;
+   backblock_30 : dynamic_boolean {( try_block && is_at "r31" && coreblock_30 )} ;
+   backblock_31 : dynamic_boolean {( try_block && is_at "r21" && coreblock_31 )} ;
+   backblock_32 : dynamic_boolean {( try_block && is_at "r31" && coreblock_32 )} ;
+   backblock_33 : dynamic_boolean {( try_block && is_at "r32" && coreblock_33 )} ;
+   backblock_34 : dynamic_boolean {( try_block && is_at "r33" && coreblock_34 )} ;
+   backblock_40 : dynamic_boolean {( try_block && is_at "r30" && coreblock_40 )} ;
+   backblock_41 : dynamic_boolean {( try_block && is_at "r31" && coreblock_41 )} ;
+   backblock_42 : dynamic_boolean {( try_block && is_at "r43" && coreblock_42 )} ;
+   backblock_43 : dynamic_boolean {( try_block && is_at "r33" && coreblock_43 )} ;
+   backblock_44 : dynamic_boolean {( try_block && is_at "r34" && coreblock_44 )} ;
+
+   backblock_15 : dynamic_boolean {( try_block && coreblock_24 )} ;
+   backblock_25 : dynamic_boolean {( try_block && coreblock_25 )} ;
+   backblock_26 : dynamic_boolean {( try_block && coreblock_26 )} ;
+   backblock_35 : dynamic_boolean {( try_block && coreblock_35 )} ;
 
    #core points-done blockers
-   coreblock_20 : dynamic_boolean {( opt_hone_aye && point_yell_open )} ;
+   try_block : dynamic_boolean {( opt_hone_aye && !has_visited "r25" && !gamestate_thug_gone )} ;
+
+   roomdone_00 : dynamic_boolean {( point_herd_all )} ;
+   roomdone_01 : dynamic_boolean {( point_dumb_parable )} ;
+   roomdone_02 : dynamic_boolean {( point_pitch_earning )} ;
+   roomdone_03 : dynamic_boolean {( point_tufty_key )} ;
+   roomdone_04 : dynamic_boolean {( point_me_growth )} ;
+   roomdone_10 : dynamic_boolean {( point_say_four )} ;
+   roomdone_11 : dynamic_boolean {( point_duh_losing )} ;
+   roomdone_12 : dynamic_boolean {( point_coin_ovations )} ;
+   roomdone_13 : dynamic_boolean {( point_whee_plucky )} ;
+   roomdone_14 : dynamic_boolean {( point_cloth_robbing )} ;
+   roomdone_20 : dynamic_boolean {( point_yell_open )} ;
+   roomdone_21 : dynamic_boolean {( point_halt_error && point_fell_asleep )} ;
+   roomdone_22 : dynamic_boolean {( point_free_crusty )} ;
+   roomdone_23 : dynamic_boolean {( point_frame_easily )} ;
+   roomdone_24 : dynamic_boolean {( point_warm_acres )} ;
+   roomdone_30 : dynamic_boolean {( point_door_cloud )} ;
+   roomdone_31 : dynamic_boolean {( point_hate_rash )} ;
+   roomdone_32 : dynamic_boolean {( point_dump_liars )} ;
+   roomdone_33 : dynamic_boolean {( point_say_loaners )} ;
+   roomdone_34 : dynamic_boolean {( point_ply_towels )} ;
+   roomdone_40 : dynamic_boolean {( point_heard_all )} ;
+   roomdone_41 : dynamic_boolean {( point_cue_bland )} ;
+   roomdone_42 : dynamic_boolean {( point_girl_only )} ;
+   roomdone_43 : dynamic_boolean {( point_flow_tripling )} ;
+   roomdone_44 : dynamic_boolean {( point_tense_ops )} ;
+
+   roomdone_15 : dynamic_boolean {( point_right_angles )} ;
+   roomdone_25 : dynamic_boolean {( point_tune_out )} ;
+   roomdone_26 : dynamic_boolean {( point_bah_slumping )} ;
+   roomdone_35 : dynamic_boolean {( point_broke_lass )} ;
+
+   coreblock_00 : dynamic_boolean {( roomdone_00 )} ;
+   coreblock_01 : dynamic_boolean {( roomdone_00 && roomdone_01 && roomdone_02 )} ;
+   coreblock_02 : dynamic_boolean {( roomdone_02 )} ;
+   coreblock_03 : dynamic_boolean {( roomdone_03 && roomdone_04 )} ;
+   coreblock_04 : dynamic_boolean {( roomdone_04 )} ;
+   coreblock_10 : dynamic_boolean {( roomdone_10 )} ;
+   coreblock_11 : dynamic_boolean {( coreblock_01 && coreblock_21 )} ;
+   coreblock_12 : dynamic_boolean {( roomdone_12 && coreblock_13 )} ;
+   coreblock_13 : dynamic_boolean {( roomdone_13 && coreblock_14 && coreblock_03 )} ;
+   coreblock_14 : dynamic_boolean {( roomdone_14 )} ;
+   coreblock_20 : dynamic_boolean {( roomdone_20 )} ;
+   coreblock_21 : dynamic_boolean {( roomdone_21 && coreblock_11 && coreblock_31 )} ;
+   coreblock_22 : dynamic_boolean {( roomdone_22 && coreblock_21 )} ;
+   coreblock_23 : dynamic_boolean {( roomdone_23 && coreblock_22 )} ;
+   coreblock_24 : dynamic_boolean {( roomdone_24 && coreblock_23 )} ;
+   coreblock_30 : dynamic_boolean {( roomdone_30 && coreblock_40 )} ;
+   coreblock_31 : dynamic_boolean {( roomdone_31 && coreblock_30 && coreblock_41 && coreblock_32 )} ;
+   coreblock_32 : dynamic_boolean {( roomdone_32 && coreblock_33 )} ;
+   coreblock_33 : dynamic_boolean {( roomdone_33 && coreblock_43 && coreblock_34 )} ;
+   coreblock_34 : dynamic_boolean {( roomdone_34 && coreblock_44 )} ;
+   coreblock_40 : dynamic_boolean {( roomdone_40 )} ;
+   coreblock_41 : dynamic_boolean {( roomdone_41 )} ;
+   coreblock_42 : dynamic_boolean {( roomdone_42 )} ;
+   coreblock_43 : dynamic_boolean {( roomdone_43 && coreblock_42 )} ;
+   coreblock_44 : dynamic_boolean {( roomdone_44 )} ;
+
+   coreblock_15 : dynamic_boolean {( roomdone_15 )} ;
+   coreblock_25 : dynamic_boolean {( roomdone_25 && coreblock_15 && coreblock_35 )} ;
+   coreblock_26 : dynamic_boolean {( roomdone_26 )} ;
+   coreblock_35 : dynamic_boolean {( roomdone_35 )} ;
 
    #bonus points-done blockers
    bonusblock_20 : dynamic_boolean {( opt_hone_aye && point_yell_open )} ;
 
-   # blocker dynamic booleans
-   r20_hone_block : dynamic_boolean {( opt_hone_aye )} ;
 
    # think variables
    already_got_command : boolean "false" ;
@@ -3029,7 +3120,7 @@ barriers {
 
    block_go_r21 : block {
       location = r21
-      block_when = goblock_21
+      block_when_not = point_yell_open
       message = THE DOOR blocks you.
    }
 
@@ -3138,15 +3229,160 @@ barriers {
    }
 
    # block going with HONE/bonus
+   block_core_r00 : block {
+      location = r00
+      block_when = backblock_00
+      message = You got the cats together. They'll be available when needed.
+   }
+   block_core_r01 : block {
+      location = r01
+      block_when = backblock_01
+      message = You have done everything you needed to the south.
+   }
+   block_core_r02 : block {
+      location = r02
+      block_when = backblock_02
+      message = You got the riches from the titan in the pit.
+   }
+   block_core_r03 : block {
+      location = r03
+      block_when = backblock_03
+      message = You found the key and interpreted the message beyond it.
+   }
+   block_core_r04 : block {
+      location = r04
+      block_when = backblock_04
+      message = You interpreted the message.
+   }
+
+   block_core_r10 : block {
+      location = r10
+      block_when = backblock_10
+      message = You got the oars. They'll be available when needed.
+   }
+   block_core_r11 : block {
+      location = r11
+      block_when = backblock_11
+      message = You have done everything you needed to the south.
+   }
+   block_core_r12 : block {
+      location = r12
+      block_when = backblock_12
+      message = You have done all you needed to past the judges.
+   }
+   block_core_r13 : block {
+      location = r13
+      block_when = backblock_13
+      message = You have done all you needed to past the bros.
+   }
+   block_core_r14 : block {
+      location = r14
+      block_when = backblock_14
+      message = You got the cloth from under the claw.
+   }
+
    block_core_r20 : block {
       location = r20
-      block_when = coreblock_20
+      block_when = backblock_20
       message = You have nothing left to do back where you started.
+   }
+   block_core_r21 : block {
+      location = r21
+      block_when = backblock_21
+      message = {blockstr_go_fwd}
+   }
+   block_core_r22 : block {
+      location = r22
+      block_when = backblock_22
+      message = You're done in the back areas. Time to go forward.
+   }
+   block_core_r23 : block {
+      location = r23
+      block_when = backblock_23
+      message = You're done in the back areas. Time to go forward.
+   }
+   block_core_r24 : block {
+      location = r24
+      block_when = backblock_24
+      message = You're done in the back areas. Time to go forward.
+   }
+
+   block_core_r30 : block {
+      location = r30
+      block_when = backblock_30
+      message = You have done everything you needed behind the door.
+   }
+   block_core_r31 : block {
+      location = r31
+      block_when = backblock_31
+      message = You have done everything you needed to the north.
+   }
+   block_core_r32 : block {
+      location = r32
+      block_when = backblock_32
+      message = You got what you needed from the isle and the (ex-)sops.
+   }
+   block_core_r33 : block {
+      location = r33
+      block_when = backblock_33
+      message = You got what you needed from the isle and the (ex-)sops.
+   }
+   block_core_r34 : block {
+      location = r34
+      block_when = backblock_34
+      message = You helped the ten sops. They don't need any more.
+   }
+
+   block_core_r40 : block {
+      location = r40
+      block_when = backblock_40
+      message = You acquired canine friends and won't need to go back to poke around for them.
+   }
+   block_core_r41 : block {
+      location = r41
+      block_when = backblock_41
+      message = You took care of Ace, Inc.
+   }
+   block_core_r42 : block {
+      location = r42
+      block_when = backblock_42
+      message = You got a companion on the isle.
+   }
+   block_core_r43 : block {
+      location = r43
+      block_when = backblock_43
+      message = You got a companion on the isle.
+   }
+   block_core_r44 : block {
+      location = r44
+      block_when = backblock_44
+      message = You helped the ten sops. They don't need any more.
+   }
+
+   block_core_r26 : block {
+      location = r26
+      block_when = backblock_26
+      message = This is the end of your journey.
+   }
+   block_core_r25 : block {
+      location = r25
+      block_when = backblock_25
+      message = {blockstr_endgame_npcs}.
+   }
+   block_core_r15 : block {
+      location = r15
+      block_when = backblock_15
+      message = {blockstr_endgame_npcs}.
+   }
+   block_core_r35 : block {
+      location = r35
+      block_when = backblock_35
+      message = You showed the mage the book, and that's enough.
    }
 
    # block going with HONE/core
    block_bonus_r20 : block {
-      location = r21
+      location = r20
       block_when = bonusblock_20
       message = You have nothing left to do back where you started.
    }
