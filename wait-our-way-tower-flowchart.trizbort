@@ -33,11 +33,11 @@
 			<dock index="0" id="3" port="s" />
 			<dock index="1" id="2" port="n" />
 		</line>
-		<room id="12" name="Bleah Stable" subtitle="" x="448" y="-768" w="96" h="64" region="NoRegion" handDrawn="yes" allcornersequal="yes" ellipse="no" roundedCorners="no" octagonal="no" cornerTopLeft="15" cornerTopRight="15" cornerBottomLeft="15" cornerBottomRight="15" borderstyle="Solid" description="" roomFill="" secondFill="" secondFillLocation="Bottom" roomBorder="" roomLargeText="" roomSubtitleColor="" roomSmallText="" ZOrder="0" />
-		<room id="15" name="True Pleading" subtitle="" x="448" y="-896" w="96" h="64" region="NoRegion" handDrawn="yes" allcornersequal="yes" ellipse="no" roundedCorners="no" octagonal="no" cornerTopLeft="15" cornerTopRight="15" cornerBottomLeft="15" cornerBottomRight="15" borderstyle="Solid" isEndRoom="yes" description="" roomFill="" secondFill="" secondFillLocation="Bottom" roomBorder="" roomLargeText="" roomSubtitleColor="" roomSmallText="" ZOrder="0" />
+		<room id="12" name="Bleah Stable" subtitle="" x="608" y="-896" w="96" h="64" region="NoRegion" handDrawn="yes" allcornersequal="yes" ellipse="no" roundedCorners="no" octagonal="no" cornerTopLeft="15" cornerTopRight="15" cornerBottomLeft="15" cornerBottomRight="15" borderstyle="Solid" description="" roomFill="" secondFill="" secondFillLocation="Bottom" roomBorder="" roomLargeText="" roomSubtitleColor="" roomSmallText="" ZOrder="0" />
+		<room id="15" name="True Pleading" subtitle="" x="608" y="-768" w="96" h="64" region="NoRegion" handDrawn="yes" allcornersequal="yes" ellipse="no" roundedCorners="no" octagonal="no" cornerTopLeft="15" cornerTopRight="15" cornerBottomLeft="15" cornerBottomRight="15" borderstyle="Solid" isEndRoom="yes" description="" roomFill="" secondFill="" secondFillLocation="Bottom" roomBorder="" roomLargeText="" roomSubtitleColor="" roomSmallText="" ZOrder="0" />
 		<line id="16" name="" description="" flow="oneWay">
-			<dock index="0" id="12" port="n" />
-			<dock index="1" id="15" port="s" />
+			<dock index="0" id="12" port="s" />
+			<dock index="1" id="15" port="n" />
 		</line>
 		<room id="17" name="Field Erring" subtitle="" x="-192" y="-640" w="96" h="64" region="NoRegion" handDrawn="yes" allcornersequal="yes" ellipse="no" roundedCorners="no" octagonal="no" cornerTopLeft="15" cornerTopRight="15" cornerBottomLeft="15" cornerBottomRight="15" borderstyle="Solid" description="" roomFill="" secondFill="" secondFillLocation="Bottom" roomBorder="" roomLargeText="" roomSubtitleColor="" roomSmallText="" ZOrder="0" />
 		<line id="18" name="" description="" flow="oneWay">
@@ -75,14 +75,10 @@
 			<dock index="0" id="27" port="n" />
 			<dock index="1" id="31" port="s" />
 		</line>
-		<room id="33" name="Boss Lumping" subtitle="" x="448" y="-640" w="96" h="64" region="Partials" handDrawn="yes" allcornersequal="yes" ellipse="no" roundedCorners="no" octagonal="no" cornerTopLeft="15" cornerTopRight="15" cornerBottomLeft="15" cornerBottomRight="15" borderstyle="Solid" description="" roomFill="" secondFill="" secondFillLocation="Bottom" roomBorder="" roomLargeText="" roomSubtitleColor="" roomSmallText="" ZOrder="0" />
+		<room id="33" name="Tune Out" subtitle="" x="448" y="-640" w="96" h="64" region="NoRegion" handDrawn="yes" allcornersequal="yes" ellipse="no" roundedCorners="no" octagonal="no" cornerTopLeft="15" cornerTopRight="15" cornerBottomLeft="15" cornerBottomRight="15" borderstyle="Solid" description="" roomFill="" secondFill="" secondFillLocation="Bottom" roomBorder="" roomLargeText="" roomSubtitleColor="" roomSmallText="" ZOrder="0" />
 		<line id="34" name="" description="" flow="oneWay">
 			<dock index="0" id="31" port="n" />
 			<dock index="1" id="33" port="s" />
-		</line>
-		<line id="35" name="" description="" flow="oneWay">
-			<dock index="0" id="33" port="n" />
-			<dock index="1" id="12" port="s" />
 		</line>
 		<room id="36" name="Dump Arable" subtitle="" x="-352" y="-512" w="96" h="64" region="NoRegion" handDrawn="yes" allcornersequal="yes" ellipse="no" roundedCorners="no" octagonal="no" cornerTopLeft="15" cornerTopRight="15" cornerBottomLeft="15" cornerBottomRight="15" borderstyle="Solid" description="" roomFill="" secondFill="" secondFillLocation="Bottom" roomBorder="" roomLargeText="" roomSubtitleColor="" roomSmallText="" ZOrder="0" />
 		<line id="37" name="" description="" flow="oneWay">
@@ -313,6 +309,20 @@
 		<line id="114" name="" description="" flow="oneWay">
 			<dock index="0" id="25" port="nnw" />
 			<dock index="1" id="33" port="ssw" />
+		</line>
+		<room id="115" name="Say Mentoring" subtitle="" x="448" y="-896" w="96" h="64" region="NoRegion" handDrawn="yes" allcornersequal="yes" ellipse="no" roundedCorners="no" octagonal="no" cornerTopLeft="15" cornerTopRight="15" cornerBottomLeft="15" cornerBottomRight="15" borderstyle="Solid" description="" roomFill="" secondFill="" secondFillLocation="Bottom" roomBorder="" roomLargeText="" roomSubtitleColor="" roomSmallText="" ZOrder="0" />
+		<line id="117" name="" description="" flow="oneWay">
+			<dock index="0" id="115" port="e" />
+			<dock index="1" id="12" port="w" />
+		</line>
+		<room id="35" name="Boss Lumping" subtitle="" x="448" y="-768" w="96" h="64" region="Partials" handDrawn="yes" allcornersequal="yes" ellipse="no" roundedCorners="no" octagonal="no" cornerTopLeft="15" cornerTopRight="15" cornerBottomLeft="15" cornerBottomRight="15" borderstyle="Solid" description="" roomFill="" secondFill="" secondFillLocation="Bottom" roomBorder="" roomLargeText="" roomSubtitleColor="" roomSmallText="" ZOrder="0" />
+		<line id="118" name="" description="" flow="oneWay">
+			<dock index="0" id="33" port="n" />
+			<dock index="1" id="35" port="s" />
+		</line>
+		<line id="119" name="" description="" flow="oneWay">
+			<dock index="0" id="35" port="n" />
+			<dock index="1" id="115" port="s" />
 		</line>
 	</map>
 	<settings>

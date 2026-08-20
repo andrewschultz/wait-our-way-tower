@@ -146,6 +146,8 @@ The tough tiki isn't just going to give you what you want.
 
 > E
 
+The meager oath isn't much. It's got some bad grammar. But it means well, or people who say it can mean well.
+
 > ME GROWTH (1)
 
 > N
@@ -162,11 +164,11 @@ This is why we waited to go here. You needed the pliers for this.
 > E
 > E
 
-You still have some riches left. The sail owners have questions.
+You still have some riches left. The sail owners have questions. You aren't rich enough to be an owner, but...
 
 > SAY LOANERS (1)
 
-Of course not an actual sailboat! But it gets you on the water.
+Of course the Mo' Tried Moat Ride is not an actual sailboat! But it gets you on the water.
 
 > N
 
@@ -215,9 +217,11 @@ You have the key, so you can ask for the...
 
 > N
 
-D'aww, Gold dog, old!
+So dogs may appear here, but you just might not be very approachable yet.
 
 > SHAPE UP (1)
+
+D'aww, Gold dog, old!
 
 > HEARD ALL (1)
 
@@ -228,9 +232,20 @@ D'aww, Gold dog, old!
 > S
 > W
 
+What hides behind the flight wraps? 
+
 > FLY TRAPS (1)
+
+Have you found anything that could cut down the fly traps, or maybe someone somebody who could? Yes, you have.
+
 > VINE EATER (1)
+
+The cat chasing things is doing a very bad job.
+
 > CATCH ACING (1)
+
+You get the sense the cat has other friends that might follow it and trust you.
+
 > HERD ALL (1)
 
 > E
@@ -238,20 +253,27 @@ D'aww, Gold dog, old!
 > N
 > E
 
+Now we're going to go E through the center, which leads to the end game. You wind up in a field, airing. You're just worried you'll make mistakes. And they will compound.
+
 > FEEL DARING (1)
+
+The freak, rusty maybe feels this way too. Maybe you can give them a new perspective on who they are or who they can be.
+
 > FREE CRUSTY (1)
 > E
+
+The Frey, measly isn't really something drastic yet, but you can find a way to settle it. You will need some confidence from a previous puzzle you solved. Which you already have.
+
 > FRAME EASILY (1)
 > E
+
+You can finally break the cold hearts of the war makers. Well, you and the friends you've picked up along the way.
+
 > WARM ACRES (1)
 
 > E
 
-This is the endgame now, out of the 5x5 map.
-
-===========================================================
-
-Okay, so the thug is now chasing you.
+We have made it to the endgame now, out of the 5x5 map. If you leave, the thug chases you.
 
 > W
 > Z
@@ -260,7 +282,7 @@ Okay, so the thug is now chasing you.
 
 You need the thug to catch you once to say this, so you know what to look for.
 
-You may try it now, and you may notice you are not close to potential loops. Where can one be?
+You may try it now, and you may notice you are not close to potential loops. Where can one be? I have tried to make it so some areas are pretty cool we blocked off and cannot be part of a loop. But it may not be super intuitive. You can bring the thug along, and any points you score, it will be dazed and not attack you. You also can get killed by the thug as many times as needed, and you cannot double back past the thug.
 
 > E
 > W
@@ -271,7 +293,7 @@ You may try it now, and you may notice you are not close to potential loops. Whe
 > E
 > E
 
-The Bros are at it again!
+The Bros are at it again! They weep "lucky."
 
 > WHEE PLUCKY (1)
 
@@ -283,22 +305,27 @@ The Bros are at it again!
 
 Why here? This is the only place that could really hold a loop, or loops. None of the four places can be enclosed. The bottom right is the only place to go. You could use trial and error, too.
 
-==================================================================================
+> N
 
-We're officially in the endgame now that we've disposed of the Thug 'Round the Ground.
+Or any direction, really. What this does is trigger one more thing to mess with your mind.
 
+"TO NOWT!" Well, that's intimidating.
+
+> TUNE OUT (1)
+
+Now you can go in all three directions, but of course starting one way is quicker than starting the others.
 
 > N
 
-Here in Bro Class, there's a lot to do. Let's change the major gent a bit first.
+Here in Bro Class, there's a lot to do. Let's change the major gent a bit first. He's one of the good guys, but as is, he will get on people's nerves and not get much stuff done.
 
-Cheap joke "Males are too emotional to lead."
+(Cheap joke "Males are too emotional to lead.")
 
 > MAGE URGENT (1)
 
 Okay, he's overcompensated for being a bit too polite, now. Waiting for the one to come and show him the way.
 
-Perhaps you've been listening to too many lovesongs that ask "How can I make you see," which all deny agency and whatnot.
+(Perhaps you've been listening to too many lovesongs that ask "How can I make you see," which all deny agency and whatnot.) <- add to game
 
 > S
 
@@ -310,32 +337,38 @@ There's also a book called THE GAMES. You can guess the bonus point.
 
 > RIGHT ANGLES (1)
 
-"But it's a book! It already has four of them!"
+"But it's a book! It already has four of them! One at each corner!"
 
-Now the gent/mage is at least capable of seeing his own mistakes and fixing them.
+Well, now the gent/mage is at least capable of seeing his own mistakes and fixing them.
+
+> N
 
 > N
 
-> N
+Someone is hiding away from the pro class, who got trapped by the thug somehow, and this is the lesser of the two evils. But with the thug gone, it's just kind of bad.
 
 > BROKE LASS (1)
 
 > S
 > E
 
-You can't ENFORCE basic decency, after all.
-
 The boss, lumping all your thoughts together...
 
+You can't ENFORCE basic decency, but you can push back against mind games like this one more time...
+
 > BAH SLUMPING (1)
+
+But of course there's one more thing to do. There's always one more thing to do. The door that says same entering just keeps kicking you back to where you are. There's no real reason for running into the door continually, except that it does give progressive hints.
+
+> SAY MENTORING (1)
 
 > E
 
 A bleah stable! Shouldn't you just sit in a corner and be grateful you have anything at all? What? You want to do more, even though you're an unexciting person who just plays text adventure games, when you could be ... well, anything?
 
-Be grateful for all your possessions. Also, know possessions don't mean much.
+"Be grateful for all your possessions. Also, know possessions don't mean much.
 
-Also, don't be self-centered and shallow, but be very grateful to me for throwing out these aphorisms.
+Also, don't be self-centered and shallow, but be very grateful to me for throwing out these aphorisms."
 
 > BLEST ABLE (1)
 
