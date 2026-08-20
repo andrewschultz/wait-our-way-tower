@@ -3409,7 +3409,7 @@ subroutines {
 
    take_inventory : subroutine {
       : if (score < 2) {
-         : print "Nothing." ;
+         : print "Nothing in your hands." ;
          : return ;
       }
       : if (score == 2) {
@@ -3440,11 +3440,14 @@ subroutines {
          : print "The tough tiki left you a tufty key." ;
       }
       : if (is_carried "vie_neater") {
-         : print "You have that promise to {puz_point_vie_neater} you got from the cube land." ;
+         : print "You have that coupon promising to {puz_point_vie_neater} you got from the cube land." ;
       }
       : if (point_say_four && !point_say_loaners) {
          : print "The four oars you bought are waiting {here_r10} until you buy a suitable craft." ;
          : set_true "inventory_intangibles" ;
+      }
+      : if (is_carried "riches") {
+         : print {( point_say_four ? "You still have some riches left over from the titan and the pit." : "You have some riches the titan left in the pit." )} ;
       }
       : if (point_me_growth && !point_tense_ops) {
          : print "You felt some growth from the meager oath but didn't find anywhere to share or use it meaningfully yet." ;
