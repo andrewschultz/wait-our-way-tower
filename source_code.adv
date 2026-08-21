@@ -4134,9 +4134,36 @@ subroutines {
       : set_true "point_duh_losing" ;
       : set_true "point_hate_rash" ;
       : set_integer var="score" "7" ;
+      : goto "r31" ;
+      : goto "r11" ;
    }
 
    testjump_part_2 : subroutine {
+      : goto "r00" ;
+      : goto "r01" ;
+      : goto "r02" ;
+      : goto "r03" ;
+      : goto "r04" ;
+      : goto "r10" ;
+      : goto "r11" ;
+      : goto "r12" ;
+      : goto "r13" ;
+      : goto "r14" ;
+      : goto "r20" ;
+      : goto "r21" ;
+      : goto "r22" ;
+      : goto "r23" ;
+      : goto "r24" ;
+      : goto "r30" ;
+      : goto "r31" ;
+      : goto "r32" ;
+      : goto "r33" ;
+      : goto "r34" ;
+      : goto "r40" ;
+      : goto "r41" ;
+      : goto "r42" ;
+      : goto "r43" ;
+      : goto "r44" ;
       : set_true "point_hate_rash" ;
       : set_true "point_duh_losing" ;
       : set_true "point_dry_vendors" ;
