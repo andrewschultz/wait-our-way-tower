@@ -366,6 +366,7 @@ strings {
    txt_on_off : dynamic_string {( opt_on_off ? "<ON<#f0f>>" : "<OFF<#f0f>>" )} ;
    roomto : string "r20" ;
 
+   temproom : string "" ;
    lastroom : string "" ;
 
 }
@@ -1133,7 +1134,7 @@ booleans {
    coreblock_03 : dynamic_boolean {( roomdone_03 && roomdone_04 )} ;
    coreblock_04 : dynamic_boolean {( roomdone_04 )} ;
    coreblock_10 : dynamic_boolean {( roomdone_10 )} ;
-   coreblock_11 : dynamic_boolean {( coreblock_01 && coreblock_21 )} ;
+   coreblock_11 : dynamic_boolean {( coreblock_01 && coreblock_12 && coreblock_10 )} ;
    coreblock_12 : dynamic_boolean {( roomdone_12 && coreblock_13 )} ;
    coreblock_13 : dynamic_boolean {( roomdone_13 && coreblock_14 && coreblock_03 )} ;
    coreblock_14 : dynamic_boolean {( roomdone_14 )} ;
@@ -3837,122 +3838,152 @@ subroutines {
 
    gotos : subroutine {
       : match "00 _;* 00" {
+         : set_boolean var="tempblockbool" {( coreblock_00 )} ;
          : set_string var="roomto" {( "r00" )} ;
          : gosub "goto_basic_check" ;
       }
       : match "01 _;* 01" {
+         : set_boolean var="tempblockbool" {( coreblock_01 )} ;
          : set_string var="roomto" {( "r01" )} ;
          : gosub "goto_basic_check" ;
       }
       : match "02 _;* 02" {
+         : set_boolean var="tempblockbool" {( coreblock_02 )} ;
          : set_string var="roomto" {( "r02" )} ;
          : gosub "goto_basic_check" ;
       }
       : match "03 _;* 03" {
+         : set_boolean var="tempblockbool" {( coreblock_03 )} ;
          : set_string var="roomto" {( "r03" )} ;
          : gosub "goto_basic_check" ;
       }
       : match "04 _;* 04" {
+         : set_boolean var="tempblockbool" {( coreblock_04 )} ;
          : set_string var="roomto" {( "r04" )} ;
          : gosub "goto_basic_check" ;
       }
       : match "10 _;* 10" {
+         : set_boolean var="tempblockbool" {( coreblock_10 )} ;
          : set_string var="roomto" {( "r10" )} ;
          : gosub "goto_basic_check" ;
       }
       : match "11 _;* 11" {
+         : set_boolean var="tempblockbool" {( coreblock_11 )} ;
          : set_string var="roomto" {( "r11" )} ;
          : gosub "goto_basic_check" ;
       }
       : match "12 _;* 12" {
+         : set_boolean var="tempblockbool" {( coreblock_12 )} ;
          : set_string var="roomto" {( "r12" )} ;
          : gosub "goto_basic_check" ;
       }
       : match "13 _;* 13" {
+         : set_boolean var="tempblockbool" {( coreblock_13 )} ;
          : set_string var="roomto" {( "r13" )} ;
          : gosub "goto_basic_check" ;
       }
       : match "14 _;* 14" {
+         : set_boolean var="tempblockbool" {( coreblock_14 )} ;
          : set_string var="roomto" {( "r14" )} ;
          : gosub "goto_basic_check" ;
       }
       : match "15 _;* 15" {
+         : set_boolean var="tempblockbool" {( coreblock_15 )} ;
          : set_string var="roomto" {( "r15" )} ;
          : gosub "goto_basic_check" ;
       }
       : match "20 _;* 20" {
+         : set_boolean var="tempblockbool" {( coreblock_20 )} ;
          : set_string var="roomto" {( "r20" )} ;
          : gosub "goto_basic_check" ;
       }
       : match "21 _;* 21" {
+         : set_boolean var="tempblockbool" {( coreblock_21 )} ;
          : set_string var="roomto" {( "r21" )} ;
          : gosub "goto_basic_check" ;
       }
       : match "22 _;* 22" {
+         : set_boolean var="tempblockbool" {( coreblock_22 )} ;
          : set_string var="roomto" {( "r22" )} ;
          : gosub "goto_basic_check" ;
       }
       : match "23 _;* 23" {
+         : set_boolean var="tempblockbool" {( coreblock_23 )} ;
          : set_string var="roomto" {( "r23" )} ;
          : gosub "goto_basic_check" ;
       }
       : match "24 _;* 24" {
+         : set_boolean var="tempblockbool" {( coreblock_24 )} ;
          : set_string var="roomto" {( "r24" )} ;
          : gosub "goto_basic_check" ;
       }
       : match "25 _;* 25" {
+         : set_boolean var="tempblockbool" {( coreblock_25 )} ;
          : set_string var="roomto" {( "r25" )} ;
          : gosub "goto_basic_check" ;
       }
       : match "26 _;* 26" {
+         : set_boolean var="tempblockbool" {( coreblock_26 )} ;
          : set_string var="roomto" {( "r26" )} ;
          : gosub "goto_basic_check" ;
       }
       : match "27 _;* 27" {
+         : set_false var="tempblockbool" ;
          : set_string var="roomto" {( "r27" )} ;
          : gosub "goto_basic_check" ;
       }
       : match "30 _;* 30" {
+         : set_boolean var="tempblockbool" {( coreblock_30 )} ;
          : set_string var="roomto" {( "r30" )} ;
          : gosub "goto_basic_check" ;
       }
       : match "31 _;* 31" {
+         : set_boolean var="tempblockbool" {( coreblock_31 )} ;
          : set_string var="roomto" {( "r31" )} ;
          : gosub "goto_basic_check" ;
       }
       : match "32 _;* 32" {
+         : set_boolean var="tempblockbool" {( coreblock_32 )} ;
          : set_string var="roomto" {( "r32" )} ;
          : gosub "goto_basic_check" ;
       }
       : match "33 _;* 33" {
+         : set_boolean var="tempblockbool" {( coreblock_33 )} ;
          : set_string var="roomto" {( "r33" )} ;
          : gosub "goto_basic_check" ;
       }
       : match "34 _;* 34" {
+         : set_boolean var="tempblockbool" {( coreblock_34 )} ;
          : set_string var="roomto" {( "r34" )} ;
          : gosub "goto_basic_check" ;
       }
       : match "35 _;* 35" {
+         : set_boolean var="tempblockbool" {( coreblock_35 )} ;
          : set_string var="roomto" {( "r35" )} ;
          : gosub "goto_basic_check" ;
       }
       : match "40 _;* 40" {
+         : set_boolean var="tempblockbool" {( coreblock_40 )} ;
          : set_string var="roomto" {( "r40" )} ;
          : gosub "goto_basic_check" ;
       }
       : match "41 _;* 41" {
+         : set_boolean var="tempblockbool" {( coreblock_41 )} ;
          : set_string var="roomto" {( "r41" )} ;
          : gosub "goto_basic_check" ;
       }
       : match "42 _;* 42" {
+         : set_boolean var="tempblockbool" {( coreblock_42 )} ;
          : set_string var="roomto" {( "r42" )} ;
          : gosub "goto_basic_check" ;
       }
       : match "43 _;* 43" {
+         : set_boolean var="tempblockbool" {( coreblock_43 )} ;
          : set_string var="roomto" {( "r43" )} ;
          : gosub "goto_basic_check" ;
       }
       : match "44 _;* 44" {
+         : set_boolean var="tempblockbool" {( coreblock_44 )} ;
          : set_string var="roomto" {( "r44" )} ;
          : gosub "goto_basic_check" ;
       }
