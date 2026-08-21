@@ -361,9 +361,10 @@ strings {
    plus_in_header : dynamic_string {( think_any ? "+{commands_figured}" : "" )} ;
    first_or_second : dynamic_string {( first_half ? "first" : "second" )} ;
 
-   #auxiliary for options
+   #auxiliary for options/GOTO
    tempopt : string "" ;
    txt_on_off : dynamic_string {( opt_on_off ? "<ON<#f0f>>" : "<OFF<#f0f>>" )} ;
+   roomto : string "r20" ;
 
    lastroom : string "" ;
 
@@ -1093,7 +1094,7 @@ booleans {
    backblock_35 : dynamic_boolean {( try_block && coreblock_35 )} ;
 
    #core points-done blockers
-   try_block : dynamic_boolean {( opt_hone_aye && !has_visited "r25" && !gamestate_thug_gone )} ;
+   try_block : dynamic_boolean {( opt_hone_aye && (!has_visited "r25" || !gamestate_thug_gone) )} ;
 
    roomdone_00 : dynamic_boolean {( point_herd_all )} ;
    roomdone_01 : dynamic_boolean {( point_dumb_parable )} ;
@@ -3772,398 +3773,142 @@ subroutines {
          : print "Sorry, I'm going to make you run through the thug chase." ;
          : done ;
       }
+      : if (!has_visited(roomto)) {
+         : if (!has_visited "r25" && (roomto == "r15" || roomto == "r25" || roomto == "r35" || roomto == "r26" || roomto == "r27")) {
+            : print "That's an endgame room, but you haven't made it to the endgame yet." ;
+         } : else {
+            : print "You haven't been there yet." ;
+         }
+         : done ;
+      }
+      : if (is_at(roomto)) {
+         : print "You're already there/here!" ;
+         : done ;
+      }
+      : goto {( roomto )} ;
+      : redescribe ;
    }
 
    gotos : subroutine {
       : match "00 _;* 00" {
+         : set_string var="roomto" {( "r00" )} ;
          : gosub "goto_basic_check" ;
-         : if (!has_visited("r00")) {
-            : print "You haven't visited there yet." ;
-            : done ;
-         }
-         : if (is_at("r00")) {
-            : print "You are already there/here!" ;
-            : done ;
-         }
-         : goto "r00" ;
-         : redescribe ;
       }
       : match "01 _;* 01" {
+         : set_string var="roomto" {( "r01" )} ;
          : gosub "goto_basic_check" ;
-         : if (!has_visited("r01")) {
-            : print "You haven't visited there yet." ;
-            : done ;
-         }
-         : if (is_at("r01")) {
-            : print "You are already there/here!" ;
-            : done ;
-         }
-         : goto "r01" ;
-         : redescribe ;
       }
       : match "02 _;* 02" {
+         : set_string var="roomto" {( "r02" )} ;
          : gosub "goto_basic_check" ;
-         : if (!has_visited("r02")) {
-            : print "You haven't visited there yet." ;
-            : done ;
-         }
-         : if (is_at("r02")) {
-            : print "You are already there/here!" ;
-            : done ;
-         }
-         : goto "r02" ;
-         : redescribe ;
       }
       : match "03 _;* 03" {
+         : set_string var="roomto" {( "r03" )} ;
          : gosub "goto_basic_check" ;
-         : if (!has_visited("r03")) {
-            : print "You haven't visited there yet." ;
-            : done ;
-         }
-         : if (is_at("r03")) {
-            : print "You are already there/here!" ;
-            : done ;
-         }
-         : goto "r03" ;
-         : redescribe ;
       }
       : match "04 _;* 04" {
+         : set_string var="roomto" {( "r04" )} ;
          : gosub "goto_basic_check" ;
-         : if (!has_visited("r04")) {
-            : print "You haven't visited there yet." ;
-            : done ;
-         }
-         : if (is_at("r04")) {
-            : print "You are already there/here!" ;
-            : done ;
-         }
-         : goto "r04" ;
-         : redescribe ;
       }
       : match "10 _;* 10" {
+         : set_string var="roomto" {( "r10" )} ;
          : gosub "goto_basic_check" ;
-         : if (!has_visited("r10")) {
-            : print "You haven't visited there yet." ;
-            : done ;
-         }
-         : if (is_at("r10")) {
-            : print "You are already there/here!" ;
-            : done ;
-         }
-         : goto "r10" ;
-         : redescribe ;
       }
       : match "11 _;* 11" {
+         : set_string var="roomto" {( "r11" )} ;
          : gosub "goto_basic_check" ;
-         : if (!has_visited("r11")) {
-            : print "You haven't visited there yet." ;
-            : done ;
-         }
-         : if (is_at("r11")) {
-            : print "You are already there/here!" ;
-            : done ;
-         }
-         : goto "r11" ;
-         : redescribe ;
       }
       : match "12 _;* 12" {
+         : set_string var="roomto" {( "r12" )} ;
          : gosub "goto_basic_check" ;
-         : if (!has_visited("r12")) {
-            : print "You haven't visited there yet." ;
-            : done ;
-         }
-         : if (is_at("r12")) {
-            : print "You are already there/here!" ;
-            : done ;
-         }
-         : goto "r12" ;
-         : redescribe ;
       }
       : match "13 _;* 13" {
+         : set_string var="roomto" {( "r13" )} ;
          : gosub "goto_basic_check" ;
-         : if (!has_visited("r13")) {
-            : print "You haven't visited there yet." ;
-            : done ;
-         }
-         : if (is_at("r13")) {
-            : print "You are already there/here!" ;
-            : done ;
-         }
-         : goto "r13" ;
-         : redescribe ;
       }
       : match "14 _;* 14" {
+         : set_string var="roomto" {( "r14" )} ;
          : gosub "goto_basic_check" ;
-         : if (!has_visited("r14")) {
-            : print "You haven't visited there yet." ;
-            : done ;
-         }
-         : if (is_at("r14")) {
-            : print "You are already there/here!" ;
-            : done ;
-         }
-         : goto "r14" ;
-         : redescribe ;
       }
       : match "15 _;* 15" {
+         : set_string var="roomto" {( "r15" )} ;
          : gosub "goto_basic_check" ;
-         : if (!has_visited("r15")) {
-            : print "You haven't visited there yet." ;
-            : done ;
-         }
-         : if (is_at("r15")) {
-            : print "You are already there/here!" ;
-            : done ;
-         }
-         : goto "r15" ;
-         : redescribe ;
       }
       : match "20 _;* 20" {
+         : set_string var="roomto" {( "r20" )} ;
          : gosub "goto_basic_check" ;
-         : if (!has_visited("r20")) {
-            : print "You haven't visited there yet." ;
-            : done ;
-         }
-         : if (is_at("r20")) {
-            : print "You are already there/here!" ;
-            : done ;
-         }
-         : goto "r20" ;
-         : redescribe ;
       }
       : match "21 _;* 21" {
+         : set_string var="roomto" {( "r21" )} ;
          : gosub "goto_basic_check" ;
-         : if (!has_visited("r21")) {
-            : print "You haven't visited there yet." ;
-            : done ;
-         }
-         : if (is_at("r21")) {
-            : print "You are already there/here!" ;
-            : done ;
-         }
-         : goto "r21" ;
-         : redescribe ;
       }
       : match "22 _;* 22" {
+         : set_string var="roomto" {( "r22" )} ;
          : gosub "goto_basic_check" ;
-         : if (!has_visited("r22")) {
-            : print "You haven't visited there yet." ;
-            : done ;
-         }
-         : if (is_at("r22")) {
-            : print "You are already there/here!" ;
-            : done ;
-         }
-         : goto "r22" ;
-         : redescribe ;
       }
       : match "23 _;* 23" {
+         : set_string var="roomto" {( "r23" )} ;
          : gosub "goto_basic_check" ;
-         : if (!has_visited("r23")) {
-            : print "You haven't visited there yet." ;
-            : done ;
-         }
-         : if (is_at("r23")) {
-            : print "You are already there/here!" ;
-            : done ;
-         }
-         : goto "r23" ;
-         : redescribe ;
       }
       : match "24 _;* 24" {
+         : set_string var="roomto" {( "r24" )} ;
          : gosub "goto_basic_check" ;
-         : if (!has_visited("r24")) {
-            : print "You haven't visited there yet." ;
-            : done ;
-         }
-         : if (is_at("r24")) {
-            : print "You are already there/here!" ;
-            : done ;
-         }
-         : goto "r24" ;
-         : redescribe ;
       }
       : match "25 _;* 25" {
+         : set_string var="roomto" {( "r25" )} ;
          : gosub "goto_basic_check" ;
-         : if (!has_visited("r25")) {
-            : print "You haven't visited there yet." ;
-            : done ;
-         }
-         : if (is_at("r25")) {
-            : print "You are already there/here!" ;
-            : done ;
-         }
-         : goto "r25" ;
-         : redescribe ;
       }
       : match "26 _;* 26" {
+         : set_string var="roomto" {( "r26" )} ;
          : gosub "goto_basic_check" ;
-         : if (!has_visited("r26")) {
-            : print "You haven't visited there yet." ;
-            : done ;
-         }
-         : if (is_at("r26")) {
-            : print "You are already there/here!" ;
-            : done ;
-         }
-         : goto "r26" ;
-         : redescribe ;
       }
       : match "27 _;* 27" {
+         : set_string var="roomto" {( "r27" )} ;
          : gosub "goto_basic_check" ;
-         : if (!has_visited("r27")) {
-            : print "You haven't visited there yet." ;
-            : done ;
-         }
-         : if (is_at("r27")) {
-            : print "You are already there/here!" ;
-            : done ;
-         }
-         : goto "r27" ;
-         : redescribe ;
       }
       : match "30 _;* 30" {
+         : set_string var="roomto" {( "r30" )} ;
          : gosub "goto_basic_check" ;
-         : if (!has_visited("r30")) {
-            : print "You haven't visited there yet." ;
-            : done ;
-         }
-         : if (is_at("r30")) {
-            : print "You are already there/here!" ;
-            : done ;
-         }
-         : goto "r30" ;
-         : redescribe ;
       }
       : match "31 _;* 31" {
+         : set_string var="roomto" {( "r31" )} ;
          : gosub "goto_basic_check" ;
-         : if (!has_visited("r31")) {
-            : print "You haven't visited there yet." ;
-            : done ;
-         }
-         : if (is_at("r31")) {
-            : print "You are already there/here!" ;
-            : done ;
-         }
-         : goto "r31" ;
-         : redescribe ;
       }
       : match "32 _;* 32" {
+         : set_string var="roomto" {( "r32" )} ;
          : gosub "goto_basic_check" ;
-         : if (!has_visited("r32")) {
-            : print "You haven't visited there yet." ;
-            : done ;
-         }
-         : if (is_at("r32")) {
-            : print "You are already there/here!" ;
-            : done ;
-         }
-         : goto "r32" ;
-         : redescribe ;
       }
       : match "33 _;* 33" {
+         : set_string var="roomto" {( "r33" )} ;
          : gosub "goto_basic_check" ;
-         : if (!has_visited("r33")) {
-            : print "You haven't visited there yet." ;
-            : done ;
-         }
-         : if (is_at("r33")) {
-            : print "You are already there/here!" ;
-            : done ;
-         }
-         : goto "r33" ;
-         : redescribe ;
       }
       : match "34 _;* 34" {
+         : set_string var="roomto" {( "r34" )} ;
          : gosub "goto_basic_check" ;
-         : if (!has_visited("r34")) {
-            : print "You haven't visited there yet." ;
-            : done ;
-         }
-         : if (is_at("r34")) {
-            : print "You are already there/here!" ;
-            : done ;
-         }
-         : goto "r34" ;
-         : redescribe ;
       }
       : match "35 _;* 35" {
+         : set_string var="roomto" {( "r35" )} ;
          : gosub "goto_basic_check" ;
-         : if (!has_visited("r35")) {
-            : print "You haven't visited there yet." ;
-            : done ;
-         }
-         : if (is_at("r35")) {
-            : print "You are already there/here!" ;
-            : done ;
-         }
-         : goto "r35" ;
-         : redescribe ;
       }
       : match "40 _;* 40" {
+         : set_string var="roomto" {( "r40" )} ;
          : gosub "goto_basic_check" ;
-         : if (!has_visited("r40")) {
-            : print "You haven't visited there yet." ;
-            : done ;
-         }
-         : if (is_at("r40")) {
-            : print "You are already there/here!" ;
-            : done ;
-         }
-         : goto "r40" ;
-         : redescribe ;
       }
       : match "41 _;* 41" {
+         : set_string var="roomto" {( "r41" )} ;
          : gosub "goto_basic_check" ;
-         : if (!has_visited("r41")) {
-            : print "You haven't visited there yet." ;
-            : done ;
-         }
-         : if (is_at("r41")) {
-            : print "You are already there/here!" ;
-            : done ;
-         }
-         : goto "r41" ;
-         : redescribe ;
       }
       : match "42 _;* 42" {
+         : set_string var="roomto" {( "r42" )} ;
          : gosub "goto_basic_check" ;
-         : if (!has_visited("r42")) {
-            : print "You haven't visited there yet." ;
-            : done ;
-         }
-         : if (is_at("r42")) {
-            : print "You are already there/here!" ;
-            : done ;
-         }
-         : goto "r42" ;
-         : redescribe ;
       }
       : match "43 _;* 43" {
+         : set_string var="roomto" {( "r43" )} ;
          : gosub "goto_basic_check" ;
-         : if (!has_visited("r43")) {
-            : print "You haven't visited there yet." ;
-            : done ;
-         }
-         : if (is_at("r43")) {
-            : print "You are already there/here!" ;
-            : done ;
-         }
-         : goto "r43" ;
-         : redescribe ;
       }
       : match "44 _;* 44" {
+         : set_string var="roomto" {( "r44" )} ;
          : gosub "goto_basic_check" ;
-         : if (!has_visited("r44")) {
-            : print "You haven't visited there yet." ;
-            : done ;
-         }
-         : if (is_at("r44")) {
-            : print "You are already there/here!" ;
-            : done ;
-         }
-         : goto "r44" ;
-         : redescribe ;
       }
    }
 
