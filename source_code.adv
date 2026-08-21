@@ -1205,8 +1205,9 @@ booleans {
    think_any : dynamic_boolean {( commands_figured > 0 )} ;
 
    # auxiliary
-   tats_blurry  : boolean "false" ;
-   show_overlay : boolean "true" ;
+   tats_blurry   : boolean "false" ;
+   show_overlay  : boolean "true" ;
+   tempblockbool : boolean "true" ;
 
    # testing
    tats_each_move : boolean "false" ;
@@ -3784,6 +3785,51 @@ subroutines {
       : if (is_at(roomto)) {
          : print "You're already there/here!" ;
          : done ;
+      }
+      : if (opt_hone_aye && tempblockbool) {
+         : set_string var="temproom" {( current_location() )} ;
+         : while (temproom != "r25" && temproom != roomto ) {
+            : if (temproom == "r00" || temproom == "r02") {
+               : set_string var="temproom" {( "r01" )} ;
+            } : else_if (temproom == "r10" || temproom == "r01" || temproom == "r12") {
+               : set_string var="temproom" {( "r11" )} ;
+            } : else_if (temproom == "r13") {
+               : set_string var="temproom" {( "r12" )} ;
+            } : else_if (temproom == "r14" || temproom == "r03") {
+               : set_string var="temproom" {( "r13" )} ;
+            } : else_if (temproom == "r04") {
+               : set_string var="temproom" {( "r03" )} ;
+            } : else_if (temproom == "r20" || temproom == "r11" || temproom == "r31") {
+               : set_string var="temproom" {( "r21" )} ;
+            } : else_if (temproom == "r21") {
+               : set_string var="temproom" {( "r22" )} ;
+            } : else_if (temproom == "r22") {
+               : set_string var="temproom" {( "r23" )} ;
+            } : else_if (temproom == "r23") {
+               : set_string var="temproom" {( "r24" )} ;
+            } : else_if (temproom == "r24") {
+               : set_string var="temproom" {( "r25" )} ;
+            } : else_if (temproom == "r30" || temproom == "r41" || temproom == "r32") {
+               : set_string var="temproom" {( "r31" )} ;
+            } : else_if (temproom == "r33") {
+               : set_string var="temproom" {( "r32" )} ;
+            } : else_if (temproom == "r43" || temproom == "r34") {
+               : set_string var="temproom" {( "r33" )} ;
+            } : else_if (temproom == "r40") {
+               : set_string var="temproom" {( "r30" )} ;
+            } : else_if (temproom == "r42") {
+               : set_string var="temproom" {( "r43" )} ;
+            } : else_if (temproom == "r44") {
+               : set_string var="temproom" {( "r34" )} ;
+            } : else {
+               : print "Search failed at {temproom}. This is a bug." ;
+               : done ;
+            }
+         }
+         : if (temproom != roomto) {
+            : print "You are done in that area, so with {vo_hone_aye} on, I won't send you there." ;
+            : done ;
+         }
       }
       : goto {( roomto )} ;
       : redescribe ;
