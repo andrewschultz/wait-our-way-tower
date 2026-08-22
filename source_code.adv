@@ -1648,7 +1648,7 @@ locations {
             : done ;
          }
          : if (!point_coin_ovations) {
-            : match "co _;_ innovations;_inovations" {
+            : match "co _;_ innovations;_ inovations" {
                : print "Right idea, but \"co\" wouldn't quite work. Look for something more concrete." ;
             }
          }
@@ -2072,7 +2072,7 @@ locations {
    }
    r22 : location "{r22_loc}" header="{r22_header}" {
       on_command {
-         : match "_ freak;_rusty" {
+         : match "_ freak;_ rusty" {
             : print {( point_free_crusty ? "They seem happier now you've helped them reframe their life." : "They don't need to be reminded of their weaknesses. They maybe need to restate how things are. It's not their fault. (Small voice: it's mine, actually. But I hope I--and you--make things turn out okay for them in the end.)" )} ;
             : done ;
          }
@@ -2846,7 +2846,7 @@ locations {
             : done ;
          }
          : if (point_seek_rest && !point_girl_only) {
-            : match "_ grr;_lonely;listen _" {
+            : match "_ grr;_ grrr;_ lonely ;listen _" {
                : print "The GRR seems artificial. You can't put your finger on it." ;
                : done ;
             }
@@ -4769,7 +4769,17 @@ on_command {
 
    : gosub "inventory_nouns" ;
    : gosub "gotos" ;
-   : match "bah _;blest _;broke _;can _;catch _;chest _;cloth _;coin _;cue _;door _;dry _;duh _;dumb _;dump _;eh _;feel _;fell _;fey _;flow _;fly _;frame _;free _;girl _;halt _;hate _;heard _;herd _;mage _;me _;no _;pitch _;ply _;pose _;read _;right _;say _;seek _;shape _;sun _;tense _;thief _;tightened _;troop _;tufty _;tune _;vine _;warm _;whee _;yell _" { #obfuscation of non solutions, regular points
+   : match "bah _;blest _;broke _;can _;catch _;chest _;cloth _;coin _;cue _;door _;dry _;duh _;dumb _;dump _;eh _;feel _;fell _;fey _;flow _;fly _;frame _;free _;girl _;halt _;hate _;heard _;herd _;mage _;me _;no _;pitch _;ply _;pose _;right _;say _;seek _;shape _;sun _;tense _;thief _;tightened _;troop _;tufty _;tune _;vine _;warm _;whee _;yell _" { #obfuscation of non solutions, regular points
+      : print "{custom_unknown_verb_error}" ;
+      : done ;
+   }
+
+   : match "co _;loners _;queue _;read _;sail _;sink _;sync _;we _;wee _" { #obfuscation of good guesses, regular points
+      : print "{custom_unknown_verb_error}" ;
+      : done ;
+   }
+
+   : match "thug _" { #obfuscation of bonus points
       : print "{custom_unknown_verb_error}" ;
       : done ;
    }
