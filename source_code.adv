@@ -2265,7 +2265,10 @@ locations {
       }
       on_describe {
          : if (!gamestate_thug_gone && !gamestate_thug_chase) {
-            : print "The {trtg} has its eye on you!" ;
+            : if (!gamestate_thug_activated) {
+               : print "Oh no! An intimidating type glares down on you! Based on how it paces around, and indications not seen in the  graphic above, you know it must be a {trtg}." ;
+               : set_true "gamestate_thug_activated" ;
+            }
             : set_true "gamestate_thug_chase" ;
             : set_string var="lastroom" text="null" ;
             : set_false "gamestate_thug_pass" ;
@@ -4341,6 +4344,7 @@ on_tick {
       : set_false "gamestate_thug_chase" ;
       : destroy "thug" ;
       : press_any_key ;
+      : update_graphic ;
       : done ;
    }
    : if (gamestate_thug_chase && !is_present("thug")) {
@@ -4356,7 +4360,9 @@ on_tick {
             : create "thug" target="r25" ;
             : set_false "gamestate_thug_chase" ;
             : set_true "gamestate_fail_oops_known" ;
-            : update_graphic ;
+            : if (!is_at "r25") {
+               : update_graphic ;
+            }
             : done ;
          }
          : set_string var="lastroom" {( previous_location() )} ;
