@@ -5204,6 +5204,14 @@ on_render {
          : overlay "s_thug" x="112" y="13" ;
       }
    }
+   : if (is_at "end_zone") {
+      : if (point_mage_urgent && !point_bah_slumping) {
+         : overlay "s_mage" x="183" y="10" ;
+      }
+      : if (point_broke_lass && !point_bah_slumping) {
+         : overlay "s_lass" x="42" y="10" ;
+      }
+   }
    : if (point_girl_only && !point_warm_acres) {
       : overlay "s_girl" x="119" y="19" ;
    }
