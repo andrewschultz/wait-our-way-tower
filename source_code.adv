@@ -3840,27 +3840,27 @@ subroutines {
    }
 
    gotos : subroutine {
-      : match "00 _;* 00" {
+      : match "00 _;* 00;0 _;_ 0" {
          : set_boolean var="tempblockbool" {( coreblock_00 )} ;
          : set_string var="roomto" {( "r00" )} ;
          : gosub "goto_basic_check" ;
       }
-      : match "01 _;* 01" {
+      : match "01 _;* 01;1 _;_ 1" {
          : set_boolean var="tempblockbool" {( coreblock_01 )} ;
          : set_string var="roomto" {( "r01" )} ;
          : gosub "goto_basic_check" ;
       }
-      : match "02 _;* 02" {
+      : match "02 _;* 02;2 _;_ 2" {
          : set_boolean var="tempblockbool" {( coreblock_02 )} ;
          : set_string var="roomto" {( "r02" )} ;
          : gosub "goto_basic_check" ;
       }
-      : match "03 _;* 03" {
+      : match "03 _;* 03;3 _;_ 3" {
          : set_boolean var="tempblockbool" {( coreblock_03 )} ;
          : set_string var="roomto" {( "r03" )} ;
          : gosub "goto_basic_check" ;
       }
-      : match "04 _;* 04" {
+      : match "04 _;* 04;4 _;_ 4" {
          : set_boolean var="tempblockbool" {( coreblock_04 )} ;
          : set_string var="roomto" {( "r04" )} ;
          : gosub "goto_basic_check" ;
@@ -4774,6 +4774,10 @@ on_command {
    }
 
    : gosub "inventory_nouns" ;
+
+   # comment out before release
+   : gosub "testing_stuff" ;
+
    : gosub "gotos" ;
    : match "bah _;blest _;broke _;can _;catch _;chest _;cloth _;coin _;cue _;door _;dry _;duh _;dumb _;dump _;eh _;feel _;fell _;fey _;flow _;fly _;frame _;free _;girl _;halt _;hate _;heard _;herd _;mage _;me _;no _;pitch _;ply _;pose _;right _;say _;seek _;shape _;sun _;tense _;thief _;tightened _;troop _;tufty _;tune _;vine _;warm _;whee _;yell _" { #obfuscation of non solutions, regular points
       : print "{custom_unknown_verb_error}" ;
@@ -4790,7 +4794,6 @@ on_command {
       : done ;
    }
 
-   : gosub "testing_stuff" ;
 }
 
 on_render {
