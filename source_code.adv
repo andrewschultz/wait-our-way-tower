@@ -29,8 +29,18 @@ strings {
    my_score : string "{score}{plus_in_header}/{max_score}" ;
    custom_unknown_verb_error : dynamic_string {( "Nothing special happens. You can use {vm_verbs} for a general overview of standard verbs." )} ;
    exits_err : dynamic_string {(
+      (is_at "r00" || is_at "r10" || is_at "r42") ? "Back east only." :
+      (is_at "r01" || is_at "r33") ? "This is a T intersection, north-east-west." :
+      (is_at "r02" || is_at "r04" || is_at "r14" || is_at "r27") ? "Back west only." :
+      (is_at "r03" || is_at "r30") ? "The passage bends north to east." :
+      is_at "r13" ? "This is a T intersection, south-east-west." :
+      is_at "r15" ? "Back north only." :
       is_at "r20" ? "THE DOOR east is the only exit." :
-      is_at "r21" ? "Can't go that way." :
+      (is_at "r11" || is_at "r21" || is_at "r25" || is_at "r31") ? "Only the four main directions." :
+      (is_at "r12" || is_at "r22" || is_at "r23" || is_at "r24" || is_at "r26" || is_at "r32") ? "The path runs east-west." :
+      is_at "r34" ? "The passage bends north to west." :
+      (is_at "r35" || is_at "r40" || is_at "r41" || is_at "r44") ? "Back south only." :
+      is_at "r43" ? "Rowing any way other than south or west might leave you lost." :
       "Can't go that way."
       )} ;
 
