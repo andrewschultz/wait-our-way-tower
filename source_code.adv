@@ -1733,8 +1733,12 @@ locations {
          }
       }
    }
-   r13 : location "{r13_loc}" header="{r13_header}" {
+   r13 : location "{r13_loc}" header="{r13_header}" graphic="r13_0" {
       on_command {
+         : match "listen _" {
+            : print {( gamestate_bros_blocking ? "The bros' chat is depressing really even if you can refute it." : "Nice and quiet with the bros gone." )} ;
+            : done ;
+         }
          : if (gamestate_bros_blocking) {
             : match "_ gah;_ bros;_ bag;_ rows" {
                : print "They sort of stand between the south and east passages, ready to step in one if you want to go forward.\nYou probably can't deal with the bros by logic. While you doubt they'll turn violent, but you've met people like this, who wear you down from doing simple things you want, making you feel bad you have some purpose, however unclear, and they don't. (Or vice versa.)" ;
@@ -5145,6 +5149,20 @@ on_render {
       }
    } : else_if (is_at "r12") {
    } : else_if (is_at "r13") {
+      : if (gamestate_bros_blocking) {
+         : overlay "s13_left" x="1" y="2" ;
+         : overlay "s13_left" x="18" y="4" ;
+         : overlay "s13_left" x="35" y="6" ;
+         : overlay "s13_left" x="52" y="8" ;
+         : overlay "s13_mid" x="69" y="10" ;
+         : overlay "s13_mid" x="86" y="12" ;
+         : overlay "s13_mid" x="103" y="12" ;
+         : overlay "s13_mid" x="120" y="10" ;
+         : overlay "s13_right" x="137" y="8" ;
+         : overlay "s13_right" x="154" y="6" ;
+         : overlay "s13_right" x="171" y="4" ;
+         : overlay "s13_right" x="188" y="2" ;
+      }
    } : else_if (is_at "r14") { # background doesn't change. We just tack on passage north.
       : if (point_fey_loops) {
          : overlay "s14_fey" x="110" y="13" ;
@@ -5303,6 +5321,11 @@ assets {
 
       r11_0 : base64_png "iVBORw0KGgoAAAANSUhEUgAAAQAAAAAoAgMAAABslMwaAAAADFBMVEUAAACAAACAgID///8RDQO6AAABHElEQVR4Xu3QMY6DMBQE0I8lN2mouAQt7ZdAmwPEUjz3YW+yJcotUqTjME5PsWIt2BX2h19uwTRIRnoeD2HNlbl9KDIxP7HmD3Bv2xQgSoFpemUBV5blFuiJzBYIIdgs4JumSQukFcZxrPIAM2+AYQbqDcDMeQBxgxRIN0AeuJWlBgjhLQD3ptEA4/gSAK/doJIA7QYSgJtugzck4Krb4CkCTreBFQHongAZ6DRAsQN4cwz01Q4AdwxY7AG4ROCLLr9APFj+YB/4WN7pImBdBOyyz+cB4OJ9FUBmBoAZ6AnwsZM9AGDmmsWPRUR2/QDdLPRIgbRCgWy6TAEQ0gpDlQd8HQscAK7uIcQMVgGArAQ4ggCo83+BEziBE/gGljv/U/2/mNAAAAAASUVORK5CYII=" ;
       s11_o : base64_png "iVBORw0KGgoAAAANSUhEUgAAAQAAAAAoAQMAAAArNLbKAAAABlBMVEX///8AgABuQUs1AAAAAXRSTlMAQObYZgAAAQpJREFUeF6t0zFOxDAQheF/shYYZK0ciSIFQlkqSpeUZkHUHAE4wZaUs7BCKTnSQkvJBTgKEiKSi4nT8LV+xTxrhn/QzT1GKjzzeqocmaoG3qg4ApQKmQ/UEwL49Z5Ji3WE24THFAmPQAaHqYdmLGvKjASTAnCNfGPjUPngiqpnAJlqofwKMkQMvtUEeHz36THEry4SwcV0HDCku+B7wPGKw9Dz8PdXL84O9O+QCaKEHYZVQjTRoVxiOkXGo7CHnF/+OOYqAm195QZAZYtpqwIIVUoLZc2Ti7ImDLRECilQ8AwIm3Kq3aqceYnSUJAzeFIKmYZSWm6CsdmF8xsqRBb3B3tVpgg0GZTCD9vqIt4XElXGAAAAAElFTkSuQmCC" ;
+
+      r13_0 : base64_png "iVBORw0KGgoAAAANSUhEUgAAAQAAAAAoBAMAAADj1Dm6AAAAD1BMVEUAAAAAgADAwMCHzuv///9iw5sXAAAA8UlEQVR4XuzOsQkAIBQD0Q9mIMEFUvz9Z1Jr+9jcQSDlq/W5HAAAAAAAAAAAAGDW24gC+i0LcLVsn1XfKykL2OWQAQoDIQwE7eEDXF9Q85IA+f+bqmmPkwapWqpAhyAiQmZXPBeExetVngK0ivsrvy8CTq9yEK0VcFcDTnYIZHY2YDkoDQgkANQAQOxooETP409ugEOhc33DABfvj7UAZ8TrGIGPAdD+ltBHYG43YFEfWGDVBgQ0fj5PVGCQOBFfCeJZ49sG5gUwQBDLjMDsfgRnmRCIpv9h6p3fCWCHgClgnYAtYIcAbRagivSPAvEHAg91+PxAb5Bd+wAAAABJRU5ErkJggg==" ;
+      s13_left : base64_png "iVBORw0KGgoAAAANSUhEUgAAAA8AAAAdBAMAAACH5ivpAAAAD1BMVEX/AP8AAABAQEC1ZR3/AADaifdmAAAAAXRSTlMAQObYZgAAAF1JREFUeF6Fy4EJgDAMRNFkg5zdoBtI3MDuP5OXC4hAwQjc40vtc8HTApA8M8/akfxAjaRC4DXW3bjWEpyFr/RPgQnoPeaUokowGEt4AUDBVGpVbF9g/gN17IGu7z1gbgtSDD5FSwAAAABJRU5ErkJggg==" ;
+      s13_mid : base64_png "iVBORw0KGgoAAAANSUhEUgAAAA0AAAAbBAMAAABVShjJAAAAD1BMVEX/AP8AAACAgID/AAD///83sWAYAAAAAXRSTlMAQObYZgAAAFlJREFUeF59zOEJgDAQg9HcBgl0AbtCXaB4+89kroKCiPfn5aNQIHwoJNVomUlA2bJNItJjoszLY1yOsVs0N23Us4XERe8bn38ZbtC6LVb7VuOjiV9V8+29TxuTDMX6mRWAAAAAAElFTkSuQmCC" ;
+      s13_right : base64_png "iVBORw0KGgoAAAANSUhEUgAAAA8AAAAdBAMAAACH5ivpAAAAD1BMVEX/AP8AAADAwMDStJb/AAD8zcAwAAAAAXRSTlMAQObYZgAAAF5JREFUeF6FysENgDAMQ9Fkg5hu0A2qsAHdfyZiVyAOlcjFT1+xz0WdFoDkmTm4rWVLlLgZQj6Y18I5p+BVhvH4Kziw9uhdCpaoYFXCCQCEqXBVbF9g/gN17IFV37sBYA4LUqsTd6QAAAAASUVORK5CYII=" ;
 
       r14_0 : base64_png "iVBORw0KGgoAAAANSUhEUgAAAQAAAAAoBAMAAADj1Dm6AAAAJFBMVEUAAACAAAAAgADAwMCA//+AQADggECAgICAAMD/AAD//wAAAP8kaVR/AAABaklEQVR4XmJwGWBAQweMOmDUAaMOGHWAAwMU0NcBCNsRgK4OQNiNACz0cQDCelJcACiu7FEjhoEo/FBl4SpV2kGwBwi5iWFPsJAr5Aoq1c4VUrmfy0Ur/wjjndhGiv0VA1Kh92lAGri64DVOpbIAKQLmJAGChjlHADqqQLdc37rCBpg9PUDew/0FXUEDCAe5/0lRA44LFHYDHEB1BPRG3HQzQkAsiKWqgM5KAMYhlQKBAoXp7oYKBIq7MFtcJIDIUPJL1/4E+icBQ0PJUaSNhfoCZMOQ7VKZ47SZUF0ANiBaTK+B5kB1ItUW4IBYkBLjOmeSNo6qChAYJgmMd8ci9gwBoPE2tNIzhJkDwD8DX4nHZ+Lj7cn7d+SYQLf6kt2CZ74HRMBtgcAqRRtMqx2C9x6NiA0iHLHhqIDLrBzcNj4CL2KxW8BFNs7P198l0Hjpud0vUBWfkB4yCuAigXYUgL1IQC4WSHBiS+AX3CZR3Bcz5ToAAAAASUVORK5CYII=" ;
       s14_fey : base64_png "iVBORw0KGgoAAAANSUhEUgAAABsAAAATAQMAAABbSeR7AAAABlBMVEX///+AQABEjof7AAAAAXRSTlMAQObYZgAAADdJREFUCB0FwLEJgDAAAMHjJ3BkR8soKS21UxAjrbVmEITZjgaCJqODvceS7ZPrFbcgTkFMMQQ/xzkRp6jRbqcAAAAASUVORK5CYII=" ;
