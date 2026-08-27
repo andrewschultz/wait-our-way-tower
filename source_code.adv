@@ -1177,7 +1177,6 @@ booleans {
    coreblock_35 : dynamic_boolean {( roomdone_35 )} ;
 
    #bonus points-done blockers
-   bonusblock_20 : dynamic_boolean {( opt_hone_aye && point_yell_open )} ;
 
 
    # think variables
@@ -3422,12 +3421,6 @@ barriers {
       message = You showed the mage the book, and that's enough.
    }
 
-   # block going with HONE/core
-   block_bonus_r20 : block {
-      location = r20
-      block_when = bonusblock_20
-      message = You have nothing left to do back where you started.
-   }
 }
 
 subroutines {
@@ -4294,6 +4287,12 @@ on_startup {
 ## Execute this every time a player moves or redescribes a location
 
 on_describe {
+   : if (!bonus_point_lo_maps && (is_at "r11" || is_at "r31")) {
+      : if (has_visited "r11" && has_visited "r31") {
+         : print "That's the second loam apse. Maybe it's there for a reason." ;
+         : done ;
+      }
+   }
    : if (is_present "only_girl") {
       : print "The girl from the isle, {puz_point_her_doll} in hand, is here." ;
    } : else_if (girl_present) {
@@ -4330,7 +4329,20 @@ on_describe {
 ## Test VERB NOUN that the player types and executes conditional actions
 
 on_tick {
-  : if (tats_each_move) {
+   : if (!bonus_point_lo_maps && (is_at "r11" || is_at "r31")) {
+      : match "lo maps;low maps" {
+         : print "You search the loam apse, and you make extra sure to search low, and what do you know? You find some maps of ... this exact area! How curious! Everywhere you've been is filled in." ;
+         : print {( has_visited "r25" ? "They're not VERY useful now, but you feel smart having gotten so far without using them." : "This'll be handy to keep track of!" )} ;
+         : print "You can use the command {vm_map} to see them at any time, or just <M<#f80>>." ;
+         : gosub "add_bonus_point" ;
+         : done ;
+      }
+      : match "_ maps;lo _;low _" {
+         : print "You feel like something interesting and useful should be behind the loam apse, but you don't know how to look, yet." ;
+         : done ;
+      }
+   }
+   : if (tats_each_move) {
       : gosub "set_tats_num" ;
       : print "Tats num this turn {my_tats_num}." ;
    }
