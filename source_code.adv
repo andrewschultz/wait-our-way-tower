@@ -4419,6 +4419,15 @@ on_command {
       }
    }
    : gosub "noun_keywords" ;
+   : if (is_at "r33" || is_at "r43") {
+      : match "_ aw;_ flake;_ off;_ lake" {
+         : if (is_at "r33") {
+            : print {( "Aw-Flake-Off-Lake houses all manner of people looking for leisure. It's really packed. " + ( has_visited "r43" ? "But you've found adventure beyond." : "Maybe there's something for you." ) )} ;
+         } : else {
+            : print {( "It's pretty " + (point_flow_tripling ? "active here now you figured how to speed things up, but there are plenty of places to go ashore and pause if the currnt is too much." : "calm now. What could be beyond?") )} ;
+         }
+      }
+   }
    : if (girl_present) {
       # HERD ALL for the cats
       : match "herd all" {
