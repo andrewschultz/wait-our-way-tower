@@ -86,7 +86,10 @@ strings {
    # links for credits
    cred_aj : string "<Andrew Apted<#0f0>>[https://andrewj.itch.io]" ;
    cred_ca : string "<Chris Ainsley<#0f0>>[https://adventuron.itch.io/]" ;
+   cred_de : string "<Doug Egan<#0f0>>[https://dougegan2.itch.io]" ;
    cred_lp : string "<Lamp Post Projects<#0f0>>[https://lamppostprojects.itch.io/]" ;
+   cred_mr : string "<Mike Russo<#0f0>>[https://russo2116gmailcom.itch.io/]" ;
+   cred_sh : string "<Stefan Hoffmann<#0f0>>[https://interactive-onions.io:5474/] (<IFDBs<#0f0>>[https://ifdb.org/search?searchfor=author%3AStefan+Hoffmann])" ;
 
    # puzzle strings
    puz_point_ace_inc        : dynamic_string {( opt_color_coding ? "<Ace, Inc.<#f8f>>" : "Ace, Inc." )}             ; # 26
@@ -4586,7 +4589,7 @@ on_command {
       : print "Directional text is color-coded, too. <RED<#f00>> means you need to solve a puzzle to go a certain way. <GREEN<#0f0>> means you've been that way. <YELLOW<#ff0>> means you can go that way but haven't, yet." ;
    }
    : match "credits _;credit _" {
-      : print "Thanks to {cred_aj} and {cred_lp} for testing." ;
+      : print "Thanks to, in alphabetical order, {cred_aj}, {cred_de}, {cred_sh}, {cred_lp}, and {cred_mr} for testing. I was behind schedule, and they found a lot, including very good points I wasn't able to fully address in the IFComp release." ;
       : print "Thanks to IFComp administrators past and present and to reviewers and judges past and present. Without them, I would not have dived into this enjoyable (hey, at least for me) nonsense." ;
       : print "Thanks to {cred_ca} for creating Adventuron." ;
       : if (!credits_yet) {
