@@ -379,6 +379,7 @@ strings {
    txt_on_off : dynamic_string {( opt_on_off ? "<ON<#f0f>>" : "<OFF<#f0f>>" )} ;
    roomto : string "r20" ;
 
+   tempstr  : string "" ;
    temproom : string "" ;
    lastroom : string "" ;
 
@@ -2278,7 +2279,14 @@ locations {
          }
          : if (gamestate_thug_gone && !point_tune_out) {
             : match "n _;s _;e _" {
-               : print {( !gamestate_tried_beyond_r25 ? "As you approach that passage, the words {puz_point_to_nowt} light up beneath your feet. You don't see them down the other two passages. Ugh! Then you hear a voice kick in." : "The words {puz_point_to_nowt} again light up under your passage only. The voice continues." )} ;
+               : if (verb_is "east") {
+                  : print "East" ;
+               }
+               : if (noun1_is "east") {
+                  : print "East" ;
+               }
+               : set_string var="tempstr" {( verb_is "east" ? "east" : verb_is "south" ? "south" : "north" )}
+               : print {( !gamestate_tried_beyond_r25 ? ("As you approach the {tempstr} passage, the words {puz_point_to_nowt} light up beneath your feet. You don't see them down the other two passages. Ugh! Then you hear a voice kick in.") : "The words {puz_point_to_nowt} again light up under the {tempstr} passage. The voice continues." )} ; #?? THAT is not very descriptive. We can do better.
                : set_true "gamestate_tried_beyond_r25" ;
             }
          }
