@@ -5175,6 +5175,9 @@ on_render {
    } : else_if (is_at "r15") {
    } : else_if (is_at "r25") {
    } : else_if (is_at "r26") {
+      : if (!point_bah_slumping) {
+         : overlay "s_boss" x="96" y="0" ;
+      }
    } : else_if (is_at "r27") {
    } : else_if (is_at "r35") {
    }
