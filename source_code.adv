@@ -3740,11 +3740,11 @@ subroutines {
 
    odd_dir_note : subroutine {
       : match "se _;sw _;ne _;nw _" {
-         : print "You don't need to use diagonal directions. Only the four main cardinal directions, and (where indicated) up/down." ;
+         : print "You don't need to use diagonal directions. Only the four main cardinal directions are used here." ;
          : done ;
       }
       : match "u _;d _;enter _;in _;exit _;out _" {
-         : print "Only the four main cardinal directions are used here, and (only when indicated) up/down." ;
+         : print "Only the four main cardinal directions are used here. You never need to go up, down, in or out." ;
          : done ;
       }
    }
