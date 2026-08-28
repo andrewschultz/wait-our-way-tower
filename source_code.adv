@@ -2239,7 +2239,6 @@ locations {
             }
          }
       }
-
    }
    r25 : location "{r25_loc}" header="{r25_header}" graphic="r25_0" {
       on_command {
@@ -3561,6 +3560,7 @@ subroutines {
       : if (is_carried "dumb_pliers") {
          : match "_ dumb;_ pliers" {
             : print {( point_cloth_robbing ? "They got the job done. But you can't bring yourself to part with them yet. When the time comes, though..." : "Well, they look like they will get the job done, whatever that job is. You're kind of glad they don't have a lot of options. That might make them confusing. You wonder if this makes you dumb." )} ;
+            : done ;
          }
       }
       : if (is_carried "vie_neater") {
@@ -4840,6 +4840,11 @@ on_command {
    : gosub "testing_stuff" ;
 
    : gosub "gotos" ;
+
+   : match "weight _;_ weight;_ hour;hour _" {
+      : print "A hollow voice booms \"INTERESTING.\"" ;
+      : done ;
+   }
    : match "bah _;blest _;broke _;can _;catch _;chest _;cloth _;coin _;cue _;door _;dry _;duh _;dumb _;dump _;eh _;feel _;fell _;fey _;flow _;fly _;frame _;free _;girl _;halt _;hate _;heard _;herd _;mage _;me _;no _;pitch _;ply _;pose _;right _;say _;seek _;shape _;sun _;tense _;thief _;tightened _;troop _;tufty _;tune _;vine _;warm _;whee _;yell _" { #obfuscation of non solutions, regular points
       : print "{custom_unknown_verb_error}" ;
       : done ;
