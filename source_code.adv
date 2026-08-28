@@ -4275,13 +4275,17 @@ on_startup {
       : press_any_key ;
    }
    : gosub "colorclue_choice" ;
-   : print "You didn't want to do anything crazy on your three-day weekend. Goal, technically, achieved! You decided to start doomscrolling in order to stop daydreaming, because daydreaming is impractical, and then after 20 minutes of doomscrolling you started daydreaming again, and you felt bad about that, so you went and doomscrolled to another site, before you went back to daydreaming again. You finally managed to focus on a game you'd beaten several times before, one that felt really smart the first time winning but didn't afterwards. Then you followed several pro baseball box scores between teams you didn't care about. One game went to extra innings. You wanted to just go to bed but felt like a quitter doing so." ;
-   : print "You entertain some vague notion of having adventures, wild or not, where you don't have to win the lottery but maybe even just gain perspective you hadn't had before, in big or small matters." ;
-   : print "But there are other websites to visit that you haven't for a while. Sigh, trite site, right? you comment to yourself. Then you hear a whirling behind you and several ghostly shapes. You look behind you. \"But it's not EctoComp yet,\" you say. \"Who the heck are you?\"" ;
+   : print "You, Will Durness, didn't want to do anything crazy on your three-day weekend. Day one's going well! (Technically.)" ;
+   : press_any_key ;
+   : print "You decided to start doomscrolling in order to stop daydreaming, because daydreaming is impractical, and then after 20 minutes of doomscrolling you started daydreaming again, and you felt bad about that, so you went and doomscrolled to another site, before you went back to daydreaming again. You finally managed to focus on a game you'd beaten several times before, one that felt really smart the first time winning but didn't afterwards. Then you followed several pro baseball box scores between teams you didn't care about. One game went to extra innings. You wanted to just go to bed but felt like a quitter doing so." ;
+   : print "You entertain some vague notion of having adventures, wild or not, where you don't have to win the lottery but maybe even just gain perspective you hadn't had before, in big or small matters. But you recall people saying \"Stop fretting! Do what must be done! Be lucky you have all you have!\"" ;
+   : press_any_key;
+   : clear_screen ;
+   : print "To block them out, you visit websites you wasted time on in the past, feeling bad for the ones you forgot. Sigh, trite site, right? you comment to yourself. Then you hear a whirling behind you and several ghostly shapes. You look behind you. \"But it's not EctoComp yet,\" you say. \"Who the heck are you?\"" ;
    : print "You're not sure if one or all three of them say it. \"Come to Wait Our Way Tower. You will get what you want. Not enough of it of course.\" They point bony fingers at you. It is your choice." ;
    : press_any_key ;
    : clear_screen ;
-   : print "You might as well. As you follow them, you remember you forgot to put the laundry in the dryer four hours earlier. Tough luck. You ask them what it's about ..." ;
+   : print "Or is it? You might as well. As you follow them, you remember you forgot to put the laundry in the dryer four hours earlier. Tough luck. You ask them what it's about ..." ;
    : print "WORD RIFTING, they respond, drifting." ;
    : print "\"I know you are. Or gliding or whatever.\"" ;
    : print "\"NO. DRIFTING.\"" ;
@@ -4291,7 +4295,7 @@ on_startup {
    : print "You feel mesmerized as they guard you to the top of a tower. It's not a very big or tall tower, but it has more than one floor." ;
    : press_any_key ;
    : clear_screen ;
-   : print "You find yourself in a small room in the corner of the tower. The door you entered slams shut. How do I get out, you wonder. The y shrug. What is going on here?" ;
+   : print "You find yourself in a small room in the corner of the tower. The figures shrug as the door you entered slams shut. How do I get out, you wonder? What is going on here?" ;
    : print "Well, that's it. You are stuck in {wowtc}. But how long will you have to wait? And why?" ;
    : press_any_key ;
    : clear_screen ;
