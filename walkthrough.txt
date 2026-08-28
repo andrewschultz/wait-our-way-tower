@@ -2,10 +2,92 @@ Wait-Our-Way Tower author's walkthrough
 
 by Andrew Schultz blurglecruncheon@gmail.com
 
-** the towels can be given to the owls in parts
-You tell the oak what's what.
+I've written games with this mechanic before. This one's more thought-heavy than action-heavy, but it has some NPCs that follow you, for better or worse. Us Too and Why Pout are the two games I wrote in Inform 7 which follow this mechanic.
 
-"Canned, ooh," you think to yourself.
+Each core point-scoring action is a two-word command. One first word is reused, but it's a pretty common one.
+
+If you X TATS, you will have a hint device. I'll describe how it works below, but I'll give some space so as not to spoil it or the first point.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+X TATS gives you a 2-digit number. The tens digit tells you the number of letters in the first word. The ones digit tells you the number of letters in the second word.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+So for the first puzzle, it says 3-2. There aren't many such words.
+
+"Canned, ooh," you think to yourself. How do we get 3 letters/2 letters from that?
+
+(More space break to avoid spoilers)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 > CAN DO (1)
 
