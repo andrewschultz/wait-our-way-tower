@@ -19,7 +19,7 @@ game_information {
 
 strings {
    # top level
-   wowt : string "<Wait-Our-Way Tower<#f80>>" ;
+   wowtc : string "<WAIT-OUR-WAY TOWER<#f80>>" ;
    this_game : string "<Wait-Our-Way Tower<#f80>>" ;
    l_ut : string "<Us Too<#0f0>>[http://andrewschultz.itch.io/us-too]" ;
    l_wp : string "<Why Pout<#0f0>>[http://andrewschultz.itch.io/why-pout]" ;
@@ -4254,10 +4254,10 @@ themes {
 
    i_cant_do_that = You found a good guess for a point-scoring command elsewhere.\n(I should reject this more generically. Let me know in my GitHub repo.)
    not_present = You can't see ${entity} here.
-   ask_new_game                                   = Would you like to restart {wowt}?
-   ask_quit                                       = \"Sign out. *SIGH*, nowt!\", you mutter under your breath.\"\nDo you wish to quit {wowt}?
+   ask_new_game                                   = Would you like to restart {this_game}?
+   ask_quit                                       = \"Sign out. *SIGH*, nowt!\", you mutter under your breath.\"\nDo you wish to quit {this_game}?
    invalid_choice                                 = {yn_or_12_or_14}
-   post_quit = I hope you enjoyed the experience. Pressing {key_enter} will restart {wowt}.
+   post_quit = I hope you enjoyed the experience. Pressing {key_enter} will restart {this_game}.
    unknown_verb                                   = {custom_unknown_verb_error}
    you_cant_go_that_direction                     = {exits_err}
    you_see_nothing_special = {nospecial_custom}
@@ -4269,7 +4269,7 @@ themes {
 ## Print the objective when the game starts
 
 on_startup {
-   : print "{wowt}: an {ifcomp} 2026 entry.";
+   : print "{this_game}: an {ifcomp} 2026 entry.";
    : if (won_yet) {
       : print "Thanks for replaying, but this is a reminder to look at the other {ifcomp} entries, too!" ;
       : press_any_key ;
@@ -4292,7 +4292,7 @@ on_startup {
    : press_any_key ;
    : clear_screen ;
    : print "You find yourself in a small room in the corner of the tower. The door you entered slams shut. How do I get out, you wonder. The y shrug. What is going on here?" ;
-   : print "Well, that's it. You are stuck in WAIT-OUR-WAY TOWER. But how long will you have to wait? And why?" ;
+   : print "Well, that's it. You are stuck in {wowtc}. But how long will you have to wait? And why?" ;
    : press_any_key ;
    : clear_screen ;
 }
@@ -4363,7 +4363,7 @@ on_tick {
       : gosub "take_inventory" ;
    }
    : if (!showed_first_note) {
-      : print "{one_time}{vm_about} will give general game information. {vm_verbs} will describe {wowt}'s stripped-down parser." ;
+      : print "{one_time}{vm_about} will give general game information. {vm_verbs} will describe {this_game}'s stripped-down parser." ;
       : set_true "showed_first_note" ;
    }
    : if (won_yet && !showed_read_ooh_note) {
@@ -4625,8 +4625,8 @@ on_command {
       }
    }
    : match "about _" {
-      : print "{wowt} was written for {ifcomp} 2026." ;
-      : print "{wowt} has the same mechanic as two games I wrote in Inform 7: {l_wp} and {l_ut}. It's about their size. I have other three games in a similar vein." ;
+      : print "{this_game} was written for {ifcomp} 2026." ;
+      : print "{this_game} has the same mechanic as two games I wrote in Inform 7: {l_wp} and {l_ut}. It's about their size. I have other three games in a similar vein." ;
       : print "Every point scoring command is an unusual verb, which is indicated by the location, or something in the location." ;
       : print "Some text is color-coded in meta-commands. <Green<#0f0>> is a clickable link, and <Orange<#f80>> or purple indicates a verb you can use. <Lavender<#88f>> text clues what to focus on. <Light grey<#ccc>> text indicates a name that fits the game's feel, but you don't need to tinker with it." ;
       : print "Directional text is color-coded, too. <RED<#f00>> means you need to solve a puzzle to go a certain way. <GREEN<#0f0>> means you've been that way. <YELLOW<#ff0>> means you can go that way but haven't, yet." ;
@@ -4668,7 +4668,7 @@ on_command {
    }
    : match "history _;version _;versions _" {
       : set_true "gamestate_thug_pass" ;
-      : print "The first release of {wowt} was September 1, 2026, for {ifcomp}." ;
+      : print "The first release of {this_game} was September 1, 2026, for {ifcomp}." ;
       : print "Maintenance releases are possible and likely, but this was good enough to release." ;
       : done ;
    }
@@ -4764,7 +4764,7 @@ on_command {
    }
    : match "verbs _;verb _" {
       : set_true "gamestate_thug_pass" ;
-      : print "To complete {wowt}, you only need the four compass directions (well, the exit from the first room is up) and special commands clued by descriptions and such." ;
+      : print "To complete {this_game}, you only need the four compass directions (well, the exit from the first room is up) and special commands clued by descriptions and such." ;
       : print "If you're not in an action sequence, you can also use a number to move to a square you've visited before. You start at 20, one east of it is 21, north from there is 31. The pre-endgame map is a 5x5 grid, so its northeast corner is 44." ;
       : print "{vm_meta} gives a list of metaverbs, or in-game actions that don't affect the world. They provide information on game play." ;
       : print "Diagnostic verbs may help, too. They give information about your game status. {vm_diag} gives information about them." ;
