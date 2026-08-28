@@ -194,13 +194,9 @@ A voucher from the Vie-Neater(c) company!
 > S
 > E
 
-Chess training is here! Surely there won't be a puzzle? No, you just need to see something nobody else did.
-
-(In-game: riff on KBN vs K mate)
+Chess training is here! Surely there won't be a chess puzzle? No, you just need to see something nobody else did.
 
 > CHEST REIGNING (1)
-
-They're upset you found this, after all their analysis. Why would you pay attention to neat stuff when you could be analyzing the intricacies of the Carlsbad structure? London System devotees and those who hate it.
 
 > DUMP LIARS (1)
 
@@ -212,7 +208,7 @@ Okay, now we can go back and see a new area which needed a special item.
 > E
 > E
 
-The Bros want you to take it easy, man, like they are, I mean they're not whining THAT loudly.
+The Bros want you to take it easy, man, like they are, I mean they're not whining THAT loudly. Give them some of their own medicine.
 
 > POSE TEASING (1)
 
@@ -222,7 +218,7 @@ The sunk etching may be hiding something if you look at it right.
 
 > SUN CATCHING (1)
 
-The tough tiki isn't just going to give you what you want.
+The tough tiki isn't just going to give you what you want. You have to ask.
 
 > TUFTY KEY (1)
 
@@ -232,7 +228,9 @@ The meager oath isn't much. It's got some bad grammar. But it means well, or peo
 
 > ME GROWTH (1)
 
+> W
 > N
+> E
 
 This is why we waited to go here. You needed the pliers for this.
 
@@ -399,15 +397,11 @@ Now you can go in all three directions, but of course starting one way is quicke
 
 > N
 
-Here in Bro Class, there's a lot to do. Let's change the major gent a bit first. He's one of the good guys, but as is, he will get on people's nerves and not get much stuff done.
-
-(Cheap joke "Males are too emotional to lead.")
+Here in Bro Class, there's a lot to do. Let's change the major gent a bit first. He's one of the good guys, or he can be, but as-is, he will get on people's nerves and not get much stuff done.
 
 > MAGE URGENT (1)
 
 Okay, he's overcompensated for being a bit too polite, now. Waiting for the one to come and show him the way.
-
-(Perhaps you've been listening to too many lovesongs that ask "How can I make you see," which all deny agency and whatnot.) <- add to game
 
 > S
 
@@ -419,7 +413,7 @@ There's also a book called THE GAMES. You can guess the bonus point.
 
 > RIGHT ANGLES (1)
 
-"But it's a book! It already has four of them! One at each corner!"
+"But it's a book!" you might say. "It already has four of them! One at each corner!"
 
 Well, now the gent/mage is at least capable of seeing his own mistakes and fixing them.
 
@@ -427,7 +421,7 @@ Well, now the gent/mage is at least capable of seeing his own mistakes and fixin
 
 > N
 
-Someone is hiding away from the pro class, who got trapped by the thug somehow, and this is the lesser of the two evils. But with the thug gone, it's just kind of bad.
+Someone is hiding away from the Bro Class, who got trapped by the thug somehow, and this was the lesser of the two evils. But with the thug gone, well, they still want to avoid ...
 
 > BROKE LASS (1)
 
@@ -444,13 +438,13 @@ But of course there's one more thing to do. There's always one more thing to do.
 
 > SAY MENTORING (1)
 
+You can keep doing this for some meta-commentary fluff. As Gustave Flaubert said, human language is like a pot on which we bang a tune for bears to dance to, when all the while we hope to move the stars with pity.
+
 > E
 
 A bleah stable! Shouldn't you just sit in a corner and be grateful you have anything at all? What? You want to do more, even though you're an unexciting person who just plays text adventure games, when you could be ... well, anything?
 
-"Be grateful for all your possessions. Also, know possessions don't mean much.
-
-Also, don't be self-centered and shallow, but be very grateful to me for throwing out these aphorisms."
+You'd like to do more than grudgingly thank the universe. You'd like to feel you can do something.
 
 > BLEST ABLE (1)
 
