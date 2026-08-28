@@ -3730,13 +3730,23 @@ subroutines {
          : print {( "Available exits are " + (opt_hone_aye ? "already" : "now") + " honed to ones you still need to use to win." )} ;
          : gosub "set_tats_num" ;
          : if (my_tats_num == 0 && !opt_hone_aye) {
-            : print "Since you're choosing this option, and you're done here, I'll make a note of that. You can exit, but you can't come back." ;
+            : print "Since you're choosing this option, and you're done here, I'll make a note of that. You can exit, but you might not be able to come back." ;
          }
          : set_true "opt_hone_aye" ;
+         : return ;
       }
       : match "ho nigh" {
-         : print {( "Exits are " + (opt_hone_aye ? "already" : "now") + " all available, even ones you don't need to revisited." )} ;
+         : print {( "Exits are " + (opt_hone_aye ? "now" : "already") + " all available, even ones you don't need to revisited." )} ;
          : set_false "opt_hone_aye" ;
+         : return ;
+      }
+      : match "ho _" {
+         : print "You need to type {vo_ho_nigh} explicitly." ;
+         : done ;
+      }
+      : match "hone _" {
+         : print "You need to type {vo_hone_aye} explicitly." ;
+         : done ;
       }
    }
 
