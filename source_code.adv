@@ -4841,7 +4841,18 @@ on_command {
       : done ;
    }
 
-   : match "lo _;low _;wilderness _;_ wilderness;thud _;thug _" { #obfuscation of bonus points
+   : match "wilderness _;_ wilderness" {
+      : if (!bonus_point_wilderness) {
+         : print "Yes, you feel like you've been in a wilderness for a while. It's been some time since people pointed that out about your name. You thought by blocking the pun out, you'd be more focused. But perhaps the right way to look at things is, if you're stuck in a mental wilderness or whatever and break out, then you'll make a big jump, and you'll have earned it, with all the thought you've put into things.\nThat's really hokey, but it's better than nothing." ;
+         : set_true "bonus_point_wilderness" ;
+         : gosub "add_bonus_point" ;
+         : done ;
+      } : else {
+         : print "You have confidence you'll work your way out. The immediate and long-term wilderness." ;
+         : done ;
+      }
+   }
+   : match "lo _;low _;thud _;thug _" { #obfuscation of bonus points
       : print "{custom_unknown_verb_error}" ;
       : done ;
    }
