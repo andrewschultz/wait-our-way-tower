@@ -2877,7 +2877,7 @@ locations {
                : print "You already shaped up." ;
                : done ;
             }
-            : print "You take some time to get your head on straight. Yes, it's a bit weird here, but you recognize you want to help people, and maybe there are people or entities who want to help you. The dog feels a bit more relaxed around you now. Perhaps it could show you more later." ;
+            : print "You take some time to get your head on straight. Yes, it's a bit weird here, but you recognize you want to help people, and maybe there are people or entities who want to help you. Your calmness has an effect. A dog drops by. Just the sight of it makes you say {dgda}. It feels relaxed around you, and you feel relaxed around it. Perhaps it has more to offer than a light moment of friendship." ;
             : set_integer var="tempint" "37" ;
             : set_true "point_shape_up" ;
             : gosub "add_point" ;
@@ -2901,6 +2901,7 @@ locations {
          : if (!point_eh_sink) {
             : match "_ ace;_ inc" {
                : print "Ugh! It's so dreary to look at. It's a monolith of automation. You doubt any technology can stop it. What could?" ;
+               : print "In fact, you recall the people most likely to babble on about corporate oppression are themselves kind of boring and overbearing. Upsetting!" ;
                : done ;
             }
             : match "* sync;sync _" {
@@ -2919,6 +2920,7 @@ locations {
                : done ;
             }
             : print "Ace, Inc. slowly sinks. You hope the message about no humans being there is true. You hear no screams or confusions, just robots whirring and glitching." ;
+            : print "It seems almost unfair you were able to do this. With all the gloom an doom about soulless corporations insulating themselves from legal liability, you ... can't really be that powerful, can you? Maybe the universe will rewrite itself, but until then, maybe you should see what's up behind." ;
             : print "What is revealed is a garish {puz_point_cube_land}." ;
             : set_integer var="tempint" "26" ;
             : set_true "point_eh_sink" ;
@@ -2946,7 +2948,7 @@ locations {
                   : print "You already worked your way through this place." ;
                   : done ;
                }
-               : print "It only makes sense, doesn't it? With all the garish stuff, the dull stuff will in its way stand out, often is something that's not trying to impress you but maybe valuable, or that only people who are dazzled by silliness would be able to find and use. At the end, you find a simple coupon saying, {puz_point_vie_neater}. It doesn't specify how to buy, or how to be neater, but perhaps the people you summon with it will know all that. Well, it's something at any rate." ;
+               : print "It only makes sense, doesn't it? With all the garish stuff, the dull stuff will in its way stand out, often is something that's not trying to impress you but maybe valuable, or that only people who are dazzled by silliness would be able to find and use. At the end, you find a simple coupon saying, {puz_point_vie_neater}. It doesn't specify how to buy, or how to be neater, but perhaps the people you summon with it will know all that. Well, it's something, at any rate." ;
                : pocket "vie_neater" ;
                : set_integer var="tempint" "27" ;
                : set_true "point_cue_bland" ;
@@ -2991,7 +2993,8 @@ locations {
                : print "You already sought and found." ;
                : done ;
             }
-            : print "You find it, but just as you're really starting to rest, you hear a {puz_point_grr_lonely}. You can't sleep with that around!" ;
+            : print "You don't know if sleeping on such an isle is recommended, but there's lots to explore. You remember sneaking around cemeteries when younger. Then, suddenly, a noise." ;
+            : print "{puz_point_grr_lonely} You can't sleep with that around! Where is it? What is it?" ;
             : set_integer var="tempint" "31" ;
             : set_true "point_seek_rest" ;
             : gosub "add_point" ;
@@ -3014,7 +3017,9 @@ locations {
                   : print "It would be belittling to repeat this reasoning in front of her." ;
                   : done ;
                }
-               : print "You look for the source of the girl, and it does sound a bit put on, and you wonder if it is somebody just trying to intimidate people. Sure enough, you find a small girl towering off to the side, holding {puz_point_her_doll}. She says, did my parents bring me to pick me up? You say no, you don't know who her parents are. She said, well, my parents had me stay here to avoid the really scary bits, but it was scary enough here, but they wouldn't mislead me, right? You don't know what to say to this, but you can only suggest that you should help her find them. She doesn't sound too enthusiastic about this car but she's sick of the island, and you will be glad for the company of her. And, of course, {puz_point_her_doll}." ;
+               : print "You look for the source of the girl, and it does sound a bit put on, and you wonder if it is somebody just trying to intimidate people. Sure enough, you find a small girl towering off to the side, holding {puz_point_her_doll}. She says, did my parents bring me to pick me up? You say no, you don't know who her parents are. She said, well, my parents had me stay here to avoid the really scary bits, but it was scary enough here, but they wouldn't mislead me, right?" ;
+               : print "You suddenly flash back to two things your parents said. How you needed to be good with kids, as they'd have liked grandkids, but they didn't want you being a teen parent. You have no clue what to do until you guess you'll show, well, not what you'd have wanted to hear, but something worth hearing and growing on." ;
+               : print "So you can only suggest that you should help her find them. She doesn't sound too enthusiastic about this, but she's sick of the island, and you will be glad for her company. And, of course, {puz_point_her_doll}." ;
                : set_integer var="tempint" "32" ;
                : set_true "point_girl_only" ;
                : gosub "add_point" ;
@@ -3051,7 +3056,7 @@ locations {
                : print "Tripling the flow again would probably capsize your craft. It's like compound interest, only it gets places quicker. The wrong places." ;
                : done ;
             }
-            : print "Finally, the waters are less calm, and fortunately, they're not rough enough to drag you places, but you see where the currents are, and there's one that flows pretty reliably to the {dir_w_y}. You can take it now, if you want." ;
+            : print "The water begins to stir a bit. Some people, who just wanted to anchor their sailboats and hold boathouse parties, are disappointed by all this. Some stay, but there's more than enough room to maneuver your own craft around without risk of accident. Fortunately, the waters still aren't nearly enough to drag you places, but they could provide a boost to get going to the {dir_w_y}." ;
             : set_integer var="tempint" "23" ;
             : set_true "point_flow_tripling" ;
             : gosub "add_point" ;
@@ -3088,7 +3093,9 @@ locations {
                : print "You already acknowledged and defused the tension." ;
                : done ;
             }
-            : print "You get their eternal thanks for sorting things out. Which isn't fungible, but it is a confidence booster." ;
+            : print "\"Look,\" you start, \"I'm no business expert. But maybe if we figure what we can't do and work by process of elimination, we'll find what we can do.\"" ;
+            : print "The ten sops actually seem glad you're not a business expert. Apparently one stopped by and made them quickly feel even dumber than when they started. You recall lessons from the meager oath, maybe not the most profound ones, and maybe you didn't learn them from the oath proper. But you start asking questions. And eventually people start coming up with ideas. You're still not entirely sure what the sops were planning, and you can't point to anything concrete you helped them with or any ideas you came up with, but they don't seem to mind." ;
+            : print "They award you an {iaad}--in fact, the same one the business expert showed them as \"proof\" they'd fix the sops. You protest, saying you are really pretty disagreeable, but they insist. Well, it's pretty lightweight. They'd be hurt if you didn't accept it. Sometimes gifts like this are hard to, though.\n" ;
             : set_integer var="tempint" "29" ;
             : set_false "think_tense_ops" ;
             : set_true "point_tense_ops" ;
