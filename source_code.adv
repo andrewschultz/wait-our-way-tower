@@ -2198,7 +2198,7 @@ locations {
                : done ;
             }
             : print "With your experience helping the ten sops, you're able to hammer out some sort of agreement. They hand you an {iaad}." ;
-            : set_integer var="tempint" "31" ;
+            : set_integer var="tempint" "30" ;
             : set_false "think_frame_easily" ;
             : set_true "point_frame_easily" ;
             : gosub "add_point" ;
@@ -2206,7 +2206,7 @@ locations {
          }
          : if (!point_frame_easily) {
             : match "frame _;_ easily" {
-               : set_integer var="tempint" "31" ;
+               : set_integer var="tempint" "30" ;
                : set_boolean var="already_got_command" {( think_frame_easily && !point_frame_easily )} ; # this is optional. Delete if point does not rely on any other variables.
                : set_false "first_half" ;
                : match "frame _" {
@@ -2923,14 +2923,14 @@ locations {
                : done ;
             }
             : print "You find it, but just as you're really starting to rest, you hear a {puz_point_grr_lonely}. You can't sleep with that around!" ;
-            : set_integer var="tempint" "30" ;
+            : set_integer var="tempint" "31" ;
             : set_true "point_seek_rest" ;
             : gosub "add_point" ;
             : done ;
          }
          : if (!point_seek_rest) {
             : match "seek _;_ rest" {
-               : set_integer var="tempint" "30" ;
+               : set_integer var="tempint" "31" ;
                : set_false "first_half" ;
                : match "seek _" {
                   : set_true "first_half" ;
