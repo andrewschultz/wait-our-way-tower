@@ -385,9 +385,24 @@ The Bros are at it again! They weep "lucky."
 
 Why here? This is the only place that could really hold a loop, or loops. None of the four places can be enclosed. The bottom right is the only place to go. You could use trial and error, too.
 
+Now we just need to run the thug in a loop.
+
 > N
 
-Or any direction, really. What this does is trigger one more thing to mess with your mind.
+And now, with the thug gone, we can progress from the Thug Room.
+
+> W
+> W
+> W
+> N
+> E
+> E
+> E
+> E
+
+We can go any new direction to trigger the next puzzle, but we can't solve it before trying to move on.
+
+> N
 
 "TO NOWT!" Well, that's intimidating.
 

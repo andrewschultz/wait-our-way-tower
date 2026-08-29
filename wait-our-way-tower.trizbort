@@ -20,7 +20,7 @@
 			<objects custom="yes" customRight="-32" customDown="0">"Rue My Room, Aye"</objects>
 		</room>
 		<room id="8" name="Aww-Flake-Off Lake 43" subtitle="" x="-128" y="-480" w="96" h="64" region="NoRegion" handDrawn="yes" allcornersequal="yes" ellipse="no" roundedCorners="no" octagonal="no" cornerTopLeft="15" cornerTopRight="15" cornerBottomLeft="15" cornerBottomRight="15" borderstyle="Solid" description="" roomFill="" secondFill="" secondFillLocation="Bottom" roomBorder="" roomLargeText="" roomSubtitleColor="" roomSmallText="" ZOrder="0">
-			<objects>Float, Rippling||what was the mud or marsh idea I had?</objects>
+			<objects>Float, Rippling</objects>
 		</room>
 		<room id="9" name="Sunk Etching 03" subtitle="" x="-128" y="32" w="96" h="64" region="NoRegion" handDrawn="yes" allcornersequal="yes" ellipse="no" roundedCorners="no" octagonal="no" cornerTopLeft="15" cornerTopRight="15" cornerBottomLeft="15" cornerBottomRight="15" borderstyle="Solid" description="" roomFill="" secondFill="" secondFillLocation="Bottom" roomBorder="" roomLargeText="" roomSubtitleColor="" roomSmallText="" ZOrder="0">
 			<objects custom="yes" customRight="-32" customDown="0">Tough Tiki</objects>
