@@ -1948,6 +1948,11 @@ locations {
    }
    r20 : location "{r20_loc}" header="{r20_header}" graphic="r20_0" {
       on_command {
+         : match "thud or;thud oar;thud ore" {
+            : print {( point_yell_open ? "You wonder if summoning something that can make the door go THUD would open it. It's worth a try, but nothing heavy like an oar or ore would be stuck inside the cell. You try running into the door with a THUD. Nothing, but hey, it was worth a try. Maybe you need something less violent." : ("You wonder if you could've opened the door another way." + (point_say_four ? "\nYou take time to fetch an oar you bought and give it a whack just in case. Nothing. Still, hooray, exercise." : "") ) )} ;
+            : set_true "bonus_point_thud_or" ;
+            : gosub "add_bonus_point" ;
+         }
          : match "_ wheeze;_ pace;_ wee;_ space" {
             : print {( point_yell_open ? "You're glad there's a way out." : "You may want to focus on specific parts of the space, or your reactions to it, to find a way out." )} ;
             : done ;
