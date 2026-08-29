@@ -1504,6 +1504,11 @@ locations {
             }
          }
          : if (point_sun_catching) {
+            : if (!point_tufty_key) {
+               : match "tuft _;_ icky" {
+                  : print "Wrong texture for what the tiki is hiding." ;
+               }
+            }
             : match "tufty key" {
                : if (point_tufty_key) {
                   : print "You already got what you needed from the tough tiki. It might not take kindly to asking for more." ;
@@ -1623,6 +1628,9 @@ locations {
                : done ;
             }
             : if (!point_say_four) {
+               : match "_ fore" {
+                  : print "Hmm, golf clubs are like oars, but ... there's no golf course in this game." ;
+               }
                : match "say _;_ four" {
                   : set_integer var="tempint" "17" ;
                   : set_boolean var="already_got_command" {( think_say_four && !point_say_four )} ; # this is optional. Delete if point does not rely on any other variables.
@@ -1660,6 +1668,9 @@ locations {
             : done ;
          }
          : if (!point_duh_losing) {
+            : match "_ loosing" {
+               : print "Loosing? There's a better way to remove the oozing's grip for good." ;
+            }
             : match "duh _;_ losing" {
                : set_integer var="tempint" "6" ;
                : set_false "first_half" ;
@@ -1784,6 +1795,9 @@ locations {
             }
          }
          : if (gamestate_bros_second_placed) {
+            : match "we _" {
+               : print "You've never felt comfortable using the royal we with other people. You really hate it when others do. But perhaps a different informal approach would work." ;
+            }
             : match "whee plucky" {
                : if (point_whee_plucky) {
                   : print "You don't need to Show Them any more. Wherever They went. Better to Do Stuff, with them watching or not." ;
@@ -2279,6 +2293,9 @@ locations {
                : done ;
             }
             : if (!point_tune_out) {
+               : match "_ ought;_ aught" {
+                  : print "But it's to nowt, not to naught. An important pedantic difference! But one that may actually be simpler for you." ;
+               }
                : match "tune _;_ out" {
                   : set_integer var="tempint" "42" ;
                   : set_false "first_half" ;
@@ -2372,6 +2389,11 @@ locations {
             : match "_ boss;_ lumping" {
                : print "They don't show any signs of letting up, but they don't show any signs of saying something new or original after their firs barrage." ;
                : done ;
+            }
+         }
+         : if (!point_bah_slumping) {
+            : match "baa _;baaa _;ba _" {
+               : print "The {puz_point_boss_lumping} is irritated at you pretending to be one of the sheeple, but it's not enough." ;
             }
          }
          : match "bah slumping" {
@@ -2857,7 +2879,7 @@ locations {
             : done ;
          }
          : if (!point_eh_sink) {
-            : match "sink _" {
+            : match "a sink;sink _" {
                : print "Right idea, but a giant sink might be impassable. Or it might drown you. And {puz_point_ace_inc} couldn't be changed to a SMALL sink." ;
                : done ;
             }
@@ -4559,6 +4581,9 @@ on_command {
    }
    : if (girl_present) {
       # HERD ALL for the cats
+      : match "_ awl" {
+         : print "You don't need to go poking holes in anything." ;
+      }
       : match "herd all" {
          : if (point_herd_all) {
             : print "You've already herded all the cats for when they are needed." ;
@@ -5009,7 +5034,7 @@ on_command {
       : done ;
    }
 
-   : match "co _;loners _;queue _;read _;sail _;sink _;sync _;we _;wee _" { #obfuscation of good guesses, regular points
+   : match "ba _;baa _;baaa _;co _;loners _;queue _;read _;sail _;sink _;sync _;we _;wee _" { #obfuscation of good guesses, regular points
       : print "{custom_unknown_verb_error}" ;
       : done ;
    }
