@@ -2382,12 +2382,28 @@ locations {
       on_command {
          : if (point_bah_slumping && !point_say_mentoring) {
             : match "say mentoring" {
-               : print "You give up and ask for help. The people who shut you in the tower appear. Good, you made it, they say. They discuss how they overheard you saying you feel unlucky and nothing happens to you. Well, now it did. And perhaps you might feel lucky now some of your actions and thoughts worked as they did. And not the sort of guilty-lucky, but the sort where you know you're relatively fortunate and want to take advantage of that when you can and not be jealous if others do. They apologize for the ... inconvenience. You figure it's okay. It was something to do, and then some." ;
-               : print "You find it odd it's the third time you had to <SAY<#f80>> something, but was it really? You never did quite speak up enough, and you actually had to ask for what you wanted. There's a lesson here, one you probably should've learned years ago." ;
+               : print "You just don't see a way beyond the door. So why not give up and ask for help?" ;
+               : print "On reflection, it's odd you had to <SAY<#f80>> something for the third time now, but was it really? You never did quite speak up enough, and for all your hoping for something interesting, you actually had to ask for what you wanted. There's a lesson here, one you probably should've learned years ago. You have people you could blame for that. People who were too demanding and people who assured you failure to ask was some sort of extreme politeness, and you seemed like a nice person. But it seems a waste of energy to single out the worst offenders." ;
+               : press_any_key ;
+               : print "The shadowy figures who shut you in the tower appear. \"Good, you made it,\" they say." ;
+               : print "\"Wait, what? You just dumped me there for fun?\"" ;
+               : print "\"Well, not quite.\" They discuss overhearing you saying you feel unlucky and nothing happens to you. Well, now it did. And perhaps you might feel lucky now some of your actions and thoughts worked as they did. And not the sort of guilty-lucky, where other people at least as lucky as you claim you get all the luck. But the sort where you know you're relatively fortunate and want to take advantage of that when you can and be opportunistic and not be jealous if others do. They apologize for the ... inconvenience. You figure it's okay. It was something to do, and then some." ;
+               : print "\"Just one more thing ... did you notice?\"" ;
+               : press_any_key ;
+               : clear_screen ;
+               : print "\"What?\"" ;
+               : print "They mention the tower's name. Wait-Our-Way? Well, not really. Weight-Our-Way Tower is the actual, proper name. It was a dirty trick, they know. But they wanted you to assume something was that way, then have that assumption shattered. But not have it hurt to much." ;
+               : print "\"So where does the weight come in?\"" ;
+               : print "\"Not physical weight, of course. More ... weighting what actions are important. What's worth doing. How much you should pressure yourself to do something new, or important. How you should enjoy those small victories, even if they were obvious, or even if they happened for dumb reasons. It's not a crime to fail to. But it helps you find bigger victories. It ... well, we want you to feel lucky for the experiences and chances you had. Like, well, you maybe haven't gotten as many promotions as people would expect someone with your aptitude test scores or whatever to. But you've also managed not to get fired. Even by managers who dislike you.\" They cut you off. \"Yup, I know who you're thinking of. Those two you were wondering about? Yeah. Ugh. We can't help them." ;
+               : print "\"And when you go back to the real world, well, you don't need to beat yourself up if you do nothing big. None of that I was lucky to have this weird experience that should've boosted my mood and it failed, and I failed to use my luck yet again. Sounds good?\"" ;
+               : print "You nod.";
+               : print "They gesture at somewhere far away. You realize you are not the only person they need to help. They'll take different forms for others as need be, with different puzzles and challenges. You wonder how they help others, but all the same, it's not your story to know. Probably fun to imagine next time you get bored." ;
+               : print "{one_time}you can continue to SAY MENTORING and some assistants will come by to share ideas with you. It's probably stuff you-the-player are familiar with, but maybe not you-the-character. And, yeah, it's also stuff I've learned or thought about. Or, well, you can just go east for the ending." ;
                : set_integer var="tempint" "47" ;
                : set_integer var="tempint" "47" ;
                : set_true "point_say_mentoring" ;
                : gosub "add_point" ;
+               : redescribe ;
                : done ;
             }
             : if (!point_say_mentoring) {
