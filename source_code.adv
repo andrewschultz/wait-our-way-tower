@@ -1589,7 +1589,8 @@ locations {
                : print "There are quite enough vendors here now." ;
                : done ;
             }
-            : print "You look into some nooks, and you find some vendors, indeed. Perhaps what they have for sale isn't for everyone, and they make enough of a profit they don't need to advertise. The main thing that catches your eye is a {puz_point_safe_oar}." ;
+            : print "Everything seems to lead nowhere at first. But then you are able to say, well, these trails DEFINITELY lead nowhere, and others don't. Process of elimination stuff, really. You eventually find a path to, well, some dry vendors, and once you do, you realize there's an easier path back." ;
+            : print "You take five seconds to feel dumb about your logic not being perfect the first time through. It seems about right. The vendors seem relaxed and crack jokes about the oar vending business. They ask if you do a lot of rowing, and you say no. They point you to a {puz_point_safe_oar}, suggesting you may get a bulk discount depending on how many you need." ;
             : set_integer var="tempint" "7" ;
             : set_true "point_dry_vendors" ;
             : gosub "add_point" ;
@@ -1609,7 +1610,7 @@ locations {
          : if (point_dry_vendors && !point_say_four) {
             : match "say four" {
                : if (!point_pitch_earning) {
-                  : print "Four oars? But you can't afford one!" ;
+                  : print "Four oars? But you can't afford one! Yet." ;
                   : set_true "think_say_four" ;
                   : collection_modify { collection = "tried_combo_core" index -> (17) content -> ("true") } ;
                   : gosub "note_thinks" ;
@@ -1619,8 +1620,8 @@ locations {
                   : print "You probably got more oars than you need." ;
                   : done ;
                }
-               : print "Four seems about right for your needs. Too many, and you couldn't carry them all, but too few, and you might lose a spare. Some of the riches are leftover for later. Perhaps you'll have to buy transport." ;
-               : print "Now you're the owner of the oars, you realize it'd be awkward to carry them. But the vendors assure you they'll hold them until you find a craft. Thoughtful!" ;
+               : print "Four seems about right for your needs. Some of the riches are leftover for later. Perhaps you'll have to buy transport." ;
+               : print "But now you're the owner of the oars, you realize it'd be awkward to carry them. However, the vendors, thrilled with your bulk purchase, assure you they'll hold them until you find a craft. Thoughtful!" ;
                : set_integer var="tempint" "17" ;
                : set_false "think_say_four" ;
                : set_true "point_say_four" ;
@@ -1662,7 +1663,8 @@ locations {
                : print "No need to reiterate things." ;
                : done ;
             }
-            : print "You recognize the dull oozing for what it is: blather that just prevents other people from trying for what they want. You're simply not going to put up with that sort of thing any more. Well, not in that form, at least." ;
+            : print "You recognize the dull oozing for what it is: blather that just prevents other people from trying a bit harder for what they want. You're simply not going to put up with that sort of thing any more. Well, not in that form, at least." ;
+            : print "Perhaps there is no pain here, but you remember those awful NO PAIN NO GAIN t-shirts you'd have looked foolish in. People who wore them generally wondered why you had the patience for boring learning, too. So, yeah, the right sort of frustration motivates you. You still can't describe it, but you know it when you see it. And you need to trust yourself. Not being willing to lose at all is its own sort of losing, or something, after all." ;
             : set_integer var="tempint" "6" ;
             : set_true "point_duh_losing" ;
             : gosub "add_point" ;
@@ -1706,7 +1708,7 @@ locations {
                : print "Strange. The juries have already forgotten about their little problems. It's as if some people just like to sit around and tell other people what they can't do, and then feel as though they've done something if they succeed." ;
                : done ;
             }
-            : print "You assure the juries that you are of perfectly sound body, if not mine, and you also mentioned that if something does happen, you can take liability for it. They say OK we guess.\nWith this done, they begin some {puz_point_coy_novations}." ;
+            : print "You assure the juries that you are of perfectly sound body, if not mine, and you also mentioned that if something does happen, you can take liability for it. Surprisingly, they don't question you much, even though they outnumber you.\nWith this done, they begin some {puz_point_coy_novations}." ;
             : set_integer var="tempint" "9" ;
             : set_true "point_no_injuries" ;
             : gosub "add_point" ;
@@ -1736,9 +1738,9 @@ locations {
                   : gosub "note_thinks" ;
                   : done ;
                }
-               : print "Surprisingly, the dumb parable works on the juries, who maybe just needed something some sort of new simplicity to ooh and ahh at.\nEach discusses with their argue-ee why the simple parable backs THEIR point up, and there are a few minor scuffles, before they go back to complex reasons why people they're smarter than and don't like shouldn't get to do more than they do.\nThey give you both coin AND innovations, though unsurprisingly, there's a lot more ovations than coin." ;
+               : print "You've rehearsed the dumb parable in your mind a few times. Now, the moment of truth. You're sure the juries will find something senseless in too much and too little detail .. and yet, you hear them oohing and aahing at a new simplicity you've discovered.\nEach discusses with a fellow argue-ee why the simple parable backs THEIR point up, and there are a few minor scuffles, before they go back to complex reasons why people they're smarter than and don't like shouldn't get to do more than they do.\nThey give you both coin AND innovations, though unsurprisingly, there's a lot more ovations than coin." ;
                : print "{cnco}, you remark, maybe overdoing it. They applaud your originality in politeness further." ;
-               : print "You almost have a headache by the time the applause stops, but at least you're not broke now.\nThe juries appear to have resolved their differences for the moment, and they just ignore you now. You've, uh, passed, I guess." ;
+               : print "You almost have a headache by the time the applause stops, but at least you're not broke now.\nThe juries even stopped arguing, too, and they just ignore you now. But the coin is yours to keep!" ;
                : set_integer var="tempint" "10" ;
                : set_false "think_coin_ovations" ;
                : set_true "point_coin_ovations" ;
@@ -1778,7 +1780,10 @@ locations {
                : print "You already exposed things." ;
                : done ;
             }
-            : print "You seem to sort of pattern before, when you wanted to like read a book or do something interesting on your own that other people didn't like. They would tell you to take it easy or whatever, then of course when they describe stuff, that they like to do, they would say why aren't you appreciating how much fun I have? The Bros look a bit upset that you've seen through this, but what can they really do? They say, well, you're lost, there's really not all that much beyond, at least not for interesting people." ;
+            : print "The bros are not going to listen to reason. You stretch to think of whom they remind you of. You remember wanting to read a book or do something interesting on your own that they didn't like. They would tell you to take it easy or whatever, but of course when they described stuff, they would say why aren't you appreciating how much fun I have? (Or if you did, they'd remind you THEY actually got to experience things." ;
+            : print "So you simply ask them if they're worried a bore (alleged bore) like you has found ways to make your life more exciting than theirs, even though they had the advantage of not being boring." ;
+            : print "They say \"Well, okay, go on ahead, but don't blame us if you find it boring there.\" And, it's implied, if you find it interesting, how lame must your life have been until this point?" ;
+            : print "You remember people hurting you getting the final word in this way, whether or not they won an argument. You don't have to, now." ;
             : set_integer var="tempint" "19" ;
             : set_true "point_pose_teasing" ;
             : gosub "add_point" ;
@@ -1804,7 +1809,8 @@ locations {
                   : print "You don't need to Show Them any more. Wherever They went. Better to Do Stuff, with them watching or not." ;
                   : done ;
                }
-               : print "You flip the script on the Bros. You say, well, maybe I've made my own luck and all that sort of thing, and maybe you haven't, by sitting around and complaining about how other people have all the luck. They start fighting with each other. Who complaints the most? Who complaints the least? There's a big argument. It's almost entertaining, but you don't want to get too caught up in it. It dies down eventually. The Bros go off to sulk somewhere else." ;
+               : print "You flip the script on the Bros. You say, well, maybe I've made my own luck and all that sort of thing, and maybe you haven't, by sitting around and complaining about how other people have all the luck. They start fighting with each other. Who complains the most? Who complains the least? There's a big argument. It's almost entertaining, but you don't want to get too caught up in it. It dies down eventually. The Bros go off to sulk somewhere else." ;
+               : print "Once they're gone, you realize you didn't even have the time to play the \"You don't realize how lame it is to pick on little ol' me not once but twice\" card. But it's still fun to imagine. Perhaps you can play that card once you've left here." ;
                : set_integer var="tempint" "39" ;
                : set_true "point_whee_plucky" ;
                : gosub "add_point" ;
@@ -1856,7 +1862,8 @@ locations {
                : print "You doubt you need any more cloth." ;
                : done ;
             }
-            : print "As the cloth throbs around, you use the pliers, which suddenly seem pretty smart, or at least you are smart enough to take them, to pull cloth away. The claw doesn't really seem to notice, or it just goes in its general circuit, oblivious to what has changed. Congratulations! You're now a possessor of several towels!" ;
+            : print "As the claw throbs around, you use the pliers, which suddenly seem pretty smart (or maybe the DUMB means you don't have to be brilliant to use them) to pull cloth away. The claw doesn't really seem to notice, or it just goes in its general circuit, oblivious to what has changed." ;
+            : print "You can't grab too much. You look to see what sort of cloth you've got. Congratulations! You're now a possessor of several towels! And you can pick up more if you need!" ;
             : set_integer var="tempint" "25" ;
             : set_false "think_cloth_robbing" ;
             : set_true "point_cloth_robbing" ;
@@ -1916,7 +1923,10 @@ locations {
                : print "You look through the book some more, but really, you've digested about all you can process for the next bit. You're at the point where you're saying, yeah, that's pretty clever, but it will go in one ear and out the other. It did what it needed to, for the person who needed it." ;
                : done ;
             }
-            : print "You encourage the mage to look at this new book, refraining from saying, thinking about things right is its own sort of magic. You mentioned that they've probably worked hard to get their beliefs, and maybe the right thing or two could give them a huge jump they just haven't seen before, but they weren't ready for it yet. And they pretty much agree. Their sense of urgency has changed, from desperation down to, well, let's do what we need to and get through with it, and we may actually not have to do anything too crazy. You like to change, even if it's temporary. Perhaps if you go get stuff done, that will encourage it to stay permanent." ;
+            : print "You encourage the mage to look at this new book, refraining from saying, thinking about things right is its own sort of magic." ;
+            : print "The mage snaps \"Are you one of those people saying I'm too emotional to lead?\"" ;
+            : print "You mentioned that they've probably worked hard to get their beliefs, and maybe the right thing or two could give them a huge jump they just haven't seen before, but they weren't ready for it yet. But they've experienced more now, and it's time to revisit things. They humor you. And, within half an hour, they admit they must have reeked of desperation more than a bit. They'd like to do what's needed to get through with things, and maybe we won't have to do anything too crazy." ;
+            : print "You like the change, even if it's temporary. It's worth cashing in on, for you and him." ;
             : set_integer var="tempint" "43" ;
             : set_false "think_right_angles" ;
             : set_true "point_right_angles" ;
