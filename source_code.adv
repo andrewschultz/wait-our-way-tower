@@ -253,7 +253,7 @@ strings {
 
    r13_dir_e : dynamic_string {( gamestate_bros_blocking ? dir_e_n : has_visited "r14" ? dir_e_v : dir_e_y )} ;
    r13_dir_s : dynamic_string {( gamestate_bros_blocking ? dir_s_n : has_visited "r03" ? dir_s_v : dir_s_y )} ;
-   r13_loc : dynamic_string {( (!point_pose_teasing ? "Here, {gbgr} chatter about any old thing, blocking the way forward." :
+   r13_loc : dynamic_string {( (!point_pose_teasing ? "Here, {gbgr} chatter about any old thing, blocking the way forward for people with stuff to do. Yet they seem unimportant, compared to the place they're in." :
       !gamestate_bros_second_placed ? "The {gbgr} are gone, for now." :
       !point_whee_plucky ? "The {gbgr} are at it again, asking if you really need to show off the opportunities you've been given, right in front of their faces. They {puz_point_weep_lucky} a lot." :
       "The {gbgr} are gone for good.") + "\nThe way back is {dir_w_v}, but paths branch {r13_dir_e} and {r13_dir_s}, too."
@@ -266,7 +266,7 @@ strings {
    )} ;
    r14_header : string "Claw, Throbbing" ;
 
-   r15_loc : string "In this library you can only leave back to the {dir_n_v}. There's a book called {puz_point_wry_tangles} and another called THE GAMES." ;
+   r15_loc : string "Wow, so many books to read! You're interested, but sadly, you don't have the time to read that sort of text at the moment.\nIn this library you can only leave back to the {dir_n_v}. Two books are laid out here. One iscalled {puz_point_wry_tangles} and another called THE GAMES." ;
    r15_header : string "Lie-Bury Libe, Airy" ;
 
    r20_dir_e : dynamic_string {( has_visited "r21" ? dir_e_v : dir_e_y )} ;
@@ -299,7 +299,7 @@ strings {
 
    r26_dir_e : dynamic_string {( has_visited "r27" ? dir_e_v : dir_e_y )} ;
    r26_loc : dynamic_string {( !point_bah_slumping ? "Well this is pretty miserable. A {puz_point_boss_lumping} abuse on you, blocks the way to the {dir_e_n}.\nAnd with such sophistry! Such common sense! Did you come here so far for nothing?\nYou can go back {dir_w_v}, if you want." : !point_say_mentoring ? "A door labeled {puz_point_same_entering} is to the {dir_e_n}. There's always one more thing!" : "Well, you've achieved no great power. But you've figured the mystery of the Same-Entering door, so you can go {r26_dir_e} as well as {dir_w_v} now." )} ;
-   r26_header : string "\"Know Power? NOPE\" Hour" ;
+   r26_header : dynamic_string {( point_bah_slumping ? "\"Thaw, Tried Thought-Ride\"" : "\"Know Power? NOPE\" Hour" )} ;
 
    r27_loc : dynamic_string {( (point_blest_able ? "You feel good here. Yet there's still more. You hear and feel {puz_point_true_pleading}, not i-have-to-have, but interest in seeing and doing and offering more.\nSo you still feel restless. Perhaps you need to get the right phrase to say, one more time, to close the book." : "This stable here is pretty bleah. Is it really what the boss was guarding? At least it's well, stable. {puz_point_bleah_stable} ... do you deserve more in life? You guess you do, but you know you're biased.") + "\nWhile this feels like your journey's end, nothing's stopping you going back {dir_w_v}." )} ;
    r27_header : string "Bleah Stable" ;
@@ -315,7 +315,7 @@ strings {
    r31_header : string "Way-Still Waste, Ill" ;
 
    r32_e_w : dynamic_string {( (has_visited "r33" ? dir_e_v : point_dump_liars ? dir_e_y : dir_e_n) + "-{dir_w_v}" )} ;
-   r32_loc : dynamic_string {( (point_chest_reigning ? "A big majestic chest lies here in this {r32_e_w} thoroughfare." + (point_dump_liars ? " The chest is empty now." : " Also, some {puz_point_dumb_pliers} are in the chest. You were discouraged from taking them.") : "Here in this {r32_e_w} thoroughfare all sorts of weird entities train at chess. What could possibly be more important or rewarding than chess? It's the game of royalty, you know!")  )} ;
+   r32_loc : dynamic_string {( (point_chest_reigning ? "A big majestic chest lies here in this {r32_e_w} thoroughfare." + (point_dump_liars ? " The chest is empty now." : " Also, some {puz_point_dumb_pliers} are in the chest. You were discouraged from taking them.") : "Here in this {r32_e_w} thoroughfare all sorts of weird entities train at chess. They have all sorts of opinions to {v_listen} to, if you want. Because what could possibly be more important or rewarding than chess? It's the game of royalty, you know!")  )} ;
    r32_header : string "Chess Training" ; # ?? the spit thus pit
 
    r33_dir_n : dynamic_string {( has_visited "r43" ? dir_n_v : dir_n_n )} ;
@@ -340,14 +340,14 @@ strings {
    )} ;
    r41_header : dynamic_string {( point_eh_sink ? "Cube Land" : "Ace, Inc." )} ;
 
-   r42_loc : dynamic_string {( (point_girl_only ? "The island seems cheerier now you found the girl behind the sea crest. Maybe that's just because you got some companionship. There can't be much else to do here." : point_seek_rest ? "Amidst the sea crest, you hear an odd voice saying {puz_point_grr_lonely}." : "There's a lot of {puz_point_seacrest} covering this otherwise drab and forbidding isle.") + "\nYou can sail back {dir_e_v} at any time." )} ;
+   r42_loc : dynamic_string {( (point_girl_only ? "The island seems cheerier now you found the girl behind the sea crest. Maybe that's just because you got some companionship. There can't be much else to do here." : point_seek_rest ? "Amidst the sea crest, you hear an odd voice saying {puz_point_grr_lonely}" : "There's a lot of {puz_point_seacrest} covering this otherwise drab and forbidding isle.") + "\nYou can sail back {dir_e_v} at any time." )} ;
    r42_header : string "Gray Vile Grave Isle" ;
 
    r43_dir_w : dynamic_string {( has_visited "r42" ? dir_w_v : point_flow_tripling ? dir_w_y : dir_w_n )} ;
-   r43_loc : dynamic_string {( "Here on your {mtmr} you see land to the {r43_dir_w} and {dir_s_v}.\n" + (point_flow_tripling ? "The flow's picked up, so passage west is viable." : "Unfortunately, you just sort of {puz_point_float_rippling}, and even your oars can't move you west as-is.") )} ;
+   r43_loc : dynamic_string {( "Here on your {mtmr} you see land to the {r43_dir_w} and {dir_s_v}.\n" + (point_flow_tripling ? "The flow's picked up, and there are fewer boats around now, so passage west is viable." : "Here you just sort of {puz_point_float_rippling} with a bunch of other boats lined up so it'll be hard to row around them.") )} ;
    r43_header : string "Aww-Flake-Off Lake" ;
 
-   r44_loc : dynamic_string {( "In this small building, " + (point_tense_ops ? "the {puz_point_ten_sops} ignore you now you've helped them, but hey, you're glad they can focus." : "{puz_point_ten_sops} mill around here, discussing plans that don't have much chance of coming off as-is.") + "\nThe only way out of this small building is {dir_s_v}." )} ;
+   r44_loc : dynamic_string {( "In this small building, " + (point_tense_ops ? "the {puz_point_ten_sops} have taken a break from planning for now." : "{puz_point_ten_sops} mill around here, discussing plans that don't have much chance of coming off as-is.") + "\nThe only way out of this small building is {dir_s_v}." )} ;
    r44_header : string "Ten Sops" ;
 
    hall_terror_blocks : string "Not with the {puz_point_hall_terror} in the way." ;
