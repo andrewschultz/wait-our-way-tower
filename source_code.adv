@@ -2277,7 +2277,7 @@ locations {
          }
          : match "warm acres" {
             : if (herd_score != 2) {
-               : print {( "You don't have " + (herd_score == 1 ? "enough" : "anything") + " to try to warm the hearts of the war makers!" )} ;
+               : print {( "You don't have " + ( herd_score == 1 ? "enough" : point_girl_only ? "special" : "any") + " assistance to try to warm the hearts of the war makers!" )} ;
                : set_true "think_warm_acres" ;
                : collection_modify { collection = "tried_combo_core" index -> (40) content -> ("true") } ;
                : gosub "note_thinks" ;
@@ -3737,6 +3737,7 @@ subroutines {
       : if (point_girl_only && !point_warm_acres) {
          : match "_ doll" {
             : print "It's a weird looking doll, but it probably helped the girl feel less lonely. Looking at it, you think \"find-all-fine doll.\"" ;
+            : print {( herd_score == 2 ? "And it has found potential allies!" : herd_score == 1 ? "You wonder, what else can it find?" : "But what is this ALL it could find?" )} ; # ?? further divvying up, if the think_all_score dynamic integer > 0 we can have 1-1 0-1 0-2
             : done ;
          }
          : match "_ girl" {
