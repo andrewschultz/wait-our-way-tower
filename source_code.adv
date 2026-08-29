@@ -3539,12 +3539,67 @@ subroutines {
       }
    }
    listen_stub : subroutine {
-      : if (is_at "r11") {
+      : if (is_present "thug") {
+         : set_true "gamestate_thug_pass" ;
+         : print "You hear the thug hyperventilating. It's bulky but not fast." ;
+      }
+      : if (is_at "r00") {
+         : if (point_fly_traps) {
+            : print "Rustling from the cat as it hunts." ;
+         }
+      } : else_if (is_at "r02") {
+         : print {( !point_tightened_rousing ? "The titan is snoring, but it's very bearable." : "Quiet with the titan awake." )} ;
+      } : else_if (is_at "r11") {
          : print {( point_duh_losing ? "You enjoy the silence and lack of dull oozing words. You can't resist refuting what you remember of them, though." : "The {puz_point_dull_oozing} makes you wonder why bother. The world beyond the tower must be even riskier than the tower! And so forth." )} ;
+      } : else_if (is_at "r12") {
+         : print "The judges hem and haw most judgefully. Not quite judgingly or judgementally. They're mostly remarking that's how the world is these days, and that sort of thing." ;
+      } : else_if (is_at "r13") {
+         : if (gamestate_bros_blocking) {
+            : print "The {bros} won't stop talking. And, more important, blocking the way forward." ;
+         }
       } : else_if (is_at "r20") {
-         : print "You hear nothing but occasionally mutter to yourself <rue my room, aye<#888>>." ;
+         : print {( point_yell_open ? "A small voice whispers \"Adventure on!\"\nFor some reason, you expected one praising you with \"In form.\"" : "You hear nothing but occasionally mutter to yourself <rue my room, aye<#888>>." )} ;
       } : else_if (is_at "r21") {
          : print {( point_fell_asleep ? "It's quiet now." : point_halt_error ? (r22_secondary_block ? "The \"{puz_point_fellas_leap}\" order echoes in your head." : "Quiet, for the moment.") : "The hall terror is making all kinds of noise." )} ;
+      } : else_if (is_at "r22") {
+         : print "Mumbling from the field's long-term occupant." ;
+      } : else_if (is_at "r23") {
+         : if (!point_frame_easily) {
+            : print "Grumblings on either side." ;
+         }
+      } : else_if (is_at "r24") {
+         : if (!point_warm_acres) {
+            : print "Alternating orders and eerie silence." ;
+         }
+      } : else_if (is_at "r30") {
+         : if (!point_door_cloud) {
+            : print "The dork loud-mumbles passive-aggressively about having to wait around to help people who don't have a clue what they want or how to get it." ;
+         }
+      } : else_if (is_at "r32") {
+         : if (!point_dump_liars) {
+            : cycle key="chesstalk" predictable_order="false" {
+               : print "You absorb knowledge about Carlsbad pawn structures." ;
+               : print "A big argument breaks out over whether it's morally wrong to play the London System." ;
+               : print "A squabble breaks out between two people of roughly equal rating." ;
+               : print "There's a brief three-way argument among people who believe the endgame or middlegame or opening is most important to study." ;
+               : print "Someone is berated for earnestly stating how educational Paul Morphy's famous Opera game can be. Someone else is berated for not having memorized it." ;
+               : print "A brief sectarian verbal skirmish between king-pawn and queen-pawn players. They eventually settle for mocking those flank opening playing types." ;
+               : print "Loud aggressive types condemn wimps who play the Exchange variation of the French, Caro-Kann or Queen's Gambit Declined." ;
+               : print "People who can checkmate with bishop and knight begin taunting those who can't, who reply they actually use their brains for more useful stuff." ;
+            }
+         }
+      } : else_if (is_at "r40") {
+         : if (point_shape_up) {
+            : print "The dog makes happy dog noises." ;
+         }
+      } : else_if (is_at "r42") {
+         : print {( point_girl_only ? " Feels peaceful now you found the girl." : point_seek_rest ? "The {puz_point_grr_lonely} fades in and out." : "Eerie silence. What awaits?" )} ;
+      } : else_if (is_at "r44") {
+         : print {( point_tense_ops ? "The sops have much less to say now." : "The sops natter and gripe among themselves." )} ;
+      } : else_if (is_at "r26") {
+         : if (!point_bah_slumping) {
+            : print "You don't really WANT to listen to the {puz_point_boss_lumping}'s beratings, but that's impossible here." ;
+         }
       } : else {
          : print "Nothing." ;
       }
