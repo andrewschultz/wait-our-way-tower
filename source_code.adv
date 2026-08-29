@@ -4204,6 +4204,7 @@ subroutines {
       : set_true "point_hate_rash" ;
       : set_integer var="score" "7" ;
       : goto "r31" ;
+      : goto "r21" ;
       : goto "r11" ;
    }
 
@@ -4387,6 +4388,9 @@ on_tick {
    }
    : if (inventory_each_move) {
       : gosub "take_inventory" ;
+   }
+   : if (listen_each_move) {
+      : gosub "listen_stub" ;
    }
    : if (!showed_first_note) {
       : print "{one_time}{vm_about} will give general game information. {vm_verbs} will describe {this_game}'s stripped-down parser." ;
