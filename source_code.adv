@@ -976,22 +976,23 @@ collections {
 }
 
 booleans {
-   # game state (noncritical)
-   note_half_think : boolean "false" ;
+   # game state (noncritical, mostly informational)
+   note_half_think : boolean "false" scope="survivor"  ;
    showed_first_note : boolean "false" scope="survivor" ;
    showed_read_ooh_note : boolean "false" scope="survivor" ;
-   warn_score_header : boolean "false" ;
-   credits_yet : boolean "false" ;
-   wait_yet : boolean "false" ;
-   me_x_yet : boolean "false" ;
+   warn_score_header : boolean "false" scope="survivor"  ;
+   credits_yet : boolean "false" scope="survivor"  ;
+   wait_yet : boolean "false" scope="survivor"  ;
+   me_x_yet : boolean "false" scope="survivor"  ;
    won_yet : boolean "false" scope="survivor" ;
    in_number_choice : boolean "false" ;
-   noted_upper_right : boolean "false" ;
-   think_note_yet : boolean "false" ;
-   map_note : boolean "false" ;
-   note_thug_pass : boolean "false" ;
-   shorten_inventory : boolean "false" ;
-   tats_explanation_yet : boolean "false" ;
+   noted_upper_right : boolean "false" scope="survivor" ;
+   think_note_yet : boolean "false" scope="survivor" ;
+   map_note : boolean "false" scope="survivor"  ;
+   note_thug_pass : boolean "false" scope="survivor"  ;
+   shorten_inventory : boolean "false" scope="survivor"  ;
+   tats_explanation_yet : boolean "false" scope="survivor"  ;
+   zero_explained : boolean "false" scope="survivor" ;
 
    # option(s)
    opt_hone_aye : boolean "false" ;
@@ -1012,6 +1013,11 @@ booleans {
    gamestate_no_oops_yet         : dynamic_boolean {( (is_at "r14" || is_at "r04") && !point_fey_loops )} ;
    gamestate_end_companions      : dynamic_boolean {( point_mage_urgent && !point_bah_slumping )} ;
    gamestate_tried_beyond_r25    : boolean "false" ;
+
+   # gamestate loam apse stuff
+   gamestate_loam_apse_placed    : boolean "false" ;
+   gamestate_both_loam_apse      : boolean "false" ;
+   apse_at_11 : boolean "false" ;
 
    # gamestate combo
    girl_present : dynamic_boolean {( point_girl_only && !point_warm_acres )} ;
