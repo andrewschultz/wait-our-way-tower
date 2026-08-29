@@ -11,7 +11,7 @@ game_information {
    written_by                   = Andrew Schultz
    uuid                         = b3c1f8e2-5d4a-4f9b-8c3d-2a7e5f6a9b1c
    year_of_release              = 2026
-   copyright_message            = Free to distribute, voluntary payments welcome
+   copyright_message            = Free to distribute
    short_synopsis               = IFComp 2026 entry, in the vein of {l_wp} and {l_ut}, but in Adventuron
 }
 
