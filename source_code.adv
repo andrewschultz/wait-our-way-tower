@@ -1471,13 +1471,9 @@ locations {
             : print {( point_sun_catching ? "You are able to see more of it now." : "It feels like you should be able to see more of it, but you're not looking at it right, or with the right resources." )} ;
             : done ;
          }
-         : match "_ tough;_ tiki" {
-            : print {( point_tufty_key ? "You'd feel bad about asking it for anything else. But you doubt it has anything else you need." : "It looks tough but not impossible to please. You can't go asking it for any old thing. You think of what you need: a mix of a bit odd and yet pedestrian, like the rather crudely designed tiki itself." )} ;
-            : done ;
-         }
          : if (point_sun_catching) {
             : match "_ tough;_ tiki" {
-               : print {( point_tufty_key ? "It still looks forbidding, even though it coughed up the key for you. Probably don't want to double-dip." : "Not VERY friendly. Almost expectant, though. It's probably not just there for decoration." )} ;
+               : print {( point_tufty_key ? "You'd feel bad about summoning it back to ask it for anything else. But you doubt it has anything else you need." : "It looks tough but not impossible to please. You can't go asking it for any old thing. You think of what you need: a mix of a bit odd and yet pedestrian, like the rather crudely designed tiki itself." )} ;
                : done ;
             }
          }
