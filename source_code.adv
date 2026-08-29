@@ -2110,9 +2110,13 @@ locations {
    }
    r22 : location "{r22_loc}" header="{r22_header}" graphic="r22_0" {
       on_command {
+         : if (point_free_crusty) {
+            : match "_ free;_ crusty" {
+               : gosub "r22_npc" ;
+            }
+         }
          : match "_ freak;_ rusty" {
-            : print {( point_free_crusty ? "They seem happier now you've helped them reframe their life." : "They don't need to be reminded of their weaknesses. They maybe need to restate how things are. It's not their fault. (Small voice: it's mine, actually. But I hope I--and you--make things turn out okay for them in the end.)" )} ;
-            : done ;
+            : gosub "r22_npc" ;
          }
          : match "_ field;_ erring" {
             : print {( point_feel_daring ? "You feel more confident navigating the field and other personal relationships." : "It's not a very big field, but you are worried about putting your feet wrong." )} ;
@@ -3772,6 +3776,12 @@ subroutines {
          : set_integer var="my_tats_num" "35" ;
       }
    }
+
+   r22_npc : subroutine {
+      : print {( point_free_crusty ? "They seem happier now you've helped them reframe their life." : "They don't need to be reminded of their weaknesses. They maybe need to restate how things are. It's not their fault. (Small voice: it's mine, actually, being the writer of this. But I hope I--and you--make things turn out okay for them in the end.)" )} ;
+      : done ;
+   }
+
    loam_apse_stuff : subroutine {
       : if (!gamestate_loam_apse_placed) {
          : print "Weird. You see a loam apse off to the side of this intersection. Maybe it holds something!" ;
