@@ -1289,7 +1289,7 @@ locations {
                : print "You already unwrapped the fly traps, for better or worse." ;
                : done ;
             }
-            : print "The flight wraps uncurl, with loud poppings, which you haven't heard since you got ahold of a ton of bubble wrap as a kid. Whether or not it was protecting the flight of the plants, or animals the plants prey on, you're not sure. But now the fly traps are out there, and they may need to be tamed." ;
+            : print "The flight wraps uncurl, with loud poppings, which you haven't heard since you got ahold of a ton of bubble wrap as a kid. You remember popping the stuff too quickly, then, as you grew older and wiser, leaving it for later, much later, until the bubbles popped by themselves. Whether or not it was protecting the flight of the plants, or animals the plants prey on, you're not sure. But now the fly traps are out there, and they probably need to be tamed." ;
             : set_integer var="tempint" "33" ;
             : set_true "point_fly_traps" ;
             : gosub "add_point" ;
@@ -1322,7 +1322,7 @@ locations {
                   : print "The cat's instincts are already back where they should be." ;
                   : done ;
                }
-               : print "You try and show the cat a better way of chasing, perhaps something it should know, but you're patient with it, and it's kind of fun. Eventually, it does get better, and it rubs against your feet, being able to trust you now. Maybe its friends will, too, if it has any." ;
+               : print "You try and show the cat a better way of chasing, perhaps something it should know, but you're patient with it, and it's kind of fun. Eventually, it does get better, and it rubs against your ankles, able to trust you now. Maybe its friends will, too, if it has any. Cats do seem to have none, or many." ;
                : set_integer var="tempint" "35" ;
                : set_true "point_catch_acing" ;
                : gosub "add_point" ;
@@ -1353,7 +1353,9 @@ locations {
                : print "You already discovered one dumb parable. Two might fry your brain for the rest of the adventure!" ;
                : done ;
             }
-            : print "Inspired, perhaps ironically, to construct a dumb parable, you built one out of simple honesty and a new simplicity and some we-are-all-one back to nature stuff and the sort of details that make rich people feel they really really do connect with poor people, at least, poor people willing to do anything not to be poor any more. It's actually kinda somewhat convincing, if you don't think too hard. It's not something that stands up under serious rigor, but it might be nice to pass off to people who don't know better." ;
+            : print "Inspired, perhaps ironically, to construct a dumb parable, you build one out of simple honesty and a new simplicity and some we-are-all-one back to nature stuff and the sort of details that make rich people feel they really really do connect with poor people. Well, at least, poor people willing to do anything not to be poor any more." ;
+            : print "It's actually kinda somewhat convincing, if you don't think too hard. It's not something that stands up under serious rigor, but it might be nice to pass off to people who don't know better." ;
+            : print "You're generally morally opposed to that sort of thing, but on the other hand, a little small talk goes a long way. You've had people do it to you. You remember stories that were inspiring as a kid but they weren't when you got older, or vice versa. The story will work. You won't be signing a contract or speaking under oath in a courtroom, after all." ;
             : set_integer var="tempint" "8" ;
             : set_true "point_dumb_parable" ;
             : gosub "add_point" ;
@@ -1393,10 +1395,10 @@ locations {
          }
          : match "tightened rousing" {
             : if (point_tightened_rousing) {
-               : print "The giant is already awake. Any more of that might be fatally irritating. Well, for you." ;
+               : print "The titan is already awake. Any more of that might be fatally irritating. Well, for you." ;
                : done ;
             }
-            : print "You're not sure how precisely to wake up a giant, but you realize you don't want to be all over the place. You also don't want to be too loud, you stand a safe distance away, and you start yelling stuff, like how you have something interesting for them or whatever. Eventually the giant turns over and blinks and stares at you. So, now, what did you wake them for?" ;
+            : print "You're not sure how precisely to wake up a titan, but you realize you don't want to be all over the place. You also don't want to be too loud, you stand a safe distance away, and you start yelling stuff, like how you have something interesting for them or whatever. It's light on details, but fortunately the titan doesn't seem angry enough to press for them, as it turns over and blinks and stares at you. So, now, what did you wake them for?" ;
             : set_integer var="tempint" "11" ;
             : set_true "point_tightened_rousing" ;
             : gosub "add_point" ;
@@ -1438,7 +1440,7 @@ locations {
                : print "There is nobody left to pitch to. Anyway, you got more riches than expected here." ;
                : done ;
             }
-            : print "You aren't quite sure how you're going to explain what's so great about one coin at first, especially since the giant has riches lying around. Then you find an angle. If someone as small as you can make this coin, with your strategies or whatever, think of what the giant could make with their height and strength and so forth. You put more of the dumb parable to use, and surprisingly, the giant buys it. They walk away. You are confronted with riches. There are \"higher itches, hi\" riches and \"power itches, POW\" riches. You decide on the first, though it's a smaller pile.\nAn unheard voice booms YOU HAVE CHOSEN WELL. PERHAPS IT WASN'T TOO HARD TO IN CASES LIKE THIS, BUT GOOD JOB, ANYWAY. SURPRISINGLY MANY DON'T." ;
+            : print "You aren't quite sure how you're going to explain what's so great about one coin at first, especially since the titan has riches lying around. Then you find an angle. If someone as small as you can make this coin, with your strategies or whatever, think of what the titan could make with their height and strength and so forth. You put more of the dumb parable to use, and surprisingly, the titan buys it. They walk away. You are confronted with riches. There are \"higher itches, hi\" riches and \"power itches, POW\" riches. You decide on the first, though it's a smaller pile.\nAn unheard voice booms YOU HAVE CHOSEN WELL. PERHAPS IT WASN'T TOO HARD TO IN CASES LIKE THIS, BUT GOOD JOB, ANYWAY. SURPRISINGLY MANY DON'T." ;
             : set_integer var="tempint" "12" ;
             : set_false "think_pitch_earning" ;
             : set_true "point_pitch_earning" ;
@@ -1482,7 +1484,7 @@ locations {
                : print {( "The tiki doesn't have a hidden friend or relative or whatever. In fact, it might be insulted if you looked for better. Guess you " + (point_tufty_key ? "did well with what you had." : "should deal with what you've got." ) )} ;
                : done ;
             }
-            : print "You angle your head various ways, noting that it is still day out, and perhaps if the sun hits things just right, you will see something you didn't. Sure enough, you catch a glean, and you dig into some soil, and you find a {puz_point_tough_tiki} staring back up at you. It's not a very big one, but it still doesn't look like it gives in to other people's wishes very easily." ;
+            : print "You angle your head various ways, noting that it is still day out, and perhaps if the sun hits things just right, you will see something you didn't. Sure enough, you catch a gleam, and you dig into some soil, and you find a {puz_point_tough_tiki} staring back up at you. It's not a very big one, but it still doesn't look like it gives in to other people's wishes very easily. Perhaps the Bros tried to get something from it, which left it suspicious." ;
             : set_integer var="tempint" "20" ;
             : set_true "point_sun_catching" ;
             : gosub "add_point" ;
@@ -1510,7 +1512,7 @@ locations {
                   : print "You already got what you needed from the tough tiki. It might not take kindly to asking for more." ;
                   : done ;
                }
-               : print "The tiki nods slightly and then opens its mouth. A key falls out. It looks pretty dry, so you pick it up without washing your hands. You nod to the tiki, which closes its eyes." ;
+               : print "The tiki nods slightly and then opens its mouth. A key falls out. It looks pretty dry, so you pick it up without washing your hands. You nod to the tiki, which closes its eyes and sinks into the ground." ;
                : set_integer var="tempint" "21" ;
                : set_true "point_tufty_key" ;
                : pocket "tufty_key" ;
@@ -1543,7 +1545,10 @@ locations {
                : print "Too much of this self-improvement will leave you completely unsuited for what really matters in life, like weird text adventures. So watch it, sport!" ;
                : done ;
             }
-            : print "Oh good, there was a bit of humble bragging in the meager oath, but you try and take the best bits and apply it to your own experiences. It actually works pretty well. You can say, well, if it helps someone less in perspective than me, it can help me, too, and I don't want to be too good for decent advice I've passed out for awhile. You feel more able to deal with people and groups and so forth." ;
+            : print "You read through the meager oath again. Some parts make you cringe, but some actually hlelp you. You try to take the best bits and apply it to your own experiences." ;
+            : print "Some of the advice would have failed miserably, some is over-general, some reminds you of unsolicited advice, and some tipped off actual useful advice from someone who wasn't overbearing." ;
+            : print "You can't say your life's changed, but you think as follows: if it's meant to help everyone, I'd be a fool to pass up the parts that actually work and worry whether I'm too smart or too dumb for it." ;
+            : print "Perhaps you can pass this feeling on to others later." ;
             : set_integer var="tempint" "24" ;
             : set_true "point_me_growth" ;
             : gosub "add_point" ;
