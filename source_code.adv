@@ -1989,7 +1989,9 @@ locations {
                : print "You already showed you could, and you did. Time to move on." ;
                : done ;
             }
-            : print "You shake off your feelings of dread. You become a bit more aware of your surroundings. In particular, {puz_point_the_floor}." ;
+            : print "You shake off your feelings of dread. Momentarily, you laugh at your fears your employers will fire you once behavioral test and motion cameras detect your work ethic is about to fall off a cliff--perhaps they already have, and you're due in three to six months, and they're just waiting." ;
+            : print "You recall, too, those people who always told you to put your head down and do things. They were TECHNICALLY correct, even if they weren't interested in things you did for yourself.";
+            : print "So you put your head down. You must have done so particularly well, because suddenly, {puz_point_the_floor} seems very interesting." ;
             : set_integer var="tempint" "0" ;
             : set_true "point_can_do" ;
             : gosub "add_point" ;
@@ -2012,7 +2014,9 @@ locations {
                   : print "You don't find anything else hidden in the floor." ;
                   : done ;
                }
-               : print "You think back to what thief lore you might know. You only know surface stuff. You think of stuff you could use to pick the lock on the outside. Perhaps it was buried under the floor by the last inhabitant. And what do you know? You find something! A {puz_point_yellow_pin}! All right!" ;
+               : print "You think back to what thief lore you might know. It's pretty superficial stuff. You managed to jimmy your own back door and also open a padlock combination you forgot, thanks to YouTube. Then, for weeks after, you were worried about your home or locker getting broken into, because it was so easy." ;
+               : print "And yet this place seems lived in before. Scratchings on the floor mention that. Messy writing, but clues emerge. But nah, that stuff only happens on TV, and this is just a text adventure with low-res graphics!" ;
+               : print "Yet, perhaps such a low budget environment is conducive to low-budget resolutions. And what do you know? You find something! A {puz_point_yellow_pin}! All right!" ;
                : print "The euphoria wears off after you find the pin, though. There's no lock to put it into, and it's too flimsy. But it's something." ;
                : set_true "point_thief_lore" ;
                : set_integer var="tempint" "1" ;
@@ -2037,7 +2041,10 @@ locations {
                   : print "No need to yell open again!" ;
                   : done ;
                }
-               : print "The yellow pin glows and burns in your hand. You throw it at the door, reflexively. The pin sticks in the door! With a loud SSS, you watch the door melt away. You can go {dir_e_y} now!" ;
+               : print "The yellow pin glows and burns in your hand. You throw it at the door, reflexively. The pin sticks in the door! With a loud SSS, you watch a small hole expand. You see the lock mechanism. It's not hard to tinker now and open it from the inside and go {dir_e_y} now." ;
+               : print "You're not complaining, but ... yell open, just like that? Where is the security here at this prison anyway? Do they WANT you to escape? You wonder if you should inform the management, but then again, if you did, you'd probably be the first person they threw back into the new improved cell. Best to keep quiet, then." ;
+               : print "You remember with guilt keeping quiet and letting a jerk at school walk into a trap teachers had prepared. Until you remembered the things they said to push you away from the books you wanted to read, shows you wanted to watch, and so forth. Take what you can get." ;
+               : print "The door open, you place the pin back under the floor where you found it, in case anyone else drops by, or is dropped by." ;
                : set_integer var="tempint" "2" ;
                : set_true "point_yell_open" ;
                : gosub "add_point" ;
@@ -2071,7 +2078,7 @@ locations {
          }
          : if (!point_halt_error) {
             : match "_ hall;_ terror" {
-               : print "You don't see any physical weakness. Maybe you can get inside the hall terror's mind. Or its controllers'." ;
+               : print "It looks like something from horrible dreams you described to friends, who then told you to stop being boring and weird. You don't see any physical weakness. Maybe you can get inside the hall terror's mind. Or its controllers'." ;
                : done ;
             }
          }
@@ -2093,6 +2100,7 @@ locations {
                : done ;
             }
             : print "What good can such words do against a terror? But they're worth a try. Surprisingly, the terror lets up a bit. It seems to do some calculations then mentioned, you are not the optimal person to be terrorizing at the time, if you said something like that. It goes in search of other prey. You hear voices after this." ;
+            : print "You're reminded of dreams you described to friends, things like the terror and how you couldn't stop it, and some time after your friends said stop being inane, you gained control. Here you got to do it in real life. You think." ;
             : set_integer var="tempint" "3" ;
             : set_true "point_halt_error" ;
             : gosub "add_point" ;
@@ -2115,7 +2123,7 @@ locations {
                   : print "You don't want to oversell this." ;
                   : done ;
                }
-               : print "You try shouting fell asleep first, but you realize that was really a bad idea. Slowly, you make your voice drowsier and drowsier, saying fell asleep, fall asleep, fall asleep. You can go {dir_e_y} now!" ;
+               : print "You consider shouting FELL ASLEEP first, but you quickly realize that's a spectacularly bad idea. Slowly, you start all questioning, then make your voice drowsier and drowsier, saying fell asleep, fall asleep, fall asleep. You can go {dir_e_y} now!" ;
                : set_integer var="tempint" "4" ;
                : set_true "point_fell_asleep" ;
                : gosub "add_point" ;
@@ -2159,7 +2167,7 @@ locations {
                : print "You don't want to engage in daring for the sake of daring. Sometimes, if you do too much of that, it burns you out for later. And you sense you have a good chunk of adventure to go." ;
                : done ;
             }
-            : print "It's not exactly flipping a switch count but it is important to feel as though you can try stuff, and to do so, you remember other times you were unexpectedly brave, and big or small things. It seems to work, for now. A nagging voice tells you you really don't want to waste that daring feeling. You're actually glad to have it around." ;
+            : print "You can't exactly flip a switch to feel daring. Well, not super daring. But it is important to feel as though you can try stuff. To do so, you remember other times you were unexpectedly brave, in big or small things. Most of the time that involved not thinking too much, and you think about how you can avoid thinking too much until your head hurts. Still, you promise yourself that in the near future you'll try some small stuff you might not otherwise try." ;
             : set_integer var="tempint" "15" ;
             : set_true "point_feel_daring" ;
             : gosub "add_point" ;
@@ -2179,7 +2187,7 @@ locations {
          : if (!point_free_crusty) {
             : match "free crusty" {
                : if (!point_feel_daring) {
-                  : print "You don't have the courage to talk to the freak yet, sadly!" ;
+                  : print "You don't have the courage to talk to the freak yet, sadly! You feel bad thinking of them that way." ;
                   : set_true "think_free_crusty" ;
                : collection_modify { collection = "tried_combo_core" index -> (16) content -> ("true") } ;
                   : gosub "note_thinks" ;
@@ -2189,7 +2197,9 @@ locations {
                   : print "You already helped the ex-freak see their individuality more productively." ;
                   : done ;
                }
-               : print "You tell the freak, nonsense, you don't have to be a freak, and they say other people have said that and they call them even more of a freak for not finding a way. But you say, well, why not frame it as nonconformism? So you're suspicious of it all, and maybe you are, well, a bit free of it, and feeling a bit crusty that more people haven't seen it, the sort of people who swear they have more common sense than you do. Brilliant, they say, I'll give that a try. I'd like to cut off your jib. They walk off, presumably to educate other people, and definitely to not block your way east any more." ;
+               : print "You tell the freak, nonsense, you don't have to be a freak, and they say other people have said that and they call them even more of a freak for not finding a way. You've heard it from other people as well. But you say, well, why not frame it as nonconformism?" ;
+               : print "You've had people say that to you, and you never quite believed it, so it feels weird. But then you realize certain names long since lost their sting, and you haven't let certain people distract you since, well, forever. You hate getting into turn-that-frown-upside-down \"philosophy,\" but it's worth it to remember certain people are, in fact, full of it, even if you can't prove that yet." ;
+               : print "The (non-)freak nods. They go off for thought for a few minutes and come back happier." ;
                : set_integer var="tempint" "16" ;
                : set_false "think_free_crusty" ;
                : set_true "point_free_crusty" ;
@@ -2219,7 +2229,8 @@ locations {
          }
          : match "frame easily" {
             : if (!point_tense_ops) {
-               : print "You might need to navigate some smaller conflicts or plans to ramp up before navigating this whole fray!" ;
+               : print "That feels right, but you're worried any simplified advice will just sound over-general." ;
+               : print "Perhaps you might need to navigate even more minor conflicts or plans to ramp up before navigating this fray, even if it is measly!" ;
                : set_true "think_frame_easily" ;
                : collection_modify { collection = "tried_combo_core" index -> (30) content -> ("true") } ;
                : gosub "note_thinks" ;
@@ -2229,7 +2240,9 @@ locations {
                : print "But you already dispersed the fray!" ;
                : done ;
             }
-            : print "With your experience helping the ten sops, you're able to hammer out some sort of agreement. They hand you an {iaad}." ;
+            : print "The fray, measly regards you suspiciously at first. You seem to talk a good game, but do you have any credentials? You show them the {iaad}. They're somewhat impressed. Then you describe how you worked with the sops and sorted things out together. \"The SOPS?\" both sides ask. \"They're hopeless! You got them to...?\"" ;
+            : print "And just like that, the two opposing sides have something they can agree on! Talks go much more smoothly after that. You wonder why the heck they started arguing in the first place. The initial beefs seemed so trivial. But then again, you remember beefing with friends, or people who should've been friends, over much smaller things." ;
+            : print "Both sides of the fray go off to start a new commune They say you're nice and all, but you just don't have the shared experience to really be one of them. You don't mind. You're not entirely sure how long the peace will last, to be honest." ;
             : set_integer var="tempint" "30" ;
             : set_false "think_frame_easily" ;
             : set_true "point_frame_easily" ;
@@ -2274,7 +2287,10 @@ locations {
                : print "It's already warmer and cozier here. We don't need to burn things up." ;
                : done ;
             }
-            : print "What good can a bit of warmth do? Even if it is emotional warmth? Well, you try it, and somehow, the dogs' and cats' animal instincts  sense you're ready. They swarm over the area. Some of the makers absolutely loathe pets, and they flee right away. Other makers, mostly the recently initiative, actually are receptive to the dogs and cats. They seem more interesting than planning war or whatever. Among some of them are the girl's old parents, apparently. She points them out to you. They kind of look at her and run by. But two others near say, wait, you're that kid they talked about, we feel bad about this, why don't you come with us at least temporarily. A dog and cat each follow as she goes. She waves goodbye to you, still holding her doll.\nNow evreyone's gone, you can see what's {dir_e_y}. Not much left {dir_w_v}." ;
+            : print "What good can a bit of warmth do? Even if it is emotional warmth? Well, you try it, and somehow, the dogs and cats sense you're ready. They swarm over the area. Some of the makers absolutely loathe pets, and they flee right away. Other makers, mostly the recently initiated, actually are receptive to the dogs and cats." ;
+            : print "Playing with pets is much more interesting than planning the war or whatever, even if it doesn't make folks feel as important. Among said folks are the girl's old parents, whom she points out to you." ;
+            : print "They just look at her and shrug and run by. Harsh! But two others near say, wait, you're that kid they talked about, we feel bad about this, why don't you come with us at least temporarily. A dog and cat each follow as she goes. She waves goodbye to you, still holding her doll. You feel relieved--you weren't up to parenting, and you own't be even if you get out of here--but you'll still miss her. Everyone else disperses." ;
+            : print "Now everyone's gone, you can see what's {dir_e_y}. Not much left {dir_w_v}." ;
             : destroy "only_girl" ;
             : set_integer var="tempint" "40" ;
             : set_false "think_warm_acres" ;
@@ -2304,7 +2320,7 @@ locations {
                   : print "Your doubts are well and truly tuned out. Time to move on!" ;
                   : done ;
                }
-               : print "You tune out your doubts yet again." ;
+               : print "You tune out your doubts yet again. There's some Don't Think of a Bear logic here. You can't meet them head-on, but you realize the doubts and fear of TO NOWT are a lot like other things you've seen, the HEY TRASH and the dull oozing and so forth, and even the fear of conflicts you helped settle. This is trivial by comparison. Perhaps you will be able to tune out this sort of thing subconsciously, with more practice." ;
                : set_integer var="tempint" "42" ;
                : set_true "point_tune_out" ;
                : gosub "add_point" ;
@@ -2426,7 +2442,11 @@ locations {
                : print "Don't rub it in. The boss is long gone, anyway." ;
                : done ;
             }
-            : print "Even though the boss doesn't seem to let up, you actually pretend that they are, and you have the backup to prove it. The gal and the mage can believably pretend they don't know each other that well, or you, so it doesn't come off as a coordinated effort. You play off this a lot, and the boss, trying to lump in your problems or alleged problems, gives up. You're just not going to listen, are you? They run away. The mage and the lass talk to you for a bit. They have other things to do, too, and they go their separate ways, and the mage realizes he has a lot to learn beyond just spells and stuff.\nBehind the boss, you see a door with text {puz_point_same_entering} on it." ;
+            : print "Even though the boss doesn't seem to let up, you actually pretend that they are, and you have the backup to prove it. The gal and the mage can believably pretend they don't know each other, or you, that well, so it doesn't come off as a coordinated effort." ;
+            : print "Of course, you all have been subjected to this game for much more nefarious reasons. The boss keeps letting you know what your problem is, and what else your problem is, and so forth. Sometimes two of the three of you are caught out, but someone always has a response." ;
+            : print "\"Since OBVIOUSLY none of you want to even TRY to listen to honest criticism, I am so THROUGH here,\" yells the boss, who stomps off, mentioning nobody who needs to listen ever does." ;
+            : print "There's not much else to say. You and the lass and mage vaguely promise to keep in touch, but after some discussion, you realize what different people you are. The mage has a lot to learn beyond spells and stuff. The lass has places to explore she put off. You? Well, you've had enough journeying. Almost." ;
+            : print "Behind where the boss was, you see a door with text {puz_point_same_entering} on it." ;
             : set_integer var="tempint" "46" ;
             : set_false "think_bah_slumping" ;
             : set_true "point_bah_slumping" ;
@@ -2464,7 +2484,8 @@ locations {
                : print "At some point, there are diminishing or even negative returns for counting and re-counting your blessings. What will you do with them, around the true pleading?" ;
                : done ;
             }
-            : print "Instead of feeling statement, you feel as though there are possibilities, possibilities that would not have opened up in a more chaotic environment. You sit back and think of your own thoughts and listen to what there is to listen to. There is now a lot of {puz_point_true_pleading}, a lot of thoughts you had and forgot you did, or you dismissed as not really important or worldly enough." ;
+            : print "Instead of feeling stagnant, you feel glad you have a chance to catch up on your own thought. You've had enough chaos and weirdness. You sit back and listen to your own thoughts. What mental blocks have you accepted too long? What small victories did you work hard to earn and then take for granted? What did you put off because it seemed too big, or too small, for the moment?" ;
+            : print "A while of this, and you realize you're not just listening to your own thoughts. There is now a lot of {puz_point_true_pleading}, whispers coming from others you can't quite see, but they're there." ;
             : set_integer var="tempint" "48" ;
             : set_true "point_blest_able" ;
             : gosub "add_point" ;
@@ -2483,7 +2504,7 @@ locations {
          }
          : if (point_blest_able) {
             : match "troop leading" {
-               : print "You win! (fill in text here about inspiring people, maybe nobody terribly much that they can rave, but you do these small things)" ;
+               : print "Well, it's certainly a big step to take. You've never thought of yourself as much of a leader. You're not going to be making big speeches in auditoriums that encourage people to change their lives. But perhaps you have more in common with people worth improving, people who want to improve, than you thought. The silly little victories along the way added up." ;
                : set_true "won_yet" ;
                : set_integer var="tempint" "49" ;
                : set_true "point_troop_leading" ;
