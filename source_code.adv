@@ -4700,14 +4700,14 @@ on_command {
       : match "fey loops" {
          : set_true "gamestate_thug_pass" ;
          : if (!is_at "r04" && !is_at "r14") {
-            : print "You look for fey loops that might catch the enemy, but not here. Perhaps there is not potential enough for looping here." ;
+            : print "You look for fey loops that might catch the enemy, but not here. Perhaps there is not potential enough for looping here, with walls or terrain may get in the way." ;
             : set_true "think_fey_loops" ;
             : collection_modify { collection = "tried_combo_core" index -> (41) content -> ("true") } ;
             : gosub "note_thinks" ;
             : done ;
          }
-         : print {( "You don't believe you will find any fey loops, but you figure why not, this place is as good as any others." )} ;
-         : print {( "And what do you know? You find some to the " + (is_at "r04" ? "{dir_n_y}" : "{dir_n_s}") + ", which creates the first (and only) loop in the game map." )} ;
+         : print "You don't believe you will find any fey loops here, even if they might be somewhere. They're always the last place you look." ;
+         : print {( "Because of course there's no point looking once you find them. Which you have, here. Recalling the surrounding map, this WAS the only place it could be -- the other locations ostensibly near each other were blocked by a wall, or water, or something. The loops weren't easy to find, but now you have, it's pretty clear how to go to the " + (is_at "r04" ? "{dir_n_y}" : "{dir_n_s}") + ", making the first (and only) loop in the game map." )} ;
          : if (gamestate_thug_chase) {
             : print "The thug is momentarily stunned by this development and does not take the time to thump you." ;
          }
