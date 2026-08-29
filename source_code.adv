@@ -52,6 +52,9 @@ strings {
    one_time : string "<ONE-TIME NOTE: <#f0f>>" ;
    key_enter : string "the <ENTER<#f88>>/<RETURN<#f88>> key" ;
 
+   v_listen : string "<LISTEN<#f80>>" ;
+   v_take_drop : string "<TAKE<#f80>> or <DROP<#f80>>" ;
+
    # diagnostic verbs
    vd_bonus : string "<BONUS<#f80>>" ;
    vd_hint : string "<HINT<#f80>>/<HINTS<#f80>>" ;
@@ -89,7 +92,8 @@ strings {
    cred_de : string "<Doug Egan<#0f0>>[https://dougegan2.itch.io]" ;
    cred_lp : string "<Lamp Post Projects<#0f0>>[https://lamppostprojects.itch.io/]" ;
    cred_mr : string "<Mike Russo<#0f0>>[https://russo2116gmailcom.itch.io/]" ;
-   cred_sh : string "<Stefan Hoffmann<#0f0>>[https://interactive-onions.io:5474/] (<IFDBs<#0f0>>[https://ifdb.org/search?searchfor=author%3AStefan+Hoffmann])" ;
+   cred_rh : string "<rh9<#0f0>>[https://rh9.itch.io/]" ;
+   cred_sh : string "<Stefan Hoffmann<#0f0>>[https://interactive-onions.io:5474]" ;
 
    # puzzle strings
    puz_point_ace_inc        : dynamic_string {( opt_color_coding ? "<Ace, Inc.<#f8f>>" : "Ace, Inc." )}             ; # 26
@@ -3609,7 +3613,7 @@ subroutines {
       }
    }
    add_bonus_point : subroutine {
-      : print "You gained a bonus point!" ;
+      : print "<You gained a bonus point!<#ff0>>" ;
       : increment "bonus_score" ;
       : update_graphic ;
    }
@@ -4647,9 +4651,9 @@ on_command {
       : print "Directional text is color-coded, too. <RED<#f00>> means you need to solve a puzzle to go a certain way. <GREEN<#0f0>> means you've been that way. <YELLOW<#ff0>> means you can go that way but haven't, yet." ;
    }
    : match "credits _;credit _" {
-      : print "Thanks to, in alphabetical order, {cred_aj}, {cred_de}, {cred_sh}, {cred_lp}, and {cred_mr} for testing. I was behind schedule, and they found a lot, including very good points I wasn't able to fully address in the IFComp release." ;
-      : print "Thanks to IFComp administrators past and present and to reviewers and judges past and present. Without them, I would not have dived into this enjoyable (hey, at least for me) nonsense." ;
+      : print "Thanks to, in alphabetical order, {cred_aj}, {cred_de}, {cred_sh},  {cred_rh}, {cred_lp}, and {cred_mr} for testing. I was behind schedule, and they found a lot, including very good points I wasn't able to fully address in the IFComp release. Links are to itch.io -- <IFDB<#0f0>> links don't play well with the Adventuron version I'm using." ;
       : print "Thanks to {cred_ca} for creating Adventuron." ;
+      : print "Thanks to IFComp administrators past and present and to reviewers and judges past and present. They give me an excuse to keep trying stuff." ;
       : if (!credits_yet) {
          : print "{one_time}Green text here links to a person's itch.io account. Also, <*CREDITS<#f80>> gives general ADVENTURON credits." ;
       }
@@ -4779,17 +4783,24 @@ on_command {
    }
    : match "verbs _;verb _" {
       : set_true "gamestate_thug_pass" ;
-      : print "To complete {this_game}, you only need the four compass directions (well, the exit from the first room is up) and special commands clued by descriptions and such." ;
-      : print "If you're not in an action sequence, you can also use a number to move to a square you've visited before. You start at 20, one east of it is 21, north from there is 31. The pre-endgame map is a 5x5 grid, so its northeast corner is 44." ;
+      : print "To complete {this_game}, you only need the four compass directions (well, the exit from the first room is up) and special commands clued by descriptions and such. You {v_take_drop} automatically." ;
+      : print "If you're not in an action sequence, you can also use a number to move to a square you've visited before. You start at <20<#f80>>, one east of it is <21<#f80>>, and north from there is <31<#f80>>. The pre-endgame map is a 5x5 grid, so its northeast corner is <44<#f80>>." ;
+      : print "{v_listen} may be entertaining in places." ;
       : print "{vm_meta} gives a list of metaverbs, or in-game actions that don't affect the world. They provide information on game play." ;
-      : print "Diagnostic verbs may help, too. They give information about your game status. {vm_diag} gives information about them." ;
-      : print "Finally, there is an option: {vo_hone_aye} blocks off exits to done rooms and what is behind them, while {vo_ho_nigh} lets you traverse freely." ;
+      : print "{vm_diag} lists diagnostic verbs, which give information about your game status." ;
+      : print "{vm_opt} lists options that change text output or restrict unneeded travel." ;
+   }
+   : match "opt _;opts _;options _;option _" {
+      : print "There are three options in {this_game}." ;
+      : print "{vo_hone_aye} blocks off exits to rooms if you've compled them and everything behind, to help focus on what to do next, while {vo_ho_nigh} lets you traverse freely." ;
+      : print "{optt_ch} {yn} turns color hints on or off." ;
+      : print "{optt_notify} {yn} turns score notification on or off." ;
    }
    : match "meta _" {
+      : print "Meta-verbs besides, well, {vm_meta}:" ;
       : print "{vm_about} discusses the game's origin and general flow." ;
       : print "{vm_credits} gives credit to people who helped create this game or make it better." ;
       : print "{vm_versions} shows version history and release dates." ;
-      : print "Meta-verbs besides {vm_meta}:" ;
       : done ;
    }
    : match "diag _" {
@@ -4797,12 +4808,14 @@ on_command {
       : print "Diagnostic verbs include {vd_i_three} to take inventory, {vd_think} to show where you've been on the right track, and {vd_score} to see your game score." ;
       : if (bonus_point_lo_maps) {
          : print "You've also unlocked the in-game {vd_map} of where you've been." ;
+      } : else {
+         : print {( "There's one more verb that's intended to be an easy bonus point. " + (has_visited("r11") || has_visited "r31" ? "You've seen it." : "It's in the starting area." ) )} ;
       }
       : done ;
    }
    : match "take _;drop _" {
       : set_true "gamestate_thug_pass" ;
-      : print "You don't need to <TAKE<#f80>> or <DROP<#f80>> anything here. It's all done for you." ;
+      : print "You don't need to {v_take_drop} anything here. It's all done for you." ;
       : done ;
    }
    : match "x me;x myself" {
