@@ -681,7 +681,7 @@ collections {
          "{here_r25}",
          "{here_r15}",
          "{here_r35}",
-         "{here_r15}",
+         "{here_r35}",
          "{here_r26}",
          "{here_r26}",
          "{here_r27}",
@@ -734,13 +734,13 @@ collections {
          "<WARM<#f80>>",
          "<FEY<#f80>>",
          "<TUNE<#f80>>",
+         "<RIGHT<#f80>>",
          "<MAGE<#f80>>",
          "<BROKE<#f80>>",
-         "<RIGHT<#f80>>",
          "<BAH<#f80>>",
          "<SAY<#f80>>",
          "<BLEST<#f80>>",
-         "<ROW<#f80>>"
+         "<TROOP<#f80>>"
       ]
    }
 
@@ -789,13 +789,13 @@ collections {
          "<ACRES<#f80>>",
          "<LOOPS<#f80>>",
          "<OUT<#f80>>",
+         "<ANGLES<#f80>>",
          "<URGENT<#f80>>",
          "<LASS<#f80>>",
-         "<ANGLES<#f80>>",
          "<SLUMPING<#f80>>",
          "<MENTORING<#f80>>",
          "<ABLE<#f80>>",
-         "<MENDING<#f80>>"
+         "<LEADING<#f80>>"
       ]
    }
 
