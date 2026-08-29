@@ -3644,19 +3644,7 @@ subroutines {
          : done ;
       }
    }
-   say_half : subroutine {
-      : match "* -;- *" {
-         : print "Feels right, but what to pair that word with?" ;
-         : done ;
-      }
-      : gosub "check_100" ;
-      : cycle key = "one_right" predictable_order = "true" skip_interval = "0" max_loops = "1" {
-         : print {( "The {first_or_second} word felt right, but the other didn't. You must be halfway there{for_bonus}.{already_got_check}" )} ;
-         : print "That halfway-there feeling again. You must have gotten the {first_or_second} word there{for_bonus}.{already_got_check}" ;
-         on_exhausted {
-            : print {( (first_half ? "First word right, second word wrong" : "First word wrong, second word right") + "{for_bonus}.{already_got_check}" )} ;
-         }
-      }
+   half_hints : subroutine {
       : if (!note_half_think) {
          : print "{one_time}{vd_think} will show half-right guesses until you've gotten both words right." ;
          : set_true "note_half_think" ;
@@ -3675,6 +3663,22 @@ subroutines {
          }
       }
       : set_false "already_got_command" ;
+   }
+   say_half : subroutine {
+      : match "* -;- *" {
+         : print "Feels right, but what to pair that word with?" ;
+         : gosub "half_hints" ;
+         : done ;
+      }
+      : gosub "check_100" ;
+      : cycle key = "one_right" predictable_order = "true" skip_interval = "0" max_loops = "1" {
+         : print {( "The {first_or_second} word felt right, but the other didn't. You must be halfway there{for_bonus}.{already_got_check}" )} ;
+         : print "That halfway-there feeling again. You must have gotten the {first_or_second} word there{for_bonus}.{already_got_check}" ;
+         on_exhausted {
+            : print {( (first_half ? "First word right, second word wrong" : "First word wrong, second word right") + "{for_bonus}.{already_got_check}" )} ;
+         }
+      }
+      : gosub "half_hints" ;
       : if (!half_bonus) {
          : done ;
       }
