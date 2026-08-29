@@ -121,15 +121,15 @@ strings {
    puz_point_float_rippling : dynamic_string {( opt_color_coding ? "<float, rippling<#f8f>>" : "float, rippling" )} ; # 23
    puz_point_fray_measly    : dynamic_string {( opt_color_coding ? "<fray, measly<#f8f>>" : "fray, measly" )}       ; # 30
    puz_point_freak_rusty    : dynamic_string {( opt_color_coding ? "<freak, rusty<#f8f>>" : "freak rusty" )}        ; # 16
-   puz_point_grr_lonely     : dynamic_string {( opt_color_coding ? "<grr lonely<#f8f>>" : "grr lonely" )}           ; # 32
+   puz_point_grr_lonely     : dynamic_string {( opt_color_coding ? "\"<Grr, lonely<#f8f>>\"" : "\"Grr, lonely\n" )} ; # 32
    puz_point_hall_terror    : dynamic_string {( opt_color_coding ? "<hall terror<#f8f>>" : "hall terror" )}         ; # 03
    puz_point_her_doll       : dynamic_string
                   {( opt_color_coding && (!point_heard_all || !point_herd_all) ? "<her doll<#f8f>>" : "her doll" )} ; # 36 38
    puz_point_hey_trash      : dynamic_string {( opt_color_coding ? "<\"HEY, TRASH\"<#f8f>>" : "\"HEY, TRASH\"" )}   ; # 05
-   puz_point_knowin_juries  : dynamic_string
-                  {( opt_color_coding ? "<knowin juries<#f8f>>" : "knowin' juries" )}                               ; # 09
+   puz_point_knowin_juries  : dynamic_string {( opt_color_coding ? "<knowin' juries<#f8f>>" : "knowin' juries" )}   ; # 09
    puz_point_major_gent     : dynamic_string {( opt_color_coding ? "<major gent<#f8f>>" : "major gent" )}           ; # 43
-   puz_point_meager_oath    : dynamic_string {( opt_color_coding && !point_me_growth ? "<meager oath<#f8f>>" : "meager oath" )}         ; # 24
+   puz_point_meager_oath    : dynamic_string
+                         {( opt_color_coding && !point_me_growth ? "<meager oath<#f8f>>" : "meager oath" )}         ; # 24
    puz_point_pit_churning   : dynamic_string {( opt_color_coding ? "<pit churning<#f8f>>" : "pit churning" )}       ; # 12
    puz_point_plight_owls    : dynamic_string {( opt_color_coding ? "<plight owls<#f8f>>" : "plight owls" )}         ; # 28
    puz_point_post_easing    : dynamic_string {( opt_color_coding ? "<post, easing<#f8f>>" : "post, easing" )}       ; # 19
@@ -157,7 +157,7 @@ strings {
    block_dull_oozing  : string "Ehh ... the {puz_point_dull_oozing} slows you down. Trekking further is probably harmless, but what if it isn't? You'd feel dumb getting poisoned by the physical ooze." ;
    block_hey_trash    : string "The call of {puz_point_hey_trash} freezes you. You half want to show them, whomever they are, and whatever you want to show. You'll decide that later. Also, you worry if you go farther, there'll be more people like that, which could put you in danger. So, for now, no." ;
    block_pose_teasing : string "The Bros wonder why you need to be running around like this. You need to chillax! Life will be easier that way. And no offense, but if you do have an exciting life, it's a bit unfair. They deserve it a bit more than you do. So you shouldn't rub it in by just walking past them like that." ;
-   block_trrg         : string "You can't explore somewhere new yet, with the {trtg} around." ;
+   block_trrg         : string "The {trtg} won't let you explore anywhere new. Thug life, man!" ;
    block_weep_lucky   : string "The bros weep about how YOU get all the adventure here. You've been through this before, but since you last visited, you do sort of have to admit you've had a lot of adventures. You feel bad for them. They feel like they're the lovable underdogs here, that they should get a chance, but noooooo." ;
 
    # THINK string(s)
@@ -362,7 +362,7 @@ strings {
    # NPC(s)
    trtg : string "<Thug 'Round the Ground<#ccc>>" ;
    trtg_status : string "The thug is bigger than you but looks out of shape. Their endurance for running can't be that good." ;
-   dgda : string "<D'aww! Gold Dog, Aww<#ccc>>" ;
+   dgda : string "<D'aww! Gold Dog, Old<#ccc>>" ;
 
    # weird strings
    gbgr : string "<\"Gah, Bros, Gab\" Rows<#ccc>>" ;
@@ -4971,7 +4971,8 @@ on_command {
             : set_integer var="my_tats_num" {( 0 - my_tats_num )} ;
          }
          : if (my_tats_num == 0) {
-            : print "You see no number right now." ;
+            : print {( zero_explained ? "No number. Done here." : "You see no number right now. Seems reasonable that you're done here, which is good to know." )} ;
+            : set_true "zero_explained" ;
             : done ;
          }
          : print "The tats swirl and form a number: {my_tats_num}." ;
