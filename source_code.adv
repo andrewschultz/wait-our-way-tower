@@ -1907,8 +1907,10 @@ locations {
                : print "You already deconstructed that book." ;
                : done ;
             }
-            : print "You convince yourself the book is total rubbish, seeing old experiences in a new light. You can't exactly lecture this to the masses, but it feels good to, uh, bury some lies people foisted on you when they were Just Being Honest or Telling You What Your Problem Is or Showing Common Sense. You will be able to reject that sort of thing a bit more quickly going forward." ;
+            : print "When much younger you'd have been impressed that the author was brave in ways you never could be. But now you see it's total rubbish, based on finding someone receptive and trusting and overwhelming them with cheap tricks. You realize you were that someone. But you see why and how it's kind of awful." ;
+            : print "You can't exactly lecture this to the masses, but it feels good to, uh, bury some lies people foisted on you when they were Just Being Honest or Telling You What Your Problem Is or Showing Common Sense. You will be able to reject that sort of thing a bit more quickly going forward." ;
             : set_true "bonus_point_thug_aims" ;
+            : gosub "add_bonus_point" ;
             : done ;
          }
          : match "right angles" {
