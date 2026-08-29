@@ -2402,6 +2402,20 @@ locations {
                }
             }
          }
+         : match "say mentoring" {
+            : print "An assistant whatever-it-is-that-pulled-you-here pops into view." ;
+            : cycle key="say_mentoring" max_loops="1" {
+               : print "You ask if there was any great social message in all this. It says no. There doesn't need to be. Social messages are important -- as are games with them, because we can't take serious stuff all the time -- but, well, the designer in charge just isn't good at that sort of thing. Or maybe they haven't figured how to be, yet. So you got to be a part of this." ;
+               : print "You ask if little victories actually do build, and you worry that once you find little victories, you may feel you have to make the most of them, or you are slacking. It says no. There are things you can't control. There will still be big jumps. Whenever they seem to appear, don't worry they're too good to be true unless there are clear red flags. If you figured these puzzles, you're smart enough to see through get-rich-quick schemes. It's just, there'll be stuff that works better for you than it should on paper. That makes up for the stuff that works worse. And about using luck or making it roll over? This isn't a casino. You get to share your luck. It's not gratitude to be glad you got any luck at all and just hope the bad luck doesn't end soon. Gratitude is an act." ;
+               : print "You ask if you've really improved at anything over the years. It tells you not to fish for compliments. You sort of know the answer. The stuff you've internalized, it doesn't register as improving. And if you had a list of all you improved, you'd be a bit embarrassed by where you were. You're not the sort of person who mocks their 20-years-ago self to mock someone else, so that's actually pretty good." ;
+               : print "You ask if ... there's something better out there than this game. Of course there is, it says. You might feel dumb when you finally found it, because maybe the world gave you hints and you ignored it. But again, don't feel too lucky when you do." ;
+               : print "You ask ... well, for general advice you hadn't thought of yet. It says, well, I can't help you much more there, or rather the designer of this game can't. He had a lot more to say. But it seemed too clunky or too twee or over-simple. So he left it. He was just glad to add the touches he did and remove the imperfections he saw. Well, uh, his testers did. He felt it wasn't good enough, or as good as it could have been. But he was glad to share it. He remembered times he talked himself out of sharing things. It took more energy than building them. There's a lesson here." ;
+               : print "You open your mouth once more but have nothing to say. \"There's only so much you can get from this sort of thing,\" it says. \"The real world awaits. Maybe, probably, there are games or books or whatever that will do this way better for you than this game will. But we all hope to do and share something. You may have the chance just ahead. But I must go now. I ... well, the designer in charge of this whole shebang only gave me so many notes." ;
+               on_exhausted {
+                  : print "There is no more mentoring. Maybe it's time to pass it on. Well, in-game." ;
+               }
+            }
+         }
          : match "_ know;_ power;_ nope;_ hour" {
             : print {( "You think about power and its accumulation. You remember people accusing you of wanting it when you just wanted to feel less helpless around them.\n" + ( point_bah_slumping ? "They fooled you, but the boss did not." : "The {puz_point_boss_lumping} is another of them. Perhaps you can deflect them creatively? It doesn't have to be PERFECTLY logical." ) )} ;
             : done ;
