@@ -5314,19 +5314,19 @@ on_render {
       }
       : if (has_visited "r25") {
          : overlay "m_r25" x="225" y="56" ;
-         : if (point_warm_acres) {
+         : if (point_tune_out) {
             : overlay "m_c_h_1" x="257" y="62" ;
-            : overlay "m_c_v_1" x="240" y="48" ;
-            : overlay "m_c_v_1" x="240" y="70" ;
+            : overlay "m_c_v_1" x="240" y="43" ;
+            : overlay "m_c_v_1" x="240" y="71" ;
          } : else {
             : overlay "m_c_h_0" x="257" y="62" ;
-            : overlay "m_c_v_0" x="240" y="48" ;
-            : overlay "m_c_v_0" x="240" y="70" ;
+            : overlay "m_c_v_0" x="240" y="43" ;
+            : overlay "m_c_v_0" x="240" y="71" ;
          }
       }
       : if (has_visited "r26") {
          : overlay "m_r26" x="270" y="56" ;
-         : if (point_bah_slumping) {
+         : if (point_say_mentoring) {
             : overlay "m_c_h_1" x="302" y="62" ;
          } : else {
             : overlay "m_c_h_0" x="302" y="62" ;
