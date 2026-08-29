@@ -3396,7 +3396,7 @@ barriers {
    block_go_r40 : block {
       location = r40
       block_when_not = point_door_cloud
-      message = \"Uggggh, let me tell you, kid-o,\" says the {puz_point_dork_loud}. \"Ain't a DANG THING to the north here. Not that you deserve to see anywhere interesting. Just, I'm saving you from your own worst urges. Why does it always fall to me?\" The {puz_point_dork_loud} then proceeds to disparage people who have too-slick social skills.
+      message = \"Uggggh, let me tell you, kid-o,\" says the {puz_point_dork_loud}. \"Ain't a DANG THING to the north here. Not that you deserve to see anywhere interesting. Just, I'm saving you from your own worst urges. Heck, honey, why does it always fall to me?\" The {puz_point_dork_loud} then proceeds to disparage people who were born into too-slick social skills, who have better jobs in life.
    }
 
    block_go_r41 : block {
@@ -3622,6 +3622,10 @@ subroutines {
       }
       : if (point_say_four && !point_say_loaners) {
          : print "The four oars you bought are waiting {here_r10} until you buy a suitable craft." ;
+         : set_true "inventory_intangibles" ;
+      }
+      : if (point_feel_daring && !point_free_crusty) {
+	     : print "You feel daring, or rather, you promised yourself you would, or you'd be able to when you needed.. But where and how? It can't be anything too wild..." ;
          : set_true "inventory_intangibles" ;
       }
       : if (is_carried "riches") {
