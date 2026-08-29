@@ -1015,6 +1015,7 @@ booleans {
 
    # gamestate combo
    girl_present : dynamic_boolean {( point_girl_only && !point_warm_acres )} ;
+   need_double_pic: dynamic_boolean {( is_at "r00" && point_vine_eater )} ;
 
    #blocker(s) derived from gamestate
    r13_secondary_block : dynamic_boolean {( gamestate_bros_second_placed && !point_whee_plucky )} ;
@@ -5198,7 +5199,7 @@ on_render {
          : overlay "s02_u" x="84" y="27" ;
          : overlay "s02_w" x="105" y="0" ;
       } : else {
-         : overlay "s02_u" x="120" y="17" ;
+         : overlay "s02_u" x="121" y="20" ;
       }
    } : else_if (is_at "r03") {
       : if (point_sun_catching) {
@@ -5296,10 +5297,13 @@ on_render {
          }
       }
    } : else_if (is_at "r33") {
+      : if (point_say_loaners) {
+         : overlay "s33_sold" x="88" y="19" ;
+      }
    } : else_if (is_at "r34") {
    } : else_if (is_at "r40") {
       : if (point_shape_up) {
-         : if (random(1) < 1) {
+         : if (random(10) < 4) { # this does not happen at the 1/2 rate it should, neither does random(1) < 1
             : overlay "s_dog_r" x="160" y="22" ;
          } : else {
             : overlay "s_dog_u" x="160" y="22" ;
@@ -5310,7 +5314,7 @@ on_render {
       : overlay "s_boat" x="172" y="27" ;
    } : else_if (is_at "r43") {
       : overlay "s_boat" x="96" y="27" ;
-      : overlay "s42_you" x="100" y="10" ;
+      : overlay "s43_you" x="105" y="9" ;
    } : else_if (is_at "r44") {
       : if (!point_tense_ops) {
          : overlay "s44_0" x="0" y="0" ;
@@ -5333,6 +5337,8 @@ on_render {
    : if (gamestate_thug_chase) {
       : if (is_at "r20") {
          : overlay "s_thug" x="52" y="13" ;
+      } : else_if (is_at "r22") {
+         : overlay "s_thug" x="82" y="13" ;
       } : else {
          : overlay "s_thug" x="112" y="13" ;
       }
@@ -5346,12 +5352,16 @@ on_render {
       }
    }
    : if (point_girl_only && !point_warm_acres) {
-      : if (is_at "r34" || is_at "r22"|| (is_at "r30" && !point_door_cloud)) {
+      : if (is_at "r34" || is_at "r22") {
          : overlay "s_girl" x="136" y="19" ;
       } : else_if (is_at "r43") {
-         : overlay "s_girl_boat" x="119" y="17" ;
+         : overlay "s_girl_boat" x="122" y="17" ;
+      } : else_if (is_at "r30") {
+         : overlay "s_girl" x="110" y="19" ;
       } : else_if (is_at "r44") {
-         : overlay "s_girl" x="138" y="17" ;
+         : overlay "s_girl" x="123" y="19" ;
+      } : else_if (is_at "r20") {
+         : overlay "s_girl" x="35" y="31" ;
       } : else_if (need_double_pic) {
          : overlay "s_girl_2" x="238" y="38" ;
       } : else {
@@ -5503,7 +5513,7 @@ assets {
       r41_1 : base64_png "iVBORw0KGgoAAAANSUhEUgAAAQAAAAAoCAMAAAAmJNS7AAAAM1BMVEUAAADAwMCAgID/+/AA/wDNfzLgwECAgABgoMAAgMD//wD/AADggEBgQAAA//+AAMD/AP9jgkDFAAADmElEQVR4XuTW22rDMBAG4QF0dE59/6ctRWJR3d0Fg1Aq8gMK+O4bhGPKXqOtTBub+Y82Pi6A+GcXYDM/jT+vAJv54egnnxgAQM7ZARhW7KfvfwO0n+kBSLKBSpDJ0wlpGHa1ADDRX1D8Cc0ffjOJMrhIpMrg+lsA5vkLij+h+QOWPyrELAPPX3HKLfkOUPwJzR+w/BHPn/H85wDc7kd4vn5OWPIlqPgTmj9g+SOeP+P5K6b/yYo/LhR/QvMHLH/E82c8f8X0v1YFYFiSAAzrGSx/xPNnPH/F9N+WBUiyMUCQnQIwrGcw/ecADOsZTP/93wWwLkC0iD2DdwEqpv/YNECWOQEYppRrGbYPoCm7/0sGygVYGeDx+BPgu9gy3E0YhoHwNfEvIsPe/2m31pEd1w6hQrAT0nZUk/Z99ELBfwkCwD2JALbA+JsGYAkC/49eigJ4mvs0RCQ/wrt5EgHgTAA4ExD4GRl/U8rAnwiAZeqgM3ZUMkB7M6qJnRIB4EwAOBUQ+BkZvwkI/FEA7honoHgDxTMV1/SqB6fDlLzyO8DiBYCjgPyDQsZvAgJ/EDDy3+cCeEd0xBbSqqzpBIhOAnDTeAHgKAAPjRMQ+Z0Azx8FOP6FgDHzGvnjGRD5b6MAv0QE/ocXEPlNwJifRIDn9wI+Etg/5fifnEQI/GcBGNK8ADeAKODEHyfg63DAF/1tfUPoepxiz38DzwIAjj8KaJprAhz/TECR9HrvrSO6SmRV5OhFot6Q8puAPJ7fCwAwE4AhmQBYhD+dwLlGcF+JrPp2oKT8JmDNrwIsEwFoVdJaJgDwA8CQdAKanUrYXp0AaxAPp9tKAIY8XheAWttB3yqaCgBbnACUPVv9ewHzCfBsAkR+EQd0/FPEAawFPDRrASO/0NeKqgLAEwHY9gh/RQT31YHTaRFB2tg+LsD4BV/4axcAngmoR4R/swmsHwvoNAG/F9e+IkD5hb7t/CoAPBGAIhH+kk0gVjcBovDR/9cEIEqqpB38IgA8EYCtR/jjBNaLyK/Ghg98CTgBwj+kqQDwRACqZuePE3ivxgm8/xQwF6BfgHoDtEMAAJ4IgEX4FxNY1usTAF8QkIAMEbLaOv9xAuwCUrOTG6DgMul7EwBfEABeR3ZvR2CbCMhPgK18eQLgCwLALwQC358B9pILkPivgO9PAHxBAHgZewiqKuCpNnsG+OIENBFpOfHrAp5r6xMwAeDPTeAXjdlSRYGV4TcAAAAASUVORK5CYII=" ;
 
       r42_0 : base64_png "iVBORw0KGgoAAAANSUhEUgAAAQAAAAAoBAMAAADj1Dm6AAAAGFBMVEUAAAAAgADAwMCAQADCsoCAgIAAAP8A//8zcYsaAAABfklEQVR4XsXXQWrDMBAF0IGi7G3qCww+QMDgEwh1ay+0D7j4Cr1+W5TJF8iUybiK/uqTjV/MhE+IefTI18tDzOyzfLQAjL4JAQD2DQXEEgjC/sIAkB/jywElITQAgIC0BeAePosP/y3UAdClvBcEqTUQ1GWBQJNQDdB5ZZoDfC3Au1rQDlCeaDgFiHHNSl8MhM5iBwwxRpQE4LG6AIDFOVpRerYJvB0QE0AKs5EQ7AC3SgGgNgGA+JM1Kz3bCeFZwHC/P5QEQKoeAnXy5aWUAB4r3gENtCzuF5DKPQAYXsKTACcAVwKQsSogCgBHUF0AQIzp+KQAYBXgCm4AXPRbAIBZoASUW4DCpwRhSnmbJNdUdFsAgPXHsG/HgFmxBQDYBcECwBYAcBzVDeKpOUWxBVL6KgDlFvwNGFVjsB0BZs0WnAfsArjS4waIAFBsgR2ALToCqLZAYgbsGWCSJIpqCyS9CYAx3uSp04Mya7YAsQHCjtBF2o20f0xOA/Zn8w13eNqn8uDOxwAAAABJRU5ErkJggg==" ;
-      s42_you : base64_png "iVBORw0KGgoAAAANSUhEUgAAAA8AAAAUBAMAAACg6XohAAAAElBMVEX/AP8AAACAAACAQAD/AAD///+3U9ZIAAAAAXRSTlMAQObYZgAAAFhJREFUeF5VzNEJwCAMBuGICyQP7lEQN2gH0HL7r1L9EaR5+jiSmFmu1TQNroUMvAqDodSAPxL303VVwIXEDFLsEPRYcCtuPoN20oSuJlwwPzgPDyJiwxc+DIARQxQ8abwAAAAASUVORK5CYII=" ;
+      s43_you : base64_png "iVBORw0KGgoAAAANSUhEUgAAAA8AAAAUBAMAAACg6XohAAAAElBMVEX/AP8AAACAAACAQAD/AAD///+3U9ZIAAAAAXRSTlMAQObYZgAAAFdJREFUeF5VzNEJwDAIAFElC+hH9yiEbNAOkJTbf5WqFEL9epyoiLTepWbAmWjAU2GxKg3gD+W6Z10dYAUlQsm/4ExPWK6iqSQ0UFcBK4ht7Icb7v7BEi8zWhHFQkucywAAAABJRU5ErkJggg==" ;
 
       r43_0 : base64_png "iVBORw0KGgoAAAANSUhEUgAAAQAAAAAoBAMAAADj1Dm6AAAAD1BMVEWAgICmyvDCsoD//wAAAP9vR6d9AAAAkklEQVR4XuzRwQmAQBBDUVv4bCVh+u9NEA/muohByIe5PyYHu62x2OwtAN8DmEci+wERAAxJgI+gwAS2AhABLF0CKQa4L/EBRwQA3q8BBRRQQAEFnOXUQQ0AMAwCQFIpl0mpf02TwaMouLSBYJuJsiCB1wQEqoDUAdMGpA64/oLB6RoO3uUlHNjrgNcGbDEpH2A/xWgZ/IQsU04AAAAASUVORK5CYII=" ;
 
