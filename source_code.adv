@@ -3903,7 +3903,7 @@ subroutines {
          : print {( "Available exits are " + (opt_hone_aye ? "already" : "now") + " honed to ones you still need to use to win." )} ;
          : gosub "set_tats_num" ;
          : if (my_tats_num == 0 && !opt_hone_aye) {
-            : print "Since you're choosing this option, and you're done here, I'll make a note of that. You can exit, but you might not be able to come back." ;
+            : print "Since you're done in this room, I'd like to note setting {vo_hone_aye} means you can exit but might not be able to come back." ;
          }
          : set_true "opt_hone_aye" ;
          : return ;
@@ -4679,14 +4679,15 @@ on_command {
             : done ;
          }
          : if (!point_shape_up) {
-            : print "You're not in the mood to listen that much yet." ;
+            : print "You're not in the mood to listen that much yet. In fact, you doubt any dogs would want to follow you. You're feeling weirdly grumpy here, after the standoff with the dork, loud." ;
             : set_true "think_heard_all" ;
             : collection_modify { collection = "tried_combo_core" index -> (38) content -> ("true") } ;
             : set_true "think_heard_all_right_place" ;
             : gosub "note_thinks" ;
             : done ;
          }
-         : print "You are ready to listen around for any other dogs that might be hidden, and some turn up to be fearful and hiding, but you and the girl find them all. Your original friend is quite happy with all this and wags its tail a bit extra. This whole bunch of dogs may be useful, but not here. It's good to know you they will have your back somewhere else, later." ;
+         : print "You are ready to listen around for any other dogs that might be hidden. It seems like too much to do by yourself, but the girl waves her doll around, which helps with the more reticent dogs." ;
+         : print "Your original friend is quite happy with all this and wags its tail a bit extra. This whole bunch of dogs may be useful, but not here. It's good to know you they will have your back somewhere else, later." ;
          : set_integer var="tempint" "38" ;
          : set_false "think_heard_all" ;
          : set_true "point_heard_all" ;
@@ -4733,7 +4734,7 @@ on_command {
             : print "You already got vines eaten!" ;
             : done ;
          }
-         : print "Your Vie-Neater summoning brings a Vine Eater which gobbles the fly traps. It nods to you. You crumble the Vie-Neater in a ball, throw it in the Eater's mouth, then watch as the Eater ambles away.\nBehind where the flytraps were, you watch a {puz_point_cat_chasing} but doing a bad job of it." ;
+         : print "Your Vie-Neater summoning brings a Vine Eater which gobbles the fly traps. It nods to you. You crumble the Vie-Neater in a ball, throw it in the Eater's mouth, then watch as the Eater ambles away.\nBehind where the flytraps were, you watch a {puz_point_cat_chasing}, well, whatever cats see and people don't, but doing a bad job of it." ;
          : destroy "vie_neater" ;
          : set_integer var="tempint" "34" ;
          : set_false "think_vine_eater" ;
