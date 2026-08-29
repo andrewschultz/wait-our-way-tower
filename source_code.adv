@@ -2541,7 +2541,7 @@ locations {
          }
          : match "door cloud" {
             : if (!point_tufty_key) {
-               : print "The dork huffs, upset, \"If I don't know what sort of door you want, I can't search through the whole dork cloud on my own. I'm smart, but not that smart. Or maybe I am, but I'm smart enough to know that's not how best to use my brain. Geez!\"" ;
+               : print "The dork huffs, upset, \"If I don't know what sort of door you want, I can't search through the whole dork cloud on my own. I'm smart, but not that smart. Or maybe I am, but I'm smart enough to know that's not how best to use my brain. And to tell others when to smarten up. Geez!\"" ;
                : set_true "think_door_cloud" ;
                : collection_modify { collection = "tried_combo_core" index -> (22) content -> ("true") } ;
                : gosub "note_thinks" ;
@@ -2589,7 +2589,9 @@ locations {
                : print "The thing about heat, is once you've labeled it and such, and risen above it, you don't need to look back and maybe get stuck in it again." ;
                : done ;
             }
-            : print "You see what's going on here, and while you hear some crying about how people don't want to be called trash, you set them straight saying, that sort of thing is trash, not the people, and you can do better if you'd be bothered. They feel very insulted by this, and they assure you that it's this sort of behavior though will make them spew even more hateful speech to the next person, who's even less able to take it than you, and you should feel very very guilty about it. But thankfully, you'll get to do so on your own time, since the voice dissipates. You can now go all four ways." ;
+            : print "You see what's going on here, and while you hear some crying about how people don't want to be called trash, you set them straight saying, that sort of thing is trash, not the people, and you can do better if you'd be bothered." ;
+            : print "There's an awkward pause. You worry whoever spoke will spew even more hateful speech to the next person, who's even less able to take it than you, and you should feel very very guilty about it. But then you think of times you actually stood up for yourself without lashing out and feared worse later -- and it never happened, or if it did, someone else stood up to it, and it got beaten back." ;
+            : print "And more practically, you can now go all four directions." ;
             : set_integer var="tempint" "5" ;
             : set_true "point_hate_rash" ;
             : gosub "add_point" ;
@@ -2611,7 +2613,7 @@ locations {
    r32 : location "{r32_loc}" header="{r32_header}" graphic="r32_0" {
       on_command {
          : match "listen _;_ chess;_ training" {
-            : print {( point_dump_liars ? "It's silent now with the chess training over." : "It's tough to know whether or not the training is effective, but it sure is loud. Everybody is yelling about stuff like the Carlsbad pond structure, or opening theory 15 lines down, or other things that just sort of make your head spin. Of course, there's always a person who yells you just have to sit there and make good moves, and they're shushed." )} ;
+            : print {( point_dump_liars ? "It's silent now with the chess training over." : "It's tough to know whether or not the training is effective, but it sure is loud. Everybody is yelling about stuff like the Carlsbad pawn structure, or opening theory 15 lines down, or other things that just sort of make your head spin. Of course, there's always a person who yells you just have to sit there and make good moves, and they're shushed.\nYou remember some guy who was on the high school baseball team who said if you don't throw pieces away, you can get kind of good, and he was shocked." )} ;
             : done ;
          }
          : if (point_chest_reigning && !point_dump_liars) {
@@ -2625,7 +2627,7 @@ locations {
                : print "One chest is enough. Don't get greedy." ;
                : done ;
             }
-            : print "If chess is the sport of kings and Queens, then it makes sense that anything around it must be pretty royal, too. Surprisingly, nobody really stops their analysis, but when you open the chest, you find a pair of {puz_point_dumb_pliers}. The trainers say, come on, {puz_point_dumb_pliers}? That's just dumb. Not as interesting as chess analysis! But hey, it's something. You probably wouldn't be able to carry vast riches anyways. But you still feel a bit embarrassed taking the pliers." ;
+            : print "If chess is the sport of kings and Queens, then it makes sense that anything around it must be pretty royal, too. Surprisingly, nobody really stops their analysis, but when you open the chest, you find a pair of {puz_point_dumb_pliers}. The trainers say, come on, {puz_point_dumb_pliers}? That's just dumb. Not as interesting or fulfilling as chess analysis! But hey, it's something. You probably wouldn't be able to carry vast riches anyways. But you still feel a bit embarrassed taking the pliers." ;
             : set_integer var="tempint" "13" ;
             : set_true "point_chest_reigning" ;
             : gosub "add_point" ;
@@ -2651,7 +2653,9 @@ locations {
                   : print "They're already dumped, and convincingly." ;
                   : done ;
                }
-               : print "Of course, you can't call them liars, but in your mind, you dump them and say, well, I can take responsibility for my actions if somehow there is a big electric surge through these players that makes me dumber, and anyway, it would be less of a loss than if it made you dumber, am I right? They recognize this is the most blow off form of flattery, but what can they do? Instead of blocking you going east, they now seem as though they wish you really would go east as soon as possible. Small victories, yay!" ;
+               : print "Of course, you can't call them liars, but in your mind, you dump them and say, well, I can take responsibility for my actions if somehow there is a big electric surge through these pliers that makes me dumber, and anyway, it would be less of a loss than if it made you dumber, am I right?" ;
+               : print "They recognize this is the most blow-off form of flattery, but what can they do? Instead of blocking you going east, they now seem as though they wish you really would go east as soon as possible. You are ruining their analysis just with your uncultured presence. Whatever you can do with the dumb pliers, it won't soar the intellectual heights they are achieving." ;
+               : print "Small victories, yay!" ;
                : set_integer var="tempint" "14" ;
                : set_true "point_dump_liars" ;
                : gosub "add_point" ;
@@ -2701,7 +2705,7 @@ locations {
                : print "You used up the last ogf your money. You have the transportation you need." ; #//got/had/needed?
                : done ;
             }
-            : print "You don't have MUCH. You get, not a great sailboat, but a more modest Mo'-Tried-Moat-Ride. And thus, your riches disappear. But you can go north!" ;
+            : print "You don't have MUCH. You almost feel awkward asking for anything. You get, not a great sailboat, but a more modest Mo'-Tried-Moat-Ride. And thus, your riches disappear. But you can go north onto the water! You still wonder if you really belong with the bigger fancier boats, but if you were somehow gifted a bigger fancier boat, you'd probably feel you didn't belong, too." ;
             : set_integer var="tempint" "18" ;
             : set_false "think_say_loaners" ;
             : set_true "point_say_loaners" ;
@@ -2726,7 +2730,7 @@ locations {
       on_command {
          : if (!point_ply_towels) {
             : match "_ plight;_ owls" {
-               : print "They look cold and wet. How could you dry them?" ;
+               : print "They look cold and wet, too waterlogged to fly away. They're guarding a nook to the north, one you could walk through if they weren't there. How could you dry them?" ;
                : done ;
             }
          }
@@ -2740,14 +2744,14 @@ locations {
                : done ;
             }
             : if (!point_cloth_robbing) {
-               : print "But you have no towels, or things that could be passed off as towels, to ply!" ;
+               : print "That seems right. But you have no towels, or things that could be passed off as towels, to ply. Yet." ;
                : set_true "think_ply_towels" ;
                : collection_modify { collection = "tried_combo_core" index -> (28) content -> ("true") } ;
                : gosub "note_thinks" ;
                : done ;
             }
-            : print "You don't have enough towels to dry off all the owls at once. But you keep going back to the claw, to get a few more. Eventually the drier owls can fly, and the oak realized the game is up. It -- well, trees can't skulk off, but it sure looks hurt." ;
-            : print "The owls hoot their appreciation. Since they don't have to huddle flightless to the north, they start flapping in the air. You call them over to hand them the pliers in case this happens again. The pliers are surprisingly lightweight, which strikes you as not dumb at all." ;
+            : print "You don't have enough towels to dry off all the owls at once. The oak laughs about this as you head back to the claw, to get a few more. Drying the owls alone doesn't work. You need to provide a weird lean-to of towels, but fortunately, there's enough debris around. Eventually the drier owls can fly, and the oak realizes the game is up. It -- well, trees can't skulk off, but it sure looks hurt." ;
+            : print "The owls hoot their appreciation. Since they don't have to huddle flightless to the north, they start flapping in the air. You call them over to hand them the pliers in case this happens again. The pliers are surprisingly lightweight, and two owls can work it with one foot each, which strikes you as not dumb at all." ;
             : set_integer var="tempint" "28" ;
             : set_false "think_ply_towels" ;
             : set_true "point_ply_towels" ;
@@ -2782,7 +2786,8 @@ locations {
                : print "The mage/gent already got a sense of urgency. It's a sense you have no wish to turbo-charge." ;
                : done ;
             }
-            : print "The major gent slowly starts talking louder and faster, and it gets to the point where you can't interrupt them. They start mentioning times they felt ripped off, and how they need to take things back and show them, whoever they are. They they finally get around to asking you what you're doing, and you mentioned you're on a quest, and they say, well, obviously you haven't finished it yet so maybe you need some help, which you guess is flattering. They really could use a bit of subtlety or thought in their new found activity. Where to find it?" ;
+            : print "The major gent slowly starts talking louder and faster, and it gets to the point where you can't interrupt him. He starts mentioning times he felt ripped off, and how he needs to take things back and Show Them, whoever they are. He finally gets around to asking you what you're doing, and you mention you're not sure, you just wound up here. He says, well, obviously you haven't finished it yet so maybe you need some help." ;
+            : print "From being too passive to utterly lacking subtlety! It might be a step up -- if people's faults are visible, they're easier to correct -- but all the same, he still needs adjustment. Where to find it?" ;
             : set_integer var="tempint" "44" ;
             : set_true "point_mage_urgent" ;
             : destroy "major_gent" ;
@@ -2806,21 +2811,24 @@ locations {
                : print "She's already been summoned. You're done here." ;
                : done ;
             }
+            : print {( think_broke_lass ? "You summon the broke lass again." : "There is, in fact, a broke lass hiding around. She asks if the thug is gone. You say yes." )} ;
             : if (!point_mage_urgent) {
-               : print "Ugh. The major gent and his drenching self-pity would be a bit too awkward for her right now. He's almost too much for you. He needs change, somehow." ;
+               : print "But she sees the major gent and whispers to you that she just doesn't want to put up with his drenching self-pity  right now. You have to admit, he's almost too much for you. He needs change, somehow." ;
                : set_true "think_broke_lass" ;
                : collection_modify { collection = "tried_combo_core" index -> (45) content -> ("true") } ;
                : gosub "note_thinks" ;
                : done ;
             }
             : if (!point_right_angles) {
-               : print "Ugh. The mage, urgent, would try a bit too hard to impress any Broke Lass right now. You'll need to change him, again, or perhaps affect his own change from within, before you can gain a new companion." ;
+               : print "But the mage, urgent, is a bit too bombastic. The Broke Lass doesn't think much of him. He's not as bad as the thug, but ... she can wait.\nYou'll need to change him, again, or perhaps affect his own change from within, before you can gain a new companion." ;
                : set_true "think_broke_lass" ;
                : collection_modify { collection = "tried_combo_core" index -> (45) content -> ("true") } ;
                : gosub "note_thinks" ;
                : done ;
             }
-            : print "The broke lass peers around, and she looks a bit worried to see the major jet there. He immediately says, you know, I made a bad first impression, but I just want to get things done. There is that boss to the right, and we can't deal with it all on our own, but maybe we can together, and if that's all we do, it'll be pretty big. The broke glass nods, impressed. OK, let's do this." ;
+            : print "The broke lass peers around. She takes a deep breath and rolls her eyes on seeing the mage." ;
+            : print "The mage says \"Let's get things done so we can get on with our lives.\" It's not poetry, but it's about what the broke lass needs to hear. She mentions she's probably stayed too long. She could've snuck out earlier if she'd really planned. And yet she wants to know who stuck her here, and why. So does he. So do you." ;
+            : print {( "After some consultation, the three of you agree you're ready to deal with " + (has_visited "r26" ? "whatever's to the east." : "the {point_puz_boss_lumping} to the east, who seems the most likely candidate." ) )} ;
             : set_integer var="tempint" "45" ;
             : set_false "think_broke_lass" ;
             : set_true "point_broke_lass" ;
