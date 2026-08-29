@@ -1811,6 +1811,10 @@ locations {
                }
                : print "You flip the script on the Bros. You say, well, maybe I've made my own luck and all that sort of thing, and maybe you haven't, by sitting around and complaining about how other people have all the luck. They start fighting with each other. Who complains the most? Who complains the least? There's a big argument. It's almost entertaining, but you don't want to get too caught up in it. It dies down eventually. The Bros go off to sulk somewhere else." ;
                : print "Once they're gone, you realize you didn't even have the time to play the \"You don't realize how lame it is to pick on little ol' me not once but twice\" card. But it's still fun to imagine. Perhaps you can play that card once you've left here." ;
+               : if (is_present "thug") {
+                  : print "The {trtg}, dazed by your psychological warfare, doesn't thunk you this turn!" ;
+                  : set_true "gamestate_thug_pass" ;
+               }
                : set_integer var="tempint" "39" ;
                : set_true "point_whee_plucky" ;
                : gosub "add_point" ;
