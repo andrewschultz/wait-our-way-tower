@@ -369,7 +369,7 @@ strings {
    dgda : string "<D'aww! Gold Dog, Old<#ccc>>" ;
 
    # weird strings
-   cnco : string "<\Coy New Coin, Ooh<#ccc>>" ;
+   cnco : string "<Coy New Coin, Ooh<#ccc>>" ;
    gbgr : string "<\"Gah, Bros, Gab\" Rows<#ccc>>" ;
    mtmr : string "<Mo' Tried Moat Ride<#ccc>>" ;
    iaad : string "<\"I'd Agree, Aye\" degree<#ccc>>" ;
@@ -1626,6 +1626,7 @@ locations {
                   : print "You probably got more oars than you need." ;
                   : done ;
                }
+               : print "There's some bargaining, but it's hardly the worst oar deal you ever had." ;
                : print "Four seems about right for your needs. Some of the riches are leftover for later. Perhaps you'll have to buy transport." ;
                : print "But now you're the owner of the oars, you realize it'd be awkward to carry them. However, the vendors, thrilled with your bulk purchase, assure you they'll hold them until you find a craft. Thoughtful!" ;
                : set_integer var="tempint" "17" ;
@@ -2552,7 +2553,7 @@ locations {
                : set_integer var="tempint" "49" ;
                : set_true "point_troop_leading" ;
                : gosub "add_point" ;
-			   : print "Oh, hey. There's no real point in playing all the way through again. Well, you won't learn much if you REDO, and there are other IFComp games but you can find out about how I thought to make this game if ... well, you do something a little different." ;
+               : print "Oh, hey. There's no real point in playing all the way through again. Well, you won't learn much if you REDO, and there are other IFComp games but you can find out about how I thought to make this game if ... well, you do something a little different." ;
                : win_game ;
                : done ;
             }
@@ -3640,7 +3641,7 @@ subroutines {
          : set_true "inventory_intangibles" ;
       }
       : if (point_feel_daring && !point_free_crusty) {
-	     : print "You feel daring, or rather, you promised yourself you would, or you'd be able to when you needed.. But where and how? It can't be anything too wild..." ;
+         : print "You feel daring, or rather, you promised yourself you would, or you'd be able to when you needed.. But where and how? It can't be anything too wild..." ;
          : set_true "inventory_intangibles" ;
       }
       : if (is_carried "riches") {
