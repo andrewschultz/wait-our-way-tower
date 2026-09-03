@@ -1251,13 +1251,14 @@ vocabulary {
 
    # actual game stuff
 
-   # irregular plurals!
+   # Irregular plurals!
    : noun / aliases = [jury, juries] ;
    : noun / aliases = [injury, injuries] ;
 
-   # we are not the spelling police!
+   # We are not the spelling police! We embrace alternative spellings!
    : noun / aliases = [vendors, venders] ;
    : verb / aliases = [troop, troup, troupe] ;
+   : verb / aliases = [fay, fey] ;
 
    # test stuff
 
@@ -1711,7 +1712,7 @@ locations {
                : print "Strange. The juries have already forgotten about their little problems. It's as if some people just like to sit around and tell other people what they can't do, and then feel as though they've done something if they succeed." ;
                : done ;
             }
-            : print "You assure the juries that you are of perfectly sound body, if not mine, and you also mentioned that if something does happen, you can take liability for it. Surprisingly, they don't question you much, even though they outnumber you.\nWith this done, they begin some {puz_point_coy_novations}." ;
+            : print "You assure the juries that you are of perfectly sound body, if not mind, and you also mentioned that if something does happen, you can take liability for it. Surprisingly, they don't question you much, even though they outnumber you.\nWith this done, they begin some {puz_point_coy_novations}." ;
             : set_integer var="tempint" "9" ;
             : set_true "point_no_injuries" ;
             : gosub "add_point" ;
@@ -4310,7 +4311,7 @@ subroutines {
       : if (!is_at "r04" && !is_at "r14") {
          : return ;
       }
-      : match "_ fey;_ loops" {
+      : match "_ fey;_ fay;_ loops" {
          : print {( "There's nothing wild about the fey loops or the passage through them now you've found them. You would probably get exhausted or bored wandering through them too many times." + (gamestate_thug_gone ? " You got use out of them with the thug." : "But they could be useful, somehow.") )} ;
          : done ;
       }
