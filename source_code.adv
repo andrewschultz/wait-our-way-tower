@@ -237,7 +237,7 @@ strings {
    r03_loc : dynamic_string {( "The trail runs {dir_n_v} to {r03_dir_e} here. " + (point_tufty_key ? "The tough tiki has disappeared." : point_sun_catching ? "\nThe sun caught a {puz_point_tough_tiki}." : "\nYou see a {puz_point_sunk_etching} or two scattered around here. Maybe they're hiding something." ) )} ;
    r03_header : string "Sunk Etching" ;
 
-   r04_loc : dynamic_string {( "A {puz_point_meager_oath} reverberates through here in this open ground. Its words are not important. " + (point_me_growth ? "You've gotten its essence." : "Perhaps you can get what you need to from it." ) + "\nPassage leads back {dir_w_v}" + (point_fey_loops ? " and, as part of the fey loops, {dir_n_v}." : ".") )} ;
+   r04_loc : dynamic_string {( "A {puz_point_meager_oath} reverberates through here in this open ground. Its words are not important. " + (point_me_growth ? "You've gotten its essence." : "Perhaps its vibes are what's really important." ) + "\nPassage leads back {dir_w_v}" + (point_fey_loops ? " and, as part of the fey loops, {dir_n_v}." : ".") )} ;
    r04_header : string "Meager Oath" ;
 
    r10_loc : dynamic_string {( point_say_four ? "Since you bought oars, nothing here is interesting." : (point_dry_vendors ? "Dry vendors have parked themselves here. A {puz_point_safe_oar} rests behind them." : "You haven't seen any cars or bikes or whatever around, so it's weird this small selection of dead ends should be called {puz_point_drive_enders}, but it is.") + "\nPassage leads back {dir_e_v}." )} ;
@@ -323,7 +323,7 @@ strings {
 
    r33_dir_n : dynamic_string {( has_visited "r43" ? dir_n_v : dir_n_n )} ;
    r33_dir_e : dynamic_string {( has_visited "r34" ? dir_e_v : dir_e_y )} ;
-   r33_loc : dynamic_string {( (point_say_loaners ? "Your Mo'-Tried Moat Ride can take you {r33_dir_n}." : "You'll need a craft to traverse Aw-Flake-Off Lake {dir_n_n}.") + " However, you can definitely go {r33_dir_e} or back {dir_w_v}." )} ;
+   r33_loc : dynamic_string {( (point_say_loaners ? "Your {mtmr} can take you {r33_dir_n}." : "You'll need a craft to traverse Aw-Flake-Off Lake {dir_n_n}.") + " However, you can definitely go {r33_dir_e} or back {dir_w_v}." )} ;
    r33_header : string "Sail Owners" ;
 
    r34_dir_n : dynamic_string {( has_visited "r44" ? dir_n_v : dir_n_y )} ;
@@ -2912,7 +2912,7 @@ locations {
             }
          } : else {
             : match "_ daww;_ daw;_ gold;_ dog;_ old" {
-               : print {( point_warm_acres ? "You reflect on the brief happy times with your dog friend." : point_heard_all ? "The dog lopes around happily. Its friends must be doing so too out of sight, waiting for when you need them." : "The dog lopes around, unconcerned." )} ;
+               : print {( point_warm_acres ? "You reflect on the brief happy times with your dog friend." : point_heard_all ? "The dog lopes around happily. Its friends must be doing so too out of sight, waiting for when you need them." : "The dog lopes around, unconcerned. You don't need to befriend it further." )} ;
                : done ;
             }
          }
@@ -3139,7 +3139,7 @@ locations {
             }
             : print "\"Look,\" you start, \"I'm no business expert. But maybe if we figure what we can't do and work by process of elimination, we'll find what we can do.\"" ;
             : print "The ten sops actually seem glad you're not a business expert. Apparently one stopped by and made them quickly feel even dumber than when they started. You recall lessons from the meager oath, maybe not the most profound ones, and maybe you didn't learn them from the oath proper. But you start asking questions. And eventually people start coming up with ideas. You're still not entirely sure what the sops were planning, and you can't point to anything concrete you helped them with or any ideas you came up with, but they don't seem to mind." ;
-            : print "They award you an {iaad}--in fact, the same one the business expert showed them as \"proof\" they'd fix the sops. You protest, saying you are really pretty disagreeable, but they insist. Well, it's pretty lightweight. They'd be hurt if you didn't accept it. Sometimes gifts like this are hard to, though.\n" ;
+            : print "They award you an {iaad}--in fact, the same one the business expert showed them as \"proof\" they'd fix the sops. You protest, saying you can get disagreeable around minimal conflict, but they insist. Well, it's pretty lightweight. They'd be hurt if you didn't accept it. Plus it was given in the right spirit.\n" ;
             : set_integer var="tempint" "29" ;
             : set_false "think_tense_ops" ;
             : set_true "point_tense_ops" ;
@@ -4698,7 +4698,7 @@ on_command {
             : done ;
          }
          : if (!is_at "r00" || !point_fly_traps) {
-            : print "Nothing to herd en masse here." ;
+            : print {( is_at "r44" ? ( point_tense_ops ? "The sops are already organized." : "The sops are herded, but their thoughts are jumbled. Where else could you get herding?") : is_at "r24" ? "They're already herder for trouble. Perhaps you could herd parties who could overcome the war makers." : "Nothing to herd en masse here." )} ;
             : set_true "think_herd_all" ;
             : collection_modify { collection = "tried_combo_core" index -> (36) content -> ("true") } ;
             : gosub "note_thinks" ;
