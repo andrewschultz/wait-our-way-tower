@@ -458,7 +458,7 @@ integers {
       !point_tufty_key ? 53 :
       0 )} ;
    r04_hintnum : dynamic_integer {( !point_me_growth ? 26 :
-      0 )} ; #?? this is inaccurate but we dont want to spoil things, -1? # fey loops also a problem, can we say -1/swirl not there?
+      0 )} ; #?? this is inaccurate but we don't want to spoil things, -1? # fey loops also a problem, can we say -1/swirl not there?
    r10_hintnum : dynamic_integer {( !point_dry_vendors ? 37 :
       !point_say_four ?
       (point_pitch_earning ? 34 : -34) :
@@ -469,7 +469,7 @@ integers {
       !point_coin_ovations ? 48 :
       0 )} ;
    r13_hintnum : dynamic_integer {( !point_pose_teasing ? 47 :
-      !point_whee_plucky && gameflag_note_pals_stay_end ? 46 :
+      !point_whee_plucky && gamestate_bros_second_placed ? 46 :
       0 )} ;
    r14_hintnum : dynamic_integer {( !point_dump_liars ? -57 :
       !point_cloth_robbing ? 57 :
@@ -509,7 +509,7 @@ integers {
    r41_hintnum : dynamic_integer {( !point_eh_sink ? 24 :
       !point_cue_bland ? 35 :
       0 )} ;
-   r42_hintnum : dynamic_integer {( !point_seek_rest ? 35 :
+   r42_hintnum : dynamic_integer {( !point_seek_rest ? 44 :
       !point_girl_only ? 44 :
       0 )} ;
    r43_hintnum : dynamic_integer {( !point_flow_tripling ? 48 :
