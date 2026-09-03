@@ -2715,6 +2715,12 @@ locations {
    }
    r33 : location "{r33_loc}" header="{r33_header}" graphic="r33_0" {
       on_command {
+         : if (gamestate_thug_chase) {
+            : match "n _" {
+               : print "You try to take off in your {mtmr}, but it takes time to launch, and before you can start, the thug duffs you up a bit, leaving you with a {puz_point_fail_oops} and returning to its training ground. " ;
+               : gosub "reset_thug" ;
+            }
+         }
          : match "_ loners;loners _" {
             : print {( "On the contrary, the owners seem quite social. But " + (point_say_loaners ? "you don't need each other for anything, cold as it sounds." : "that sounds right...") )} ;
             : done ;
@@ -3917,6 +3923,15 @@ subroutines {
          : return ;
       }
    }
+
+   reset_thug : subroutine {
+      : set_true "gamestate_fail_oops_known" ;
+      : create "thug" target="r25" ;
+      : set_false "gamestate_thug_chase" ;
+      : update_graphic ;
+      : done ;
+   }
+
    ########################## options
 
    colorclue_choice : subroutine {
@@ -4613,11 +4628,7 @@ on_tick {
          : print "Thud. The thug got you. It snickers {puz_point_fail_oops} before lumbering away back to its ground." ;
          : print "Thud. The thug got you again. It again snickers {puz_point_fail_oops} before lumbering away back to its ground." ;
       }
-      : set_true "gamestate_fail_oops_known" ;
-      : create "thug" target="r25" ;
-      : set_false "gamestate_thug_chase" ;
-      : update_graphic ;
-      : done ;
+      : gosub "reset_thug" ;
    }
    : if (gamestate_thug_chase && ((is_at "r04" && previous_location() == "r14") || (is_at "r14" && previous_location() == "r04"))) {
       : print "You send the thug running in loops! It eventually runs out of breath as you run around in loops, until it wanders off to sulk. Bye bye thug!" ;
