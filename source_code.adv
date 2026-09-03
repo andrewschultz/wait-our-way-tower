@@ -4813,7 +4813,10 @@ on_command {
       : match "fey loops" {
          : set_true "gamestate_thug_pass" ;
          : if (!is_at "r04" && !is_at "r14") {
-            : print "You look for fey loops that might catch the enemy, but not here. Perhaps there is not potential enough for looping here, with walls or terrain may get in the way." ;
+            : print "You look for fey loops that might catch the thug, but not here." ;
+            : print {( is_at "r11" || is_at "r21" || is_at "r31" ? "It's really too wide open here, since you can go all four directions." :
+               is_at "r20" || is_at "r40" || is_at "r44" ? "It's really too enclosed here." :
+               "You look for fey loops that might catch the thug, ones that might be easy to overlook and treacherous to navigate, but you see none here." )} ;
             : set_true "think_fey_loops" ;
             : collection_modify { collection = "tried_combo_core" index -> (41) content -> ("true") } ;
             : gosub "note_thinks" ;
