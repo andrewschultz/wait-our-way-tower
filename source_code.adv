@@ -250,7 +250,7 @@ strings {
    r11_header : string "Note 'Eres No Tears" ;
 
    r12_dir_e : dynamic_string {( has_visited "r13" ? dir_e_v : dir_e_y )} ;
-   r12_loc : dynamic_string {( point_coin_ovations ? "The juries are done with you. They care not how many times you amble back west or east, nor for the purpose." :
+   r12_loc : dynamic_string {( point_coin_ovations ? "The juries are done with you. They care not how many times you amble back {dir_w_v} or {r12_dir_e}, nor for the purpose." :
       point_no_injuries ? "The juries continue their {puz_point_coy_novations}, no longer concerned if you might try to go {r12_dir_e}, or just go back {dir_w_v}." : "Here, {puz_point_knowin_juries} gaze intently at you, mumbling ... well, whatever it is, it seems impressive. It's an {dir_e_n}-{dir_w_v} passage here, but they seem to cock their heads to indicate you'd best go back {dir_w_v}, as-is." )}  ;
    r12_header : string "Knowin' Juries" ;
 
@@ -1548,7 +1548,7 @@ locations {
                : print "Too much of this self-improvement will leave you completely unsuited for what really matters in life, like weird text adventures. So watch it, sport!" ;
                : done ;
             }
-            : print "You read through the meager oath again. Some parts make you cringe, but some actually hlelp you. You try to take the best bits and apply it to your own experiences." ;
+            : print "You read through the meager oath again. Some particularly humblebraggy parts make you cringe, but some actually help you. You try to take the best bits and apply it to your own experiences." ;
             : print "Some of the advice would have failed miserably, some is over-general, some reminds you of unsolicited advice, and some tipped off actual useful advice from someone who wasn't overbearing." ;
             : print "You can't say your life's changed, but you think as follows: if it's meant to help everyone, I'd be a fool to pass up the parts that actually work and worry whether I'm too smart or too dumb for it." ;
             : print "Perhaps you can pass this feeling on to others later." ;
@@ -1613,7 +1613,7 @@ locations {
          : if (point_dry_vendors && !point_say_four) {
             : match "say four" {
                : if (!point_pitch_earning) {
-                  : print "Four oars? But you can't afford one! Yet." ;
+                  : print {( "Four oars? But you can't afford one! Yet." + (point_coin_ovations ? " And they won't accept the coin as down payment." : "" ) )} ;
                   : set_true "think_say_four" ;
                   : collection_modify { collection = "tried_combo_core" index -> (17) content -> ("true") } ;
                   : gosub "note_thinks" ;
@@ -1692,7 +1692,7 @@ locations {
    r12 : location "{r12_loc}" header="{r12_header}" graphic="r12_0" {
       on_command {
          : match "_ knowin;_ juries" {
-            : print {( "You look at the juries, about to speak, but they cut you off with a sharp glare." + ( point_no_injuries ? "Surely you're not foolish enough to risk going east? You have no clue..." : point_coin_ovations ? "With your little story complete, they've found other people to judge. Their work is never done!" : "They seem almost interested in you back, for the moment." ) )} ;
+            : print {( "You look at the juries, about to speak, but they cut you off with a sharp glare. " + ( point_no_injuries ? "Surely you're not foolish enough to risk going east? You have no clue..." : point_coin_ovations ? "With your little story complete, they've found other people to judge. Their work is never done!" : "They seem almost interested in you back, for the moment." ) )} ;
             : done ;
          }
          : if (!point_coin_ovations) {
@@ -2106,7 +2106,7 @@ locations {
                : print "There's no need to prevent things coming back." ;
                : done ;
             }
-            : print "What good can such words do against a terror? But they're worth a try. Surprisingly, the terror lets up a bit. It seems to do some calculations then mentioned, you are not the optimal person to be terrorizing at the time, if you said something like that. It goes in search of other prey. You hear voices after this." ;
+            : print "What good can such words do against a terror? But they're worth a try. Surprisingly, the terror lets up a bit. It seems to do some calculations then mentions you are not the optimal person to be terrorizing at the time, if you said something like that. It goes in search of other prey. You hear voices after this." ;
             : print "You're reminded of dreams you described to friends, things like the terror and how you couldn't stop it, and some time after your friends said stop being inane, you gained control. Here you got to do it in real life. You think." ;
             : set_integer var="tempint" "3" ;
             : set_true "point_halt_error" ;
@@ -2296,7 +2296,7 @@ locations {
             }
             : print "What good can a bit of warmth do? Even if it is emotional warmth? Well, you try it, and somehow, the dogs and cats sense you're ready. They swarm over the area. Some of the makers absolutely loathe pets, and they flee right away. Other makers, mostly the recently initiated, actually are receptive to the dogs and cats." ;
             : print "Playing with pets is much more interesting than planning the war or whatever, even if it doesn't make folks feel as important. Among said folks are the girl's old parents, whom she points out to you." ;
-            : print "They just look at her and shrug and run by. Harsh! But two others near say, wait, you're that kid they talked about, we feel bad about this, why don't you come with us at least temporarily. A dog and cat each follow as she goes. She waves goodbye to you, still holding her doll. You feel relieved--you weren't up to parenting, and you own't be even if you get out of here--but you'll still miss her. Everyone else disperses." ;
+            : print "They just look at her and shrug and run by. Harsh! But two others near say, wait, you're that kid they talked about, we feel bad about this, why don't you come with us at least temporarily. A dog and cat each follow as she goes. She waves goodbye to you, still holding her doll. You feel relieved--you weren't up to parenting, and you won't be even if you get out of here--but you'll still miss her. Everyone else disperses." ;
             : print "Now everyone's gone, you can see what's {dir_e_y}. Not much left {dir_w_v}." ;
             : destroy "only_girl" ;
             : set_integer var="tempint" "40" ;
@@ -2458,7 +2458,7 @@ locations {
          }
          : if (!point_bah_slumping) {
             : match "_ boss;_ lumping" {
-               : print "They don't show any signs of letting up, but they don't show any signs of saying something new or original after their firs barrage." ;
+               : print "They don't show any signs of letting up, but they don't show any signs of saying something new or original after their first barrage." ;
                : done ;
             }
          }
@@ -2664,7 +2664,7 @@ locations {
                : print "One chest is enough. Don't get greedy." ;
                : done ;
             }
-            : print "If chess is the sport of kings and Queens, then it makes sense that anything around it must be pretty royal, too. Surprisingly, nobody really stops their analysis, but when you open the chest, you find a pair of {puz_point_dumb_pliers}. The trainers say, come on, {puz_point_dumb_pliers}? That's just dumb. Not as interesting or fulfilling as chess analysis! But hey, it's something. You probably wouldn't be able to carry vast riches anyways. But you still feel a bit embarrassed taking the pliers." ;
+            : print "If chess is the sport of Kings and Queens, then it makes sense that anything around it must be pretty royal, too. Surprisingly, nobody really stops their analysis, but when you open the chest, you find a pair of {puz_point_dumb_pliers}. The trainers say, come on, {puz_point_dumb_pliers}? That's just dumb. No chance of being as interesting or fulfilling as their discussion! But hey, it's something. You probably wouldn't be able to carry vast riches anyways. But you still feel a bit embarrassed taking the pliers." ;
             : set_integer var="tempint" "13" ;
             : set_true "point_chest_reigning" ;
             : gosub "add_point" ;
@@ -2739,7 +2739,7 @@ locations {
                : done ;
             }
             : if (point_say_loaners) {
-               : print "You used up the last ogf your money. You have the transportation you need." ; #//got/had/needed?
+               : print "You used up the last of your money. You have the transportation you need." ; #//got/had/needed?
                : done ;
             }
             : print "You don't have MUCH. You almost feel awkward asking for anything. You get, not a great sailboat, but a more modest Mo'-Tried-Moat-Ride. And thus, your riches disappear. But you can go north onto the water! You still wonder if you really belong with the bigger fancier boats, but if you were somehow gifted a bigger fancier boat, you'd probably feel you didn't belong, too." ;
@@ -3054,7 +3054,7 @@ locations {
                   : print "It would be belittling to repeat this reasoning in front of her." ;
                   : done ;
                }
-               : print "You look for the source of the girl, and it does sound a bit put on, and you wonder if it is somebody just trying to intimidate people. Sure enough, you find a small girl towering off to the side, holding {puz_point_her_doll}. She says, did my parents bring me to pick me up? You say no, you don't know who her parents are. She said, well, my parents had me stay here to avoid the really scary bits, but it was scary enough here, but they wouldn't mislead me, right?" ;
+               : print "You look for the source of the growl, and it does sound a bit put on, and you wonder if it is somebody just trying to intimidate people. Sure enough, you find a small girl cowering off to the side, holding {puz_point_her_doll}. She says, did my parents send you to pick me up? You say no, you don't know who her parents are. She said, well, my parents had me stay here to avoid the really scary bits, but it was scary enough here, but they wouldn't mislead me, right?" ;
                : print "You suddenly flash back to two things your parents said. How you needed to be good with kids, as they'd have liked grandkids, but they didn't want you being a teen parent. You have no clue what to do until you guess you'll show, well, not what you'd have wanted to hear, but something worth hearing and growing on." ;
                : print "So you can only suggest that you should help her find them. She doesn't sound too enthusiastic about this, but she's sick of the island, and you will be glad for her company. And, of course, {puz_point_her_doll}." ;
                : set_integer var="tempint" "32" ;
@@ -3651,7 +3651,7 @@ subroutines {
          : set_true "inventory_intangibles" ;
       }
       : if (!point_warm_acres && herd_score > 0) {
-         : print {( "You've gained support from " + ((herd_score == 2) ? "cats and dogs in the western corners of the map" : point_herd_all ? "cats {here_r00}" : "dogs {here_r40}") )} ;
+         : print {( "You've gained support from " + ((herd_score == 2) ? "cats and dogs in the western corners of the map" : point_herd_all ? "cats {here_r00}" : "dogs {here_r40}") + "." )} ;
          : set_true "inventory_intangibles" ;
       }
       : if (carried() == 0 && !inventory_intangibles) {
@@ -4657,7 +4657,7 @@ on_command {
    : if (won_yet) {
       : match "read ooh" {
          : print "Hooray! You found the bonus point where I describe a bit about the game but not too much." ;
-         : print "I've always had more than a bit of a problem with self help, and its over simple advice. We'd like simple general principles, of course, but they tend to ignore our own experience.\nAlso, what are we helping ourselves for? What should we help ourselves for?\nI found more that small things help give me a boost to work through big problems, and sometimes distracting myself the right way with them can really give me a shot in the arm. It's sort of like the lottery in reverse, where I might have a one in 10 chance of getting a 20 times boost." ;
+         : print "I've always had more than a bit of a problem with self help and its over-simple advice. We'd like simple general principles, of course, but they tend to ignore our own experience.\nAlso, what are we helping ourselves for? What should we help ourselves for?\nI found more that small things help give me a boost to work through big problems, and sometimes distracting myself the right way with them can really give me a shot in the arm. It's sort of like the lottery in reverse, where I might have a one in 10 chance of getting a 20 times boost." ;
          : press_any_key ;
          : print "It's that sort of thing I bring into my game writing. I find it hard to write about big issues, not because I don't care about them, but because I feel like I haven't lived them. So what I came up with here was having a surprising amount of non-physical verbs and nouns and concepts you had to do. How to fight through things? This might not be super dramatic, but I wanted it to be something worthwhile, something you'd enjoy, maybe something that might help you with something in the future, big or small, if you didn't know what." ;
          : print "I hope I didn't overdo it. The one problem of giving a character lethargy or self doubt to fight through is that they doubt why they're playing this game. I doubted why I was writing this at several points. I'm not the first person to write about it, but I hope I gave an interesting perspective." ;
@@ -4918,7 +4918,7 @@ on_command {
    }
    : match "score _" {
       : set_true "gamestate_thug_pass" ;
-      : print {( "You've currently scored {score} of {max_score} total core points." + (think_any ? "You have also figured {number_as_word} point-scoring command" + ( commands_figured > 1 ? "s" : "" ) + " before you had the necessary support. Type {vd_think} for details." : "" ) )};
+      : print {( "You've currently scored {score} of {max_score} total core points." + (think_any ? " You have also figured {number_as_word} point-scoring command" + ( commands_figured > 1 ? "s" : "" ) + " before you had the necessary support. Type {vd_think} for details." : "" ) )};
       : print "You also found {bonus_score} of {max_bonus_score} bonus points." ;
       : gosub "note_score_upper_right" ;
    }
@@ -5087,7 +5087,7 @@ on_command {
    : gosub "inventory_nouns" ;
 
    # comment out before release
-   : gosub "testing_stuff" ;
+   # : gosub "testing_stuff" ;
 
    : gosub "gotos" ;
 
