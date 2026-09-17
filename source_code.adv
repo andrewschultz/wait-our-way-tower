@@ -126,7 +126,7 @@ strings {
    puz_point_float_rippling : dynamic_string {( opt_color_coding && !point_flow_tripling ? "<float, rippling<#f8f>>" : "float, rippling" )} ; # 23
    puz_point_fray_measly    : dynamic_string {( opt_color_coding && !point_frame_easily ? "<fray, measly<#f8f>>" : "fray, measly" )}       ; # 30
    puz_point_freak_rusty    : dynamic_string {( opt_color_coding && !point_free_crusty ? "<freak, rusty<#f8f>>" : "freak rusty" )}        ; # 16
-   puz_point_grr_lonely     : dynamic_string {( opt_color_coding && !point_girl_only ? "\"<Grr, lonely<#f8f>>\"" : "\"Grr, lonely\n" )} ; # 32
+   puz_point_grr_lonely     : dynamic_string {( opt_color_coding && !point_girl_only ? "\"<Grr, lonely.<#f8f>>\"" : "\"Grr, lonely.\"" )} ; # 32
    puz_point_hall_terror    : dynamic_string {( opt_color_coding && !point_halt_error ? "<hall terror<#f8f>>" : "hall terror" )}         ; # 03
    puz_point_her_doll       : dynamic_string
                   {( opt_color_coding && (!point_heard_all || !point_herd_all) ? "<her doll<#f8f>>" : "her doll" )} ; # 36 38
@@ -1037,7 +1037,7 @@ booleans {
    apse_at_11 : boolean "false" ;
 
    # gamestate combo
-   girl_present : dynamic_boolean {( point_girl_only && !point_warm_acres )} ;
+   girl_following : dynamic_boolean {( point_girl_only && !point_warm_acres )} ;
    need_double_pic: dynamic_boolean {( is_at "r00" && point_vine_eater )} ;
 
    #blocker(s) derived from gamestate
@@ -4644,8 +4644,8 @@ on_describe {
       : gosub "loam_apse_stuff" ;
    }
    : if (is_present "only_girl") {
-      : print "The girl from the isle, {puz_point_her_doll} in hand, is here." ;
-   } : else_if (girl_present) {
+      : print {( "The girl from the isle" + (gamestate_doll_usable ? " fidgets with {puz_point_her_doll} here." : ", {puz_point_her_doll} in hand, is here.") )} ;
+   } : else_if (girl_following) {
       : print {( "The girl from the isle tags along, " + (gamestate_doll_usable ? "fidgeting with {puz_point_her_doll}." : "{puz_point_her_doll} in hand.") )} ;
       : create "only_girl" ;
    }
@@ -4767,7 +4767,7 @@ on_command {
          }
       }
    }
-   : if (girl_present) {
+   : if (girl_following) {
       # HERD ALL for the cats
       : match "_ awl" {
          : print "You don't need to go poking holes in anything." ;
