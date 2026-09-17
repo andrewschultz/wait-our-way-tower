@@ -1801,7 +1801,7 @@ locations {
          }
          : match "pose teasing" {
             : if (point_pose_teasing) {
-               : print "You already exposed things." ;
+               : print {( gamestate_bros_blocking ? "You already exposed things that way. You need to mix it up to get rid of the bros again." : "You pretend the bros have come back and you get to \"show them\" again, a bit better this time. Pointless, but harmless." )} ;
                : done ;
             }
             : print "The bros are not going to listen to reason. You stretch to think of whom they remind you of. You remember wanting to read a book or do something interesting on your own that they didn't like. They would tell you to take it easy or whatever, but of course when they described stuff, they would say why aren't you appreciating how much fun I have? (Or if you did, they'd remind you THEY actually got to experience things." ;
@@ -1867,6 +1867,7 @@ locations {
          : if (gamestate_bros_second_trigger && !gamestate_bros_second_placed) {
             : set_false "gamestate_bros_second_trigger" ;
             : set_true "gamestate_bros_second_placed" ;
+            : update_graphic ;
             : print "The Bros are back at it again. They ask how you've been. You mention you've been doing stuff since last you chatted. They all {puz_point_weep_lucky} ... what a stupid guilt trip. But for whatever reason, it works, and you're going to have to change your mindset to get out of this one." ;
          }
       }
