@@ -1678,6 +1678,10 @@ locations {
          : match "_ dull;_ oozing" {
             : print {( point_duh_losing ? "You don't want to focus on the oozing. It took effort not to." : "You stare at, and listen to, the dull oozing for a while. You get the feeling you really should be grateful for your freedom, yet at the same time, exercising it would be unfair to other prisoners. If they exist, of course. Can't be too considerate these days! Besides, you admit you have no interesting plans...\n...wait, no, you can do better than that." )} ;
          }
+         : match "_ zing" {
+            : print "You search for a zinger, but you have nobody to zing. You probably couldn't find a good one. Perhaps you need a more roundabout blow-off." ;
+            : done ;
+         }
          : match "duh losing" {
             : if (point_duh_losing) {
                : print "No need to reiterate things." ;
@@ -1818,6 +1822,9 @@ locations {
                }
                : gosub "say_half" ;
                : done ;
+            }
+            : match "poes _;poe _" {
+               : print "Any literary reference would likely go over the bros' head. But that sounds right." ;
             }
          }
          : if (gamestate_bros_second_placed) {
@@ -2342,6 +2349,12 @@ locations {
    r25 : location "{r25_loc}" header="{r25_header}" graphic="r25_0" {
       on_command {
          : if (gamestate_tried_beyond_r25) {
+            : match "toon _" {
+               : print "Sorry, you're not going to get Looney Tunes quality graphics here. And it's not yet the time or place for \"That's All, Folks!\"" ;
+               : if (!point_tune_out) {
+                  : print "But that's GOT to be on the right track." ;
+               }
+            }
             : match "tune out" {
                : if (point_tune_out) {
                   : print "Your doubts are well and truly tuned out. Time to move on!" ;
@@ -2536,6 +2549,11 @@ locations {
             : print "Things aren't going to come crashing down here, but you hope for better than that bare minimum, and you wonder if others do, too." ;
             : done ;
          }
+         : if (!point_blest_able) {
+            : match "bless _;_ table" {
+               : print "No table appears to bless." ;
+            }
+         }
          : match "blest able" {
             : if (point_blest_able) {
                : print "At some point, there are diminishing or even negative returns for counting and re-counting your blessings. What will you do with them, around the true pleading?" ;
@@ -2693,6 +2711,9 @@ locations {
          : if (!point_chest_reigning) {
             : match "_ raining" {
                : print "You don't need to make everyone wet here. But you're on the right track." ;
+            }
+            : match "_ reining" {
+               : print "That sounds right, but the chest might reign in you as well as the chess fans." ;
             }
             : match "chest _;_ reigning" {
                : set_integer var="tempint" "13" ;
