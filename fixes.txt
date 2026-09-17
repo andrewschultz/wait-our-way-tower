@@ -1,0 +1,36 @@
+Version 1.1.0 9/17/2026
+
+--If a puzzle is in THINK and you guess a word half-right, you're now notified you already figured the phrase, you just didn't have auxiliary items to make things work. (This opens up a can of worms with two similar puzzles, but it's a big step forward.)
+  -- similarly, some guesses with one word right/wrong didn't look for if we'd solved the puzzle yet.
+--Slightly altered text describing a following NPC to give better cluing
+--For the chase scene, better cluing for guessing the right phrase in the wrong place, so the player doesn't wander around
+--Five very good guesses now hint the player to better things
+--The first puzzle in room 41 may have pointed people away from the right of two similar sounding words
+--Better reject for room 23 puzzle if you're not ready yet
+--Room 26 had wrong value for numeric clue
+--Room 26 made it clearer what sort of first word was expected
+--Puzzle #2 in room 03 has a very good guess where we need to consider either word, or both
+--Noted the what and why of the Loam Apse that appears in rooms 11/31 (low difficulty bonus point that gives quality of life)
+--the brief author commentary on winning is now lampshaded 1) each new room 2) each parser error until you figure it out
+--Boats initially in room 43 are now in the graphics
+--When the text says the Bros reappear in room 13, you can now see them immediately in the graphics
+--Fixed room 10 description, bad parentheses in if/then
+--Description of NPC in room 40 was flipped before/after you made them happy
+--X THUG upgrade
+--room 35 fix typo and general description
+--HINT now refers to your hint item in all steps, so the player isn't confused if you haven't done so in a while. Also, (1/12) etc. are listed.
+--Accepting alternate spelling for room 00 puzzle
+--zapped double text in VERBS
+--general narrative fixes for typos and style
+
+Version 1.0.6 9/3/2025
+--Fixed typos in bracketed string variables (caused blank text where text expected)
+--added borders to in-game map for readability
+
+Version 1.0.5 9/1/2026
+--version 1.0.0 pulled slightly wrong compiled HTML file that left out minor graphical fixes/text upgrades
+--fixed false positives if color coded hint text option is on (e.g. if you already solved a puzzle, the clue text no longer turns lavender)
+--chase scene now shortcircuits down certain path where it makes sense to do so
+--better reject-clues for how/where to "win" chase scene if you try an action in the wrong part
+--general typo/stylistic fixes
+--blocked off testing commands
