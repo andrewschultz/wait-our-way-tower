@@ -332,7 +332,7 @@ strings {
    r34_loc : dynamic_string {( ( point_ply_towels ? "THE SOAK-THUS OAK sits and pouts, its fun ruined. The owls have left, leaving passage {r34_dir_n}." : "Somehow, a tree is summoning rain down on owls hiding at the entry to a building to the {dir_n_n}. One look at it and you know it is THE SOAK-THUS OAK, and given how wet and unhappy the owls look, they must be {puz_point_plight_owls}." ) + "\nThere is also passage back {dir_w_v}." )} ;
    r34_header : string "The Soak-Thus Oak" ;
 
-   r35_loc : string "Here, people are apparently learn stuff. What stuff, you're not sure. You can only go back {dir_s_v} here." ;
+   r35_loc : string "Here, people apparently learn stuff. Your initial guesses of what stuff and its worth leave you troubled. You can only go back {dir_s_v} here." ;
    r35_header : string "Bro Class" ;
 
    r40_loc : dynamic_string {( "This is a small hut that smells (pleasantly) of canines." +
@@ -376,7 +376,7 @@ strings {
 
    # NPC(s)
    trtg : string "<Thug 'Round the Ground<#ccc>>" ;
-   trtg_status : string "The thug is bigger than you but looks out of shape. Their endurance for running can't be that good." ;
+   trtg_status : string "The thug is bigger than you but you're pretty sure it's not all muscle. They seem to be wheezing a bit. Their endurance for running can't be that good. Also, uhh, relying on looks is bad, but it looks ... outsmartable." ;
    dgda : string "<D'aww! Gold Dog, Old<#ccc>>" ;
 
    # weird strings
@@ -1461,7 +1461,7 @@ locations {
                : print "There is nobody left to pitch to. Anyway, you got more riches than expected here." ;
                : done ;
             }
-            : print "You aren't quite sure how you're going to explain what's so great about one coin at first, especially since the titan has riches lying around. Then you find an angle. If someone as small as you can make this coin, with your strategies or whatever, think of what the titan could make with their height and strength and so forth. You put more of the dumb parable to use, and surprisingly, the titan buys it. They walk away. You are confronted with riches. There are \"higher itches, hi\" riches and \"power itches, POW\" riches. You decide on the first, though it's a smaller pile.\nAn unheard voice booms YOU HAVE CHOSEN WELL. PERHAPS IT WASN'T TOO HARD TO IN CASES LIKE THIS, BUT GOOD JOB, ANYWAY. SURPRISINGLY MANY DON'T." ;
+            : print "You aren't quite sure how you're going to explain what's so great about one coin at first, especially since the titan has riches lying around. Then you find an angle. If someone as small as you can make this coin, with your strategies or whatever, think of what the titan could make with their height and strength and so forth. You put more of the dumb parable to use, and surprisingly, the titan buys it. They walk away. You are confronted with riches. There are \"higher itches, hi\" riches and \"power itches, POW\" riches. You decide on the first, though it's a smaller pile.\nAn unseen voice booms YOU HAVE CHOSEN WELL. PERHAPS IT WASN'T TOO HARD TO IN CASES LIKE THIS, BUT GOOD JOB, ANYWAY. SURPRISINGLY MANY DON'T." ;
             : set_integer var="tempint" "12" ;
             : set_false "think_pitch_earning" ;
             : set_true "point_pitch_earning" ;
@@ -1565,7 +1565,7 @@ locations {
                : done ;
             }
             : print "You read through the meager oath again. Some particularly humblebraggy parts make you cringe, but some actually help you. You try to take the best bits and apply it to your own experiences." ;
-            : print "Some of the advice would have failed miserably, some is over-general, some reminds you of unsolicited advice, and some tipped off actual useful advice from someone who wasn't overbearing." ;
+            : print "Some of the advice would have failed miserably, some is over-general, some reminds you of unsolicited advice, and some tipped off actual useful advice from someone who wasn't overbearing. But the parts that work, work. At least for now." ;
             : print "You can't say your life's changed, but you think as follows: if it's meant to help everyone, I'd be a fool to pass up the parts that actually work and worry whether I'm too smart or too dumb for it." ;
             : print "Perhaps you can pass this feeling on to others later." ;
             : set_integer var="tempint" "24" ;
@@ -1629,7 +1629,7 @@ locations {
          : if (point_dry_vendors && !point_say_four) {
             : match "say four" {
                : if (!point_pitch_earning) {
-                  : print {( "Four oars? But you can't afford one! Yet." + (point_coin_ovations ? " And they won't accept the coin as down payment." : "" ) )} ;
+                  : print {( "Four oars? That seems a reasonable amount. But you can't afford one! Yet." + (point_coin_ovations ? " The coin's a start, but they don't offer installment plans." : "" ) )} ;
                   : set_true "think_say_four" ;
                   : collection_modify { collection = "tried_combo_core" index -> (17) content -> ("true") } ;
                   : gosub "note_thinks" ;
@@ -1960,7 +1960,7 @@ locations {
             : print "You encourage the mage to look at this new book, refraining from saying, thinking about things right is its own sort of magic." ;
             : print "The mage snaps \"Are you one of those people saying I'm too emotional to lead?\"" ;
             : print "You mentioned that they've probably worked hard to get their beliefs, and maybe the right thing or two could give them a huge jump they just haven't seen before, but they weren't ready for it yet. But they've experienced more now, and it's time to revisit things. They humor you. And, within half an hour, they admit they must have reeked of desperation more than a bit. They'd like to do what's needed to get through with things, and maybe we won't have to do anything too crazy." ;
-            : print "You like the change, even if it's temporary. It's worth cashing in on, for you and him." ;
+            : print "You like the change, even if it's temporary and potentially superficial. It's worth cashing in on, for you and him." ;
             : set_integer var="tempint" "43" ;
             : set_false "think_right_angles" ;
             : set_true "point_right_angles" ;
@@ -2261,8 +2261,8 @@ locations {
          }
          : match "frame easily" {
             : if (!point_tense_ops) {
-               : print "That feels right, but you're worried any simplified advice will just sound over-general." ;
-               : print "Perhaps you might need to navigate even more minor conflicts or plans to ramp up before navigating this fray, even if it is measly!" ;
+               : print "That feels right, but you're worried any simplified advice would just sound over-general." ;
+               : print "Perhaps navigating even more minor conflicts or plans would help you ramp up before navigating this fray, even if it is measly!" ;
                : set_true "think_frame_easily" ;
                : collection_modify { collection = "tried_combo_core" index -> (30) content -> ("true") } ;
                : gosub "note_thinks" ;
@@ -2274,7 +2274,7 @@ locations {
             }
             : print "The fray, measly regards you suspiciously at first. You seem to talk a good game, but do you have any credentials? You show them the {iaad}. They're somewhat impressed. Then you describe how you worked with the sops and sorted things out together. \"The SOPS?\" both sides ask. \"They're hopeless! You got them to...?\"" ;
             : print "And just like that, the two opposing sides have something they can agree on! Talks go much more smoothly after that. You wonder why the heck they started arguing in the first place. The initial beefs seemed so trivial. But then again, you remember beefing with friends, or people who should've been friends, over much smaller things." ;
-            : print "Both sides of the fray go off to start a new commune They say you're nice and all, but you just don't have the shared experience to really be one of them. You don't mind. You're not entirely sure how long the peace will last, to be honest." ;
+            : print "Both sides of the fray go off to start a new commune. They say you're nice and all, but you just don't have the shared experience to really be one of them. They're sure you'll find your own way. You don't mind. You're not entirely sure how long the peace will last, and you're just glad you can journey further east now." ;
             : set_integer var="tempint" "30" ;
             : set_false "think_frame_easily" ;
             : set_true "point_frame_easily" ;
@@ -2689,7 +2689,7 @@ locations {
    r32 : location "{r32_loc}" header="{r32_header}" graphic="r32_0" {
       on_command {
          : match "listen _;_ chess;_ training" {
-            : print {( point_dump_liars ? "It's silent now with the chess training over." : "It's tough to know whether or not the training is effective, but it sure is loud. Everybody is yelling about stuff like the Carlsbad pawn structure, or opening theory 15 lines down, or other things that just sort of make your head spin. Of course, there's always a person who yells you just have to sit there and make good moves, and they're shushed.\nYou remember some guy who was on the high school baseball team who said if you don't throw pieces away, you can get kind of good, and he was shocked." )} ;
+            : print {( point_dump_liars ? "It's silent now with the chess training over." : "It's tough to know whether or not the training is effective, but it sure is loud. Everybody is yelling about stuff like the Carlsbad pawn structure, or opening theory fifteen lines down, or other things that just sort of make your head spin. Of course, there's always a person who wonders if it's worth it to get so technical when we still don't understand general principles, and they're shushed quickly.\nYou remember some guy who was on the high school baseball and chess teams who said if you don't throw pieces away or move pawns willy-nilly, you can get kind of good, and he was shocked it happened to him." )} ;
             : done ;
          }
          : if (point_chest_reigning && !point_dump_liars) {
@@ -2703,7 +2703,7 @@ locations {
                : print "One chest is enough. Don't get greedy." ;
                : done ;
             }
-            : print "If chess is the sport of Kings and Queens, then it makes sense that anything around it must be pretty royal, too. Surprisingly, nobody really stops their analysis, but when you open the chest, you find a pair of {puz_point_dumb_pliers}. The trainers say, come on, {puz_point_dumb_pliers}? That's just dumb. No chance of being as interesting or fulfilling as their discussion! But hey, it's something. You probably wouldn't be able to carry vast riches anyways. But you still feel a bit embarrassed taking the pliers." ;
+            : print "If chess is the sport of Kings and Queens, then it makes sense that anything around it must be pretty royal, too. Surprisingly, nobody really stops their analysis, but when you open the chest, you find a pair of {puz_point_dumb_pliers}. The trainers say, come on, {puz_point_dumb_pliers}? That's just dumb. No chance of being as interesting or fulfilling as their discussion! But hey, it's something. You probably wouldn't be able to carry vast riches anyways. You reach for the pliers, but the chess enthusiasts--well, but their know-it-all banter leaves you feeling weird and embarrassed you'd want pliers. Right now, you're not entirely sure how or why you'd need them." ;
             : set_integer var="tempint" "13" ;
             : set_true "point_chest_reigning" ;
             : gosub "add_point" ;
@@ -2836,7 +2836,8 @@ locations {
                : done ;
             }
             : print "You don't have enough towels to dry off all the owls at once. The oak laughs about this as you head back to the claw, to get a few more. Drying the owls alone doesn't work. You need to provide a weird lean-to of towels, but fortunately, there's enough debris around. Eventually the drier owls can fly, and the oak realizes the game is up. It -- well, trees can't skulk off, but it sure looks hurt." ;
-            : print "The owls hoot their appreciation. Since they don't have to huddle flightless to the north, they start flapping in the air. You call them over to hand them the pliers in case this happens again. The pliers are surprisingly lightweight, and two owls can work it with one foot each, which strikes you as not dumb at all." ;
+            : print "The owls hoot their appreciation. Since they don't have to huddle flightless, they start flapping in the air. You call them over to hand them the pliers in case this happens again. The pliers are surprisingly lightweight, and two owls can work it with one foot each, which strikes you as not dumb at all." ;
+            : print "You'll miss the owls, but with them gone, you can go {dir_n_y} now." ;
             : set_integer var="tempint" "28" ;
             : set_false "think_ply_towels" ;
             : set_true "point_ply_towels" ;
@@ -2990,7 +2991,7 @@ locations {
                : done ;
             }
             : match "* sync;sync _" {
-               : print "You might want to get {puz_point_ace_inc} out of sync. Sounds right, though." ;
+               : print "You might want to get {puz_point_ace_inc} out of sync, but that feels too abstract, though it sounds right.\nWhat sort of action would get it out of sync?" ;
                : done ;
             }
          } : else_if (!point_cue_bland) {
@@ -3958,7 +3959,7 @@ subroutines {
          : return ;
       }
       : match "tuft _" {
-         : print "That makes sense, but then you consider the only thing you'd do with a tuft is look under it to find something useful. But it feels close." ;
+         : print "That makes sense, but then you consider the only thing you'd do with a tuft is look under it to find something useful. It feels close, though." ;
          : return ;
       }
    }
