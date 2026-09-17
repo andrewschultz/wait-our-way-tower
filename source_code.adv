@@ -3910,6 +3910,12 @@ subroutines {
       : set_false "already_got_command" ;
    }
    say_half : subroutine {
+      : if (herd_score == 1) {
+         : match "all *" {
+            : print "Perhaps you haven't done all you can with, well, ALL." ;
+            : done ;
+         }
+      }
       : match "* -;- *" {
          : print {( already_got_command ? "That's half of something you already figured." : "Feels right, but what to pair that word with?" )} ;
          : gosub "half_hints" ;
