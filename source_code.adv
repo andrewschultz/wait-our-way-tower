@@ -4727,7 +4727,13 @@ on_command {
             : done ;
          }
          : if (!is_at "r00" || !point_fly_traps) {
-            : print {( is_at "r44" ? ( point_tense_ops ? "The sops are already organized." : "The sops are herded, but their thoughts are jumbled. Where else could you get herding?") : is_at "r24" ? "They're already herder for trouble. Perhaps you could herd parties who could overcome the war makers." : "Nothing to herd en masse here." )} ;
+            : print {( is_at "r44" ? ( point_tense_ops ? "The sops are already organized." : "The sops are herded, but their thoughts are jumbled. Where else could you get herding?") :
+               is_at "r24" ? "They're already herded for trouble. Perhaps you could herd parties who could overcome the war makers." :
+               is_at "r12" ? "The juries are already sort of a herd, but they are all talk, no action. They won't help you." :
+               (is_at "r30" && !point_door_cloud) ? "One dork is enough. You don't need a herd." :
+               is_at "r42" ? "You're not sure you'd want to herd anything you could find on this island." :
+               (is_at "r13" && gamestate_bros_blocking) ? "They have already self-herded, and they wouldn't help you." :
+               "You don't see any potential ally or allies to herd en masse here." )} ;
             : set_true "think_herd_all" ;
             : collection_modify { collection = "tried_combo_core" index -> (36) content -> ("true") } ;
             : gosub "note_thinks" ;
