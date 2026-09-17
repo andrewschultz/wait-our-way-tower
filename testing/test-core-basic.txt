@@ -117,6 +117,8 @@ E
 FEY LOOPS
 N
 anykey
+anykey
+anykey
 W
 W
 W
@@ -139,6 +141,10 @@ S
 E
 BAH SLUMPING
 SAY MENTORING
+anykey
+anykey
+anykey
+anykey
 E
 BLEST ABLE
 anykey

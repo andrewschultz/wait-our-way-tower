@@ -4454,6 +4454,19 @@ subroutines {
          : redescribe ;
          : done ;
       }
+      : match "testjump girl" {
+         : gosub "testjump_girl" ;
+         : goto "r21" ;
+         : redescribe ;
+         : done ;
+      }
+      : match "testjump girlx" {
+         : gosub "testjump_girl" ;
+         : gosub "testjump_girl_ext" ;
+         : goto "r21" ;
+         : redescribe ;
+         : done ;
+      }
       : match "testjump 2" {
          : gosub "testjump_part_1" ;
          : gosub "testjump_part_2" ;
@@ -4480,7 +4493,59 @@ subroutines {
       : print "TESTJUMP 1N/1S also clears north and south of the hall, placing you north or south." ;
       : print "TESTJUMP 2 sends you to 1 room before the chase, 39 points." ;
       : print "TESTJUMP 3 sends you to the chase room after you won, 41 points." ;
+      : print "TESTJUMP GIRL gets you the girl's help." ;
+      : print "TESTJUMP GIRLX gets you the girl's help, with other puzzles solved so she is immediately useful." ;
       : done ;
+   }
+
+   testjump_girl : subroutine {
+      : gosub "testjump_part_1" ;
+      : set_true "point_hate_rash" ;
+      : set_true "point_duh_losing" ;
+      : set_true "point_dry_vendors" ;
+      : set_true "point_dumb_parable" ;
+      : set_true "point_no_injuries" ;
+      : set_true "point_coin_ovations" ;
+      : set_true "point_tightened_rousing" ;
+      : set_true "point_pitch_earning" ;
+      : set_true "point_chest_reigning" ;
+      : set_true "point_dump_liars" ;
+      : set_true "point_say_four" ;
+      : set_true "point_say_loaners" ;
+      : set_true "point_seek_rest" ;
+      : set_true "point_girl_only" ;
+      : goto "r01" ;
+      : goto "r02" ;
+      : goto "r10" ;
+      : goto "r11" ;
+      : goto "r12" ;
+      : goto "r21" ;
+      : goto "r31" ;
+      : goto "r32" ;
+      : goto "r33" ;
+      : goto "r42" ;
+      : goto "r43" ;
+   }
+
+   testjump_girl_ext : subroutine {
+      : set_true "point_pose_teasing" ;
+      : set_true "point_sun_catching" ;
+      : set_true "point_tufty_key" ;
+      : set_true "point_door_cloud" ;
+      : set_true "point_eh_sink" ;
+      : set_true "point_cue_bland" ;
+      : set_true "point_vine_eater" ;
+      : set_true "point_fly_traps" ;
+      : set_true "point_catch_acing" ;
+      : set_true "point_shape_up" ;
+      : goto "r00" ;
+      : goto "r03" ;
+      : goto "r04" ;
+      : goto "r13" ;
+      : goto "r14" ;
+      : goto "r30" ;
+      : goto "r40" ;
+      : goto "r41" ;
    }
 
    testjump_part_1 : subroutine {
