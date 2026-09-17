@@ -409,7 +409,7 @@ integers {
    score : integer "0" ;
    max_score : integer "50" ;
    bonus_score : integer "0" ;
-   max_bonus_score : integer "0" ;
+   max_bonus_score : integer "5" ;
 
    herd_score : dynamic_integer {( (point_herd_all ? 1 : 0) + (point_heard_all ? 1 : 0) )} ;
 
@@ -3886,7 +3886,7 @@ subroutines {
    }
    say_half : subroutine {
       : match "* -;- *" {
-         : print "Feels right, but what to pair that word with?" ;
+         : print {( already_got_command ? "That's half of something you already figured." : "Feels right, but what to pair that word with?" )} ; #?? big question about if you HERD ALL, XXX ALL, will you see something else? We would have to juggle things.
          : gosub "half_hints" ;
          : done ;
       }
@@ -5206,6 +5206,11 @@ on_command {
    }
 
    : match "lo _;low _;thud _;thug _" { #obfuscation of bonus points
+      : print "{custom_unknown_verb_error}" ;
+      : done ;
+   }
+
+   : match "goto _" { #obfuscation of metaverbs
       : print "{custom_unknown_verb_error}" ;
       : done ;
    }
