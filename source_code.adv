@@ -1044,6 +1044,7 @@ booleans {
    r13_secondary_block : dynamic_boolean {( gamestate_bros_second_placed && !point_whee_plucky )} ;
    r22_secondary_block : dynamic_boolean {( gamestate_r21_e && !point_fell_asleep )} ;
    gamestate_bros_blocking : dynamic_boolean {( r13_secondary_block || !point_pose_teasing )} ;
+   gamestate_doll_usable : dynamic_boolean {( (is_at "r40" && point_shape_up && !point_heard_all) || (is_at "r00" && point_catch_acing && !point_herd_all) )} ;
 
    # points (sorted, beginning or end)
    point_bah_slumping      : boolean "false" ; # 46
@@ -3772,7 +3773,7 @@ subroutines {
    inventory_nouns : subroutine {
       : if (point_girl_only && !point_warm_acres) {
          : match "_ doll" {
-            : print "It's a weird looking doll, but it probably helped the girl feel less lonely. Looking at it, you think \"find-all-fine doll.\"" ;
+            : print "It's a weird looking doll, but it probably helped the girl feel less lonely. Looking at it, you feel less lonely, too and you think \"find-all-fine doll.\"" ;
             : print {( herd_score == 2 ? "And it has found potential allies!" : herd_score == 1 ? "You wonder, what else can it find?" : "But what is this ALL it could find?" )} ; # ?? further divvying up, if the think_all_score dynamic integer > 0 we can have 1-1 0-1 0-2
             : done ;
          }
@@ -4612,7 +4613,7 @@ on_describe {
    : if (is_present "only_girl") {
       : print "The girl from the isle, {puz_point_her_doll} in hand, is here." ;
    } : else_if (girl_present) {
-      : print "The girl from the isle tags along, {puz_point_her_doll} in hand." ;
+      : print {( "The girl from the isle tags along, " + (gamestate_doll_usable ? "fidgeting with {puz_point_her_doll}." : "{puz_point_her_doll} in hand.") )} ;
       : create "only_girl" ;
    }
    : if (is_present "thug") {
