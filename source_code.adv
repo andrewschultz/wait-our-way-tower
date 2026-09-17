@@ -3982,8 +3982,10 @@ subroutines {
          : if (apse_at_11 != is_at "r11") {
             : print "Ooh, another loam apse. Odd to have two of them. They must be special." ;
             : set_true "gamestate_both_loam_apse" ;
+         } : else {
+            : print "The loam apse is still here. It looks ... potentially helpful?" ;
          }
-            : return ;
+         : return ;
       } : else {
          : print "One of the two identical loam apses sits at the intersection here." ;
          : return ;
@@ -4635,7 +4637,7 @@ on_startup {
 ## Execute this every time a player moves or redescribes a location
 
 on_describe {
-   : if (won_yet && !bonus_point_read_ooh && !has_visited(current_location()) && !is_at "r20") {
+   : if (won_yet && !bonus_point_read_ooh && is_first_entered() && !is_at "r20") {
       : print "You've sort of been here before. What could I do besides <REDO<#f8f>>, you wonder?" ;
    }
    : if (!bonus_point_lo_maps && (is_at "r11" || is_at "r31")) {
