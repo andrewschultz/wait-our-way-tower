@@ -1473,7 +1473,7 @@ locations {
          : if (!point_pitch_earning) {
             : match "pitch _;_ earning" {
                : set_integer var="tempint" "12" ;
-               : set_boolean var="already_got_command" {( think_pitch_earning && !point_pitch_earning )} ; # this is optional. Delete if point does not rely on any other variables.
+               : set_boolean var="already_got_command" {( think_pitch_earning && !point_pitch_earning )} ;
                : set_false "first_half" ;
                : match "pitch _" {
                   : set_true "first_half" ;
@@ -1655,7 +1655,7 @@ locations {
                }
                : match "say _;_ four" {
                   : set_integer var="tempint" "17" ;
-                  : set_boolean var="already_got_command" {( think_say_four && !point_say_four )} ; # this is optional. Delete if point does not rely on any other variables.
+                  : set_boolean var="already_got_command" {( think_say_four && !point_say_four )} ;
                   : set_false "first_half" ;
                   : match "say _" {
                      : set_true "first_half" ;
@@ -1776,6 +1776,7 @@ locations {
             : if (!point_coin_ovations) {
                : match "coin _;_ ovations" {
                   : set_integer var="tempint" "10" ;
+                  : set_boolean var="already_got_command" {( think_coin_ovations && !point_coin_ovations )} ;
                   : set_false "first_half" ;
                   : match "coin _" {
                      : set_true "first_half" ;
@@ -1905,7 +1906,7 @@ locations {
          : if (!point_cloth_robbing) {
             : match "cloth _;_ robbing" {
                : set_integer var="tempint" "25" ;
-               : set_boolean var="already_got_command" {( think_cloth_robbing && !point_cloth_robbing )} ; # this is optional. Delete if point does not rely on any other variables.
+               : set_boolean var="already_got_command" {( think_cloth_robbing && !point_cloth_robbing )} ;
                : set_false "first_half" ;
                : match "cloth _" {
                   : set_true "first_half" ;
@@ -1970,6 +1971,7 @@ locations {
          : if (!point_right_angles) {
             : match "right _;_ angles" {
                : set_integer var="tempint" "43" ;
+               : set_boolean var="already_got_command" {( think_right_angles && !point_right_angles )} ;
                : set_false "first_half" ;
                : match "right _" {
                   : set_true "first_half" ;
@@ -2241,7 +2243,7 @@ locations {
             : if (!point_free_crusty) {
                : match "free _;_ crusty" {
                   : set_integer var="tempint" "16" ;
-                  : set_boolean var="already_got_command" {( think_free_crusty && !point_free_crusty )} ; # this is optional. Delete if point does not rely on any other variables.
+                  : set_boolean var="already_got_command" {( think_free_crusty && !point_free_crusty )} ;
                   : set_false "first_half" ;
                   : match "free _" {
                      : set_true "first_half" ;
@@ -2262,7 +2264,7 @@ locations {
          : match "frame easily" {
             : if (!point_tense_ops) {
                : print "That feels right, but you're worried any simplified advice would just sound over-general." ;
-               : print "Perhaps navigating even more minor conflicts or plans would help you ramp up before navigating this fray, even if it is measly!" ;
+               : print "Perhaps if you could navigate an even smaller conflicts than this, it would help you ramp up before navigating this fray, even if it is measly!" ;
                : set_true "think_frame_easily" ;
                : collection_modify { collection = "tried_combo_core" index -> (30) content -> ("true") } ;
                : gosub "note_thinks" ;
@@ -2284,7 +2286,7 @@ locations {
          : if (!point_frame_easily) {
             : match "frame _;_ easily" {
                : set_integer var="tempint" "30" ;
-               : set_boolean var="already_got_command" {( think_frame_easily && !point_frame_easily )} ; # this is optional. Delete if point does not rely on any other variables.
+               : set_boolean var="already_got_command" {( think_frame_easily && !point_frame_easily )} ;
                : set_false "first_half" ;
                : match "frame _" {
                   : set_true "first_half" ;
@@ -2336,7 +2338,7 @@ locations {
          : if (!point_warm_acres) {
             : match "warm _;_ acres" {
                : set_integer var="tempint" "40" ;
-               : set_boolean var="already_got_command" {( think_warm_acres && !point_warm_acres )} ; # this is optional. Delete if point does not rely on any other variables.
+               : set_boolean var="already_got_command" {( think_warm_acres && !point_warm_acres )} ;
                : set_false "first_half" ;
                : match "warm _" {
                   : set_true "first_half" ;
@@ -2638,6 +2640,7 @@ locations {
          : if (!point_door_cloud) {
             : match "door _;_ cloud" {
                : set_integer var="tempint" "22" ;
+               : set_boolean var="already_got_command" {( think_door_cloud && !point_door_cloud )} ;
                : set_false "first_half" ;
                : match "door _" {
                   : set_true "first_half" ;
@@ -2800,7 +2803,7 @@ locations {
          : if (!point_say_loaners) {
             : match "say _;_ loaners" {
                : set_integer var="tempint" "18" ;
-               : set_boolean var="already_got_command" {( think_say_loaners && !point_say_loaners )} ; # this is optional. Delete if point does not rely on any other variables.
+               : set_boolean var="already_got_command" {( think_say_loaners && !point_say_loaners )} ;
                : set_false "first_half" ;
                : match "say _" {
                   : set_true "first_half" ;
@@ -2848,7 +2851,7 @@ locations {
          : if (!point_ply_towels) {
             : match "ply _;_ towels" {
                : set_integer var="tempint" "28" ;
-               : set_boolean var="already_got_command" {( think_ply_towels && !point_ply_towels )} ; # this is optional. Delete if point does not rely on any other variables.
+               : set_boolean var="already_got_command" {( think_ply_towels && !point_ply_towels )} ;
                : set_false "first_half" ;
                : match "ply _" {
                   : set_true "first_half" ;
@@ -3190,7 +3193,7 @@ locations {
          : if (!point_tense_ops) {
             : match "tense _;_ ops" {
                : set_integer var="tempint" "29" ;
-               : set_boolean var="already_got_command" {( think_tense_ops && !point_tense_ops )} ; # this is optional. Delete if point does not rely on any other variables.
+               : set_boolean var="already_got_command" {( think_tense_ops && !point_tense_ops )} ;
                : set_false "first_half" ;
                : match "tense _" {
                   : set_true "first_half" ;
@@ -3908,7 +3911,7 @@ subroutines {
    }
    say_half : subroutine {
       : match "* -;- *" {
-         : print {( already_got_command ? "That's half of something you already figured." : "Feels right, but what to pair that word with?" )} ; #?? big question about if you HERD ALL, XXX ALL, will you see something else? We would have to juggle things.
+         : print {( already_got_command ? "That's half of something you already figured." : "Feels right, but what to pair that word with?" )} ;
          : gosub "half_hints" ;
          : done ;
       }
@@ -4827,7 +4830,7 @@ on_command {
       : if (!point_heard_all) {
          : match "heard _;_ all" { #?? this is potentially wretched if we get ALL in R40 / R00 backwards. We should note the doll has some weird power. Maybe this will give you an idea what else to do.
             : set_integer var="tempint" "38" ;
-            : set_boolean var="already_got_command" {( think_herd_all && !point_herd_all )} ;
+            : set_boolean var="already_got_command" {( think_heard_all && !point_heard_all )} ;
             : set_false "first_half" ;
             : match "heard _" {
                : set_true "first_half" ;
@@ -4839,7 +4842,7 @@ on_command {
       : if (!point_herd_all) {
          : match "herd _;_ all" {
             : set_integer var="tempint" "36" ;
-            : set_boolean var="already_got_command" {( think_herd_all && !point_herd_all )} ; # this is optional. Delete if point does not rely on any other variables.
+            : set_boolean var="already_got_command" {( think_herd_all && !point_herd_all )} ;
             : set_false "first_half" ;
             : match "herd _" {
                : set_true "first_half" ;
@@ -4874,7 +4877,7 @@ on_command {
       : if (!point_vine_eater) {
          : match "vine _;_ eater" {
             : set_integer var="tempint" "34" ;
-            : set_boolean var="already_got_command" {( think_vine_eater && !point_vine_eater )} ; # this is optional. Delete if point does not rely on any other variables.
+            : set_boolean var="already_got_command" {( think_vine_eater && !point_vine_eater )} ;
             : set_false "first_half" ;
             : match "vine _" {
                : set_true "first_half" ;
@@ -4913,7 +4916,7 @@ on_command {
       : match "fey _;_ loops" {
          : set_true "gamestate_thug_pass" ;
          : set_integer var="tempint" "41" ;
-         : set_boolean var="already_got_command" {( think_fey_loops && !point_fey_loops )} ; # this is optional. Delete if point does not rely on any other variables.
+         : set_boolean var="already_got_command" {( think_fey_loops && !point_fey_loops )} ;
          : set_false "first_half" ;
          : match "fey _" {
             : set_true "first_half" ;
