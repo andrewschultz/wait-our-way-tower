@@ -4908,7 +4908,7 @@ on_command {
          }
          : set_true "shorten_inventory" ;
       }
-      : print {( me_x_yet ? "While you're not carrying them, your tats will help give you clues if/when you need them" : "Perhaps you should inspect or EXAMINE yourself for something hidden on you." )} ;
+      : print {( me_x_yet ? "Your <TATS<#f80>>, while not strictly carried, will give you clues if/when you need them." : "Perhaps you should inspect or <EXAMINE<#f80>> yourself for something hidden on you." )} ;
       : done ;
    }
    : gosub "check_options" ;
@@ -4946,18 +4946,18 @@ on_command {
       } : else {
          : set_true "gamestate_thug_pass" ;
          : cycle key = "help_general" predictable_order = "true" skip_interval = "0" {
-            : print "There are no in-game hints for specific puzzles, so ahead is an explanation of {xtats}, It gives a number that clues what you need to do in the current room. Before spoiling it, I'll mention that each point-scoring command the tats hint is a two-word command." ;
-            : print "So it's meant to be information that doesn't require much or any additional calculation. Also note that it doesn't track whether or not you're ready to, though you can still guess, and {vd_think} will hold it for later." ;
-            : print "If there is no number, there is nothing left to do. (All rooms have something to do at some point.)" ;
-            : print "Swirling numbers mean come back later." ;
-            : print "Each of the number's two digits matches with one word." ;
-            : print {( "The tens digit is the length of the first word you need, and the ones digit is the length of the second." + (score == 0 ? " Note: game mechanic spoilers are ahead." : "") )} ;
-            : print "Let's say you are at an ICE CREAM stand and you get the number 16." ;
-            : print "To get the ICE CREAM, you need to type a command with a one-letter word, then a six-letter word." ;
-            : print "What's more, the command needs to sound like ICE CREAM." ;
-            : print "There aren't many one-letter words, so you can guess the first is I, then CREAM has a sound tacked on the start." ;
-            : print "I SCREAM is thus the answer." ;
-            : print "Most words should be in the three to six letter range, though there is one with nine letters and a few with eight. (The clues will now cycle.)" ;
+            : print "(1/12) There are no in-game hints for specific puzzles, so ahead is an explanation of {xtats}, It gives a number that clues what you need to do in the current room. Before spoiling it, I'll mention that each point-scoring command the tats hint is a two-word command." ;
+            : print "(2/12) The tats are meant to be information that doesn't require much or any additional calculation. Also note that it doesn't track whether or not you're ready to, though you can still guess, and {vd_think} will hold it for later." ;
+            : print "(3/12) If there is no number on the tats, there is nothing left to do. (All rooms have something to do at some point.)" ;
+            : print "(4/12) Swirling numbers on the tats mean come back later." ;
+            : print "(5/12) When the tats give a two-digit number, each number matches with one word of the needed command." ;
+            : print {( "(6/12) The tens digit of the tats is the length of the first word you need, and the ones digit is the length of the second." + (score == 0 ? " Note: game mechanic spoilers are ahead." : "") )} ;
+            : print "(7/12) Let's say you are at an ICE CREAM stand and the tats give you get the number 16." ;
+            : print "(8/12) To get the ICE CREAM, the tats are cuing a command with a one-letter word, then a six-letter word." ;
+            : print "(9/12) What's more, the command the tats cue needs to sound like ICE CREAM." ;
+            : print "(10/12) There aren't many one-letter words, so you can guess the first is I, then CREAM has a sound tacked on the start." ;
+            : print "(11/12) I SCREAM is thus the answer." ;
+            : print "(12/12) Most words on the tats should be in the three to six letter range, though there is one with nine letters and a few with eight. (The clues will now cycle.)" ;
          }
       }
       : done ;
