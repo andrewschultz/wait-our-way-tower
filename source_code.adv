@@ -241,7 +241,7 @@ strings {
    r04_loc : dynamic_string {( "A {puz_point_meager_oath} reverberates through here in this open ground. Its words are not important. " + (point_me_growth ? "You've gotten its essence." : "Perhaps its vibes are what's really important." ) + "\nPassage leads back {dir_w_v}" + (point_fey_loops ? " and, as part of the fey loops, {dir_n_v}." : ".") )} ;
    r04_header : string "Meager Oath" ;
 
-   r10_loc : dynamic_string {( point_say_four ? "Since you bought oars, nothing here is interesting." : (point_dry_vendors ? "Dry vendors have parked themselves here. A {puz_point_safe_oar} rests behind them." : "You haven't seen any cars or bikes or whatever around, so it's weird this small selection of dead ends should be called {puz_point_drive_enders}, but it is.") + "\nPassage leads back {dir_e_v}." )} ;
+   r10_loc : dynamic_string {( (point_say_four ? "Since you bought the oars, you see nothing you might need. And you have no money anyway." : point_dry_vendors ? "Dry vendors have parked themselves here. A {puz_point_safe_oar} rests behind them." : "You haven't seen any cars or bikes or whatever around, so it's weird this small selection of dead ends should be called {puz_point_drive_enders}, but it is.") + "\nPassage leads back {dir_e_v}." )} ;
    r10_header : dynamic_string {( point_dry_vendors ? "Dry Vendors" : "Drive Enders" )} ;
 
    r11_dir_s : dynamic_string {( has_visited "r01" ? dir_s_v : dir_s_y )} ;
@@ -334,7 +334,13 @@ strings {
    r35_loc : string "Here, people are apparently learn stuff. What stuff, you're not sure. You can only go back {dir_s_v} here." ;
    r35_header : string "Bro Class" ;
 
-   r40_loc : dynamic_string {( "This is a small hut that smells (pleasantly) of canines. " + (point_warm_acres ? "But since you transformed the warm acres, a lot of them found homes." : point_shape_up ? "An old dog that hasn't been a pup for a while pads around here, making you say {dgda}." : "But you don't see any. Perhaps you're giving off bad vibes. How to fix that?") + "\nThe exit is back {dir_s_v}." )} ;
+   r40_loc : dynamic_string {( "This is a small hut that smells (pleasantly) of canines." +
+      (point_warm_acres ? "But since you transformed the warm acres, a lot of them found homes." :
+      (point_shape_up ?
+      ("An old dog that hasn't been a pup for a while pads around here, making you say {dgda}." +
+      (point_heard_all ? " You found its companions, who trust you." : " Can it really be the only dog in this place?" )) :
+      "But you don't see any. Perhaps you're giving off bad vibes. How to fix that?"))
+      + "\nThe exit is back {dir_s_v}." )} ;
    r40_header : string "Chez Pup" ;
 
    r41_loc : dynamic_string {( (!point_eh_sink ? "{puz_point_ace_inc} rises above you on all sides except to the {dir_s_v}. You've heard of it. It's one of those soulless corporations that may or may not have already hired all machines." :
@@ -2916,7 +2922,7 @@ locations {
             }
          } : else {
             : match "_ daww;_ daw;_ gold;_ dog;_ old" {
-               : print {( point_warm_acres ? "You reflect on the brief happy times with your dog friend." : point_heard_all ? "The dog lopes around happily. Its friends must be doing so too out of sight, waiting for when you need them." : "The dog lopes around, unconcerned. You don't need to befriend it further." )} ;
+               : print {( point_warm_acres ? "You reflect on the brief happy times with your dog friend." : point_heard_all ? "The dog lopes around, unconcerned. You don't need to befriend it further." : "The dog lopes around happily. Its friends must be doing so too out of sight, waiting for when you need them." )} ;
                : done ;
             }
          }
