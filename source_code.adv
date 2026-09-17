@@ -993,7 +993,8 @@ collections {
 
 booleans {
    # game state (noncritical, mostly informational)
-   note_half_think : boolean "false" scope="survivor"  ;
+   note_half_think : boolean "false" scope="survivor" ;
+   noted_loam_bonus : boolean "false" scope="survivor" ;
    showed_first_note : boolean "false" scope="survivor" ;
    showed_read_ooh_note : boolean "false" scope="survivor" ;
    warn_score_header : boolean "false" scope="survivor"  ;
@@ -3955,6 +3956,13 @@ subroutines {
       }
    }
 
+   loam_bonus_note : subroutine {
+       : if (!noted_loam_bonus) {
+          : print "{one_time}I didn't want to distract the player too much with bonus points, but this one gives a quality-of-life feature and is meant to be easy. However, I may've gotten too cute with it. (I hope not.)" ;
+          : set_true "noted_loam_bonus" ;
+       }
+   }
+
    reset_thug : subroutine {
       : set_true "gamestate_fail_oops_known" ;
       : create "thug" target="r25" ;
@@ -5177,7 +5185,13 @@ on_command {
          : done ;
       }
       : match "_ maps;lo _;low _" {
+         : print "Hmm. you feel must be close to finding what, precisely, is behind or under the loam apse, and where you need to look!" ;
+         : gosub "loam_bonus_note" ;
+         : done ;
+      }
+      : match "_ loam;_ apse" {
          : print "You feel like something interesting and useful should be behind the loam apse, but you don't know how to look, yet." ;
+         : gosub "loam_bonus_note" ;
          : done ;
       }
    }
