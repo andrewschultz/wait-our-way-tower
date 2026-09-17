@@ -303,7 +303,7 @@ strings {
    r25_header : string "The Groom-Thug Room" ;
 
    r26_dir_e : dynamic_string {( has_visited "r27" ? dir_e_v : dir_e_y )} ;
-   r26_loc : dynamic_string {( !point_bah_slumping ? "Well this is pretty miserable. A {puz_point_boss_lumping} abuse on you, blocks the way to the {dir_e_n}.\nAnd with such sophistry! Such common sense! Did you come here so far for nothing?\nAnd such interjections I can't repeat here! And you feel you can't, but maybe you can subvert them.\nYou can go back {dir_w_v} for a break from this, if you want, though you'll probably have to come back anyway." : !point_say_mentoring ? "A door labeled {puz_point_same_entering} is to the {dir_e_n}. There's always one more thing!" : "Well, you've achieved no great power. But you've figured the mystery of the Same-Entering door, so you can go {r26_dir_e} as well as {dir_w_v} now." )} ;
+   r26_loc : dynamic_string {( !point_bah_slumping ? "Well, this is pretty miserable. A {puz_point_boss_lumping} abuse on you, blocks the way to the {dir_e_n}.\nAnd with such sophistry! Such common sense! Did you come here so far for nothing?\nAnd such interjections I can't repeat here! And you feel you can't, but maybe you can subvert them.\nYou can go back {dir_w_v} for a break from this, if you want, though you'll probably have to come back anyway." : !point_say_mentoring ? "A door labeled {puz_point_same_entering} is to the {dir_e_n}. There's always one more thing!" : "Well, you've achieved no great power. But you've figured the mystery of the Same-Entering door, so you can go {r26_dir_e} as well as {dir_w_v} now." )} ;
    r26_header : dynamic_string {( point_bah_slumping ? "\"Thaw, Tried Thought-Ride\"" : "\"Know Power? NOPE\" Hour" )} ;
 
    r27_loc : dynamic_string {( (point_blest_able ? "You feel good here. Yet there's still more. You hear and feel {puz_point_true_pleading}, not i-have-to-have, but interest in seeing and doing and offering more.\nSo you still feel restless. Perhaps you need to get the right phrase to say, one more time, to close the book." : "This stable here is pretty bleah. Is it really what the boss was guarding? At least it's well, stable. {puz_point_bleah_stable} ... do you deserve more in life? You guess you do, but you know you're biased.") + "\nWhile this feels like your journey's end, nothing's stopping you going back {dir_w_v}." )} ;
@@ -2264,7 +2264,7 @@ locations {
          : match "frame easily" {
             : if (!point_tense_ops) {
                : print "That feels right, but you're worried any simplified advice would just sound over-general." ;
-               : print "Perhaps if you could navigate an even smaller conflicts than this, it would help you ramp up before navigating this fray, even if it is measly!" ;
+               : print "Perhaps if you could navigate an even smaller conflicts than this, it would help you ramp up before navigating this fray, measly though it is!" ;
                : set_true "think_frame_easily" ;
                : collection_modify { collection = "tried_combo_core" index -> (30) content -> ("true") } ;
                : gosub "note_thinks" ;
@@ -2554,7 +2554,7 @@ locations {
          }
          : if (!point_blest_able) {
             : match "bless _;_ table" {
-               : print "No table appears to bless." ;
+               : print "No table appears to bless. Yet positivity, in moderation, feels right here." ;
             }
          }
          : match "blest able" {
@@ -3412,7 +3412,7 @@ barriers {
    block_go_r27 : block {
       location = r27
       block_when_not = point_bah_slumping
-      message = The {puz_point_boss_lumping} insults at you won't let you buy.
+      message = The {puz_point_boss_lumping} insults at you, won't let you buy.
    }
 
    block_go_r30 : block {
@@ -3798,7 +3798,7 @@ subroutines {
    inventory_nouns : subroutine {
       : if (point_girl_only && !point_warm_acres) {
          : match "_ doll" {
-            : print "It's a weird looking doll, but it probably helped the girl feel less lonely. Looking at it, you feel less lonely, too and you think \"find-all-fine doll.\"" ;
+            : print "It's a weird-looking doll, but it probably helped the girl feel less lonely. Looking at it, you feel less lonely, too and you think \"find-all-fine doll.\"" ;
             : print {( herd_score == 2 ? "And it has found potential allies!" : herd_score == 1 ? "You wonder, what else can it find?" : "But what is this ALL it could find?" )} ; # ?? further divvying up, if the think_all_score dynamic integer > 0 we can have 1-1 0-1 0-2
             : done ;
          }
