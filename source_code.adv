@@ -3015,8 +3015,7 @@ locations {
          }
          : if (!point_eh_sink) {
             : match "a sink;sink _" {
-               : print "Right idea, but a giant sink might be impassable. Or it might drown you. And {puz_point_ace_inc} couldn't be changed to a SMALL sink." ;
-               : done ;
+               : print "Right idea, but *a* sink would still be an impassable eyesore. Or it might drown you. And {puz_point_ace_inc} couldn't be changed to a SMALL sink.\nBut what could you make it do?" ;
             }
             : match "eh _;_ sink" {
                : set_integer var="tempint" "26" ;
