@@ -259,7 +259,7 @@ strings {
    r13_dir_e : dynamic_string {( gamestate_bros_blocking ? dir_e_n : has_visited "r14" ? dir_e_v : dir_e_y )} ;
    r13_dir_s : dynamic_string {( gamestate_bros_blocking ? dir_s_n : has_visited "r03" ? dir_s_v : dir_s_y )} ;
    r13_loc : dynamic_string {( (!point_pose_teasing ? "Here, {gbgr} chatter about any old thing, blocking the way forward for people with stuff to do. Yet they seem unimportant, compared to the place they're in." :
-      !gamestate_bros_second_placed ? "The {gbgr} are gone, for now." :
+      !gamestate_bros_second_placed ? ( gamestate_bros_second_trigger ? "It's almost too quiet, here..." : "The {gbgr} are gone, for now." ) :
       !point_whee_plucky ? "The {gbgr} are at it again, asking if you really need to show off the opportunities you've been given, right in front of their faces. They {puz_point_weep_lucky} a lot." :
       "The {gbgr} are gone for good.") + "\nThe way back is {dir_w_v}, but paths branch {r13_dir_e} and {r13_dir_s}, too."
    )} ;
@@ -1869,7 +1869,7 @@ locations {
             : set_false "gamestate_bros_second_trigger" ;
             : set_true "gamestate_bros_second_placed" ;
             : update_graphic ;
-            : print "The Bros are back at it again. They ask how you've been. You mention you've been doing stuff since last you chatted. They all {puz_point_weep_lucky} ... what a stupid guilt trip. But for whatever reason, it works, and you're going to have to change your mindset to get out of this one." ;
+            : print "Just as you're starting to enjoy the peace and quiet, the Bros pop back up. They ask how you've been, interrupting before you complete your second sentence. They all {puz_point_weep_lucky} ... what a stupid guilt trip. But for whatever reason, it works, and you're going to have to change your mindset to get out of this one." ;
          }
       }
    }
