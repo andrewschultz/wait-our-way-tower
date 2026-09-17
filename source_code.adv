@@ -98,6 +98,7 @@ strings {
    cred_mr : string "<Mike Russo<#0f0>>[https://russo2116gmailcom.itch.io/]" ;
    cred_rh : string "<rh9<#0f0>>[https://rh9.itch.io/]" ;
    cred_sh : string "<Stefan Hoffmann<#0f0>>[https://interactive-onions.io:5474]" ;
+   cred_wc : string "<Wade Clarke<#0f0>>[https://wade-clarke.itch.io]" ;
 
    # puzzle strings
    puz_point_ace_inc        : dynamic_string {( opt_color_coding && !point_eh_sink ? "<Ace, Inc.<#f8f>>" : "Ace, Inc." )}             ; # 26
@@ -4929,6 +4930,7 @@ on_command {
    }
    : match "credits _;credit _" {
       : print "Thanks to, in alphabetical order, {cred_aj}, {cred_de}, {cred_sh},  {cred_rh}, {cred_lp}, and {cred_mr} for testing. I was behind schedule, and they found a lot, including very good points I wasn't able to fully address in the IFComp release. Links are to itch.io -- <IFDB<#0f0>> links don't play well with the Adventuron version I'm using." ;
+      : print "Thanks to {cred_wc} for finding bugs during the comp." ;
       : print "Thanks to {cred_ca} for creating Adventuron." ;
       : print "Thanks to IFComp administrators past and present and to reviewers and judges past and present. They give me an excuse to keep trying stuff." ;
       : if (!credits_yet) {
@@ -5061,8 +5063,9 @@ on_command {
    : match "verbs _;verb _" {
       : set_true "gamestate_thug_pass" ;
       : print "To complete {this_game}, you only need the four compass directions (well, the exit from the first room is up) and special commands clued by descriptions and such. You {v_take_drop} automatically." ;
+      : print {( "Many commands are noun-based, so <X NOUN<#f80>> and <USE NOUN<#f80>> work the same, and they generally default to examining. For instance, you can just " + (me_x_yet ? "type TATS or X TATS so examine your tats." : "type the name of a hint item on you that you haven't found yet.") )} ;
       : print "If you're not in an action sequence, you can also use a number to move to a square you've visited before. You start at <20<#f80>>, one east of it is <21<#f80>>, and north from there is <31<#f80>>. The pre-endgame map is a 5x5 grid, so its northeast corner is <44<#f80>>." ;
-      : print "{v_listen} may be entertaining in places." ;
+      : print "For non-point-scoring sequences, {v_listen} may be entertaining in places." ;
       : print "{vm_meta} gives a list of metaverbs, or in-game actions that don't affect the world. They provide information on game play." ;
       : print "{vm_diag} lists diagnostic verbs, which give information about your game status." ;
       : print "{vm_options} lists options that change text output or restrict unneeded travel." ;
