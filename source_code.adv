@@ -1509,9 +1509,7 @@ locations {
          }
          : if (point_sun_catching) {
             : if (!point_tufty_key) {
-               : match "tuft _;_ icky" {
-                  : print "Wrong texture for what the tiki is hiding." ;
-               }
+               : gosub "r03_tuft_icky" ;
             }
             : match "tufty key" {
                : if (point_tufty_key) {
@@ -3911,6 +3909,21 @@ subroutines {
    r22_npc : subroutine {
       : print {( point_free_crusty ? "They seem happier now you've helped them reframe their life." : "They don't need to be reminded of their weaknesses. They maybe need to restate how things are. It's not their fault. (Small voice: it's mine, actually, being the writer of this. But I hope I--and you--make things turn out okay for them in the end.)" )} ;
       : done ;
+   }
+
+   r03_tuft_icky : subroutine {
+      : match "tuft icky" {
+         : print "The tough tiki seems to look at you pleadingly, as if to say, you're so close. But what would you do with a tuft? (And wouldn't you like something not-icky?)" ;
+         : return ;
+      }
+      : match "_ icky" {
+         : print "Nothing happens. Missing the mark's always a bummer, especially when it felt right, but you're sort of relieved you don't have to handle anything icky." ;
+         : return ;
+      }
+      : match "tuft _" {
+         : print "That makes sense, but then you consider the only thing you'd do with a tuft is look under it to find something useful. But it feels close." ;
+         : return ;
+      }
    }
 
    loam_apse_stuff : subroutine {
