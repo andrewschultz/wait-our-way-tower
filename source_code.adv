@@ -348,7 +348,11 @@ strings {
       "You've found your way through the cube land. Not much else can be here.") +
       "\nThe only way out is back {dir_s_v}."
    )} ;
-   r41_header : dynamic_string {( point_eh_sink ? "Cube Land" : "Ace, Inc." )} ;
+   r41_header : dynamic_string {( point_eh_sink ? "Cube Land" : puz_point_ace_inc )} ;
+   r41_fey_reject : dynamic_string {( point_cue_bland ? "But the passage you found through the cube land, though fruitful, led to a dead end." :
+      point_eh_sink ? "But the cube land is full of obstacles, and you trip over one quickly." :
+      "But {puz_point_ace_inc} looms too large."
+   )} ;
 
    r42_loc : dynamic_string {( (point_girl_only ? "The island seems cheerier now you found the girl behind the sea crest. Maybe that's just because you got some companionship. There can't be much else to do here." : point_seek_rest ? "Amidst the sea crest, you hear an odd voice saying {puz_point_grr_lonely}" : "There's a lot of {puz_point_seacrest} covering this otherwise drab and forbidding isle.") + "\nYou can sail back {dir_e_v} at any time." )} ;
    r42_header : string "Gray Vile Grave Isle" ;
@@ -4838,10 +4842,12 @@ on_command {
       : match "fey loops" {
          : set_true "gamestate_thug_pass" ;
          : if (!is_at "r04" && !is_at "r14") {
-            : print "You look for fey loops that might catch the thug, but not here." ;
-            : print {( is_at "r11" || is_at "r21" || is_at "r31" ? "It's really too wide open here, since you can go all four directions." :
-               is_at "r20" || is_at "r40" || is_at "r44" ? "It's really too enclosed here." :
-               "You look for fey loops that might catch the thug, ones that might be easy to overlook and treacherous to navigate, but you see none here." )} ;
+            : print "You look for fey loops that might catch the thug, perhaps narrow ones that might be easy to overlook and treacherous to navigate." ;
+            : print {( is_at "r11" || is_at "r21" || is_at "r31" ? "But it's really too wide open here, since you can go all four directions." :
+               is_at "r20" || is_at "r40" || is_at "r44" ? "But it's really too enclosed here." :
+               is_at "r41" ? r41_fey_reject :
+               "But you see none " + (is_at "r03" || is_at "r13" ? "in the immediate area." : "here." )
+             )} ;
             : set_true "think_fey_loops" ;
             : collection_modify { collection = "tried_combo_core" index -> (41) content -> ("true") } ;
             : gosub "note_thinks" ;
